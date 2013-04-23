@@ -1,0 +1,8 @@
+# ignore Build
+Build/
+
+#ignore UserInterfaceState.xcuserstate
+UserInterfaceState.xcuserstate
+
+# ignore DS_Store
+.DS_Store

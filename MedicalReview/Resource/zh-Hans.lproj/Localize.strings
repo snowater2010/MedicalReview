@@ -1,0 +1,11 @@
+/* 
+  Localize.strings
+  MedicalReview
+
+  Created by lipeng11 on 13-4-23.
+  Copyright (c) 2013年 medical.review. All rights reserved.
+*/
+
+"提示" = "提示";
+"确定" = "确定";
+"取消" = "取消";
