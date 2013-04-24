@@ -36,6 +36,7 @@
 		F678A94317278AA3000DAB46 /* MR_LoginCtro.m in Sources */ = {isa = PBXBuildFile; fileRef = F678A94117278AA3000DAB46 /* MR_LoginCtro.m */; };
 		F678A94417278AA3000DAB46 /* MR_LoginCtro.xib in Resources */ = {isa = PBXBuildFile; fileRef = F678A94217278AA3000DAB46 /* MR_LoginCtro.xib */; };
 		F678A9A11727DA68000DAB46 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F678A9A01727DA68000DAB46 /* Localizable.strings */; };
+		F67CC73E17280D0100004FD4 /* MR_MainCtro.m in Sources */ = {isa = PBXBuildFile; fileRef = F67CC73D17280D0100004FD4 /* MR_MainCtro.m */; };
 		F67E557A1726ACAA00573BF8 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E55751726ACAA00573BF8 /* GTMBase64.m */; };
 		F67E557B1726ACAA00573BF8 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E55791726ACAA00573BF8 /* MBProgressHUD.m */; };
 		F67E55891726AE1200573BF8 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = F67E55851726AE1200573BF8 /* 37x-Checkmark.png */; };
@@ -112,6 +113,8 @@
 		F678A94117278AA3000DAB46 /* MR_LoginCtro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_LoginCtro.m; sourceTree = "<group>"; };
 		F678A94217278AA3000DAB46 /* MR_LoginCtro.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MR_LoginCtro.xib; sourceTree = "<group>"; };
 		F678A9A01727DA68000DAB46 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		F67CC73C17280D0100004FD4 /* MR_MainCtro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_MainCtro.h; sourceTree = "<group>"; };
+		F67CC73D17280D0100004FD4 /* MR_MainCtro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_MainCtro.m; sourceTree = "<group>"; };
 		F67E55741726ACAA00573BF8 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		F67E55751726ACAA00573BF8 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		F67E55761726ACAA00573BF8 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -239,6 +242,7 @@
 				F602F4BA17266D13005FE31F /* MR_RootController.h */,
 				F602F4BB17266D13005FE31F /* MR_RootController.m */,
 				F6C297271726736A002FB4B8 /* Login */,
+				F67CC73A17280CDB00004FD4 /* Main */,
 				F67E55911726C08A00573BF8 /* Score */,
 			);
 			path = Controller;
@@ -329,6 +333,15 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
+		F67CC73A17280CDB00004FD4 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				F67CC73C17280D0100004FD4 /* MR_MainCtro.h */,
+				F67CC73D17280D0100004FD4 /* MR_MainCtro.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		F67E55731726ACAA00573BF8 /* GTMBase64 */ = {
 			isa = PBXGroup;
 			children = (
@@ -417,12 +430,12 @@
 		F6C2972E17267BF5002FB4B8 /* PageView */ = {
 			isa = PBXGroup;
 			children = (
-				F6C2972F17267C2E002FB4B8 /* MR_MainPageView.h */,
-				F6C2973017267C2E002FB4B8 /* MR_MainPageView.m */,
-				F6C2973217267C43002FB4B8 /* MR_LeftPageView.h */,
-				F6C2973317267C43002FB4B8 /* MR_LeftPageView.m */,
 				F6C2973517267C6D002FB4B8 /* MR_TopPageView.h */,
 				F6C2973617267C6D002FB4B8 /* MR_TopPageView.m */,
+				F6C2973217267C43002FB4B8 /* MR_LeftPageView.h */,
+				F6C2973317267C43002FB4B8 /* MR_LeftPageView.m */,
+				F6C2972F17267C2E002FB4B8 /* MR_MainPageView.h */,
+				F6C2973017267C2E002FB4B8 /* MR_MainPageView.m */,
 			);
 			path = PageView;
 			sourceTree = "<group>";
@@ -566,6 +579,7 @@
 				F67E557B1726ACAA00573BF8 /* MBProgressHUD.m in Sources */,
 				F67E55951726C0CF00573BF8 /* MR_PathScoreCtro.m in Sources */,
 				F678A94317278AA3000DAB46 /* MR_LoginCtro.m in Sources */,
+				F67CC73E17280D0100004FD4 /* MR_MainCtro.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

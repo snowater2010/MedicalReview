@@ -8,8 +8,7 @@
 
 #import "MR_LoginCtro.h"
 #import "MR_User.h"
-#import "MR_PathScoreCtro.h"
-#import "MR_PathScoreCtro.h"
+#import "MR_MainCtro.h"
 
 @interface MR_LoginCtro ()
 {
@@ -121,7 +120,7 @@
 
 - (void)visitMainPage
 {
-    MR_PathScoreCtro *score = [[MR_PathScoreCtro alloc] init];
+    MR_MainCtro *score = [[MR_MainCtro alloc] init];
     [self presentModalViewController:score animated:YES];
     [score release];
 }

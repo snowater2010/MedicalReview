@@ -10,4 +10,7 @@
 
 @interface MR_RootController : UIViewController <ASIHTTPRequestDelegate>
 
+- (id)initWithFrame:(CGRect)frame;
+- (void)loadRootView;
+
 @end

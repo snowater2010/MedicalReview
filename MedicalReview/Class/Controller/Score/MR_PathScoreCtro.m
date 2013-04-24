@@ -28,13 +28,14 @@
 
 - (void)loadView
 {
-    _LOAD_ROOT_VIEW;
+    [super loadRootView];
     [self initView];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 	// Do any additional setup after loading the view.
 }
 
@@ -51,22 +52,14 @@
 {
     CGRect rootFrame = self.view.frame;
     
-    //top
-    CGRect topFrame = CGRectMake(0, 0, rootFrame.size.width, rootFrame.size.height*0.2);
-    MR_TopPageView *topPageView = [[MR_TopPageView alloc] initWithFrame:topFrame];
-    topPageView.backgroundColor = [UIColor redColor];
-    [self.view addSubview:topPageView];
-    
     //left
-    CGRect leftFrame = CGRectMake(0, topFrame.size.height, rootFrame.size.width*0.2, rootFrame.size.height-topFrame.size.height);
+    CGRect leftFrame = CGRectMake(0, 0, rootFrame.size.width*0.2, rootFrame.size.height);
     MR_LeftPageView *leftPageView = [[MR_LeftPageView alloc] initWithFrame:leftFrame];
-    leftPageView.backgroundColor = [UIColor yellowColor];
     [self.view addSubview:leftPageView];
     
     //main
-    CGRect mainFrame = CGRectMake(leftFrame.size.width, topFrame.size.height, rootFrame.size.width-leftFrame.size.width, rootFrame.size.height-topFrame.size.height);
+    CGRect mainFrame = CGRectMake(leftFrame.size.width, 0, rootFrame.size.width-leftFrame.size.width, rootFrame.size.height);
     MR_MainPageView *mainPageView = [[MR_MainPageView alloc] initWithFrame:mainFrame];
-    mainPageView.backgroundColor = [UIColor greenColor];
     [self.view addSubview:mainPageView];
 }
 

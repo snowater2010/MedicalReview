@@ -19,13 +19,6 @@
 #define _DEVICE_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define _DEVICE_WIDTH [UIScreen mainScreen].bounds.size.width - 20
 
-#define _LOAD_ROOT_VIEW\
-    CGRect fullFrame = CGRectMake(0, 0, _DEVICE_HEIGHT, _DEVICE_WIDTH);\
-    UIView *fullView = [[UIView alloc] initWithFrame:fullFrame];\
-    fullView.backgroundColor = [UIColor whiteColor];\
-    self.view = fullView;\
-    [fullView release];\
-
 //排序类型
 enum SORT_TYPE
 {

@@ -9,10 +9,31 @@
 #import "MR_RootController.h"
 
 @interface MR_RootController ()
+{
+    BOOL customFrame;
+}
+@property(nonatomic, assign) CGRect initViewFrame;
 
 @end
 
 @implementation MR_RootController
+
+- (id)init
+{
+    if (self = [super init]) {
+        customFrame = NO;
+    }
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame
+{
+    if (self = [super init]) {
+        customFrame = YES;
+        self.initViewFrame = frame;
+    }
+    return self;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -21,6 +42,21 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)loadRootView
+{
+    if (customFrame) {
+        UIView *selfView = [[UIView alloc] initWithFrame:_initViewFrame];
+        self.view = selfView;
+        [selfView release];
+    }
+    else {
+        CGRect fullFrame = CGRectMake(0, 0, _DEVICE_HEIGHT, _DEVICE_WIDTH);
+        UIView *fullView = [[UIView alloc] initWithFrame:fullFrame];
+        self.view = fullView;
+        [fullView release];
+    }
 }
 
 - (void)viewDidLoad
