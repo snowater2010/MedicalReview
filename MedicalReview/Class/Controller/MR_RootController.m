@@ -40,4 +40,14 @@
     return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
 }
 
+#pragma mark -
+#pragma mark -- ASIHTTPRequestDelegate
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    NSError *error = [request error];
+    _LOG_(error);
+    _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"request_error"));
+}
+
 @end

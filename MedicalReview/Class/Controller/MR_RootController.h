@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MR_RootController : UIViewController
+@interface MR_RootController : UIViewController <ASIHTTPRequestDelegate>
 
 @end

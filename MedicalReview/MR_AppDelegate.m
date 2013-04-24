@@ -24,12 +24,21 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     
+    [self initApp];
+    
     MR_LoginCtro *rootCtro = [[MR_LoginCtro alloc] initWithNibName:@"MR_LoginCtro" bundle:nil];
     self.window.rootViewController = rootCtro;
     [self.window makeKeyAndVisible];
     [rootCtro release];
     
     return YES;
+}
+
+- (void)initApp
+{
+    //set server url
+    self.globalinfo = [[GlobalInfo alloc] init];
+    _globalinfo.serverInfo.strWebServiceUrl = SERVICE_URL;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

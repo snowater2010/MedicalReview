@@ -10,4 +10,12 @@
 
 @interface MR_LoginCtro : MR_RootController
 
+@property(nonatomic, retain) IBOutlet UITextField   *ibName;
+@property(nonatomic, retain) IBOutlet UITextField   *ibPassWord;
+@property(nonatomic, retain) IBOutlet UIButton      *ibLoginBt;
+@property(nonatomic, retain) IBOutlet UIControl     *ibRemember;
+
+- (IBAction)clickRememberIv:(id)sender;
+- (IBAction)doLogin:(id)sender;
+
 @end

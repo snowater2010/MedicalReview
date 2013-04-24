@@ -12,7 +12,7 @@
 
 #define _MODE_DEBUG_    1
 
-#define _LOG_(x)  if(_MODE_DEBUG_) _LOG_FORMAT_(@"---LogPrint:%@---", x);
+#define _LOG_(x)  if(_MODE_DEBUG_) _LOG_FORMAT_(@"---LogPrint:---\n%@", x);
 
 #define _LOG_FORMAT_(FORMAT, PARM...)  if(_MODE_DEBUG_) \
                                         NSLog(FORMAT, ##PARM);\

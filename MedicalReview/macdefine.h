@@ -13,7 +13,7 @@
 
 #define ENABLE_CACHE 0   //是否启用缓存,1为启用
 
-#define SERVICE_URL  @"http://127.0.0.1:8080/medicalreview"
+#define SERVICE_URL  @"https://api.douban.com/v2/book/1220562"
 
 //获取屏幕高度
 #define _DEVICE_HEIGHT [UIScreen mainScreen].bounds.size.height
@@ -46,8 +46,8 @@ enum SORT_TYPE
 #endif
 
 //获取国际化字符串
-#define _GETLOCALIZEDSTRING_(key)\
-        NSLocalizedString(key, @"");\
+#define _GET_LOCALIZED_STRING_(key)\
+        NSLocalizedString(key, @"")\
 
 #define _GET_APP_DELEGATE_(appDelegate)\
         MR_AppDelegate* appDelegate = (MR_AppDelegate*)[UIApplication sharedApplication].delegate;
@@ -83,29 +83,36 @@ enum SORT_TYPE
             __view.layer.masksToBounds = YES;\
         }\
 
-//简单的警示框（1个按钮）
-#define _ALERT_SIMPLE_(_msg, _delegate, _tag) \
+//简单的警示框
+#define _ALERT_SIMPLE_(_msg) \
         {\
-            NSString* str_note   = _GETLOCALIZEDSTRING_(@"提示");\
-            NSString* str_cancel = _GETLOCALIZEDSTRING_(@"确定");\
+            NSString* str_note   = _GET_LOCALIZED_STRING_(@"alert_note");\
+            NSString* str_cancel = _GET_LOCALIZED_STRING_(@"alert_sure");\
+            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:str_note message:_msg delegate:nil cancelButtonTitle:str_cancel otherButtonTitles:nil, nil];\
+            [alert show];\
+            [alert release];\
+        }\
+//有确认的警示框(1个按钮)
+#define _ALERT_CONFIRM_(_msg, _delegate, _tag) \
+        {\
+            NSString* str_note   = _GET_LOCALIZED_STRING_(@"alert_note");\
+            NSString* str_cancel = _GET_LOCALIZED_STRING_(@"alert_sure");\
             UIAlertView *alert=[[UIAlertView alloc] initWithTitle:str_note message:_msg delegate:_delegate cancelButtonTitle:str_cancel otherButtonTitles:nil, nil];\
             alert.tag = _tag;    \
             [alert show];\
             [alert release];\
         }\
-
 //有选择的警示框(2个按钮)
 #define _ALERT_SELECT_(_msg, _delegate, _tag)\
         {\
-            NSString* str_note   = _GETLOCALIZEDSTRING_(@"提示");\
-            NSString* str_sure   = _GETLOCALIZEDSTRING_(@"确定");\
-            NSString* str_cancel   = _GETLOCALIZEDSTRING_(@"取消");\
+            NSString* str_note   = _GET_LOCALIZED_STRING_(@"alert_note");\
+            NSString* str_sure   = _GET_LOCALIZED_STRING_(@"alert_sure");\
+            NSString* str_cancel   = _GET_LOCALIZED_STRING_(@"alert_cancel");\
             UIAlertView *alert=[[UIAlertView alloc] initWithTitle:str_note message:_msg delegate:_delegate cancelButtonTitle:str_cancel otherButtonTitles:str_sure, nil];\
             alert.tag = _tag;\
             [alert show];\
             [alert release];\
         }\
-
 //移出所有子视图
 #define _REMOVE_ALLSUBVIEWS_(_fatherView)\
         {\

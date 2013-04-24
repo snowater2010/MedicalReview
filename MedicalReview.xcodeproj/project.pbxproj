@@ -35,6 +35,7 @@
 		F678A8A11727671C000DAB46 /* loginbg.png in Resources */ = {isa = PBXBuildFile; fileRef = F678A8A01727671C000DAB46 /* loginbg.png */; };
 		F678A94317278AA3000DAB46 /* MR_LoginCtro.m in Sources */ = {isa = PBXBuildFile; fileRef = F678A94117278AA3000DAB46 /* MR_LoginCtro.m */; };
 		F678A94417278AA3000DAB46 /* MR_LoginCtro.xib in Resources */ = {isa = PBXBuildFile; fileRef = F678A94217278AA3000DAB46 /* MR_LoginCtro.xib */; };
+		F678A9A11727DA68000DAB46 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F678A9A01727DA68000DAB46 /* Localizable.strings */; };
 		F67E557A1726ACAA00573BF8 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E55751726ACAA00573BF8 /* GTMBase64.m */; };
 		F67E557B1726ACAA00573BF8 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E55791726ACAA00573BF8 /* MBProgressHUD.m */; };
 		F67E55891726AE1200573BF8 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = F67E55851726AE1200573BF8 /* 37x-Checkmark.png */; };
@@ -52,7 +53,6 @@
 		F6B1B2F3172539F200A51DDD /* FileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2E7172539F200A51DDD /* FileHelper.m */; };
 		F6B1B2F4172539F200A51DDD /* NSDate+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2EA172539F200A51DDD /* NSDate+Common.m */; };
 		F6B1B2F6172539F200A51DDD /* UITextView+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2EE172539F200A51DDD /* UITextView+Helper.m */; };
-		F6C2972317267210002FB4B8 /* Localize.strings in Resources */ = {isa = PBXBuildFile; fileRef = F6C29721172671DE002FB4B8 /* Localize.strings */; };
 		F6C2972D17267580002FB4B8 /* MR_User.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C2972C17267580002FB4B8 /* MR_User.m */; };
 		F6C2973117267C2E002FB4B8 /* MR_MainPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C2973017267C2E002FB4B8 /* MR_MainPageView.m */; };
 		F6C2973417267C43002FB4B8 /* MR_LeftPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C2973317267C43002FB4B8 /* MR_LeftPageView.m */; };
@@ -111,6 +111,7 @@
 		F678A94017278AA3000DAB46 /* MR_LoginCtro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_LoginCtro.h; sourceTree = "<group>"; };
 		F678A94117278AA3000DAB46 /* MR_LoginCtro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_LoginCtro.m; sourceTree = "<group>"; };
 		F678A94217278AA3000DAB46 /* MR_LoginCtro.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MR_LoginCtro.xib; sourceTree = "<group>"; };
+		F678A9A01727DA68000DAB46 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		F67E55741726ACAA00573BF8 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		F67E55751726ACAA00573BF8 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		F67E55761726ACAA00573BF8 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -142,7 +143,6 @@
 		F6B1B2EA172539F200A51DDD /* NSDate+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Common.m"; sourceTree = "<group>"; };
 		F6B1B2ED172539F200A51DDD /* UITextView+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Helper.h"; sourceTree = "<group>"; };
 		F6B1B2EE172539F200A51DDD /* UITextView+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Helper.m"; sourceTree = "<group>"; };
-		F6C29720172671DE002FB4B8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localize.strings"; sourceTree = "<group>"; };
 		F6C2972B17267580002FB4B8 /* MR_User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_User.h; sourceTree = "<group>"; };
 		F6C2972C17267580002FB4B8 /* MR_User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_User.m; sourceTree = "<group>"; };
 		F6C2972F17267C2E002FB4B8 /* MR_MainPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_MainPageView.h; sourceTree = "<group>"; };
@@ -453,7 +453,7 @@
 		F6E078BB1724F4C900C00E6B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				F6C29721172671DE002FB4B8 /* Localize.strings */,
+				F678A9A01727DA68000DAB46 /* Localizable.strings */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -515,7 +515,6 @@
 				F606A0BB1724CBD000490D04 /* Default.png in Resources */,
 				F606A0BC1724CBD000490D04 /* Default@2x.png in Resources */,
 				F6E078B81724F43C00C00E6B /* InfoPlist.strings in Resources */,
-				F6C2972317267210002FB4B8 /* Localize.strings in Resources */,
 				F67E55891726AE1200573BF8 /* 37x-Checkmark.png in Resources */,
 				F67E558A1726AE1200573BF8 /* 37x-Checkmark@2x.png in Resources */,
 				F67E558B1726AE1200573BF8 /* Icon.png in Resources */,
@@ -524,6 +523,7 @@
 				F67E55B51726D49200573BF8 /* choose_pressed.png in Resources */,
 				F678A8A11727671C000DAB46 /* loginbg.png in Resources */,
 				F678A94417278AA3000DAB46 /* MR_LoginCtro.xib in Resources */,
+				F678A9A11727DA68000DAB46 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,17 +570,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		F6C29721172671DE002FB4B8 /* Localize.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F6C29720172671DE002FB4B8 /* zh-Hans */,
-			);
-			name = Localize.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F606A0A21724BF3100490D04 /* Debug */ = {
