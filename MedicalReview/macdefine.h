@@ -16,8 +16,8 @@
 #define SERVICE_URL  @"http://127.0.0.1:8080/medicalreview"
 
 //获取屏幕高度
-#define _DEVICE_HEIGHT [UIScreen mainScreen].applicationFrame.size.height
-#define _DEVICE_WIDTH [UIScreen mainScreen].applicationFrame.size.width
+#define _DEVICE_HEIGHT [UIScreen mainScreen].bounds.size.height
+#define _DEVICE_WIDTH [UIScreen mainScreen].bounds.size.width - 20
 
 #define _LOAD_ROOT_VIEW\
     CGRect fullFrame = CGRectMake(0, 0, _DEVICE_HEIGHT, _DEVICE_WIDTH);\

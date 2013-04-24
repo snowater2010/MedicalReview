@@ -32,12 +32,18 @@
 		F641715617258B7600648A5E /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = F641712D17258B7600648A5E /* ASINetworkQueue.m */; };
 		F641716D1725922100648A5E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = F641716C1725922100648A5E /* Reachability.m */; };
 		F64171731725957600648A5E /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = F64171721725957400648A5E /* NSString+Helper.m */; };
+		F678A8A11727671C000DAB46 /* loginbg.png in Resources */ = {isa = PBXBuildFile; fileRef = F678A8A01727671C000DAB46 /* loginbg.png */; };
+		F678A94317278AA3000DAB46 /* MR_LoginCtro.m in Sources */ = {isa = PBXBuildFile; fileRef = F678A94117278AA3000DAB46 /* MR_LoginCtro.m */; };
+		F678A94417278AA3000DAB46 /* MR_LoginCtro.xib in Resources */ = {isa = PBXBuildFile; fileRef = F678A94217278AA3000DAB46 /* MR_LoginCtro.xib */; };
 		F67E557A1726ACAA00573BF8 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E55751726ACAA00573BF8 /* GTMBase64.m */; };
 		F67E557B1726ACAA00573BF8 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E55791726ACAA00573BF8 /* MBProgressHUD.m */; };
 		F67E55891726AE1200573BF8 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = F67E55851726AE1200573BF8 /* 37x-Checkmark.png */; };
 		F67E558A1726AE1200573BF8 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F67E55861726AE1200573BF8 /* 37x-Checkmark@2x.png */; };
 		F67E558B1726AE1200573BF8 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F67E55871726AE1200573BF8 /* Icon.png */; };
 		F67E558C1726AE1200573BF8 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F67E55881726AE1200573BF8 /* Icon@2x.png */; };
+		F67E55951726C0CF00573BF8 /* MR_PathScoreCtro.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E55941726C0CF00573BF8 /* MR_PathScoreCtro.m */; };
+		F67E55B41726D49200573BF8 /* choose_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = F67E55B21726D49200573BF8 /* choose_normal.png */; };
+		F67E55B51726D49200573BF8 /* choose_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = F67E55B31726D49200573BF8 /* choose_pressed.png */; };
 		F69C6CF017251635008247F5 /* MR_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C6CEF17251635008247F5 /* MR_AppDelegate.m */; };
 		F6B1B2D71725362B00A51DDD /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2CA1725362B00A51DDD /* JSONKit.m */; };
 		F6B1B2D81725362B00A51DDD /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2CD1725362B00A51DDD /* NSDate+Helper.m */; };
@@ -47,7 +53,6 @@
 		F6B1B2F4172539F200A51DDD /* NSDate+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2EA172539F200A51DDD /* NSDate+Common.m */; };
 		F6B1B2F6172539F200A51DDD /* UITextView+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2EE172539F200A51DDD /* UITextView+Helper.m */; };
 		F6C2972317267210002FB4B8 /* Localize.strings in Resources */ = {isa = PBXBuildFile; fileRef = F6C29721172671DE002FB4B8 /* Localize.strings */; };
-		F6C2972A1726736A002FB4B8 /* MR_LoginCtro.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C297291726736A002FB4B8 /* MR_LoginCtro.m */; };
 		F6C2972D17267580002FB4B8 /* MR_User.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C2972C17267580002FB4B8 /* MR_User.m */; };
 		F6C2973117267C2E002FB4B8 /* MR_MainPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C2973017267C2E002FB4B8 /* MR_MainPageView.m */; };
 		F6C2973417267C43002FB4B8 /* MR_LeftPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C2973317267C43002FB4B8 /* MR_LeftPageView.m */; };
@@ -102,6 +107,10 @@
 		F641716C1725922100648A5E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		F64171711725957400648A5E /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
 		F64171721725957400648A5E /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
+		F678A8A01727671C000DAB46 /* loginbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginbg.png; sourceTree = "<group>"; };
+		F678A94017278AA3000DAB46 /* MR_LoginCtro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_LoginCtro.h; sourceTree = "<group>"; };
+		F678A94117278AA3000DAB46 /* MR_LoginCtro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_LoginCtro.m; sourceTree = "<group>"; };
+		F678A94217278AA3000DAB46 /* MR_LoginCtro.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MR_LoginCtro.xib; sourceTree = "<group>"; };
 		F67E55741726ACAA00573BF8 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		F67E55751726ACAA00573BF8 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		F67E55761726ACAA00573BF8 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -111,6 +120,10 @@
 		F67E55861726AE1200573BF8 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
 		F67E55871726AE1200573BF8 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		F67E55881726AE1200573BF8 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		F67E55931726C0CF00573BF8 /* MR_PathScoreCtro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_PathScoreCtro.h; sourceTree = "<group>"; };
+		F67E55941726C0CF00573BF8 /* MR_PathScoreCtro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_PathScoreCtro.m; sourceTree = "<group>"; };
+		F67E55B21726D49200573BF8 /* choose_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = choose_normal.png; sourceTree = "<group>"; };
+		F67E55B31726D49200573BF8 /* choose_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = choose_pressed.png; sourceTree = "<group>"; };
 		F69C6CEE17251635008247F5 /* MR_AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_AppDelegate.h; sourceTree = "<group>"; };
 		F69C6CEF17251635008247F5 /* MR_AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_AppDelegate.m; sourceTree = "<group>"; };
 		F69C6CF117251687008247F5 /* macdefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = macdefine.h; sourceTree = "<group>"; };
@@ -130,8 +143,6 @@
 		F6B1B2ED172539F200A51DDD /* UITextView+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Helper.h"; sourceTree = "<group>"; };
 		F6B1B2EE172539F200A51DDD /* UITextView+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Helper.m"; sourceTree = "<group>"; };
 		F6C29720172671DE002FB4B8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localize.strings"; sourceTree = "<group>"; };
-		F6C297281726736A002FB4B8 /* MR_LoginCtro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_LoginCtro.h; sourceTree = "<group>"; };
-		F6C297291726736A002FB4B8 /* MR_LoginCtro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_LoginCtro.m; sourceTree = "<group>"; };
 		F6C2972B17267580002FB4B8 /* MR_User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_User.h; sourceTree = "<group>"; };
 		F6C2972C17267580002FB4B8 /* MR_User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_User.m; sourceTree = "<group>"; };
 		F6C2972F17267C2E002FB4B8 /* MR_MainPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_MainPageView.h; sourceTree = "<group>"; };
@@ -228,6 +239,7 @@
 				F602F4BA17266D13005FE31F /* MR_RootController.h */,
 				F602F4BB17266D13005FE31F /* MR_RootController.m */,
 				F6C297271726736A002FB4B8 /* Login */,
+				F67E55911726C08A00573BF8 /* Score */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -258,6 +270,9 @@
 		F606A0B61724C8D000490D04 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				F678A8A01727671C000DAB46 /* loginbg.png */,
+				F67E55B21726D49200573BF8 /* choose_normal.png */,
+				F67E55B31726D49200573BF8 /* choose_pressed.png */,
 				F67E55851726AE1200573BF8 /* 37x-Checkmark.png */,
 				F67E55861726AE1200573BF8 /* 37x-Checkmark@2x.png */,
 				F67E55871726AE1200573BF8 /* Icon.png */,
@@ -333,6 +348,15 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		F67E55911726C08A00573BF8 /* Score */ = {
+			isa = PBXGroup;
+			children = (
+				F67E55931726C0CF00573BF8 /* MR_PathScoreCtro.h */,
+				F67E55941726C0CF00573BF8 /* MR_PathScoreCtro.m */,
+			);
+			path = Score;
+			sourceTree = "<group>";
+		};
 		F6B1B2C81725362B00A51DDD /* JSON */ = {
 			isa = PBXGroup;
 			children = (
@@ -383,8 +407,9 @@
 		F6C297271726736A002FB4B8 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				F6C297281726736A002FB4B8 /* MR_LoginCtro.h */,
-				F6C297291726736A002FB4B8 /* MR_LoginCtro.m */,
+				F678A94017278AA3000DAB46 /* MR_LoginCtro.h */,
+				F678A94117278AA3000DAB46 /* MR_LoginCtro.m */,
+				F678A94217278AA3000DAB46 /* MR_LoginCtro.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -495,6 +520,10 @@
 				F67E558A1726AE1200573BF8 /* 37x-Checkmark@2x.png in Resources */,
 				F67E558B1726AE1200573BF8 /* Icon.png in Resources */,
 				F67E558C1726AE1200573BF8 /* Icon@2x.png in Resources */,
+				F67E55B41726D49200573BF8 /* choose_normal.png in Resources */,
+				F67E55B51726D49200573BF8 /* choose_pressed.png in Resources */,
+				F678A8A11727671C000DAB46 /* loginbg.png in Resources */,
+				F678A94417278AA3000DAB46 /* MR_LoginCtro.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,13 +558,14 @@
 				F602F4B61726648D005FE31F /* MR_Leader.m in Sources */,
 				F602F4BC17266D14005FE31F /* MR_RootController.m in Sources */,
 				F602F4BF17266E75005FE31F /* MR_RootView.m in Sources */,
-				F6C2972A1726736A002FB4B8 /* MR_LoginCtro.m in Sources */,
 				F6C2972D17267580002FB4B8 /* MR_User.m in Sources */,
 				F6C2973117267C2E002FB4B8 /* MR_MainPageView.m in Sources */,
 				F6C2973417267C43002FB4B8 /* MR_LeftPageView.m in Sources */,
 				F6C2973717267C6D002FB4B8 /* MR_TopPageView.m in Sources */,
 				F67E557A1726ACAA00573BF8 /* GTMBase64.m in Sources */,
 				F67E557B1726ACAA00573BF8 /* MBProgressHUD.m in Sources */,
+				F67E55951726C0CF00573BF8 /* MR_PathScoreCtro.m in Sources */,
+				F678A94317278AA3000DAB46 /* MR_LoginCtro.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,13 +636,16 @@
 		F606A0A51724BF3100490D04 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bin Shan (C228THHY56)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bin Shan (C228THHY56)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MedicalReview/Main/MedicalReview-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/MedicalReview/Main/MedicalReview-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "764379DD-289A-4E1F-9C70-23353E819C2C";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "764379DD-289A-4E1F-9C70-23353E819C2C";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -620,13 +653,16 @@
 		F606A0A61724BF3100490D04 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bin Shan (C228THHY56)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bin Shan (C228THHY56)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MedicalReview/Main/MedicalReview-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/MedicalReview/Main/MedicalReview-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "764379DD-289A-4E1F-9C70-23353E819C2C";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "764379DD-289A-4E1F-9C70-23353E819C2C";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

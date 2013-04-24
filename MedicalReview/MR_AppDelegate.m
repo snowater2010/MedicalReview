@@ -7,13 +7,14 @@
 //
 
 #import "MR_AppDelegate.h"
-
 #import "MR_LoginCtro.h"
 
 @implementation MR_AppDelegate
 
 - (void)dealloc
 {
+    self.globalinfo = nil;
+    
     [_window release];
     [super dealloc];
 }
@@ -23,7 +24,7 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     
-    MR_LoginCtro *rootCtro = [[MR_LoginCtro alloc] init];
+    MR_LoginCtro *rootCtro = [[MR_LoginCtro alloc] initWithNibName:@"MR_LoginCtro" bundle:nil];
     self.window.rootViewController = rootCtro;
     [self.window makeKeyAndVisible];
     [rootCtro release];

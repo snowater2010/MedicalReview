@@ -34,4 +34,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+//ios6 orientation默认是Portrait， 这个方法必须要设置，光靠plist里面的设置不足够
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+}
+
 @end
