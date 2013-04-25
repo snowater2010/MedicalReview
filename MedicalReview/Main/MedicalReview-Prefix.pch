@@ -11,6 +11,7 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import <QuartzCore/QuartzCore.h>
     #import "MR_AppDelegate.h"
     #import "ASIHTTPRequest.h"
     #import "ASIHTTPRequest+Helper.h"

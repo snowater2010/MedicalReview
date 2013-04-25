@@ -18,6 +18,8 @@
 		F606A0BA1724CBD000490D04 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F606A0B71724CBD000490D04 /* Default-568h@2x.png */; };
 		F606A0BB1724CBD000490D04 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F606A0B81724CBD000490D04 /* Default.png */; };
 		F606A0BC1724CBD000490D04 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F606A0B91724CBD000490D04 /* Default@2x.png */; };
+		F623AC401728FBB40060DD4E /* MR_PathNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F623AC3F1728FBB40060DD4E /* MR_PathNodeView.m */; };
+		F623AC51172906740060DD4E /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = F623AC50172906740060DD4E /* NIDropDown.m */; };
 		F641710917256FC100648A5E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F641710817256FC100648A5E /* CFNetwork.framework */; };
 		F641710B1725702300648A5E /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F641710A1725702300648A5E /* libz.1.2.5.dylib */; };
 		F641710D1725716000648A5E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F641710C1725716000648A5E /* SystemConfiguration.framework */; };
@@ -80,6 +82,10 @@
 		F606A0B71724CBD000490D04 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F606A0B81724CBD000490D04 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		F606A0B91724CBD000490D04 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		F623AC3E1728FBB40060DD4E /* MR_PathNodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_PathNodeView.h; sourceTree = "<group>"; };
+		F623AC3F1728FBB40060DD4E /* MR_PathNodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_PathNodeView.m; sourceTree = "<group>"; };
+		F623AC4F172906740060DD4E /* NIDropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIDropDown.h; sourceTree = "<group>"; };
+		F623AC50172906740060DD4E /* NIDropDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIDropDown.m; sourceTree = "<group>"; };
 		F641710817256FC100648A5E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F641710A1725702300648A5E /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		F641710C1725716000648A5E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -165,13 +171,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F606A0831724BF3100490D04 /* CoreGraphics.framework in Frameworks */,
 				F641710F1725718500648A5E /* MobileCoreServices.framework in Frameworks */,
 				F641710D1725716000648A5E /* SystemConfiguration.framework in Frameworks */,
 				F641710B1725702300648A5E /* libz.1.2.5.dylib in Frameworks */,
 				F641710917256FC100648A5E /* CFNetwork.framework in Frameworks */,
 				F606A07F1724BF3100490D04 /* UIKit.framework in Frameworks */,
 				F606A0811724BF3100490D04 /* Foundation.framework in Frameworks */,
-				F606A0831724BF3100490D04 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +294,15 @@
 			path = Image;
 			sourceTree = "<group>";
 		};
+		F623AC4E172906740060DD4E /* NIDropDown */ = {
+			isa = PBXGroup;
+			children = (
+				F623AC4F172906740060DD4E /* NIDropDown.h */,
+				F623AC50172906740060DD4E /* NIDropDown.m */,
+			);
+			path = NIDropDown;
+			sourceTree = "<group>";
+		};
 		F641711A17258B7600648A5E /* ASIHTTPRequest */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +381,8 @@
 			children = (
 				F67E55931726C0CF00573BF8 /* MR_PathScoreCtro.h */,
 				F67E55941726C0CF00573BF8 /* MR_PathScoreCtro.m */,
+				F623AC3E1728FBB40060DD4E /* MR_PathNodeView.h */,
+				F623AC3F1728FBB40060DD4E /* MR_PathNodeView.m */,
 			);
 			path = Score;
 			sourceTree = "<group>";
@@ -454,6 +471,7 @@
 		F6E078B61724F43C00C00E6B /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				F623AC4E172906740060DD4E /* NIDropDown */,
 				F67E55731726ACAA00573BF8 /* GTMBase64 */,
 				F67E55771726ACAA00573BF8 /* MBProgressHUD */,
 				F641711A17258B7600648A5E /* ASIHTTPRequest */,
@@ -580,6 +598,8 @@
 				F67E55951726C0CF00573BF8 /* MR_PathScoreCtro.m in Sources */,
 				F678A94317278AA3000DAB46 /* MR_LoginCtro.m in Sources */,
 				F67CC73E17280D0100004FD4 /* MR_MainCtro.m in Sources */,
+				F623AC401728FBB40060DD4E /* MR_PathNodeView.m in Sources */,
+				F623AC51172906740060DD4E /* NIDropDown.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

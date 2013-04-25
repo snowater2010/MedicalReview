@@ -10,6 +10,7 @@
 #import "MR_LeftPageView.h"
 #import "MR_TopPageView.h"
 #import "MR_MainPageView.h"
+#import "MR_PathNodeView.h"
 
 @interface MR_PathScoreCtro ()
 
@@ -56,6 +57,9 @@
     CGRect leftFrame = CGRectMake(0, 0, rootFrame.size.width*0.2, rootFrame.size.height);
     MR_LeftPageView *leftPageView = [[MR_LeftPageView alloc] initWithFrame:leftFrame];
     [self.view addSubview:leftPageView];
+    
+    MR_PathNodeView *pathNodeView = [[MR_PathNodeView alloc] initWithFrame:leftPageView.bounds];
+    [leftPageView addSubview:pathNodeView];
     
     //main
     CGRect mainFrame = CGRectMake(leftFrame.size.width, 0, rootFrame.size.width-leftFrame.size.width, rootFrame.size.height);
