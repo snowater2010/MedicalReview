@@ -48,6 +48,7 @@
 		F67E55951726C0CF00573BF8 /* MR_PathScoreCtro.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E55941726C0CF00573BF8 /* MR_PathScoreCtro.m */; };
 		F67E55B41726D49200573BF8 /* choose_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = F67E55B21726D49200573BF8 /* choose_normal.png */; };
 		F67E55B51726D49200573BF8 /* choose_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = F67E55B31726D49200573BF8 /* choose_pressed.png */; };
+		F689D9B7172A4A1400E50D16 /* json_clause.txt in Resources */ = {isa = PBXBuildFile; fileRef = F689D9B6172A4A1400E50D16 /* json_clause.txt */; };
 		F69C6CF017251635008247F5 /* MR_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C6CEF17251635008247F5 /* MR_AppDelegate.m */; };
 		F6B1B2D71725362B00A51DDD /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2CA1725362B00A51DDD /* JSONKit.m */; };
 		F6B1B2D81725362B00A51DDD /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2CD1725362B00A51DDD /* NSDate+Helper.m */; };
@@ -134,6 +135,7 @@
 		F67E55941726C0CF00573BF8 /* MR_PathScoreCtro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_PathScoreCtro.m; sourceTree = "<group>"; };
 		F67E55B21726D49200573BF8 /* choose_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = choose_normal.png; sourceTree = "<group>"; };
 		F67E55B31726D49200573BF8 /* choose_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = choose_pressed.png; sourceTree = "<group>"; };
+		F689D9B6172A4A1400E50D16 /* json_clause.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_clause.txt; sourceTree = "<group>"; };
 		F69C6CEE17251635008247F5 /* MR_AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_AppDelegate.h; sourceTree = "<group>"; };
 		F69C6CEF17251635008247F5 /* MR_AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_AppDelegate.m; sourceTree = "<group>"; };
 		F69C6CF117251687008247F5 /* macdefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = macdefine.h; sourceTree = "<group>"; };
@@ -484,6 +486,7 @@
 		F6E078BB1724F4C900C00E6B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				F689D9B6172A4A1400E50D16 /* json_clause.txt */,
 				F678A9A01727DA68000DAB46 /* Localizable.strings */,
 			);
 			path = Resource;
@@ -555,6 +558,7 @@
 				F678A8A11727671C000DAB46 /* loginbg.png in Resources */,
 				F678A94417278AA3000DAB46 /* MR_LoginCtro.xib in Resources */,
 				F678A9A11727DA68000DAB46 /* Localizable.strings in Resources */,
+				F689D9B7172A4A1400E50D16 /* json_clause.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
