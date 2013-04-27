@@ -12,6 +12,7 @@
 #import "MR_MainPageView.h"
 #import "MR_PathNodeView.h"
 #import "MR_ClauseView.h"
+#import "MR_ExplainView.h"
 
 @interface MR_PathScoreCtro ()
 

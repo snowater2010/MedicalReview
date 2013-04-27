@@ -7,33 +7,72 @@
 //
 
 #import "MR_ClauseView.h"
+#import "MR_ClauseHeadView.h"
+#import "MR_ClauseNodeView.h"
 
 @implementation MR_ClauseView
 
-
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame cellHeight:(float)cellHeight
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor lightGrayColor];
         _jsonData = nil;
+        _cellHeight = cellHeight;
     }
     return self;
 }
 
+- (id)initWithFrame:(CGRect)frame
+{
+    return [self initWithFrame:frame cellHeight:DEFAULT_CELL_HEIGHT];
+}
+
 - (void)drawRect:(CGRect)rect
 {
-    CollapseClick *collapseClickView = [[CollapseClick alloc] initWithFrame:rect];
-    collapseClickView.CollapseClickDelegate = self;
-    [collapseClickView reloadCollapseClick];
-    [self addSubview:collapseClickView];
-    [collapseClickView release];
-    
-    if (_jsonData) {
-        NSString *indexName = [_jsonData objectForKey:KEY_indexName];
-        
+    if (!_jsonData) {
+        return;
     }
     
+//    NSString *indexName = [_jsonData objectForKey:KEY_indexName];
+    NSArray *pointList = [_jsonData objectForKey:KEY_pointList];
+    
+    CGRect headFrame = CGRectMake(0, 0, rect.size.width, _cellHeight);
+    MR_ClauseHeadView *headView = [[MR_ClauseHeadView alloc] initWithFrame:headFrame];
+    
+    CGRect contentFrame = CGRectMake(0, headFrame.origin.y+headFrame.size.height, rect.size.width, _cellHeight*pointList.count);
+    UIView *contentView = [[UIView alloc] initWithFrame:contentFrame];
+    
+    float contentY = 0.0f;
+    for (NSDictionary *pointDic in pointList) {
+        //NSString *indexName = [pointDic objectForKey:KEY_indexName];
+        
+        CGRect nodeFrame = CGRectMake(0, contentY, rect.size.width, _cellHeight);
+        
+        MR_ClauseNodeView *nodeView = [[MR_ClauseNodeView alloc] initWithFrame:nodeFrame];
+        
+        [contentView addSubview:nodeView];
+        [nodeView release];
+        
+        contentY += _cellHeight;
+    }
+    
+    
+//    CollapseClick *collapseClickView = [[CollapseClick alloc] initWithFrame:rect];
+//    collapseClickView.CollapseClickDelegate = self;
+//    [collapseClickView reloadCollapseClick];
+//    [self addSubview:collapseClickView];
+//    [collapseClickView release];
+//    
+
+    [self addSubview:headView];
+    [self addSubview:contentView];
+    [headView release];
+    [contentView release];
+}
+- (float)getAllHeight
+{
+    return _cellHeight * ([[_jsonData objectForKey:KEY_nodeList] count] + 1);
 }
 
 #pragma mark - Collapse Click Delegate
@@ -62,8 +101,7 @@
 }
 
 -(UIView *)viewForCollapseClickContentViewAtIndex:(int)index {
-    UIView *view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 150)] autorelease];
-    view.backgroundColor = [UIColor purpleColor];
+    MR_ClauseNodeView *view = [[[MR_ClauseNodeView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, _cellHeight)] autorelease];
     switch (index) {
         case 0:
             return view;
