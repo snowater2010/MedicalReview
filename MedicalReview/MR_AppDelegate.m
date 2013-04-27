@@ -8,6 +8,7 @@
 
 #import "MR_AppDelegate.h"
 #import "MR_LoginCtro.h"
+#import "MR_MainCtro.h"
 
 @implementation MR_AppDelegate
 
@@ -26,7 +27,8 @@
     
     [self initApp];
     
-    MR_LoginCtro *rootCtro = [[MR_LoginCtro alloc] initWithNibName:@"MR_LoginCtro" bundle:nil];
+//    MR_LoginCtro *rootCtro = [[MR_LoginCtro alloc] initWithNibName:@"MR_LoginCtro" bundle:nil];
+    MR_MainCtro *rootCtro = [[MR_MainCtro alloc] init];
     self.window.rootViewController = rootCtro;
     [self.window makeKeyAndVisible];
     [rootCtro release];

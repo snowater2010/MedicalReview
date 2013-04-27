@@ -63,8 +63,7 @@
 
 - (IBAction)doLogin:(id)sender
 {
-//    [self doRequest];
-    [self visitMainPage];
+    [self doRequest];
 }
 
 #pragma mark -

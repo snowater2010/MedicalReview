@@ -35,16 +35,13 @@
 {
     [super viewDidLoad];
     
-    NSString *fileName = @"json_clause.txt";
-    NSString *filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
-    NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
-    
-    NSDictionary *jsonDic = [jsonData objectFromJSONData];
-    
-    NSString *pathName = [jsonDic objectForKey:@"pathName"];
+//    NSString *fileName = @"json_clause.txt";
+//    NSString *filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
+//    NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
+//    NSDictionary *jsonDic = [jsonData objectFromJSONData];
+//    NSString *pathName = [jsonDic objectForKey:KEY_pathName];
     
     [self visitFunction:0];
-    
 }
 
 - (void)didReceiveMemoryWarning

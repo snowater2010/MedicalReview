@@ -141,3 +141,17 @@ enum SORT_TYPE
             [desview insertSubview:bgTable atIndex:0];\
             [bgTable release];\
         }\
+
+
+//json data keys
+#define KEY_pathName            @"pathName"
+#define KEY_nodeList            @"nodeList"
+#define KEY_clauseList          @"clauseList"
+#define KEY_attrID              @"attrID"
+#define KEY_indexName           @"indexName"
+#define KEY_pointList           @"pointList"
+#define KEY_datainSpection      @"datainSpection"
+#define KEY_proofLink           @"proofLink"
+#define KEY_wordExplan          @"wordExplan"
+#define KEY_templateDisplay     @"templateDisplay"
+

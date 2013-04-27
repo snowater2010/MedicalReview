@@ -39,6 +39,11 @@
 		F678A94417278AA3000DAB46 /* MR_LoginCtro.xib in Resources */ = {isa = PBXBuildFile; fileRef = F678A94217278AA3000DAB46 /* MR_LoginCtro.xib */; };
 		F678A9A11727DA68000DAB46 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F678A9A01727DA68000DAB46 /* Localizable.strings */; };
 		F67CC73E17280D0100004FD4 /* MR_MainCtro.m in Sources */ = {isa = PBXBuildFile; fileRef = F67CC73D17280D0100004FD4 /* MR_MainCtro.m */; };
+		F67D5769172B6EAE00AE25A2 /* MR_ClauseView.m in Sources */ = {isa = PBXBuildFile; fileRef = F67D5768172B6EAE00AE25A2 /* MR_ClauseView.m */; };
+		F67D57C2172BA9BF00AE25A2 /* CollapseClick.m in Sources */ = {isa = PBXBuildFile; fileRef = F67D57BC172BA9BF00AE25A2 /* CollapseClick.m */; };
+		F67D57C3172BA9BF00AE25A2 /* CollapseClickArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = F67D57BE172BA9BF00AE25A2 /* CollapseClickArrow.m */; };
+		F67D57C4172BA9BF00AE25A2 /* CollapseClickCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F67D57C0172BA9BF00AE25A2 /* CollapseClickCell.m */; };
+		F67D57C5172BA9BF00AE25A2 /* CollapseClickCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F67D57C1172BA9BF00AE25A2 /* CollapseClickCell.xib */; };
 		F67E557A1726ACAA00573BF8 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E55751726ACAA00573BF8 /* GTMBase64.m */; };
 		F67E557B1726ACAA00573BF8 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E55791726ACAA00573BF8 /* MBProgressHUD.m */; };
 		F67E55891726AE1200573BF8 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = F67E55851726AE1200573BF8 /* 37x-Checkmark.png */; };
@@ -122,6 +127,15 @@
 		F678A9A01727DA68000DAB46 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		F67CC73C17280D0100004FD4 /* MR_MainCtro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_MainCtro.h; sourceTree = "<group>"; };
 		F67CC73D17280D0100004FD4 /* MR_MainCtro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_MainCtro.m; sourceTree = "<group>"; };
+		F67D5767172B6EAE00AE25A2 /* MR_ClauseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ClauseView.h; sourceTree = "<group>"; };
+		F67D5768172B6EAE00AE25A2 /* MR_ClauseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ClauseView.m; sourceTree = "<group>"; };
+		F67D57BB172BA9BF00AE25A2 /* CollapseClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollapseClick.h; sourceTree = "<group>"; };
+		F67D57BC172BA9BF00AE25A2 /* CollapseClick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollapseClick.m; sourceTree = "<group>"; };
+		F67D57BD172BA9BF00AE25A2 /* CollapseClickArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollapseClickArrow.h; sourceTree = "<group>"; };
+		F67D57BE172BA9BF00AE25A2 /* CollapseClickArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollapseClickArrow.m; sourceTree = "<group>"; };
+		F67D57BF172BA9BF00AE25A2 /* CollapseClickCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollapseClickCell.h; sourceTree = "<group>"; };
+		F67D57C0172BA9BF00AE25A2 /* CollapseClickCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollapseClickCell.m; sourceTree = "<group>"; };
+		F67D57C1172BA9BF00AE25A2 /* CollapseClickCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollapseClickCell.xib; sourceTree = "<group>"; };
 		F67E55741726ACAA00573BF8 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		F67E55751726ACAA00573BF8 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		F67E55761726ACAA00573BF8 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -275,6 +289,9 @@
 				F602F4BD17266E75005FE31F /* MR_RootView.h */,
 				F602F4BE17266E75005FE31F /* MR_RootView.m */,
 				F6C2972E17267BF5002FB4B8 /* PageView */,
+				F67D5767172B6EAE00AE25A2 /* MR_ClauseView.h */,
+				F67D5768172B6EAE00AE25A2 /* MR_ClauseView.m */,
+				F67D57BA172BA95200AE25A2 /* CollapseClick */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -357,6 +374,20 @@
 				F67CC73D17280D0100004FD4 /* MR_MainCtro.m */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		F67D57BA172BA95200AE25A2 /* CollapseClick */ = {
+			isa = PBXGroup;
+			children = (
+				F67D57BB172BA9BF00AE25A2 /* CollapseClick.h */,
+				F67D57BC172BA9BF00AE25A2 /* CollapseClick.m */,
+				F67D57BD172BA9BF00AE25A2 /* CollapseClickArrow.h */,
+				F67D57BE172BA9BF00AE25A2 /* CollapseClickArrow.m */,
+				F67D57BF172BA9BF00AE25A2 /* CollapseClickCell.h */,
+				F67D57C0172BA9BF00AE25A2 /* CollapseClickCell.m */,
+				F67D57C1172BA9BF00AE25A2 /* CollapseClickCell.xib */,
+			);
+			path = CollapseClick;
 			sourceTree = "<group>";
 		};
 		F67E55731726ACAA00573BF8 /* GTMBase64 */ = {
@@ -559,6 +590,7 @@
 				F678A94417278AA3000DAB46 /* MR_LoginCtro.xib in Resources */,
 				F678A9A11727DA68000DAB46 /* Localizable.strings in Resources */,
 				F689D9B7172A4A1400E50D16 /* json_clause.txt in Resources */,
+				F67D57C5172BA9BF00AE25A2 /* CollapseClickCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +636,10 @@
 				F67CC73E17280D0100004FD4 /* MR_MainCtro.m in Sources */,
 				F623AC401728FBB40060DD4E /* MR_PathNodeView.m in Sources */,
 				F623AC51172906740060DD4E /* NIDropDown.m in Sources */,
+				F67D5769172B6EAE00AE25A2 /* MR_ClauseView.m in Sources */,
+				F67D57C2172BA9BF00AE25A2 /* CollapseClick.m in Sources */,
+				F67D57C3172BA9BF00AE25A2 /* CollapseClickArrow.m in Sources */,
+				F67D57C4172BA9BF00AE25A2 /* CollapseClickCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

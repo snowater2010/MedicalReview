@@ -8,6 +8,12 @@
 
 #import "MR_RootController.h"
 
+#define TAG_VIEW_LEFT       0201
+#define TAG_VIEW_MAIN       0202
+#define TAG_VIEW_CLAUSE     020201
+
 @interface MR_PathScoreCtro : MR_RootController
+
+@property(nonatomic, retain) NSDictionary *jsonData;
 
 @end
