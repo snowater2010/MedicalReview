@@ -7,9 +7,18 @@
 //
 
 #import "MR_RootView.h"
+#import "MR_ClauseView.h"
 
 #define ARROW_SIZE 20
+#define ARROW_MARGIN 5
+
+@class MR_ArrowView;
 
 @interface MR_ClauseHeadView : MR_RootView
+
+@property(nonatomic, assign) id<ClauseDelegate> delegate;
+@property(nonatomic, assign) enum CLAUSE_HEAD_STATE headState;
+
+- (void)showHeadState;
 
 @end
