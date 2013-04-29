@@ -20,6 +20,12 @@
 		F606A0BC1724CBD000490D04 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F606A0B91724CBD000490D04 /* Default@2x.png */; };
 		F623AC401728FBB40060DD4E /* MR_PathNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F623AC3F1728FBB40060DD4E /* MR_PathNodeView.m */; };
 		F623AC51172906740060DD4E /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = F623AC50172906740060DD4E /* NIDropDown.m */; };
+		F62BF839172E2FC400054E55 /* MR_ClauseHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF830172E2FC400054E55 /* MR_ClauseHeadView.m */; };
+		F62BF83A172E2FC400054E55 /* MR_ClauseNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF832172E2FC400054E55 /* MR_ClauseNodeView.m */; };
+		F62BF83B172E2FC400054E55 /* MR_ClauseView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF834172E2FC400054E55 /* MR_ClauseView.m */; };
+		F62BF83C172E2FC400054E55 /* MR_CollapseClauseView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF836172E2FC400054E55 /* MR_CollapseClauseView.m */; };
+		F62BF83D172E2FC400054E55 /* MR_ExplainView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF838172E2FC400054E55 /* MR_ExplainView.m */; };
+		F62BF85C172E68DE00054E55 /* MR_ArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF85B172E68DC00054E55 /* MR_ArrowView.m */; };
 		F641710917256FC100648A5E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F641710817256FC100648A5E /* CFNetwork.framework */; };
 		F641710B1725702300648A5E /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F641710A1725702300648A5E /* libz.1.2.5.dylib */; };
 		F641710D1725716000648A5E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F641710C1725716000648A5E /* SystemConfiguration.framework */; };
@@ -39,12 +45,6 @@
 		F678A94417278AA3000DAB46 /* MR_LoginCtro.xib in Resources */ = {isa = PBXBuildFile; fileRef = F678A94217278AA3000DAB46 /* MR_LoginCtro.xib */; };
 		F678A9A11727DA68000DAB46 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F678A9A01727DA68000DAB46 /* Localizable.strings */; };
 		F67CC73E17280D0100004FD4 /* MR_MainCtro.m in Sources */ = {isa = PBXBuildFile; fileRef = F67CC73D17280D0100004FD4 /* MR_MainCtro.m */; };
-		F67D5769172B6EAE00AE25A2 /* MR_ClauseView.m in Sources */ = {isa = PBXBuildFile; fileRef = F67D5768172B6EAE00AE25A2 /* MR_ClauseView.m */; };
-		F67D57C2172BA9BF00AE25A2 /* CollapseClick.m in Sources */ = {isa = PBXBuildFile; fileRef = F67D57BC172BA9BF00AE25A2 /* CollapseClick.m */; };
-		F67D57C3172BA9BF00AE25A2 /* CollapseClickArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = F67D57BE172BA9BF00AE25A2 /* CollapseClickArrow.m */; };
-		F67D57C4172BA9BF00AE25A2 /* CollapseClickCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F67D57C0172BA9BF00AE25A2 /* CollapseClickCell.m */; };
-		F67D57C5172BA9BF00AE25A2 /* CollapseClickCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F67D57C1172BA9BF00AE25A2 /* CollapseClickCell.xib */; };
-		F67D57C8172BBC6000AE25A2 /* MR_ExplainView.m in Sources */ = {isa = PBXBuildFile; fileRef = F67D57C7172BBC6000AE25A2 /* MR_ExplainView.m */; };
 		F67E557A1726ACAA00573BF8 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E55751726ACAA00573BF8 /* GTMBase64.m */; };
 		F67E557B1726ACAA00573BF8 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E55791726ACAA00573BF8 /* MBProgressHUD.m */; };
 		F67E55891726AE1200573BF8 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = F67E55851726AE1200573BF8 /* 37x-Checkmark.png */; };
@@ -54,8 +54,6 @@
 		F67E55951726C0CF00573BF8 /* MR_PathScoreCtro.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E55941726C0CF00573BF8 /* MR_PathScoreCtro.m */; };
 		F67E55B41726D49200573BF8 /* choose_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = F67E55B21726D49200573BF8 /* choose_normal.png */; };
 		F67E55B51726D49200573BF8 /* choose_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = F67E55B31726D49200573BF8 /* choose_pressed.png */; };
-		F67E817C172C1B8300D86D62 /* MR_ClauseHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E817B172C1B8200D86D62 /* MR_ClauseHeadView.m */; };
-		F67E8180172C2BD200D86D62 /* MR_ClauseNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E817F172C2BD100D86D62 /* MR_ClauseNodeView.m */; };
 		F689D9B7172A4A1400E50D16 /* json_clause.txt in Resources */ = {isa = PBXBuildFile; fileRef = F689D9B6172A4A1400E50D16 /* json_clause.txt */; };
 		F69C6CF017251635008247F5 /* MR_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F69C6CEF17251635008247F5 /* MR_AppDelegate.m */; };
 		F6B1B2D71725362B00A51DDD /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2CA1725362B00A51DDD /* JSONKit.m */; };
@@ -95,6 +93,18 @@
 		F623AC3F1728FBB40060DD4E /* MR_PathNodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_PathNodeView.m; sourceTree = "<group>"; };
 		F623AC4F172906740060DD4E /* NIDropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIDropDown.h; sourceTree = "<group>"; };
 		F623AC50172906740060DD4E /* NIDropDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIDropDown.m; sourceTree = "<group>"; };
+		F62BF82F172E2FC400054E55 /* MR_ClauseHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ClauseHeadView.h; sourceTree = "<group>"; };
+		F62BF830172E2FC400054E55 /* MR_ClauseHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ClauseHeadView.m; sourceTree = "<group>"; };
+		F62BF831172E2FC400054E55 /* MR_ClauseNodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ClauseNodeView.h; sourceTree = "<group>"; };
+		F62BF832172E2FC400054E55 /* MR_ClauseNodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ClauseNodeView.m; sourceTree = "<group>"; };
+		F62BF833172E2FC400054E55 /* MR_ClauseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ClauseView.h; sourceTree = "<group>"; };
+		F62BF834172E2FC400054E55 /* MR_ClauseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ClauseView.m; sourceTree = "<group>"; };
+		F62BF835172E2FC400054E55 /* MR_CollapseClauseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_CollapseClauseView.h; sourceTree = "<group>"; };
+		F62BF836172E2FC400054E55 /* MR_CollapseClauseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_CollapseClauseView.m; sourceTree = "<group>"; };
+		F62BF837172E2FC400054E55 /* MR_ExplainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ExplainView.h; sourceTree = "<group>"; };
+		F62BF838172E2FC400054E55 /* MR_ExplainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ExplainView.m; sourceTree = "<group>"; };
+		F62BF85A172E68DB00054E55 /* MR_ArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ArrowView.h; sourceTree = "<group>"; };
+		F62BF85B172E68DC00054E55 /* MR_ArrowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ArrowView.m; sourceTree = "<group>"; };
 		F641710817256FC100648A5E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F641710A1725702300648A5E /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		F641710C1725716000648A5E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -130,17 +140,6 @@
 		F678A9A01727DA68000DAB46 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		F67CC73C17280D0100004FD4 /* MR_MainCtro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_MainCtro.h; sourceTree = "<group>"; };
 		F67CC73D17280D0100004FD4 /* MR_MainCtro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_MainCtro.m; sourceTree = "<group>"; };
-		F67D5767172B6EAE00AE25A2 /* MR_ClauseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ClauseView.h; sourceTree = "<group>"; };
-		F67D5768172B6EAE00AE25A2 /* MR_ClauseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ClauseView.m; sourceTree = "<group>"; };
-		F67D57BB172BA9BF00AE25A2 /* CollapseClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollapseClick.h; sourceTree = "<group>"; };
-		F67D57BC172BA9BF00AE25A2 /* CollapseClick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollapseClick.m; sourceTree = "<group>"; };
-		F67D57BD172BA9BF00AE25A2 /* CollapseClickArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollapseClickArrow.h; sourceTree = "<group>"; };
-		F67D57BE172BA9BF00AE25A2 /* CollapseClickArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollapseClickArrow.m; sourceTree = "<group>"; };
-		F67D57BF172BA9BF00AE25A2 /* CollapseClickCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollapseClickCell.h; sourceTree = "<group>"; };
-		F67D57C0172BA9BF00AE25A2 /* CollapseClickCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollapseClickCell.m; sourceTree = "<group>"; };
-		F67D57C1172BA9BF00AE25A2 /* CollapseClickCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollapseClickCell.xib; sourceTree = "<group>"; };
-		F67D57C6172BBC5F00AE25A2 /* MR_ExplainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ExplainView.h; sourceTree = "<group>"; };
-		F67D57C7172BBC6000AE25A2 /* MR_ExplainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ExplainView.m; sourceTree = "<group>"; };
 		F67E55741726ACAA00573BF8 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		F67E55751726ACAA00573BF8 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		F67E55761726ACAA00573BF8 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -154,10 +153,6 @@
 		F67E55941726C0CF00573BF8 /* MR_PathScoreCtro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_PathScoreCtro.m; sourceTree = "<group>"; };
 		F67E55B21726D49200573BF8 /* choose_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = choose_normal.png; sourceTree = "<group>"; };
 		F67E55B31726D49200573BF8 /* choose_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = choose_pressed.png; sourceTree = "<group>"; };
-		F67E817A172C1B8200D86D62 /* MR_ClauseHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ClauseHeadView.h; sourceTree = "<group>"; };
-		F67E817B172C1B8200D86D62 /* MR_ClauseHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ClauseHeadView.m; sourceTree = "<group>"; };
-		F67E817E172C2BD100D86D62 /* MR_ClauseNodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ClauseNodeView.h; sourceTree = "<group>"; };
-		F67E817F172C2BD100D86D62 /* MR_ClauseNodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ClauseNodeView.m; sourceTree = "<group>"; };
 		F689D9B6172A4A1400E50D16 /* json_clause.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_clause.txt; sourceTree = "<group>"; };
 		F69C6CEE17251635008247F5 /* MR_AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_AppDelegate.h; sourceTree = "<group>"; };
 		F69C6CEF17251635008247F5 /* MR_AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_AppDelegate.m; sourceTree = "<group>"; };
@@ -298,15 +293,7 @@
 				F602F4BD17266E75005FE31F /* MR_RootView.h */,
 				F602F4BE17266E75005FE31F /* MR_RootView.m */,
 				F6C2972E17267BF5002FB4B8 /* PageView */,
-				F67D5767172B6EAE00AE25A2 /* MR_ClauseView.h */,
-				F67D5768172B6EAE00AE25A2 /* MR_ClauseView.m */,
-				F67D57C6172BBC5F00AE25A2 /* MR_ExplainView.h */,
-				F67D57C7172BBC6000AE25A2 /* MR_ExplainView.m */,
-				F67E817A172C1B8200D86D62 /* MR_ClauseHeadView.h */,
-				F67E817B172C1B8200D86D62 /* MR_ClauseHeadView.m */,
-				F67E817E172C2BD100D86D62 /* MR_ClauseNodeView.h */,
-				F67E817F172C2BD100D86D62 /* MR_ClauseNodeView.m */,
-				F67D57BA172BA95200AE25A2 /* CollapseClick */,
+				F62BF82E172E256300054E55 /* Clause */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -335,6 +322,25 @@
 				F623AC50172906740060DD4E /* NIDropDown.m */,
 			);
 			path = NIDropDown;
+			sourceTree = "<group>";
+		};
+		F62BF82E172E256300054E55 /* Clause */ = {
+			isa = PBXGroup;
+			children = (
+				F62BF835172E2FC400054E55 /* MR_CollapseClauseView.h */,
+				F62BF836172E2FC400054E55 /* MR_CollapseClauseView.m */,
+				F62BF833172E2FC400054E55 /* MR_ClauseView.h */,
+				F62BF834172E2FC400054E55 /* MR_ClauseView.m */,
+				F62BF82F172E2FC400054E55 /* MR_ClauseHeadView.h */,
+				F62BF830172E2FC400054E55 /* MR_ClauseHeadView.m */,
+				F62BF831172E2FC400054E55 /* MR_ClauseNodeView.h */,
+				F62BF832172E2FC400054E55 /* MR_ClauseNodeView.m */,
+				F62BF837172E2FC400054E55 /* MR_ExplainView.h */,
+				F62BF838172E2FC400054E55 /* MR_ExplainView.m */,
+				F62BF85A172E68DB00054E55 /* MR_ArrowView.h */,
+				F62BF85B172E68DC00054E55 /* MR_ArrowView.m */,
+			);
+			path = Clause;
 			sourceTree = "<group>";
 		};
 		F641711A17258B7600648A5E /* ASIHTTPRequest */ = {
@@ -389,20 +395,6 @@
 				F67CC73D17280D0100004FD4 /* MR_MainCtro.m */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		F67D57BA172BA95200AE25A2 /* CollapseClick */ = {
-			isa = PBXGroup;
-			children = (
-				F67D57BB172BA9BF00AE25A2 /* CollapseClick.h */,
-				F67D57BC172BA9BF00AE25A2 /* CollapseClick.m */,
-				F67D57BD172BA9BF00AE25A2 /* CollapseClickArrow.h */,
-				F67D57BE172BA9BF00AE25A2 /* CollapseClickArrow.m */,
-				F67D57BF172BA9BF00AE25A2 /* CollapseClickCell.h */,
-				F67D57C0172BA9BF00AE25A2 /* CollapseClickCell.m */,
-				F67D57C1172BA9BF00AE25A2 /* CollapseClickCell.xib */,
-			);
-			path = CollapseClick;
 			sourceTree = "<group>";
 		};
 		F67E55731726ACAA00573BF8 /* GTMBase64 */ = {
@@ -605,7 +597,6 @@
 				F678A94417278AA3000DAB46 /* MR_LoginCtro.xib in Resources */,
 				F678A9A11727DA68000DAB46 /* Localizable.strings in Resources */,
 				F689D9B7172A4A1400E50D16 /* json_clause.txt in Resources */,
-				F67D57C5172BA9BF00AE25A2 /* CollapseClickCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -651,13 +642,12 @@
 				F67CC73E17280D0100004FD4 /* MR_MainCtro.m in Sources */,
 				F623AC401728FBB40060DD4E /* MR_PathNodeView.m in Sources */,
 				F623AC51172906740060DD4E /* NIDropDown.m in Sources */,
-				F67D5769172B6EAE00AE25A2 /* MR_ClauseView.m in Sources */,
-				F67D57C2172BA9BF00AE25A2 /* CollapseClick.m in Sources */,
-				F67D57C3172BA9BF00AE25A2 /* CollapseClickArrow.m in Sources */,
-				F67D57C4172BA9BF00AE25A2 /* CollapseClickCell.m in Sources */,
-				F67D57C8172BBC6000AE25A2 /* MR_ExplainView.m in Sources */,
-				F67E817C172C1B8300D86D62 /* MR_ClauseHeadView.m in Sources */,
-				F67E8180172C2BD200D86D62 /* MR_ClauseNodeView.m in Sources */,
+				F62BF839172E2FC400054E55 /* MR_ClauseHeadView.m in Sources */,
+				F62BF83A172E2FC400054E55 /* MR_ClauseNodeView.m in Sources */,
+				F62BF83B172E2FC400054E55 /* MR_ClauseView.m in Sources */,
+				F62BF83C172E2FC400054E55 /* MR_CollapseClauseView.m in Sources */,
+				F62BF83D172E2FC400054E55 /* MR_ExplainView.m in Sources */,
+				F62BF85C172E68DE00054E55 /* MR_ArrowView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

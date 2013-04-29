@@ -11,7 +11,7 @@
 #import "MR_TopPageView.h"
 #import "MR_MainPageView.h"
 #import "MR_PathNodeView.h"
-#import "MR_ClauseView.h"
+#import "MR_CollapseClauseView.h"
 #import "MR_ExplainView.h"
 
 @interface MR_PathScoreCtro ()
@@ -41,11 +41,11 @@
     [self initData];
     
     MR_MainPageView *mainPageView = (MR_MainPageView *)[self.view viewWithTag:TAG_VIEW_MAIN];
-    MR_ClauseView *clauseView = (MR_ClauseView *)[mainPageView viewWithTag:TAG_VIEW_CLAUSE];
+    MR_CollapseClauseView *clauseView = (MR_CollapseClauseView *)[mainPageView viewWithTag:TAG_VIEW_CLAUSE];
     
     NSArray *nodeList = [_jsonData objectForKey:KEY_nodeList];
     NSArray *clauseList = [[nodeList objectAtIndex:0] objectForKey:KEY_clauseList];
-    clauseView.jsonData = [clauseList objectAtIndex:0];
+    clauseView.jsonData = clauseList;
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,7 +77,7 @@
     [self.view addSubview:mainPageView];
     
     CGRect clauseFrame = CGRectMake(0, 0, mainFrame.size.width, mainFrame.size.height/2);
-    MR_ClauseView *clauseView = [[MR_ClauseView alloc] initWithFrame:clauseFrame];
+    MR_CollapseClauseView *clauseView = [[MR_CollapseClauseView alloc] initWithFrame:clauseFrame];
     clauseView.tag = TAG_VIEW_CLAUSE;
     [mainPageView addSubview:clauseView];
 }

@@ -1,14 +1,14 @@
 //
-//  CollapseClickIcon.m
-//  CollapseClick
+//  MR_ArrowView.m
+//  MedicalReview
 //
-//  Created by Ben Gordon on 3/17/13.
-//  Copyright (c) 2013 Ben Gordon. All rights reserved.
+//  Created by lipeng11 on 13-4-29.
+//  Copyright (c) 2013年 medical.review. All rights reserved.
 //
 
-#import "CollapseClickArrow.h"
+#import "MR_ArrowView.h"
 
-@implementation CollapseClickArrow
+@implementation MR_ArrowView
 
 - (id)initWithFrame:(CGRect)frame
 {
