@@ -23,6 +23,9 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    NSString *name = [_jsonData objectForKey:KEY_indexName];
+    NSString *explain = [_jsonData objectForKey:KEY_wordExplan];
+    
     //name
     float name_x = 0;
     float name_y = 0;
@@ -32,7 +35,7 @@
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:nameFrame];
     nameLabel.lineBreakMode = UILineBreakModeWordWrap;
     nameLabel.numberOfLines = 0;
-    nameLabel.text = @"我的声活是sje个我的声活是sje个我的声活是sje个我的声活是sje个我的声";
+    nameLabel.text = name;
     
     //explain
     float explain_x = name_x + name_w;
@@ -41,11 +44,18 @@
     float explain_h = rect.size.height;
     CGRect explainFrame = CGRectMake(explain_x, explain_y, explain_w, explain_h);
     MR_ExplainView *explainView = [[MR_ExplainView alloc] initWithFrame:explainFrame];
+    explainView.wordExplan = explain;
     
     [self addSubview:nameLabel];
     [self addSubview:explainView];
     [nameLabel release];
     [explainView release];
+}
+
+- (void)dealloc
+{
+    self.jsonData = nil;
+    [super dealloc];
 }
 
 @end

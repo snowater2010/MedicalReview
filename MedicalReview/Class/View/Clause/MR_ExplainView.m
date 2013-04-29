@@ -27,12 +27,13 @@
     explainView.tag = TAG_VIEW_EXPLAIN;
     explainView.font = [UIFont systemFontOfSize:_textSize];
     explainView.backgroundColor = [UIColor greenColor];
+    explainView.text = _wordExplan;
     
     CGRect buttonFrame = CGRectMake(rect.size.width*0.7, 0, rect.size.width*0.3, rect.size.height);
     UIButton *button = [[UIButton alloc] initWithFrame:buttonFrame];
     [button addTarget:self action:@selector(btPressed) forControlEvents:UIControlEventTouchUpInside];
     button.backgroundColor = [UIColor blueColor];
-    [button setTitle:@"快捷" forState:UIControlStateNormal];
+    [button setTitle:_GET_LOCALIZED_STRING_(@"button_shortcut") forState:UIControlStateNormal];
     
     explainView.editable = !_readOnly;
     button.enabled = !_readOnly;
@@ -41,6 +42,12 @@
     [self addSubview:button];
     [explainView release];
     [button release];
+}
+
+- (void)dealloc
+{
+    self.wordExplan = nil;
+    [super dealloc];
 }
 
 - (void)btPressed

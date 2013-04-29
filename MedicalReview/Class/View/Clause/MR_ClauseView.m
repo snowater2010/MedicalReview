@@ -35,7 +35,8 @@
         return;
     }
     
-//    NSString *indexName = [_jsonData objectForKey:KEY_indexName];
+    NSString *indexName = [_jsonData objectForKey:KEY_indexName];
+    NSString *explain = [_jsonData objectForKey:KEY_wordExplan];
     NSArray *pointList = [_jsonData objectForKey:KEY_pointList];
     
     //head view
@@ -46,6 +47,8 @@
     CGRect headFrame = CGRectMake(head_x, head_y, head_w, head_h);
     MR_ClauseHeadView *headView = [[MR_ClauseHeadView alloc] initWithFrame:headFrame];
     headView.delegate = self;
+    headView.name = indexName;
+    headView.explain = explain;
     self.headView = headView;
     [headView release];
     
@@ -61,11 +64,10 @@
     
     float contentY = 0.0f;
     for (NSDictionary *pointDic in pointList) {
-        //NSString *indexName = [pointDic objectForKey:KEY_indexName];
-        
         CGRect nodeFrame = CGRectMake(0, contentY, rect.size.width, _cellHeight);
         
         MR_ClauseNodeView *nodeView = [[MR_ClauseNodeView alloc] initWithFrame:nodeFrame];
+        nodeView.jsonData = pointDic;
         
         [_contentView addSubview:nodeView];
         [nodeView release];
