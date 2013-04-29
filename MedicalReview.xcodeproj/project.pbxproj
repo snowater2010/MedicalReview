@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E8BDB54172EDBB900218B91 /* MR_PathCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E8BDB53172EDBB900218B91 /* MR_PathCell.m */; };
 		F602F4A3172651AE005FE31F /* ASIHTTPRequest+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = F602F4A2172651AD005FE31F /* ASIHTTPRequest+Helper.m */; };
 		F602F4B317266414005FE31F /* MR_Doctor.m in Sources */ = {isa = PBXBuildFile; fileRef = F602F4B217266414005FE31F /* MR_Doctor.m */; };
 		F602F4B61726648D005FE31F /* MR_Leader.m in Sources */ = {isa = PBXBuildFile; fileRef = F602F4B51726648D005FE31F /* MR_Leader.m */; };
@@ -72,6 +73,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E8BDB52172EDBB900218B91 /* MR_PathCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_PathCell.h; sourceTree = "<group>"; };
+		3E8BDB53172EDBB900218B91 /* MR_PathCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_PathCell.m; sourceTree = "<group>"; };
 		F602F4A1172651AD005FE31F /* ASIHTTPRequest+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ASIHTTPRequest+Helper.h"; sourceTree = "<group>"; };
 		F602F4A2172651AD005FE31F /* ASIHTTPRequest+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ASIHTTPRequest+Helper.m"; sourceTree = "<group>"; };
 		F602F4B117266414005FE31F /* MR_Doctor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_Doctor.h; sourceTree = "<group>"; };
@@ -204,6 +207,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E8BDB51172EDB9300218B91 /* Path */ = {
+			isa = PBXGroup;
+			children = (
+				3E8BDB52172EDBB900218B91 /* MR_PathCell.h */,
+				3E8BDB53172EDBB900218B91 /* MR_PathCell.m */,
+			);
+			name = Path;
+			sourceTree = "<group>";
+		};
 		F606A06F1724BF3100490D04 = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +277,7 @@
 		F606A0AC1724C69400490D04 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3E8BDB51172EDB9300218B91 /* Path */,
 				F602F4BA17266D13005FE31F /* MR_RootController.h */,
 				F602F4BB17266D13005FE31F /* MR_RootController.m */,
 				F6C297271726736A002FB4B8 /* Login */,
@@ -648,6 +661,7 @@
 				F62BF83C172E2FC400054E55 /* MR_CollapseClauseView.m in Sources */,
 				F62BF83D172E2FC400054E55 /* MR_ExplainView.m in Sources */,
 				F62BF85C172E68DE00054E55 /* MR_ArrowView.m in Sources */,
+				3E8BDB54172EDBB900218B91 /* MR_PathCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,8 +728,8 @@
 				INFOPLIST_FILE = "$(SRCROOT)/MedicalReview/Main/MedicalReview-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "764379DD-289A-4E1F-9C70-23353E819C2C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "764379DD-289A-4E1F-9C70-23353E819C2C";
+				PROVISIONING_PROFILE = "1B6BB893-305C-4F3C-9FA3-1D999419D1F7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1B6BB893-305C-4F3C-9FA3-1D999419D1F7";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
@@ -731,8 +745,8 @@
 				INFOPLIST_FILE = "$(SRCROOT)/MedicalReview/Main/MedicalReview-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "764379DD-289A-4E1F-9C70-23353E819C2C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "764379DD-289A-4E1F-9C70-23353E819C2C";
+				PROVISIONING_PROFILE = "1B6BB893-305C-4F3C-9FA3-1D999419D1F7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1B6BB893-305C-4F3C-9FA3-1D999419D1F7";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
