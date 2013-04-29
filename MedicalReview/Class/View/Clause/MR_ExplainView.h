@@ -12,6 +12,7 @@
 
 @interface MR_ExplainView : MR_RootView
 
+@property(nonatomic, retain) NSString *wordExplan;
 @property(nonatomic, assign) float textSize;
 @property(nonatomic, assign) BOOL readOnly;
 

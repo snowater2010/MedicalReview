@@ -2,7 +2,7 @@
 Build/
 
 #ignore UserInterfaceState.xcuserstate
-UserInterfaceState.xcuserstate
+MedicalReview.xcodeproj/project.xcworkspace/xcuserdata/
 
 # ignore DS_Store
 .DS_Store

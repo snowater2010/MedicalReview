@@ -49,7 +49,7 @@
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:nameFrame];
     nameLabel.lineBreakMode = UILineBreakModeWordWrap;
     nameLabel.numberOfLines = 0;
-    nameLabel.text = @"我的声活是sje个我的声活是sje个我的声活是sje个我的声活是sje个我的声";
+    nameLabel.text = _name;
     
     //explain
     float explain_x = nameFrame.origin.x + nameFrame.size.width;
@@ -58,6 +58,7 @@
     float explain_h = rect.size.height;
     CGRect explainFrame = CGRectMake(explain_x, explain_y, explain_w, explain_h);
     MR_ExplainView *explainView = [[MR_ExplainView alloc] initWithFrame:explainFrame];
+    explainView.wordExplan = _explain;
     
     //cover view -- click event
     float cover_x = 0;
@@ -78,6 +79,13 @@
     [coverControl release];
     
     [self showHeadState];
+}
+
+- (void)dealloc
+{
+    self.name = nil;
+    self.explain = nil;
+    [super dealloc];
 }
 
 - (void)clickClauseHead

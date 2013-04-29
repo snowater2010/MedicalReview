@@ -10,4 +10,6 @@
 
 @interface MR_ClauseNodeView : MR_RootView
 
+@property(nonatomic, retain) NSDictionary *jsonData;
+
 @end
