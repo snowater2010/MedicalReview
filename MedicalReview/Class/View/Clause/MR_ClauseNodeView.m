@@ -68,12 +68,23 @@
     MR_ExplainView *explainView = [[MR_ExplainView alloc] initWithFrame:explainFrame];
     explainView.wordExplan = explain;
     
+    //operate
+    float operate_x = explain_x + explain_w;
+    float operate_y = 0;
+    float operate_w = rect.size.width * 0.1;
+    float operate_h = rect.size.height;
+    CGRect operateFrame = CGRectMake(operate_x, operate_y, operate_w, operate_h);
+    MR_OperateView *operateView = [[MR_OperateView alloc] initWithFrame:operateFrame];
+    operateView.isHasLink = YES;
+    
     [self addSubview:nameLabel];
     [self addSubview:scoreView];
     [self addSubview:explainView];
+    [self addSubview:operateView];
     [nameLabel release];
     [scoreView release];
     [explainView release];
+    [operateView release];
 }
 
 - (void)dealloc
@@ -85,6 +96,15 @@
 - (void)radioButtonGroupTaped:(NSString *)radioKey
 {
     _LOG_(radioKey);
+}
+
+- (void)doDelete
+{
+    _LOG_(@"doDelete");
+}
+- (void)doLink
+{
+    _LOG_(@"doLink");
 }
 
 @end
