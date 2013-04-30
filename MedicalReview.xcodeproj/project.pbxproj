@@ -45,6 +45,10 @@
 		F678A94417278AA3000DAB46 /* MR_LoginCtro.xib in Resources */ = {isa = PBXBuildFile; fileRef = F678A94217278AA3000DAB46 /* MR_LoginCtro.xib */; };
 		F678A9A11727DA68000DAB46 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F678A9A01727DA68000DAB46 /* Localizable.strings */; };
 		F67CC73E17280D0100004FD4 /* MR_MainCtro.m in Sources */ = {isa = PBXBuildFile; fileRef = F67CC73D17280D0100004FD4 /* MR_MainCtro.m */; };
+		F67E1551172F4660004FF751 /* MR_ScoreRadioView.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E1550172F465F004FF751 /* MR_ScoreRadioView.m */; };
+		F67E155D172F6913004FF751 /* RadioButton-Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = F67E155B172F6913004FF751 /* RadioButton-Selected.png */; };
+		F67E155E172F6913004FF751 /* RadioButton-Unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = F67E155C172F6913004FF751 /* RadioButton-Unselected.png */; };
+		F67E1569172F8EB2004FF751 /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E1568172F8EB2004FF751 /* RadioButton.m */; };
 		F67E557A1726ACAA00573BF8 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E55751726ACAA00573BF8 /* GTMBase64.m */; };
 		F67E557B1726ACAA00573BF8 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E55791726ACAA00573BF8 /* MBProgressHUD.m */; };
 		F67E55891726AE1200573BF8 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = F67E55851726AE1200573BF8 /* 37x-Checkmark.png */; };
@@ -140,6 +144,12 @@
 		F678A9A01727DA68000DAB46 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		F67CC73C17280D0100004FD4 /* MR_MainCtro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_MainCtro.h; sourceTree = "<group>"; };
 		F67CC73D17280D0100004FD4 /* MR_MainCtro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_MainCtro.m; sourceTree = "<group>"; };
+		F67E154F172F465F004FF751 /* MR_ScoreRadioView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ScoreRadioView.h; sourceTree = "<group>"; };
+		F67E1550172F465F004FF751 /* MR_ScoreRadioView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ScoreRadioView.m; sourceTree = "<group>"; };
+		F67E155B172F6913004FF751 /* RadioButton-Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RadioButton-Selected.png"; sourceTree = "<group>"; };
+		F67E155C172F6913004FF751 /* RadioButton-Unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RadioButton-Unselected.png"; sourceTree = "<group>"; };
+		F67E1567172F8EB2004FF751 /* RadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioButton.h; sourceTree = "<group>"; };
+		F67E1568172F8EB2004FF751 /* RadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioButton.m; sourceTree = "<group>"; };
 		F67E55741726ACAA00573BF8 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		F67E55751726ACAA00573BF8 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		F67E55761726ACAA00573BF8 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -301,6 +311,8 @@
 		F606A0B61724C8D000490D04 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				F67E155B172F6913004FF751 /* RadioButton-Selected.png */,
+				F67E155C172F6913004FF751 /* RadioButton-Unselected.png */,
 				F678A8A01727671C000DAB46 /* loginbg.png */,
 				F67E55B21726D49200573BF8 /* choose_normal.png */,
 				F67E55B31726D49200573BF8 /* choose_pressed.png */,
@@ -339,6 +351,8 @@
 				F62BF838172E2FC400054E55 /* MR_ExplainView.m */,
 				F62BF85A172E68DB00054E55 /* MR_ArrowView.h */,
 				F62BF85B172E68DC00054E55 /* MR_ArrowView.m */,
+				F67E154F172F465F004FF751 /* MR_ScoreRadioView.h */,
+				F67E1550172F465F004FF751 /* MR_ScoreRadioView.m */,
 			);
 			path = Clause;
 			sourceTree = "<group>";
@@ -395,6 +409,15 @@
 				F67CC73D17280D0100004FD4 /* MR_MainCtro.m */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		F67E1557172F683D004FF751 /* RadioButton */ = {
+			isa = PBXGroup;
+			children = (
+				F67E1567172F8EB2004FF751 /* RadioButton.h */,
+				F67E1568172F8EB2004FF751 /* RadioButton.m */,
+			);
+			path = RadioButton;
 			sourceTree = "<group>";
 		};
 		F67E55731726ACAA00573BF8 /* GTMBase64 */ = {
@@ -511,6 +534,7 @@
 		F6E078B61724F43C00C00E6B /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				F67E1557172F683D004FF751 /* RadioButton */,
 				F623AC4E172906740060DD4E /* NIDropDown */,
 				F67E55731726ACAA00573BF8 /* GTMBase64 */,
 				F67E55771726ACAA00573BF8 /* MBProgressHUD */,
@@ -597,6 +621,8 @@
 				F678A94417278AA3000DAB46 /* MR_LoginCtro.xib in Resources */,
 				F678A9A11727DA68000DAB46 /* Localizable.strings in Resources */,
 				F689D9B7172A4A1400E50D16 /* json_clause.txt in Resources */,
+				F67E155D172F6913004FF751 /* RadioButton-Selected.png in Resources */,
+				F67E155E172F6913004FF751 /* RadioButton-Unselected.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -648,6 +674,8 @@
 				F62BF83C172E2FC400054E55 /* MR_CollapseClauseView.m in Sources */,
 				F62BF83D172E2FC400054E55 /* MR_ExplainView.m in Sources */,
 				F62BF85C172E68DE00054E55 /* MR_ArrowView.m in Sources */,
+				F67E1551172F4660004FF751 /* MR_ScoreRadioView.m in Sources */,
+				F67E1569172F8EB2004FF751 /* RadioButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

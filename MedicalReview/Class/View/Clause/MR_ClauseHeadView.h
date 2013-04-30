@@ -16,8 +16,7 @@
 
 @interface MR_ClauseHeadView : MR_RootView
 
-@property(nonatomic, retain) NSString *name;
-@property(nonatomic, retain) NSString *explain;
+@property(nonatomic, retain) NSDictionary *jsonData;
 
 @property(nonatomic, assign) id<ClauseDelegate> delegate;
 @property(nonatomic, assign) enum CLAUSE_HEAD_STATE headState;

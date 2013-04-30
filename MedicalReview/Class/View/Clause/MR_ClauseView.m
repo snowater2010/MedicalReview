@@ -35,8 +35,6 @@
         return;
     }
     
-    NSString *indexName = [_jsonData objectForKey:KEY_indexName];
-    NSString *explain = [_jsonData objectForKey:KEY_wordExplan];
     NSArray *pointList = [_jsonData objectForKey:KEY_pointList];
     
     //head view
@@ -47,8 +45,7 @@
     CGRect headFrame = CGRectMake(head_x, head_y, head_w, head_h);
     MR_ClauseHeadView *headView = [[MR_ClauseHeadView alloc] initWithFrame:headFrame];
     headView.delegate = self;
-    headView.name = indexName;
-    headView.explain = explain;
+    headView.jsonData = _jsonData;
     self.headView = headView;
     [headView release];
     

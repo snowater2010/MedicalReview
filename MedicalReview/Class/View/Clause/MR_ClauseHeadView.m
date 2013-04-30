@@ -29,6 +29,9 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    NSString *name = [_jsonData objectForKey:KEY_indexName];
+    NSString *explain = [_jsonData objectForKey:KEY_wordExplan];
+    
     //arrow
     float arrow_x = ARROW_MARGIN;
     float arrow_y = (rect.size.height-ARROW_SIZE)/2;
@@ -49,16 +52,7 @@
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:nameFrame];
     nameLabel.lineBreakMode = UILineBreakModeWordWrap;
     nameLabel.numberOfLines = 0;
-    nameLabel.text = _name;
-    
-    //explain
-    float explain_x = nameFrame.origin.x + nameFrame.size.width;
-    float explain_y = 0;
-    float explain_w = rect.size.width * 0.2;
-    float explain_h = rect.size.height;
-    CGRect explainFrame = CGRectMake(explain_x, explain_y, explain_w, explain_h);
-    MR_ExplainView *explainView = [[MR_ExplainView alloc] initWithFrame:explainFrame];
-    explainView.wordExplan = _explain;
+    nameLabel.text = name;
     
     //cover view -- click event
     float cover_x = 0;
@@ -70,10 +64,21 @@
     coverControl.backgroundColor = [UIColor clearColor];
     [coverControl addTarget:self action:@selector(clickClauseHead) forControlEvents:UIControlEventTouchUpInside];
     
+    //explain
+    float explain_x = nameFrame.origin.x + nameFrame.size.width;
+    float explain_y = 0;
+    float explain_w = rect.size.width * 0.2;
+    float explain_h = rect.size.height;
+    CGRect explainFrame = CGRectMake(explain_x, explain_y, explain_w, explain_h);
+    MR_ExplainView *explainView = [[MR_ExplainView alloc] initWithFrame:explainFrame];
+    explainView.wordExplan = explain;
+    
+    
     [self addSubview:_arrowView];
     [self addSubview:nameLabel];
-    [self addSubview:explainView];
     [self addSubview:coverControl];
+    [self addSubview:explainView];
+    
     [nameLabel release];
     [explainView release];
     [coverControl release];
@@ -83,8 +88,8 @@
 
 - (void)dealloc
 {
-    self.name = nil;
-    self.explain = nil;
+    self.jsonData = nil;
+    self.arrowView = nil;
     [super dealloc];
 }
 

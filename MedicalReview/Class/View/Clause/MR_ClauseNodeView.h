@@ -7,8 +7,9 @@
 //
 
 #import "MR_RootView.h"
+#import "MR_ScoreRadioView.h"
 
-@interface MR_ClauseNodeView : MR_RootView
+@interface MR_ClauseNodeView : MR_RootView <RadioButtonViewDelegate>
 
 @property(nonatomic, retain) NSDictionary *jsonData;
 
