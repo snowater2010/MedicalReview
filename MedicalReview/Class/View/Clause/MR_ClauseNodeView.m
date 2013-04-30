@@ -8,6 +8,7 @@
 
 #import "MR_ClauseNodeView.h"
 #import "MR_ClauseHeadView.h"
+#import "MR_ScoreRadioView.h"
 #import "MR_ExplainView.h"
 
 @implementation MR_ClauseNodeView
@@ -37,8 +38,29 @@
     nameLabel.numberOfLines = 0;
     nameLabel.text = name;
     
+    //score
+    float score_x = name_x + name_w;
+    float score_y = 0;
+    float score_w = rect.size.width * 0.25;
+    float score_h = rect.size.height;
+    CGRect scoreFrame = CGRectMake(score_x, score_y, score_w, score_h);
+    MR_ScoreRadioView *scoreView = [[MR_ScoreRadioView alloc] initWithFrame:scoreFrame];
+    
+    NSMutableArray *choiceData = [[NSMutableArray alloc] initWithCapacity:3];
+    NSDictionary *dicA = [[NSDictionary alloc] initWithObjectsAndKeys:@"A", @"key", @"通过", @"name", nil];
+    [choiceData addObject:dicA];
+    [dicA release];
+    NSDictionary *dicB = [[NSDictionary alloc] initWithObjectsAndKeys:@"B", @"key", @"不通过", @"name", nil];
+    [choiceData addObject:dicB];
+    [dicB release];
+    NSDictionary *dicC = [[NSDictionary alloc] initWithObjectsAndKeys:@"C", @"key", @"不适应", @"name", nil];
+    [choiceData addObject:dicC];
+    [dicC release];
+    scoreView.choiceData = choiceData;
+    scoreView.delegate = self;
+    
     //explain
-    float explain_x = name_x + name_w;
+    float explain_x = score_x + score_w;
     float explain_y = 0;
     float explain_w = rect.size.width * 0.2;
     float explain_h = rect.size.height;
@@ -47,8 +69,10 @@
     explainView.wordExplan = explain;
     
     [self addSubview:nameLabel];
+    [self addSubview:scoreView];
     [self addSubview:explainView];
     [nameLabel release];
+    [scoreView release];
     [explainView release];
 }
 
@@ -56,6 +80,11 @@
 {
     self.jsonData = nil;
     [super dealloc];
+}
+
+- (void)radioButtonGroupTaped:(NSString *)radioKey
+{
+    _LOG_(radioKey);
 }
 
 @end
