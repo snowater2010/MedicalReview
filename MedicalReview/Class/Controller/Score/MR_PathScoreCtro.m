@@ -13,18 +13,19 @@
 #import "MR_PathNodeView.h"
 #import "MR_CollapseClauseView.h"
 #import "MR_ExplainView.h"
+#import "MR_PathCell.h"
 
 @interface MR_PathScoreCtro ()
 
 @end
 
 @implementation MR_PathScoreCtro
-
+    @synthesize realData=_realData;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        // Custom initialization //test
     }
     return self;
 }
@@ -66,9 +67,19 @@
     MR_LeftPageView *leftPageView = [[MR_LeftPageView alloc] initWithFrame:leftFrame];
     leftPageView.tag = TAG_VIEW_LEFT;
     [self.view addSubview:leftPageView];
+    [self parseJson];
+    CGRect tableViewFrame = CGRectMake(0,80, leftFrame.size.width, leftFrame.size.height-80);
+    UITableView *tableView = [[UITableView alloc] initWithFrame:tableViewFrame];
     
-    MR_PathNodeView *pathNodeView = [[MR_PathNodeView alloc] initWithFrame:leftPageView.bounds];
-    [leftPageView addSubview:pathNodeView];
+    
+    tableView.dataSource = self;
+    tableView.delegate = self;
+    
+    [leftPageView addSubview:tableView];
+    
+    //MR_PathNodeView *pathNodeView = [[MR_PathNodeView alloc] initWithFrame:leftPageView.bounds];
+    //[leftPageView addSubview:pathNodeView];
+    [leftPageView addSubview:tableView];
     
     //main
     CGRect mainFrame = CGRectMake(leftFrame.size.width, 0, rootFrame.size.width-leftFrame.size.width, rootFrame.size.height);
@@ -89,5 +100,72 @@
     NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
     self.jsonData = [jsonData objectFromJSONData];
 }
+
+#pragma mark -------------------
+#pragma mark UITableViewDataSource
+//委托里 @required 的必须实现
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+     return [self.realData count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+     static NSString *CellIdentifier = @"MR_PathCell";
+     MR_PathCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+     if (cell == nil) {
+          cell = [[MR_PathCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+         }
+     //config the cell
+     //cell.textLabel.text = [[self.realData objectAtIndex:indexPath.row] objectForKey:@"nodeName"];
+     //cell.model = [[self.realData objectAtIndex:indexPath.row] objectForKey:@"nodeName"];
+     cell.cellModel = [self.realData objectAtIndex:indexPath.row];
+     UIView *backView = [[UIView alloc] initWithFrame:cell.frame];
+     cell.selectedBackgroundView = backView;
+     cell.selectedBackgroundView.backgroundColor = [UIColor clearColor];
+     //取消边框线
+    
+     [cell setBackgroundView:[[UIView alloc] init]];    //取消边框线
+     cell.backgroundColor = [UIColor clearColor];
+     return cell;
+}
+
+
+#pragma mark -------------------
+#pragma mark UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+     return [MR_PathCell cellHeight];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+     NSLog(@"%@", [[self.realData objectAtIndex:indexPath.row] objectForKey:@"nodeName"]);
+}
+
+
+
+
+
+- (void)parseJson{
+     NSString *dataJsonPath = [[NSBundle mainBundle] pathForResource:@"json_clause" ofType:@"txt"];
+     NSLog(@"dataxml file url:%@",dataJsonPath);
+     NSData *jsonData = [NSData dataWithContentsOfFile:dataJsonPath];
+     /*
+         * json格式解码
+         */
+     JSONDecoder *jd=[[JSONDecoder alloc] init];
+    
+     //针对NSData数据
+    
+     NSDictionary *ret = [jd objectWithData: jsonData];
+     NSMutableArray *nodeList =[ret objectForKey:@"nodeList"];
+     /*for (int i=0; i<nodeList.count; i++) {
+         NSDictionary *item = [nodeList objectAtIndex:i];
+         NSLog(@"name: %@",[item objectForKey:@"nodeName"]);
+         }*/
+     
+     self.realData = nodeList;
+     //NSLog(@"res= %@", [ret objectForKey:@"nodeList"]);
+}
+
 
 @end
