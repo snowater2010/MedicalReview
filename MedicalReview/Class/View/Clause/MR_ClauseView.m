@@ -17,6 +17,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor lightGrayColor];
+        self.clipsToBounds = YES;
         _jsonData = nil;
         _cellHeight = cellHeight;
         _headState = CLAUSE_HEAD_STATE_CLOSE;

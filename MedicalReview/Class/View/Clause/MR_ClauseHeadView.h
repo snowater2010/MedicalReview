@@ -8,13 +8,14 @@
 
 #import "MR_RootView.h"
 #import "MR_ClauseView.h"
+#import "MR_ScoreRadioView.h"
 
 #define ARROW_SIZE 20
 #define ARROW_MARGIN 5
 
 @class MR_ArrowView;
 
-@interface MR_ClauseHeadView : MR_RootView
+@interface MR_ClauseHeadView : MR_RootView <RadioButtonViewDelegate>
 
 @property(nonatomic, retain) NSDictionary *jsonData;
 

@@ -35,6 +35,7 @@
 		F62BF83C172E2FC400054E55 /* MR_CollapseClauseView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF836172E2FC400054E55 /* MR_CollapseClauseView.m */; };
 		F62BF83D172E2FC400054E55 /* MR_ExplainView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF838172E2FC400054E55 /* MR_ExplainView.m */; };
 		F62BF85C172E68DE00054E55 /* MR_ArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF85B172E68DC00054E55 /* MR_ArrowView.m */; };
+		F63A89D4173000A00007B5C7 /* MR_OperateView.m in Sources */ = {isa = PBXBuildFile; fileRef = F63A89D31730009F0007B5C7 /* MR_OperateView.m */; };
 		F641710917256FC100648A5E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F641710817256FC100648A5E /* CFNetwork.framework */; };
 		F641710B1725702300648A5E /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F641710A1725702300648A5E /* libz.1.2.5.dylib */; };
 		F641710D1725716000648A5E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F641710C1725716000648A5E /* SystemConfiguration.framework */; };
@@ -128,6 +129,8 @@
 		F62BF838172E2FC400054E55 /* MR_ExplainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ExplainView.m; sourceTree = "<group>"; };
 		F62BF85A172E68DB00054E55 /* MR_ArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ArrowView.h; sourceTree = "<group>"; };
 		F62BF85B172E68DC00054E55 /* MR_ArrowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ArrowView.m; sourceTree = "<group>"; };
+		F63A89D21730009F0007B5C7 /* MR_OperateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_OperateView.h; sourceTree = "<group>"; };
+		F63A89D31730009F0007B5C7 /* MR_OperateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_OperateView.m; sourceTree = "<group>"; };
 		F641710817256FC100648A5E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F641710A1725702300648A5E /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		F641710C1725716000648A5E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -390,6 +393,8 @@
 				F62BF85B172E68DC00054E55 /* MR_ArrowView.m */,
 				F67E154F172F465F004FF751 /* MR_ScoreRadioView.h */,
 				F67E1550172F465F004FF751 /* MR_ScoreRadioView.m */,
+				F63A89D21730009F0007B5C7 /* MR_OperateView.h */,
+				F63A89D31730009F0007B5C7 /* MR_OperateView.m */,
 			);
 			path = Clause;
 			sourceTree = "<group>";
@@ -722,6 +727,7 @@
 				F67E1551172F4660004FF751 /* MR_ScoreRadioView.m in Sources */,
 				F67E1569172F8EB2004FF751 /* RadioButton.m in Sources */,
 				3E8BDB54172EDBB900218B91 /* MR_PathCell.m in Sources */,
+				F63A89D4173000A00007B5C7 /* MR_OperateView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

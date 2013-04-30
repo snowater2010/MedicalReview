@@ -10,3 +10,5 @@
 "alert_cancel"          = "取消";
 "request_error"         = "数据请求错误";
 "button_shortcut"       = "快捷";
+"button_delete"         = "删除";
+"button_link"           = "评审要素";

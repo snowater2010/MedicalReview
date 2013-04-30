@@ -64,8 +64,29 @@
     coverControl.backgroundColor = [UIColor clearColor];
     [coverControl addTarget:self action:@selector(clickClauseHead) forControlEvents:UIControlEventTouchUpInside];
     
+    //score
+    float score_x = nameFrame.origin.x + nameFrame.size.width;
+    float score_y = 0;
+    float score_w = rect.size.width * 0.25;
+    float score_h = rect.size.height;
+    CGRect scoreFrame = CGRectMake(score_x, score_y, score_w, score_h);
+    MR_ScoreRadioView *scoreView = [[MR_ScoreRadioView alloc] initWithFrame:scoreFrame];
+    
+    NSMutableArray *choiceData = [[NSMutableArray alloc] initWithCapacity:3];
+    NSDictionary *dicA = [[NSDictionary alloc] initWithObjectsAndKeys:@"A", @"key", @" A", @"name", nil];
+    [choiceData addObject:dicA];
+    [dicA release];
+    NSDictionary *dicB = [[NSDictionary alloc] initWithObjectsAndKeys:@"B", @"key", @" B", @"name", nil];
+    [choiceData addObject:dicB];
+    [dicB release];
+    NSDictionary *dicC = [[NSDictionary alloc] initWithObjectsAndKeys:@"C", @"key", @" C", @"name", nil];
+    [choiceData addObject:dicC];
+    [dicC release];
+    scoreView.choiceData = choiceData;
+    scoreView.delegate = self;
+    
     //explain
-    float explain_x = nameFrame.origin.x + nameFrame.size.width;
+    float explain_x = score_x + score_w;
     float explain_y = 0;
     float explain_w = rect.size.width * 0.2;
     float explain_h = rect.size.height;
@@ -73,15 +94,16 @@
     MR_ExplainView *explainView = [[MR_ExplainView alloc] initWithFrame:explainFrame];
     explainView.wordExplan = explain;
     
-    
     [self addSubview:_arrowView];
     [self addSubview:nameLabel];
     [self addSubview:coverControl];
+    [self addSubview:scoreView];
     [self addSubview:explainView];
     
     [nameLabel release];
     [explainView release];
     [coverControl release];
+    [scoreView release];
     
     [self showHeadState];
 }
@@ -117,6 +139,11 @@
         default:
             break;
     }
+}
+
+- (void)radioButtonGroupTaped:(NSString *)radioKey
+{
+    _LOG_(radioKey);
 }
 
 @end
