@@ -9,8 +9,16 @@
 #import "MR_RootView.h"
 #import "NIDropDown.h"
 
-@interface MR_PathNodeView : MR_RootView <NIDropDownDelegate>
+@protocol PathNodeDelegate <NSObject>
 
-@property(nonatomic, retain) NSArray *nodeData;
+@optional
+- (void)nodeSelected:(NSArray *)nodeData;
+
+@end
+
+@interface MR_PathNodeView : MR_RootView <NIDropDownDelegate, UITableViewDataSource, UITableViewDelegate>
+
+@property(nonatomic, retain) NSArray *jsonData;
+@property(nonatomic, assign) id<PathNodeDelegate> delegate;
 
 @end

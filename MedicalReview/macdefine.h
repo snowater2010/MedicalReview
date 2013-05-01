@@ -146,6 +146,7 @@ enum SORT_TYPE
 //json data keys
 #define KEY_pathName            @"pathName"
 #define KEY_nodeList            @"nodeList"
+#define KEY_nodeId              @"nodeId"
 #define KEY_clauseList          @"clauseList"
 #define KEY_attrID              @"attrID"
 #define KEY_indexName           @"indexName"

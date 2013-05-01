@@ -7,10 +7,13 @@
 //
 
 #import "MR_PathNodeView.h"
+#import "MR_PathCell.h"
 
 @interface MR_PathNodeView()
 
 @property(nonatomic, retain) NIDropDown *dropDown;
+@property(nonatomic, retain) NSArray *nodeData;
+@property(nonatomic, retain) UITableView *tableView;
 
 @end
 
@@ -20,7 +23,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor orangeColor];
+        _jsonData = nil;
         _nodeData = nil;
         _dropDown = nil;
     }
@@ -29,8 +33,19 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    if (!_jsonData || _jsonData.count <= 0) {
+        return;
+    }
+    NSDictionary *dic = [_jsonData objectAtIndex:0];
+    NSString *pathName = [dic objectForKey:KEY_pathName];
+    [self setNodeDataAtIndex:0];
+    
     //dropdown list
-    CGRect btnSelectFrame = CGRectMake(10, 10, rect.size.width - 20, 40);
+    float select_x = 10;
+    float select_y = 10;
+    float select_w = rect.size.width - 20;
+    float select_h = 40;
+    CGRect btnSelectFrame = CGRectMake(select_x, select_y, select_w, select_h);
     UIButton *btnSelect = [[UIButton alloc] initWithFrame:btnSelectFrame];
     btnSelect.layer.borderWidth = 1;
     btnSelect.layer.borderColor = [[UIColor blackColor] CGColor];
@@ -39,28 +54,66 @@
     [btnSelect addTarget:self action:@selector(selectClicked:) forControlEvents:UIControlEventTouchUpInside];
     btnSelect.tag = 100;
     
-    [btnSelect setTitle:@"Hello" forState:UIControlStateNormal];
+    [btnSelect setTitle:pathName forState:UIControlStateNormal];
     [btnSelect setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
+    //tree node List
+    float tree_x = 10;
+    float tree_y = select_y + select_h;
+    float tree_w = rect.size.width - 20;
+    float tree_h = rect.size.height - (select_y + select_h) -10;
+    CGRect treeFrame = CGRectMake(tree_x, tree_y, tree_w, tree_h);
+    
+    UITableView *tableView = [[UITableView alloc] initWithFrame:treeFrame];
+    tableView.dataSource = self;
+    tableView.delegate = self;
+    self.tableView = tableView;
+    
     [self addSubview:btnSelect];
+    [self addSubview:_tableView];
+    [self bringSubviewToFront:btnSelect];
+    
+    [btnSelect release];
+    [tableView release];
 }
 
 - (IBAction)selectClicked:(id)sender {
-    NSArray * arr = [[NSArray alloc] init];
-    arr = [NSArray arrayWithObjects:@"Hello 0", @"Hello 1", @"Hello 2", @"Hello 3", @"Hello 4", @"Hello 5", @"Hello 6", @"Hello 7", @"Hello 8", @"Hello 9",nil];
+    
+    NSMutableArray *pathArr = [[NSMutableArray alloc] initWithCapacity:_jsonData.count];
+    for (NSDictionary *dic in _jsonData) {
+        NSString *pathName = [dic objectForKey:KEY_pathName];
+        [pathArr addObject:pathName];
+    }
+    
     if(_dropDown == nil) {
         CGFloat f = 200;
-        _dropDown = [[NIDropDown alloc]showDropDown:sender :&f :arr :nil :@"down"];
+        _dropDown = [[NIDropDown alloc]showDropDown:sender :&f :pathArr :nil :@"down"];
         _dropDown.delegate = self;
     }
     else {
         [_dropDown hideDropDown:sender];
         [self rel];
     }
+    
+    [pathArr release];
 }
 
 - (void) niDropDownDelegateMethod: (NIDropDown *) sender {
+    int index = sender.selectIndex;
+    [self setNodeDataAtIndex:index];
+    [_tableView reloadData];
     [self rel];
+}
+
+- (void)setNodeDataAtIndex:(int)index
+{
+    NSArray *nodeList = [[_jsonData objectAtIndex:index] objectForKey:KEY_nodeList];
+    if (nodeList) {
+        self.nodeData = nodeList;
+    }
+    else {
+        self.nodeData = nil;
+    }
 }
 
 -(void)rel{
@@ -69,9 +122,56 @@
 
 - (void)dealloc
 {
-    self.nodeData = nil;
+    self.jsonData = nil;
     self.dropDown = nil;
+    self.nodeData = nil;
+    self.tableView = nil;
     [super dealloc];
+}
+
+#pragma mark -------------------
+#pragma mark UITableView delegate
+//委托里 @required 的必须实现
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [_nodeData count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *CellIdentifier = @"MR_PathCell";
+    MR_PathCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[MR_PathCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    //config the cell
+    //cell.textLabel.text = [[self.realData objectAtIndex:indexPath.row] objectForKey:@"nodeName"];
+    //cell.model = [[self.realData objectAtIndex:indexPath.row] objectForKey:@"nodeName"];
+    cell.cellModel = [self.nodeData objectAtIndex:indexPath.row];
+    UIView *backView = [[UIView alloc] initWithFrame:cell.frame];
+    cell.selectedBackgroundView = backView;
+    cell.selectedBackgroundView.backgroundColor = [UIColor clearColor];
+    //取消边框线
+    
+    [cell setBackgroundView:[[UIView alloc] init]];    //取消边框线
+    cell.backgroundColor = [UIColor clearColor];
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return [MR_PathCell cellHeight];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    _LOG_([[self.nodeData objectAtIndex:indexPath.row] objectForKey:@"nodeName"]);
+    
+    NSDictionary *dic = [_nodeData objectAtIndex:indexPath.row];
+    NSArray *clauseList = [dic objectForKey:KEY_clauseList];
+    
+    if ([_delegate respondsToSelector:@selector(nodeSelected:)]) {
+        [_delegate performSelector:@selector(nodeSelected:) withObject:clauseList];
+    }
+    
 }
 
 @end

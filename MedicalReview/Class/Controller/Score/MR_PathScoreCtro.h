@@ -7,14 +7,10 @@
 //
 
 #import "MR_RootController.h"
+#import "MR_PathNodeView.h"
 
-#define TAG_VIEW_LEFT       0201
-#define TAG_VIEW_MAIN       0202
-#define TAG_VIEW_CLAUSE     020201
-
-@interface MR_PathScoreCtro : MR_RootController<UITableViewDataSource, UITableViewDelegate>
+@interface MR_PathScoreCtro : MR_RootController <PathNodeDelegate>
 
 @property(nonatomic, retain) NSDictionary *jsonData;
 
-@property(nonatomic,retain) NSMutableArray *realData;
 @end
