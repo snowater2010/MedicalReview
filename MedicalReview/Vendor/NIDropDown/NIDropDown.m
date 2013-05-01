@@ -130,6 +130,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.selectIndex = indexPath.row;
+    
     [self hideDropDown:btnSender];
     
     UITableViewCell *c = [tableView cellForRowAtIndexPath:indexPath];

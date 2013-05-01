@@ -17,10 +17,13 @@
 
 @interface MR_PathScoreCtro ()
 
+@property(nonatomic, retain) MR_PathNodeView *pathNodeView;
+@property(nonatomic, retain) MR_CollapseClauseView *clauseView;
+
 @end
 
 @implementation MR_PathScoreCtro
-    @synthesize realData=_realData;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -41,18 +44,25 @@
     [super viewDidLoad];
     [self initData];
     
-    MR_MainPageView *mainPageView = (MR_MainPageView *)[self.view viewWithTag:TAG_VIEW_MAIN];
-    MR_CollapseClauseView *clauseView = (MR_CollapseClauseView *)[mainPageView viewWithTag:TAG_VIEW_CLAUSE];
+    _pathNodeView.jsonData = [NSArray arrayWithObjects:_jsonData, nil];
     
     NSArray *nodeList = [_jsonData objectForKey:KEY_nodeList];
     NSArray *clauseList = [[nodeList objectAtIndex:0] objectForKey:KEY_clauseList];
-    clauseView.jsonData = clauseList;
+    _clauseView.jsonData = clauseList;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    self.pathNodeView = nil;
+    self.clauseView = nil;
+    self.jsonData = nil;
+    [super dealloc];
 }
 
 #pragma mark -
@@ -65,32 +75,27 @@
     //left
     CGRect leftFrame = CGRectMake(0, 0, rootFrame.size.width*0.2, rootFrame.size.height);
     MR_LeftPageView *leftPageView = [[MR_LeftPageView alloc] initWithFrame:leftFrame];
-    leftPageView.tag = TAG_VIEW_LEFT;
     [self.view addSubview:leftPageView];
-    [self parseJson];
-    CGRect tableViewFrame = CGRectMake(0,80, leftFrame.size.width, leftFrame.size.height-80);
-    UITableView *tableView = [[UITableView alloc] initWithFrame:tableViewFrame];
+    [leftPageView release];
     
-    
-    tableView.dataSource = self;
-    tableView.delegate = self;
-    
-    [leftPageView addSubview:tableView];
-    
-    //MR_PathNodeView *pathNodeView = [[MR_PathNodeView alloc] initWithFrame:leftPageView.bounds];
-    //[leftPageView addSubview:pathNodeView];
-    [leftPageView addSubview:tableView];
+    //path node
+    MR_PathNodeView *pathNodeView = [[MR_PathNodeView alloc] initWithFrame:leftPageView.bounds];
+    pathNodeView.delegate = self;
+    self.pathNodeView = pathNodeView;
+    [leftPageView addSubview:_pathNodeView];
+    [pathNodeView release];
     
     //main
     CGRect mainFrame = CGRectMake(leftFrame.size.width, 0, rootFrame.size.width-leftFrame.size.width, rootFrame.size.height);
     MR_MainPageView *mainPageView = [[MR_MainPageView alloc] initWithFrame:mainFrame];
-    mainPageView.tag = TAG_VIEW_MAIN;
     [self.view addSubview:mainPageView];
+    [mainPageView release];
     
-    CGRect clauseFrame = CGRectMake(0, 0, mainFrame.size.width, mainFrame.size.height/2);
+    CGRect clauseFrame = CGRectMake(0, 0, mainFrame.size.width, mainFrame.size.height);
     MR_CollapseClauseView *clauseView = [[MR_CollapseClauseView alloc] initWithFrame:clauseFrame];
-    clauseView.tag = TAG_VIEW_CLAUSE;
+    self.clauseView = clauseView;
     [mainPageView addSubview:clauseView];
+    [clauseView release];
 }
 
 - (void)initData
@@ -101,71 +106,14 @@
     self.jsonData = [jsonData objectFromJSONData];
 }
 
-#pragma mark -------------------
-#pragma mark UITableViewDataSource
-//委托里 @required 的必须实现
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-     return [self.realData count];
+#pragma mark -
+#pragma mark PathNodeDelegate
+- (void)nodeSelected:(NSArray *)nodeData;
+{
+    if (nodeData) {
+        _clauseView.jsonData = nodeData;
+        [_clauseView setNeedsDisplay];
+    }
 }
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-     static NSString *CellIdentifier = @"MR_PathCell";
-     MR_PathCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-     if (cell == nil) {
-          cell = [[MR_PathCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-         }
-     //config the cell
-     //cell.textLabel.text = [[self.realData objectAtIndex:indexPath.row] objectForKey:@"nodeName"];
-     //cell.model = [[self.realData objectAtIndex:indexPath.row] objectForKey:@"nodeName"];
-     cell.cellModel = [self.realData objectAtIndex:indexPath.row];
-     UIView *backView = [[UIView alloc] initWithFrame:cell.frame];
-     cell.selectedBackgroundView = backView;
-     cell.selectedBackgroundView.backgroundColor = [UIColor clearColor];
-     //取消边框线
-    
-     [cell setBackgroundView:[[UIView alloc] init]];    //取消边框线
-     cell.backgroundColor = [UIColor clearColor];
-     return cell;
-}
-
-
-#pragma mark -------------------
-#pragma mark UITableViewDelegate
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-     return [MR_PathCell cellHeight];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-     NSLog(@"%@", [[self.realData objectAtIndex:indexPath.row] objectForKey:@"nodeName"]);
-}
-
-
-
-
-
-- (void)parseJson{
-     NSString *dataJsonPath = [[NSBundle mainBundle] pathForResource:@"json_clause" ofType:@"txt"];
-     NSLog(@"dataxml file url:%@",dataJsonPath);
-     NSData *jsonData = [NSData dataWithContentsOfFile:dataJsonPath];
-     /*
-         * json格式解码
-         */
-     JSONDecoder *jd=[[JSONDecoder alloc] init];
-    
-     //针对NSData数据
-    
-     NSDictionary *ret = [jd objectWithData: jsonData];
-     NSMutableArray *nodeList =[ret objectForKey:@"nodeList"];
-     /*for (int i=0; i<nodeList.count; i++) {
-         NSDictionary *item = [nodeList objectAtIndex:i];
-         NSLog(@"name: %@",[item objectForKey:@"nodeName"]);
-         }*/
-     
-     self.realData = nodeList;
-     //NSLog(@"res= %@", [ret objectForKey:@"nodeList"]);
-}
-
 
 @end
