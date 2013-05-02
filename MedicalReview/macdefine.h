@@ -13,7 +13,11 @@
 
 #define ENABLE_CACHE 0   //是否启用缓存,1为启用
 
-#define SERVICE_URL  @"https://api.douban.com/v2/book/1220562"
+#define SERVICE_URL     @"https://api.douban.com/v2/book/1220562"
+
+#define CACHE_PATH      @"cache"                //自定义缓存路径
+#define CACHE_CLAUSE    @"cache_clause"         //条款缓存文件名
+#define CACHE_SCORE     @"cache_score"          //打分缓存文件名
 
 //获取屏幕高度
 #define _DEVICE_HEIGHT [UIScreen mainScreen].bounds.size.height

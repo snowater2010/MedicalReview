@@ -14,6 +14,7 @@
 #import "MR_CollapseClauseView.h"
 #import "MR_ExplainView.h"
 #import "MR_PathCell.h"
+#import "FileHelper.h"
 
 @interface MR_PathScoreCtro ()
 
@@ -42,6 +43,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self initData];
     
     _pathNodeView.jsonData = [NSArray arrayWithObjects:_jsonData, nil];
@@ -100,10 +102,13 @@
 
 - (void)initData
 {
-    NSString *fileName = @"json_clause.txt";
-    NSString *filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
-    NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
-    self.jsonData = [jsonData objectFromJSONData];
+    //从缓存读取数据
+    self.jsonData = [FileHelper readClauseDataFromCache];
+    
+//    NSString *fileName = @"json_clause.txt";
+//    NSString *filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
+//    NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
+//    self.jsonData = [jsonData objectFromJSONData];
 }
 
 #pragma mark -
