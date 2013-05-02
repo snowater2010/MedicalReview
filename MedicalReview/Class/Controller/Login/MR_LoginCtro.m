@@ -9,6 +9,7 @@
 #import "MR_LoginCtro.h"
 #import "MR_User.h"
 #import "MR_MainCtro.h"
+#import "FileHelper.h"
 
 @interface MR_LoginCtro ()
 {
@@ -63,7 +64,9 @@
 
 - (IBAction)doLogin:(id)sender
 {
-    [self doRequest];
+    [self visitMainPage];
+    
+//    [self doRequest];
 }
 
 #pragma mark -

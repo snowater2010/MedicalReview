@@ -14,7 +14,15 @@
 //Document目录，放数据文件
 + (NSString*)getDocumentPath;
 
+//获取条款缓存文件路径
++(NSString*)getClauseFilePath;
+
+//获取打分缓存文件路径
++(NSString*)getScoreFilePath;
+
 //删除文件
 + (BOOL)removeFileAtPath:(NSString*)path;
+
++ (NSDictionary *)readClauseDataFromCache;
 
 @end
