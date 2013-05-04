@@ -10,13 +10,39 @@
 
 @implementation MR_User
 
-- (id)initWithId:(NSString *)uId name:(NSString *)uName;
+- (id)init
 {
     if (self = [super init]) {
-        self.uId = uId;
-        self.uName = uName;
+        self.isRememberPw = NO;
     }
     return self;
+}
+
+- (id)initWithData:(NSDictionary *)userDic
+{
+    if (self = [super init]) {
+        if (userDic) {
+            self.uId = [userDic objectForKey:KEY_userId];
+            self.uName = [userDic objectForKey:KEY_userName];
+            self.uPassWord = [userDic objectForKey:KEY_userPassword];
+            NSNumber *isRemember = [userDic objectForKey:KEY_userIsRemember];
+            if (isRemember) {
+                self.isRememberPw = [isRemember boolValue];
+            }
+        }
+    }
+    return self;
+}
+
+- (NSDictionary *)user2Data
+{
+    NSDictionary *userDic = [[[NSDictionary alloc] initWithObjectsAndKeys:
+                              _uId, KEY_userId,
+                              _uName, KEY_userName,
+                              _uPassWord, KEY_userPassword,
+                              [NSNumber numberWithBool:_isRememberPw], KEY_userIsRemember,
+                              nil] autorelease];
+    return userDic;
 }
 
 -(void)dealloc

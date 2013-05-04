@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MR_RootController : UIViewController <ASIHTTPRequestDelegate>
+@interface MR_RootController : UIViewController <ASIHTTPRequestDelegate, UITextFieldDelegate>
 
 - (id)initWithFrame:(CGRect)frame;
 - (void)loadRootView;

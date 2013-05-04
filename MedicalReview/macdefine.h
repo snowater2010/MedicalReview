@@ -13,15 +13,21 @@
 
 #define ENABLE_CACHE 0   //是否启用缓存,1为启用
 
-#define SERVICE_URL     @"https://api.douban.com/v2/book/1220562"
+#define SERVICE_URL         @"https://api.douban.com/v2/book/1220562"
 
-#define CACHE_PATH      @"cache"                //自定义缓存路径
-#define CACHE_CLAUSE    @"cache_clause"         //条款缓存文件名
-#define CACHE_SCORE     @"cache_score"          //打分缓存文件名
+#define CACHE_PATH          @"cache"                //自定义缓存路径
+#define CACHE_CLAUSE        @"cache_clause"         //条款缓存文件名
+#define CACHE_SCORE         @"cache_score"          //打分缓存文件名
+
+#define USER_DEFAULT_KEY    @"MR_User_Default"      //存储登陆信息
 
 //获取屏幕高度
+#define _DEVICE_STATEBAR_HEIGHT 20
 #define _DEVICE_HEIGHT [UIScreen mainScreen].bounds.size.height
-#define _DEVICE_WIDTH [UIScreen mainScreen].bounds.size.width - 20
+#define _DEVICE_WIDTH [UIScreen mainScreen].bounds.size.width - _DEVICE_STATEBAR_HEIGHT
+
+//键盘
+#define _UIKeyboardFrameEndUserInfoKey (&UIKeyboardFrameEndUserInfoKey != NULL ? UIKeyboardFrameEndUserInfoKey : @"UIKeyboardBoundsUserInfoKey")
 
 //排序类型
 enum SORT_TYPE
@@ -159,4 +165,10 @@ enum SORT_TYPE
 #define KEY_proofLink           @"proofLink"
 #define KEY_wordExplan          @"wordExplan"
 #define KEY_templateDisplay     @"templateDisplay"
+
+//user
+#define KEY_userId              @"userId"
+#define KEY_userName            @"userName"
+#define KEY_userPassword        @"userPassword"
+#define KEY_userIsRemember      @"userIsRemember"
 
