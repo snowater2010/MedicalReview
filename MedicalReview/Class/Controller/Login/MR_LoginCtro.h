@@ -8,8 +8,9 @@
 
 #import "MR_RootController.h"
 
-@interface MR_LoginCtro : MR_RootController
+@interface MR_LoginCtro : MR_RootController <UITextFieldDelegate>
 
+@property(nonatomic, retain) IBOutlet UIView        *ibLoginView;
 @property(nonatomic, retain) IBOutlet UITextField   *ibName;
 @property(nonatomic, retain) IBOutlet UITextField   *ibPassWord;
 @property(nonatomic, retain) IBOutlet UIButton      *ibLoginBt;
@@ -17,5 +18,6 @@
 
 - (IBAction)clickRememberIv:(id)sender;
 - (IBAction)doLogin:(id)sender;
+- (IBAction)nameChanged;
 
 @end

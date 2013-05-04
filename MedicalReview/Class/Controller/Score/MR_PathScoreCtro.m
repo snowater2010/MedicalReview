@@ -96,7 +96,7 @@
     CGRect clauseFrame = CGRectMake(0, 0, mainFrame.size.width, mainFrame.size.height);
     MR_CollapseClauseView *clauseView = [[MR_CollapseClauseView alloc] initWithFrame:clauseFrame];
     self.clauseView = clauseView;
-    [mainPageView addSubview:clauseView];
+    //[mainPageView addSubview:clauseView];
     [clauseView release];
 }
 

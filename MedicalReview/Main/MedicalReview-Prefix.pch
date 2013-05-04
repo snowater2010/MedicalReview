@@ -18,4 +18,5 @@
     #import "macdefine.h"
     #import "Common.h"
     #import "MyLog.h"
+    #import "NSString+Helper.h"
 #endif

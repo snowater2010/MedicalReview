@@ -10,7 +10,10 @@
 
 @property(nonatomic, retain) NSString *uId;
 @property(nonatomic, retain) NSString *uName;
+@property(nonatomic, retain) NSString *uPassWord;
+@property(nonatomic, assign) BOOL isRememberPw;
 
-- (id)initWithId:(NSString *)uId name:(NSString *)uName;
+- (id)initWithData:(NSDictionary *)userDic;
+- (NSDictionary *)user2Data;
 
 @end

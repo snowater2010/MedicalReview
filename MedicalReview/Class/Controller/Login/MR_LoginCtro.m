@@ -14,6 +14,7 @@
 @interface MR_LoginCtro ()
 {
     BOOL isRememberPw;  //is remember password
+    float loginViewY;
 }
 @property (retain, nonatomic) ASIHTTPRequest *request;
 
@@ -34,9 +35,26 @@
 {
     [super viewDidLoad];
     
-    //init view
+    _ibName.delegate = self;
+    
     isRememberPw = NO;
+    
+    //取上次登陆者信息
+    MR_User *defaultUser = [self loadUserByName:USER_DEFAULT_KEY];
+    if (defaultUser) {
+        self.ibName.text = defaultUser.uName;
+        if (defaultUser.isRememberPw) {
+            self.ibPassWord.text = defaultUser.uPassWord;
+            isRememberPw = YES;
+        }
+    }
+    
+    //init view
     [self showRememberPic];
+    
+    //键盘监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:)name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,6 +67,9 @@
 {
     //must do request release
     [_request doRelease];
+    
+    //remove keyboard notification
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [super dealloc];
 }
@@ -64,9 +85,56 @@
 
 - (IBAction)doLogin:(id)sender
 {
+//    NSString *uId = @"abc";
+//    NSString *name = self.ibName.text;
+//    NSString *password = self.ibPassWord.text;
+//    
+//    if ([name IsEmpty]) {
+//        _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_login_name_empty"));
+//        return;
+//    }
+//    
+//    if ([password IsEmpty]) {
+//        _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_login_password_empty"));
+//        return;
+//    }
+//    
+//    MR_User *user = [[MR_User alloc] init];
+//    user.uId = uId;
+//    user.uName = name;
+//    user.uPassWord = password;
+//    user.isRememberPw = isRememberPw;
+//    [self initUserInfo:user];
+//    [user release];
+    
     [self visitMainPage];
     
 //    [self doRequest];
+}
+
+- (void)nameChanged
+{
+    NSString *name = self.ibName.text;
+    NSString *password = @"";
+    isRememberPw = NO;
+    
+    MR_User *defaultUser = [self loadUserByName:name];
+    if (defaultUser) {
+        if (defaultUser.isRememberPw) {
+            password = defaultUser.uPassWord;
+            isRememberPw = YES;
+        }
+    }
+    
+    self.ibPassWord.text = password;
+    [self showRememberPic];
+}
+
+#pragma mark -
+#pragma mark -- UITextFieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self nameChanged];
 }
 
 #pragma mark -
@@ -92,10 +160,8 @@
     _LOG_(retDic)
     
     //init user info
-    NSString *uId = [retDic objectForKey:@""];
-    NSString *uName = [retDic objectForKey:@""];
-    
-    MR_User *user = [[MR_User alloc] initWithId:uId name:uName];
+    MR_User *user = [[MR_User alloc] initWithData:retDic];
+    user.isRememberPw = isRememberPw;
     [self initUserInfo:user];
     [user release];
     
@@ -117,6 +183,11 @@
 
 - (void)initUserInfo:(MR_User *)user
 {
+    //default info
+    [self saveUserForName:user];
+    [self saveUser:user forKey:USER_DEFAULT_KEY];
+    
+    //global info
     _GET_APP_DELEGATE_(appDelegate);
     appDelegate.globalinfo.userInfo.user = user;
 }
@@ -126,6 +197,80 @@
     MR_MainCtro *score = [[MR_MainCtro alloc] init];
     [self presentModalViewController:score animated:YES];
     [score release];
+}
+
+#pragma mark -
+#pragma mark -- UserDefaults
+
+//移出用户信息
+-(void)removeUserWithId:(NSString *)userName
+{
+    NSUserDefaults* userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault removeObjectForKey:userName];
+}
+
+//保存用户信息
+-(void)saveUser:(MR_User *)user forKey:(NSString *)key
+{
+    if(user){
+        NSDictionary *userDic = [user user2Data];
+        if (userDic) {
+            NSUserDefaults* userDefault = [NSUserDefaults standardUserDefaults];
+            [userDefault setObject:userDic forKey:key];
+        }
+    }
+}
+//保存用户信息，名字作为key
+-(void)saveUserForName:(MR_User *)user
+{
+    if(user){
+        [self saveUser:user forKey:user.uName];
+    }
+}
+
+//加载用户信息
+-(MR_User *)loadUserByName:(NSString *)userName
+{
+    NSUserDefaults* userDefault = [NSUserDefaults standardUserDefaults];
+    NSDictionary *userDic = [userDefault dictionaryForKey:userName];
+    
+    if(userDic)
+    {
+        MR_User *user = [[[MR_User alloc] initWithData:userDic] autorelease];
+        return user;
+    }  
+    else {
+        return nil;
+    }  
+}
+
+#pragma mark -
+#pragma mark -- keyboard notifation
+
+//键盘事件
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    CGRect loginFrame = _ibLoginView.frame;
+    loginViewY = loginFrame.origin.y;
+    
+    _ANIMATIONS_INIT_BEGIN_(0.25f);
+    
+    loginFrame.origin.y = 100;
+    _ibLoginView.frame = loginFrame;
+    
+    _ANIMATIONS_INIT_END_;
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    CGRect loginFrame = _ibLoginView.frame;
+    
+    _ANIMATIONS_INIT_BEGIN_(0.25f);
+    
+    loginFrame.origin.y = loginViewY;
+    _ibLoginView.frame = loginFrame;
+    
+    _ANIMATIONS_INIT_END_;
 }
 
 @end

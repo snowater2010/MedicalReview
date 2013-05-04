@@ -13,7 +13,7 @@
 #pragma mark -- 字符串
 -(BOOL)IsEmpty;
 {
-    if(self || [self length] <= 0)
+    if(!self || [self length] <= 0)
         return YES;
     return NO;
 }

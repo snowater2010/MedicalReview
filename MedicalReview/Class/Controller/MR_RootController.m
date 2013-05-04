@@ -13,6 +13,7 @@
     BOOL customFrame;
 }
 @property(nonatomic, assign) CGRect initViewFrame;
+@property(nonatomic, retain) UIView *nowEditView;
 
 @end
 
@@ -62,6 +63,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+//    //键盘监听
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:)name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewDidUnload
+{
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,6 +86,12 @@
     return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
 }
 
+- (void)dealloc
+{
+    [_nowEditView release];
+    [super dealloc];
+}
+
 #pragma mark -
 #pragma mark -- ASIHTTPRequestDelegate
 
@@ -85,5 +101,37 @@
     _LOG_(error);
     _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"request_error"));
 }
+
+////键盘事件
+//- (void)keyboardWillShow:(NSNotification *)notification
+//{
+//    
+//    NSDictionary* info = [notification userInfo];
+//    CGSize kbSize=[[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+//    
+//    CGRect editFrame = [_nowEditView convertRect:_nowEditView.frame toView:self.view];
+//    CGRect windowFrame = self.view.frame;
+//    
+//    //如果被键盘遮挡
+//    float editOffset = (editFrame.origin.y + editFrame.size.height) - (windowFrame.size.width - kbSize.width);
+//    if (editOffset > 0) {
+//        windowFrame.origin.x = _DEVICE_STATEBAR_HEIGHT - editOffset;
+//    }
+//    
+//    self.view.frame = windowFrame;
+//}
+//
+//- (void)keyboardWillHide:(NSNotification *)notification
+//{
+//    CGRect windowFrame = self.view.frame;
+//    windowFrame.origin.x = _DEVICE_STATEBAR_HEIGHT;
+//    
+//    self.view.frame = windowFrame;
+//}
+//
+//- (void)textFieldDidBeginEditing:(UITextField *)textField
+//{
+//    self.nowEditView = textField;
+//}
 
 @end
