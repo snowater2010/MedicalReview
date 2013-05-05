@@ -8,5 +8,6 @@
 
 @interface Common : NSObject
 
++ (BOOL)isEmptyString:(NSString *)str;
 
 @end

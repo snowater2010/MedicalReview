@@ -10,4 +10,11 @@
 
 @implementation Common
 
++ (BOOL)isEmptyString:(NSString *)str;
+{
+    if(!str || [str length] <= 0)
+        return YES;
+    return NO;
+}
+
 @end

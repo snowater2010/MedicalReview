@@ -13,5 +13,6 @@
 @interface MR_ClauseNodeView : MR_RootView <RadioButtonViewDelegate, OperateDelegate>
 
 @property(nonatomic, retain) NSDictionary *jsonData;
+@property(nonatomic, retain) NSDictionary *scoreData;
 
 @end

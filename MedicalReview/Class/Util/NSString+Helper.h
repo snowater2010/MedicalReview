@@ -10,7 +10,6 @@
 
 @interface NSString (Helper)
 
-- (BOOL)IsEmpty;
 - (BOOL)isNumberString;
 - (NSString *)toThousand;
 

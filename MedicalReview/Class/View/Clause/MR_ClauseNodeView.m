@@ -25,7 +25,8 @@
 - (void)drawRect:(CGRect)rect
 {
     NSString *name = [_jsonData objectForKey:KEY_indexName];
-    NSString *explain = [_jsonData objectForKey:KEY_wordExplan];
+    NSString *scoreValue = [_scoreData objectForKey:KEY_scoreValue];
+    NSString *scoreExplain = [_scoreData objectForKey:KEY_scoreExplain];
     
     //name
     float name_x = ARROW_MARGIN * 2 + ARROW_SIZE;
@@ -58,6 +59,8 @@
     [choiceData addObject:dicC];
     [dicC release];
     scoreView.choiceData = choiceData;
+    if (![Common isEmptyString:scoreValue])
+        scoreView.choiceIndex = scoreValue.intValue;
     scoreView.delegate = self;
     
     //explain
@@ -67,7 +70,8 @@
     float explain_h = rect.size.height;
     CGRect explainFrame = CGRectMake(explain_x, explain_y, explain_w, explain_h);
     MR_ExplainView *explainView = [[MR_ExplainView alloc] initWithFrame:explainFrame];
-    explainView.wordExplan = explain;
+    if (![Common isEmptyString:scoreExplain])
+        explainView.wordExplan = scoreExplain;
     
     //operate
     float operate_x = explain_x + explain_w;
@@ -91,6 +95,7 @@
 - (void)dealloc
 {
     self.jsonData = nil;
+    self.scoreData = nil;
     [super dealloc];
 }
 

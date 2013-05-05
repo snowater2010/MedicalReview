@@ -46,6 +46,7 @@
     MR_ClauseHeadView *headView = [[MR_ClauseHeadView alloc] initWithFrame:headFrame];
     headView.delegate = self;
     headView.jsonData = _jsonData;
+    headView.scoreData = _scoreData;
     self.headView = headView;
     [headView release];
     
@@ -61,10 +62,12 @@
     
     float contentY = 0.0f;
     for (NSDictionary *pointDic in pointList) {
+        NSDictionary *pointId = [pointDic objectForKey:KEY_attrId];
         CGRect nodeFrame = CGRectMake(0, contentY, rect.size.width, _cellHeight);
         
         MR_ClauseNodeView *nodeView = [[MR_ClauseNodeView alloc] initWithFrame:nodeFrame];
         nodeView.jsonData = pointDic;
+        nodeView.scoreData = [_scoreData objectForKey:pointId];
         
         [_contentView addSubview:nodeView];
         [nodeView release];
@@ -87,6 +90,7 @@
 - (void)dealloc
 {
     self.jsonData = nil;
+    self.scoreData = nil;
     self.headView = nil;
     [super dealloc];
 }

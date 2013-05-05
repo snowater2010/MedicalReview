@@ -153,18 +153,22 @@ enum SORT_TYPE
         }\
 
 
-//json data keys
+//clause data keys
 #define KEY_pathName            @"pathName"
 #define KEY_nodeList            @"nodeList"
 #define KEY_nodeId              @"nodeId"
 #define KEY_clauseList          @"clauseList"
-#define KEY_attrID              @"attrID"
+#define KEY_attrId              @"attrId"
 #define KEY_indexName           @"indexName"
 #define KEY_pointList           @"pointList"
 #define KEY_datainSpection      @"datainSpection"
 #define KEY_proofLink           @"proofLink"
 #define KEY_wordExplan          @"wordExplan"
 #define KEY_templateDisplay     @"templateDisplay"
+
+//score data keys
+#define KEY_scoreValue          @"scoreValue"
+#define KEY_scoreExplain        @"scoreExplain"
 
 //user
 #define KEY_userId              @"userId"

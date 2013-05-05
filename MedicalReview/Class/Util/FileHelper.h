@@ -20,14 +20,22 @@
 //获取打分缓存文件路径
 + (NSString*)getScoreFilePath;
 
-+ (BOOL)writeDataToCache:(NSDictionary *)dataDic;
-
 //是否有缓存条款
 + (BOOL)ifHaveClauseCache;
 
 //删除文件
 + (BOOL)removeFileAtPath:(NSString*)path;
 
+//从缓存中读取条款数据
 + (NSDictionary *)readClauseDataFromCache;
+
+//将条款数据写入缓存
++ (BOOL)writeDataToCache:(NSDictionary *)dataDic;
+
+//从文件中读取条款数据，demo
++ (NSDictionary *)readClauseDataFromFile;
+
+//从文件中读取打分数据，demo
++ (NSDictionary *)readScoreDataFromFile;
 
 @end

@@ -76,12 +76,6 @@
 
 + (BOOL)writeDataToCache:(NSDictionary *)dataDic
 {
-    //demo
-//    NSString *fileName = @"json_clause.txt";
-//    NSString *filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
-//    NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
-//    NSDictionary *jsonDic = [jsonData objectFromJSONData];
-    
     NSString *cachePath = [FileHelper getClauseFilePath];
     
     BOOL result = [dataDic writeToFile:cachePath atomically:YES];
@@ -89,6 +83,24 @@
         _LOG_(@"写入条款缓存成功！");
     }
     return result;
+}
+
++ (NSDictionary *)readClauseDataFromFile
+{
+    NSString *fileName = @"json_clause.txt";
+    NSString *filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
+    NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
+    NSDictionary *jsonDic = [[NSDictionary dictionaryWithDictionary:[jsonData objectFromJSONData]] autorelease];
+    return jsonDic;
+}
+
++ (NSDictionary *)readScoreDataFromFile
+{
+    NSString *fileName = @"json_score.txt";
+    NSString *filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
+    NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
+    NSDictionary *jsonDic = [[NSDictionary dictionaryWithDictionary:[jsonData objectFromJSONData]] autorelease];
+    return jsonDic;
 }
 
 @end

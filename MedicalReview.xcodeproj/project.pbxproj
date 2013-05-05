@@ -36,6 +36,8 @@
 		F62BF83D172E2FC400054E55 /* MR_ExplainView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF838172E2FC400054E55 /* MR_ExplainView.m */; };
 		F62BF85C172E68DE00054E55 /* MR_ArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF85B172E68DC00054E55 /* MR_ArrowView.m */; };
 		F63A89D4173000A00007B5C7 /* MR_OperateView.m in Sources */ = {isa = PBXBuildFile; fileRef = F63A89D31730009F0007B5C7 /* MR_OperateView.m */; };
+		F63AC96B173634FB00C8C7C3 /* MR_ClauseTable.m in Sources */ = {isa = PBXBuildFile; fileRef = F63AC96A173634FB00C8C7C3 /* MR_ClauseTable.m */; };
+		F63AC96E173647DB00C8C7C3 /* json_score.txt in Resources */ = {isa = PBXBuildFile; fileRef = F63AC96D173647DB00C8C7C3 /* json_score.txt */; };
 		F641710917256FC100648A5E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F641710817256FC100648A5E /* CFNetwork.framework */; };
 		F641710B1725702300648A5E /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F641710A1725702300648A5E /* libz.1.2.5.dylib */; };
 		F641710D1725716000648A5E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F641710C1725716000648A5E /* SystemConfiguration.framework */; };
@@ -86,8 +88,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3E8BDB52172EDBB900218B91 /* MR_PathCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_PathCell.h; sourceTree = "<group>"; };
-		3E8BDB53172EDBB900218B91 /* MR_PathCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_PathCell.m; sourceTree = "<group>"; };
+		3E8BDB52172EDBB900218B91 /* MR_PathCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MR_PathCell.h; path = ../MR_PathCell.h; sourceTree = "<group>"; };
+		3E8BDB53172EDBB900218B91 /* MR_PathCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MR_PathCell.m; path = ../MR_PathCell.m; sourceTree = "<group>"; };
 		3E8BDB55172EDFB900218B91 /* festival_cell_bg_0.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = festival_cell_bg_0.9.png; sourceTree = "<group>"; };
 		3E8BDB56172EDFB900218B91 /* festival_cell_bg_0.9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "festival_cell_bg_0.9@2x.png"; sourceTree = "<group>"; };
 		3E8BDB57172EDFB900218B91 /* festival_cell_bg_1.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = festival_cell_bg_1.9.png; sourceTree = "<group>"; };
@@ -131,6 +133,9 @@
 		F62BF85B172E68DC00054E55 /* MR_ArrowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ArrowView.m; sourceTree = "<group>"; };
 		F63A89D21730009F0007B5C7 /* MR_OperateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_OperateView.h; sourceTree = "<group>"; };
 		F63A89D31730009F0007B5C7 /* MR_OperateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_OperateView.m; sourceTree = "<group>"; };
+		F63AC969173634FA00C8C7C3 /* MR_ClauseTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ClauseTable.h; sourceTree = "<group>"; };
+		F63AC96A173634FB00C8C7C3 /* MR_ClauseTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ClauseTable.m; sourceTree = "<group>"; };
+		F63AC96D173647DB00C8C7C3 /* json_score.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_score.txt; sourceTree = "<group>"; };
 		F641710817256FC100648A5E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F641710A1725702300648A5E /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		F641710C1725716000648A5E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -236,15 +241,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3E8BDB51172EDB9300218B91 /* Path */ = {
-			isa = PBXGroup;
-			children = (
-				3E8BDB52172EDBB900218B91 /* MR_PathCell.h */,
-				3E8BDB53172EDBB900218B91 /* MR_PathCell.m */,
-			);
-			name = Path;
-			sourceTree = "<group>";
-		};
 		F606A06F1724BF3100490D04 = {
 			isa = PBXGroup;
 			children = (
@@ -306,7 +302,6 @@
 		F606A0AC1724C69400490D04 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				3E8BDB51172EDB9300218B91 /* Path */,
 				F602F4BA17266D13005FE31F /* MR_RootController.h */,
 				F602F4BB17266D13005FE31F /* MR_RootController.m */,
 				F6C297271726736A002FB4B8 /* Login */,
@@ -343,7 +338,8 @@
 		F606A0B61724C8D000490D04 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
+				F67E155B172F6913004FF751 /* RadioButton-Selected.png */,
+				F67E155C172F6913004FF751 /* RadioButton-Unselected.png */,
 				3E8BDB55172EDFB900218B91 /* festival_cell_bg_0.9.png */,
 				3E8BDB56172EDFB900218B91 /* festival_cell_bg_0.9@2x.png */,
 				3E8BDB57172EDFB900218B91 /* festival_cell_bg_1.9.png */,
@@ -352,10 +348,6 @@
 				3E8BDB5A172EDFB900218B91 /* festival_cell_bg_2.9@2x.png */,
 				3E8BDB5B172EDFB900218B91 /* festival_cell_bg_3.9.png */,
 				3E8BDB5C172EDFB900218B91 /* festival_cell_bg_3.9@2x.png */,
-=======
-				F67E155B172F6913004FF751 /* RadioButton-Selected.png */,
-				F67E155C172F6913004FF751 /* RadioButton-Unselected.png */,
->>>>>>> add the radio select view for node clause
 				F678A8A01727671C000DAB46 /* loginbg.png */,
 				F67E55B21726D49200573BF8 /* choose_normal.png */,
 				F67E55B31726D49200573BF8 /* choose_pressed.png */,
@@ -382,6 +374,8 @@
 		F62BF82E172E256300054E55 /* Clause */ = {
 			isa = PBXGroup;
 			children = (
+				F63AC969173634FA00C8C7C3 /* MR_ClauseTable.h */,
+				F63AC96A173634FB00C8C7C3 /* MR_ClauseTable.m */,
 				F62BF835172E2FC400054E55 /* MR_CollapseClauseView.h */,
 				F62BF836172E2FC400054E55 /* MR_CollapseClauseView.m */,
 				F62BF833172E2FC400054E55 /* MR_ClauseView.h */,
@@ -491,6 +485,8 @@
 				F67E55941726C0CF00573BF8 /* MR_PathScoreCtro.m */,
 				F623AC3E1728FBB40060DD4E /* MR_PathNodeView.h */,
 				F623AC3F1728FBB40060DD4E /* MR_PathNodeView.m */,
+				3E8BDB52172EDBB900218B91 /* MR_PathCell.h */,
+				3E8BDB53172EDBB900218B91 /* MR_PathCell.m */,
 			);
 			path = Score;
 			sourceTree = "<group>";
@@ -593,6 +589,7 @@
 		F6E078BB1724F4C900C00E6B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				F63AC96D173647DB00C8C7C3 /* json_score.txt */,
 				F689D9B6172A4A1400E50D16 /* json_clause.txt */,
 				F678A9A01727DA68000DAB46 /* Localizable.strings */,
 			);
@@ -666,7 +663,8 @@
 				F678A94417278AA3000DAB46 /* MR_LoginCtro.xib in Resources */,
 				F678A9A11727DA68000DAB46 /* Localizable.strings in Resources */,
 				F689D9B7172A4A1400E50D16 /* json_clause.txt in Resources */,
-<<<<<<< HEAD
+				F67E155D172F6913004FF751 /* RadioButton-Selected.png in Resources */,
+				F67E155E172F6913004FF751 /* RadioButton-Unselected.png in Resources */,
 				3E8BDB5D172EDFB900218B91 /* festival_cell_bg_0.9.png in Resources */,
 				3E8BDB5E172EDFB900218B91 /* festival_cell_bg_0.9@2x.png in Resources */,
 				3E8BDB5F172EDFB900218B91 /* festival_cell_bg_1.9.png in Resources */,
@@ -675,10 +673,7 @@
 				3E8BDB62172EDFB900218B91 /* festival_cell_bg_2.9@2x.png in Resources */,
 				3E8BDB63172EDFB900218B91 /* festival_cell_bg_3.9.png in Resources */,
 				3E8BDB64172EDFB900218B91 /* festival_cell_bg_3.9@2x.png in Resources */,
-=======
-				F67E155D172F6913004FF751 /* RadioButton-Selected.png in Resources */,
-				F67E155E172F6913004FF751 /* RadioButton-Unselected.png in Resources */,
->>>>>>> add the radio select view for node clause
+				F63AC96E173647DB00C8C7C3 /* json_score.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -730,17 +725,11 @@
 				F62BF83C172E2FC400054E55 /* MR_CollapseClauseView.m in Sources */,
 				F62BF83D172E2FC400054E55 /* MR_ExplainView.m in Sources */,
 				F62BF85C172E68DE00054E55 /* MR_ArrowView.m in Sources */,
-<<<<<<< HEAD
-				3E8BDB54172EDBB900218B91 /* MR_PathCell.m in Sources */,
-=======
 				F67E1551172F4660004FF751 /* MR_ScoreRadioView.m in Sources */,
 				F67E1569172F8EB2004FF751 /* RadioButton.m in Sources */,
-<<<<<<< HEAD
->>>>>>> add the radio select view for node clause
-=======
 				3E8BDB54172EDBB900218B91 /* MR_PathCell.m in Sources */,
 				F63A89D4173000A00007B5C7 /* MR_OperateView.m in Sources */,
->>>>>>> 进一步完善了clause内容
+				F63AC96B173634FB00C8C7C3 /* MR_ClauseTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -807,8 +796,8 @@
 				INFOPLIST_FILE = "$(SRCROOT)/MedicalReview/Main/MedicalReview-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1B6BB893-305C-4F3C-9FA3-1D999419D1F7";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1B6BB893-305C-4F3C-9FA3-1D999419D1F7";
+				PROVISIONING_PROFILE = "764379DD-289A-4E1F-9C70-23353E819C2C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "764379DD-289A-4E1F-9C70-23353E819C2C";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
@@ -824,8 +813,8 @@
 				INFOPLIST_FILE = "$(SRCROOT)/MedicalReview/Main/MedicalReview-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1B6BB893-305C-4F3C-9FA3-1D999419D1F7";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1B6BB893-305C-4F3C-9FA3-1D999419D1F7";
+				PROVISIONING_PROFILE = "764379DD-289A-4E1F-9C70-23353E819C2C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "764379DD-289A-4E1F-9C70-23353E819C2C";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};

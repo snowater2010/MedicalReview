@@ -12,5 +12,6 @@
 @interface MR_PathScoreCtro : MR_RootController <PathNodeDelegate>
 
 @property(nonatomic, retain) NSDictionary *jsonData;
+@property(nonatomic, retain) NSDictionary *scoreData;
 
 @end

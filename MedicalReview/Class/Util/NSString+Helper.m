@@ -11,16 +11,10 @@
 @implementation NSString (Helper)
 
 #pragma mark -- 字符串
--(BOOL)IsEmpty;
-{
-    if(!self || [self length] <= 0)
-        return YES;
-    return NO;
-}
 
 -(BOOL)isNumberString
 {
-    if([self IsEmpty])
+    if([Common isEmptyString:self])
         return NO;
     
     NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:kAlphaNum] invertedSet];
@@ -35,7 +29,7 @@
 //转千分位
 - (NSString *)toThousand
 {
-    if([self IsEmpty])
+    if([Common isEmptyString:self])
         return @"";
 	NSMutableString* strThousand = [[[NSMutableString alloc]initWithString: self] autorelease];
 	NSRange range = [strThousand rangeOfString:@"."];
