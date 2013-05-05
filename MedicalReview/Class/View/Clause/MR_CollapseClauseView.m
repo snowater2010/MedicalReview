@@ -23,6 +23,7 @@
 - (void)dealloc
 {
     self.jsonData = nil;
+    self.scoreData = nil;
     [super dealloc];
 }
 
@@ -42,6 +43,9 @@
         
         NSDictionary *clauseDic = [_jsonData objectAtIndex:i];
         
+        NSString *attrID = [clauseDic objectForKey:KEY_attrId];
+        NSDictionary *scoreDic = [_scoreData objectForKey:attrID];
+        
         CGRect cellFrame = CGRectMake(0,
                                       totalHeight,
                                       rect.size.width,
@@ -51,6 +55,7 @@
         clauseView.tag = i;
         clauseView.delegate = self;
         clauseView.jsonData = clauseDic;
+        clauseView.scoreData = scoreDic;
         
         // Add cell
         [self addSubview:clauseView];

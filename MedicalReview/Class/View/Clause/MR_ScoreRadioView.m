@@ -15,6 +15,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.textSize = DEFAULT_TEXT_SIZE;
+        self.choiceData = nil;
+        self.choiceIndex = -1;
     }
     return self;
 }
@@ -42,6 +44,11 @@
         
         CGRect radioFrame = CGRectMake(local_x, radio_y, radio_w, radio_h);
         RadioButton *radioView = [[RadioButton alloc] init];
+        
+        if (i == _choiceIndex) {
+            [radioView setChecked:YES];
+        }
+        
         [self registerInstance:radioView];
         radioView.frame = radioFrame;
         [self addSubview:radioView];
@@ -70,7 +77,7 @@
 #pragma mark -
 #pragma mark - Manage Instances
 
--(void)registerInstance:(RadioButton*)radioButton{
+- (void)registerInstance:(RadioButton*)radioButton{
     if(!_rb_instances){
         _rb_instances = [[NSMutableArray alloc] init];
     }
@@ -84,12 +91,12 @@
 
 #pragma mark - Class level handler
 
--(void)handleButtonTap:(id)sender{
+- (void)handleButtonTap:(id)sender{
     RadioButton *radioButton = (RadioButton *) sender;
     [self buttonSelected:radioButton];
 }
 
--(void)buttonSelected:(RadioButton*)radioButton{
+- (void)buttonSelected:(RadioButton*)radioButton{
     // Unselect the other radio buttons
     if (_rb_instances) {
         int btIndex = 0;

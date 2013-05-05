@@ -89,12 +89,12 @@
 //    NSString *name = self.ibName.text;
 //    NSString *password = self.ibPassWord.text;
 //    
-//    if ([name IsEmpty]) {
+//    if ([Common isEmptyString:name]) {
 //        _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_login_name_empty"));
 //        return;
 //    }
 //    
-//    if ([password IsEmpty]) {
+//    if ([Common isEmptyString:password]) {
 //        _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_login_password_empty"));
 //        return;
 //    }

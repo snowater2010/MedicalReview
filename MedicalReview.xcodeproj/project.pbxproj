@@ -37,6 +37,7 @@
 		F62BF85C172E68DE00054E55 /* MR_ArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF85B172E68DC00054E55 /* MR_ArrowView.m */; };
 		F63A89D4173000A00007B5C7 /* MR_OperateView.m in Sources */ = {isa = PBXBuildFile; fileRef = F63A89D31730009F0007B5C7 /* MR_OperateView.m */; };
 		F63AC96B173634FB00C8C7C3 /* MR_ClauseTable.m in Sources */ = {isa = PBXBuildFile; fileRef = F63AC96A173634FB00C8C7C3 /* MR_ClauseTable.m */; };
+		F63AC96E173647DB00C8C7C3 /* json_score.txt in Resources */ = {isa = PBXBuildFile; fileRef = F63AC96D173647DB00C8C7C3 /* json_score.txt */; };
 		F641710917256FC100648A5E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F641710817256FC100648A5E /* CFNetwork.framework */; };
 		F641710B1725702300648A5E /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F641710A1725702300648A5E /* libz.1.2.5.dylib */; };
 		F641710D1725716000648A5E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F641710C1725716000648A5E /* SystemConfiguration.framework */; };
@@ -134,6 +135,7 @@
 		F63A89D31730009F0007B5C7 /* MR_OperateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_OperateView.m; sourceTree = "<group>"; };
 		F63AC969173634FA00C8C7C3 /* MR_ClauseTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ClauseTable.h; sourceTree = "<group>"; };
 		F63AC96A173634FB00C8C7C3 /* MR_ClauseTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ClauseTable.m; sourceTree = "<group>"; };
+		F63AC96D173647DB00C8C7C3 /* json_score.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_score.txt; sourceTree = "<group>"; };
 		F641710817256FC100648A5E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F641710A1725702300648A5E /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		F641710C1725716000648A5E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -587,6 +589,7 @@
 		F6E078BB1724F4C900C00E6B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				F63AC96D173647DB00C8C7C3 /* json_score.txt */,
 				F689D9B6172A4A1400E50D16 /* json_clause.txt */,
 				F678A9A01727DA68000DAB46 /* Localizable.strings */,
 			);
@@ -670,6 +673,7 @@
 				3E8BDB62172EDFB900218B91 /* festival_cell_bg_2.9@2x.png in Resources */,
 				3E8BDB63172EDFB900218B91 /* festival_cell_bg_3.9.png in Resources */,
 				3E8BDB64172EDFB900218B91 /* festival_cell_bg_3.9@2x.png in Resources */,
+				F63AC96E173647DB00C8C7C3 /* json_score.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

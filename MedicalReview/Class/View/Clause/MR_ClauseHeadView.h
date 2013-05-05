@@ -19,6 +19,7 @@
 @interface MR_ClauseHeadView : MR_RootView <RadioButtonViewDelegate>
 
 @property(nonatomic, retain) NSDictionary *jsonData;
+@property(nonatomic, retain) NSDictionary *scoreData;
 
 @property(nonatomic, assign) id<ClauseDelegate> delegate;
 @property(nonatomic, assign) enum CLAUSE_HEAD_STATE headState;

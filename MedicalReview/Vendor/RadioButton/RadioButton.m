@@ -98,6 +98,16 @@ static const NSUInteger kRadioButtonHeight=22;
     [super dealloc];
 }
 
+#pragma mark - Set Default Checked
+
+- (void)setChecked:(BOOL)isChecked
+{
+    if (isChecked) {
+        [_button setSelected:YES];
+    }else {
+        [_button setSelected:NO];
+    }
+}
 
 #pragma mark - Tap handling
 

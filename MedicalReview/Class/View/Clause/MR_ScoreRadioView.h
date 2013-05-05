@@ -20,6 +20,7 @@
 @interface MR_ScoreRadioView : MR_RootView <RadioButtonDelegate>
 
 @property(nonatomic, retain) NSArray *choiceData;
+@property(nonatomic, assign) int choiceIndex;
 @property(nonatomic, retain) NSMutableArray *rb_instances;
 @property(nonatomic, retain) NSMutableDictionary *rb_observers;
 @property(nonatomic, assign) id<RadioButtonViewDelegate> delegate;

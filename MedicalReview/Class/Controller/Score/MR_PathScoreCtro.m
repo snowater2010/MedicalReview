@@ -52,6 +52,7 @@
     NSArray *nodeList = [_jsonData objectForKey:KEY_nodeList];
     NSArray *clauseList = [[nodeList objectAtIndex:0] objectForKey:KEY_clauseList];
     _clauseView.jsonData = clauseList;
+    _clauseView.scoreData = _scoreData;
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,6 +66,7 @@
     self.pathNodeView = nil;
     self.clauseView = nil;
     self.jsonData = nil;
+    self.scoreData = nil;
     [super dealloc];
 }
 
@@ -137,14 +139,8 @@
 - (void)initData
 {
     //从缓存读取数据
-    self.jsonData = [FileHelper readClauseDataFromCache];
-    
-//    NSString *fileName = @"json_clause.txt";
-//    NSString *filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
-//    NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
-//    self.jsonData = [jsonData objectFromJSONData];
-    
-//    [FileHelper writeDataToCache:_jsonData];
+    self.jsonData = [FileHelper readClauseDataFromFile];
+    self.scoreData = [FileHelper readScoreDataFromFile];
 }
 
 #pragma mark -

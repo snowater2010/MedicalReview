@@ -23,6 +23,7 @@
 @property(nonatomic,assign)NSUInteger index;
 @property(nonatomic,assign)id<RadioButtonDelegate> delegate;
 
+- (void)setChecked:(BOOL)isChecked;
 -(void)otherButtonSelected:(id)sender;
 
 @end
