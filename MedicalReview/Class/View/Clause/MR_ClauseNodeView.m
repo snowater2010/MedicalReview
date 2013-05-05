@@ -17,7 +17,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor purpleColor];
+        
     }
     return self;
 }
@@ -28,15 +28,16 @@
     NSString *explain = [_jsonData objectForKey:KEY_wordExplan];
     
     //name
-    float name_x = 0;
+    float name_x = ARROW_MARGIN * 2 + ARROW_SIZE;
     float name_y = 0;
-    float name_w = rect.size.width * 0.4;
+    float name_w = rect.size.width * 0.4 - name_x;
     float name_h = rect.size.height;
     CGRect nameFrame = CGRectMake(name_x, name_y, name_w, name_h);
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:nameFrame];
-    nameLabel.lineBreakMode = UILineBreakModeWordWrap;
+    nameLabel.lineBreakMode = UILineBreakModeMiddleTruncation;
     nameLabel.numberOfLines = 0;
     nameLabel.text = name;
+    nameLabel.font = [UIFont systemFontOfSize:NAME_TEXT_SIZE];
     
     //score
     float score_x = name_x + name_w;
@@ -71,7 +72,7 @@
     //operate
     float operate_x = explain_x + explain_w;
     float operate_y = 0;
-    float operate_w = rect.size.width * 0.1;
+    float operate_w = rect.size.width - operate_x;
     float operate_h = rect.size.height;
     CGRect operateFrame = CGRectMake(operate_x, operate_y, operate_w, operate_h);
     MR_OperateView *operateView = [[MR_OperateView alloc] initWithFrame:operateFrame];

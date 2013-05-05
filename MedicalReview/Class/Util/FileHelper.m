@@ -11,21 +11,21 @@
 @implementation FileHelper
 
 //获取属性列表数据
-+(NSDictionary*)getInfoPlistDic
++ (NSDictionary*)getInfoPlistDic
 {
     NSDictionary* resDic = [[[NSDictionary alloc]initWithDictionary:[[NSBundle mainBundle] infoDictionary]] autorelease];
     return resDic;
 }
 
 //获取doc路径
-+(NSString*)getDocumentPath
++ (NSString*)getDocumentPath
 {
     NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     return path;
 }
 
 //获取条款缓存文件路径
-+(NSString*)getClauseFilePath
++ (NSString*)getClauseFilePath
 {
     NSString* clausePath = [[FileHelper getDocumentPath] stringByAppendingPathComponent:CACHE_CLAUSE];
     NSString* path = [[[NSString alloc]initWithString:clausePath] autorelease];
@@ -33,15 +33,22 @@
 }
 
 //获取打分缓存文件路径
-+(NSString*)getScoreFilePath
++ (NSString*)getScoreFilePath
 {
     NSString* scorePath = [[FileHelper getDocumentPath] stringByAppendingPathComponent:CACHE_SCORE];
     NSString* path = [[[NSString alloc]initWithString:scorePath] autorelease];
     return path;
 }
 
++ (BOOL)ifHaveClauseCache
+{
+    NSString *clausePath = [self getClauseFilePath];
+    BOOL isss = [[NSFileManager defaultManager] fileExistsAtPath:clausePath];
+    return isss;
+}
+
 //根据指定路径，删除文件
-+(BOOL)removeFileAtPath:(NSString*)path
++ (BOOL)removeFileAtPath:(NSString*)path
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if ([fileManager fileExistsAtPath:path])

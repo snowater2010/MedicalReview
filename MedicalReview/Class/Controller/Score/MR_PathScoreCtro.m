@@ -15,6 +15,7 @@
 #import "MR_ExplainView.h"
 #import "MR_PathCell.h"
 #import "FileHelper.h"
+#import "MR_ClauseTable.h"
 
 @interface MR_PathScoreCtro ()
 
@@ -75,7 +76,7 @@
     CGRect rootFrame = self.view.frame;
     
     //left
-    CGRect leftFrame = CGRectMake(0, 0, rootFrame.size.width*0.2, rootFrame.size.height);
+    CGRect leftFrame = CGRectMake(0, 0, rootFrame.size.width*0.18, rootFrame.size.height);
     MR_LeftPageView *leftPageView = [[MR_LeftPageView alloc] initWithFrame:leftFrame];
     [self.view addSubview:leftPageView];
     [leftPageView release];
@@ -93,10 +94,43 @@
     [self.view addSubview:mainPageView];
     [mainPageView release];
     
-    CGRect clauseFrame = CGRectMake(0, 0, mainFrame.size.width, mainFrame.size.height);
+    //clause table
+    NSDictionary *dic1 = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"评审条款", KEY_tableName,
+                          @"0.4", KEY_tableWidth, nil];
+    NSDictionary *dic2 = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"自评", KEY_tableName,
+                          @"0.05", KEY_tableWidth, nil];
+    NSDictionary *dic3 = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"评测结果", KEY_tableName,
+                          @"0.2", KEY_tableWidth, nil];
+    NSDictionary *dic4 = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"评测说明", KEY_tableName,
+                          @"0.2", KEY_tableWidth, nil];
+    NSDictionary *dic5 = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"操作", KEY_tableName,
+                          @"-1", KEY_tableWidth, nil];
+    NSArray *tableHead = [NSArray arrayWithObjects:dic1, dic2, dic3, dic4, dic5, nil];
+    
+    float head_x = 0;
+    float head_y = 0;
+    float head_w = mainFrame.size.width;
+    float head_h = mainFrame.size.height * 0.05;
+    CGRect headFrame = CGRectMake(head_x, head_y, head_w, head_h);
+    MR_ClauseTable *headView = [[MR_ClauseTable alloc] initWithFrame:headFrame];
+    headView.backgroundColor = [UIColor blackColor];
+    headView.jsonData = tableHead;
+    [mainPageView addSubview:headView];
+    [headView release];
+    
+    float clause_x = 0;
+    float clause_y = head_y + head_h;
+    float clause_w = mainFrame.size.width;
+    float clause_h = mainFrame.size.height - head_h;
+    CGRect clauseFrame = CGRectMake(clause_x, clause_y, clause_w, clause_h);
     MR_CollapseClauseView *clauseView = [[MR_CollapseClauseView alloc] initWithFrame:clauseFrame];
     self.clauseView = clauseView;
-    //[mainPageView addSubview:clauseView];
+    [mainPageView addSubview:clauseView];
     [clauseView release];
 }
 
@@ -109,6 +143,8 @@
 //    NSString *filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
 //    NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
 //    self.jsonData = [jsonData objectFromJSONData];
+    
+//    [FileHelper writeDataToCache:_jsonData];
 }
 
 #pragma mark -
