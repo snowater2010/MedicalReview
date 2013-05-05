@@ -30,7 +30,7 @@
     //name
     float name_x = ARROW_MARGIN * 2 + ARROW_SIZE;
     float name_y = 0;
-    float name_w = rect.size.width * 0.4 - name_x;
+    float name_w = rect.size.width * 0.45 - name_x;
     float name_h = rect.size.height;
     CGRect nameFrame = CGRectMake(name_x, name_y, name_w, name_h);
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:nameFrame];
@@ -42,7 +42,7 @@
     //score
     float score_x = name_x + name_w;
     float score_y = 0;
-    float score_w = rect.size.width * 0.25;
+    float score_w = rect.size.width * 0.23;
     float score_h = rect.size.height;
     CGRect scoreFrame = CGRectMake(score_x, score_y, score_w, score_h);
     MR_ScoreRadioView *scoreView = [[MR_ScoreRadioView alloc] initWithFrame:scoreFrame];

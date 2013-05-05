@@ -35,7 +35,7 @@
     //name view
     float nameView_x = 0;
     float nameView_y = 0;
-    float nameView_w = rect.size.width * 0.4;
+    float nameView_w = rect.size.width * 0.45;
     float nameView_h = rect.size.height;
     CGRect nameViewFrame = CGRectMake(nameView_x, nameView_y, nameView_w, nameView_h);
     UIView *nameView = [[UIView alloc] initWithFrame:nameViewFrame];
@@ -84,7 +84,7 @@
     //score
     float score_x = self_x + self_w;
     float score_y = 0;
-    float score_w = rect.size.width * 0.2;
+    float score_w = rect.size.width * 0.18;
     float score_h = rect.size.height;
     CGRect scoreFrame = CGRectMake(score_x, score_y, score_w, score_h);
     MR_ScoreRadioView *scoreView = [[MR_ScoreRadioView alloc] initWithFrame:scoreFrame];
