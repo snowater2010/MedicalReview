@@ -97,13 +97,13 @@
     //clause table
     NSDictionary *dic1 = [NSDictionary dictionaryWithObjectsAndKeys:
                           @"评审条款", KEY_tableName,
-                          @"0.4", KEY_tableWidth, nil];
+                          @"0.45", KEY_tableWidth, nil];
     NSDictionary *dic2 = [NSDictionary dictionaryWithObjectsAndKeys:
                           @"自评", KEY_tableName,
                           @"0.05", KEY_tableWidth, nil];
     NSDictionary *dic3 = [NSDictionary dictionaryWithObjectsAndKeys:
                           @"评测结果", KEY_tableName,
-                          @"0.2", KEY_tableWidth, nil];
+                          @"0.18", KEY_tableWidth, nil];
     NSDictionary *dic4 = [NSDictionary dictionaryWithObjectsAndKeys:
                           @"评测说明", KEY_tableName,
                           @"0.2", KEY_tableWidth, nil];
