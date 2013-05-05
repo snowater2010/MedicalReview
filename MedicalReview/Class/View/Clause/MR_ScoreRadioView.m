@@ -14,7 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        self.textSize = DEFAULT_TEXT_SIZE;
     }
     return self;
 }
@@ -51,7 +51,7 @@
         CGRect nameFrame = CGRectMake(name_x, name_y, name_w, name_h);
         UILabel *nameView = [[UILabel alloc] initWithFrame:nameFrame];
         nameView.text = name;
-        nameView.font = [UIFont systemFontOfSize:NAME_TEXT_SIZE];
+        nameView.font = [UIFont systemFontOfSize:_textSize];
         [self addSubview:nameView];
         [nameView release];
         

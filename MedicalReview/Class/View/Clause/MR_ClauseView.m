@@ -16,7 +16,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor lightGrayColor];
         self.clipsToBounds = YES;
         _jsonData = nil;
         _cellHeight = cellHeight;
@@ -51,7 +50,7 @@
     [headView release];
     
     //content view
-    float content_x = ARROW_SIZE + ARROW_MARGIN * 2;
+    float content_x = 0;
     float content_y = head_y + head_h;
     float content_w = rect.size.width - content_x;
     float content_h = _cellHeight*pointList.count;

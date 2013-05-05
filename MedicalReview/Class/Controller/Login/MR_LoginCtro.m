@@ -165,6 +165,19 @@
     [self initUserInfo:user];
     [user release];
     
+    //clause cache，1 or 0
+    BOOL updateClause = [[retDic objectForKey:@"updateClause"] boolValue];
+    if (!updateClause) {
+        //如果服务器没有更新，取本地缓存
+        BOOL ifClauseCache = [FileHelper ifHaveClauseCache];
+        if (!ifClauseCache) {
+            //如果没有本地缓存，向服务器请求（同步请求，显示进度条）
+            
+        }
+    }
+    
+    //取分数
+    
     [self visitMainPage];
 }
 

@@ -172,3 +172,7 @@ enum SORT_TYPE
 #define KEY_userPassword        @"userPassword"
 #define KEY_userIsRemember      @"userIsRemember"
 
+//table
+#define KEY_tableName           @"tableName"
+#define KEY_tableWidth          @"tableWidth"
+

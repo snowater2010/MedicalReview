@@ -8,6 +8,8 @@
 
 #import "MR_RootView.h"
 
+#define OPERATE_TEXT_SIZE 14
+
 @protocol OperateDelegate <NSObject>
 
 - (void)doDelete;

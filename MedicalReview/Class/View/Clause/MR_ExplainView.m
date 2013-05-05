@@ -22,18 +22,20 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    CGRect textFrame = CGRectMake(0, 0, rect.size.width*0.7, rect.size.height);
+    CGRect textFrame = CGRectMake(0, 0, rect.size.width*0.75, rect.size.height);
     UITextView *explainView = [[UITextView alloc] initWithFrame:textFrame];
     explainView.tag = TAG_VIEW_EXPLAIN;
     explainView.font = [UIFont systemFontOfSize:_textSize];
     explainView.backgroundColor = [UIColor greenColor];
     explainView.text = _wordExplan;
+    explainView.font = [UIFont systemFontOfSize:DEFAULT_TEXT_SIZE];
     
-    CGRect buttonFrame = CGRectMake(rect.size.width*0.7, 0, rect.size.width*0.3, rect.size.height);
+    CGRect buttonFrame = CGRectMake(rect.size.width*0.75, 0, rect.size.width*0.25, rect.size.height);
     UIButton *button = [[UIButton alloc] initWithFrame:buttonFrame];
     [button addTarget:self action:@selector(btPressed) forControlEvents:UIControlEventTouchUpInside];
     button.backgroundColor = [UIColor blueColor];
     [button setTitle:_GET_LOCALIZED_STRING_(@"button_shortcut") forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:BUTTON_TEXT_SIZE];
     
     explainView.editable = !_readOnly;
     button.enabled = !_readOnly;

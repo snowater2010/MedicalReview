@@ -9,9 +9,10 @@
 #import "MR_RootView.h"
 #import "MR_ClauseView.h"
 #import "MR_ScoreRadioView.h"
+#import "MR_OperateView.h"
 
-#define ARROW_SIZE 20
-#define ARROW_MARGIN 5
+#define ARROW_SIZE 12
+#define ARROW_MARGIN 2
 
 @class MR_ArrowView;
 

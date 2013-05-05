@@ -15,10 +15,15 @@
 + (NSString*)getDocumentPath;
 
 //获取条款缓存文件路径
-+(NSString*)getClauseFilePath;
++ (NSString*)getClauseFilePath;
 
 //获取打分缓存文件路径
-+(NSString*)getScoreFilePath;
++ (NSString*)getScoreFilePath;
+
++ (BOOL)writeDataToCache:(NSDictionary *)dataDic;
+
+//是否有缓存条款
++ (BOOL)ifHaveClauseCache;
 
 //删除文件
 + (BOOL)removeFileAtPath:(NSString*)path;

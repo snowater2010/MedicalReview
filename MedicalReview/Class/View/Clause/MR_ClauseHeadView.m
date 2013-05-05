@@ -22,7 +22,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor brownColor];
+        
     }
     return self;
 }
@@ -31,6 +31,14 @@
 {
     NSString *name = [_jsonData objectForKey:KEY_indexName];
     NSString *explain = [_jsonData objectForKey:KEY_wordExplan];
+    
+    //name view
+    float nameView_x = 0;
+    float nameView_y = 0;
+    float nameView_w = rect.size.width * 0.4;
+    float nameView_h = rect.size.height;
+    CGRect nameViewFrame = CGRectMake(nameView_x, nameView_y, nameView_w, nameView_h);
+    UIView *nameView = [[UIView alloc] initWithFrame:nameViewFrame];
     
     //arrow
     float arrow_x = ARROW_MARGIN;
@@ -42,32 +50,41 @@
     [arrowView drawWithColor:[UIColor redColor]];
     self.arrowView = arrowView;
     [arrowView release];
+    [nameView addSubview:_arrowView];
     
-    //name
-    float name_x = arrowFrame.origin.x + arrowFrame.size.width + ARROW_MARGIN;
+    //name label
+    float name_x = arrow_x + arrow_w + ARROW_MARGIN;
     float name_y = 0;
-    float name_w = rect.size.width * 0.4;
+    float name_w = nameView_w - name_x;
     float name_h = rect.size.height;
     CGRect nameFrame = CGRectMake(name_x, name_y, name_w, name_h);
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:nameFrame];
-    nameLabel.lineBreakMode = UILineBreakModeWordWrap;
+    nameLabel.lineBreakMode = UILineBreakModeMiddleTruncation;
     nameLabel.numberOfLines = 0;
     nameLabel.text = name;
+    nameLabel.font = [UIFont systemFontOfSize:NAME_TEXT_SIZE];
+    [nameView addSubview:nameLabel];
+    [nameLabel release];
     
     //cover view -- click event
-    float cover_x = 0;
-    float cover_y = 0;
-    float cover_w = name_x + name_w;
-    float cover_h = rect.size.height;
-    CGRect coverFrame = CGRectMake(cover_x, cover_y, cover_w, cover_h);
-    UIControl *coverControl = [[UIControl alloc] initWithFrame:coverFrame];
+    UIControl *coverControl = [[UIControl alloc] initWithFrame:nameViewFrame];
     coverControl.backgroundColor = [UIColor clearColor];
     [coverControl addTarget:self action:@selector(clickClauseHead) forControlEvents:UIControlEventTouchUpInside];
     
+    //----------------------
+    //self score
+    float self_x = name_x + name_w;
+    float self_y = 0;
+    float self_w = rect.size.width * 0.05;
+    float self_h = rect.size.height;
+    CGRect selfFrame = CGRectMake(self_x, self_y, self_w, self_h);
+    UILabel *selfView = [[UILabel alloc] initWithFrame:selfFrame];
+    selfView.backgroundColor = [UIColor purpleColor];
+    
     //score
-    float score_x = nameFrame.origin.x + nameFrame.size.width;
+    float score_x = self_x + self_w;
     float score_y = 0;
-    float score_w = rect.size.width * 0.25;
+    float score_w = rect.size.width * 0.2;
     float score_h = rect.size.height;
     CGRect scoreFrame = CGRectMake(score_x, score_y, score_w, score_h);
     MR_ScoreRadioView *scoreView = [[MR_ScoreRadioView alloc] initWithFrame:scoreFrame];
@@ -94,16 +111,28 @@
     MR_ExplainView *explainView = [[MR_ExplainView alloc] initWithFrame:explainFrame];
     explainView.wordExplan = explain;
     
-    [self addSubview:_arrowView];
-    [self addSubview:nameLabel];
+    //operate
+    float operate_x = explain_x + explain_w;
+    float operate_y = 0;
+    float operate_w = rect.size.width - operate_x;
+    float operate_h = rect.size.height;
+    CGRect operateFrame = CGRectMake(operate_x, operate_y, operate_w, operate_h);
+    MR_OperateView *operateView = [[MR_OperateView alloc] initWithFrame:operateFrame];
+    operateView.isHasLink = YES;
+    
+    [self addSubview:nameView];
     [self addSubview:coverControl];
+    [self addSubview:selfView];
     [self addSubview:scoreView];
     [self addSubview:explainView];
+    [self addSubview:operateView];
     
-    [nameLabel release];
-    [explainView release];
+    [nameView release];
     [coverControl release];
+    [selfView release];
     [scoreView release];
+    [explainView release];
+    [operateView release];
     
     [self showHeadState];
 }
