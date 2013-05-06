@@ -109,6 +109,11 @@ static const NSUInteger kRadioButtonHeight=22;
     }
 }
 
+- (BOOL)isChecked
+{
+    return [_button isSelected];
+}
+
 #pragma mark - Tap handling
 
 -(void)handleButtonTap:(id)sender{

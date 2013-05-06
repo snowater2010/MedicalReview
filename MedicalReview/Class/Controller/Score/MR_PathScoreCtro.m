@@ -139,8 +139,19 @@
 - (void)initData
 {
     //从缓存读取数据
-    self.jsonData = [FileHelper readClauseDataFromFile];
-    self.scoreData = [FileHelper readScoreDataFromFile];
+//    self.jsonData = [FileHelper readClauseDataFromFile];
+//    self.scoreData = [FileHelper readScoreDataFromFile];
+    
+    self.jsonData = [FileHelper readClauseDataFromCache];
+    self.scoreData = [FileHelper readScoreDataFromCache];
+    
+//    //合并打分数据
+//    NSDictionary *score = [FileHelper readScoreDataFromCache];
+//    NSDictionary *scoreUpdate = [FileHelper readScoreUpdateDataFromCache];
+//    NSMutableDictionary *scoreAll = [[NSMutableDictionary alloc] initWithDictionary:score];
+//    [scoreAll addEntriesFromDictionary:scoreUpdate];
+//    self.scoreData = scoreAll;
+//    [scoreAll release];
 }
 
 #pragma mark -

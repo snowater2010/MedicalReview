@@ -15,13 +15,22 @@
 + (NSString*)getDocumentPath;
 
 //获取条款缓存文件路径
-+ (NSString*)getClauseFilePath;
++ (NSString*)getClauseCacheFilePath;
 
-//获取打分缓存文件路径
-+ (NSString*)getScoreFilePath;
+//根据用户名，得到用户的打分缓存路径
++ (NSString*)getScoreCacheFilePath;
+
+//根据用户名，得到用户的打分缓存路径(本地更新)
++ (NSString*)getScoreUpdateCacheFilePath;
 
 //是否有缓存条款
 + (BOOL)ifHaveClauseCache;
+
+//是否有缓存打分
++ (BOOL)ifHaveScoreCache;
+
+//是否有缓存打分本地更新
++ (BOOL)ifHaveScoreUpdateCache;
 
 //删除文件
 + (BOOL)removeFileAtPath:(NSString*)path;
@@ -30,7 +39,21 @@
 + (NSDictionary *)readClauseDataFromCache;
 
 //将条款数据写入缓存
-+ (BOOL)writeDataToCache:(NSDictionary *)dataDic;
++ (BOOL)writeClauseDataToCache:(NSDictionary *)dataDic;
+
++ (NSDictionary *)readScoreDataFromCache;
+
+//更新打分数据缓存
++ (BOOL)writeScoreDataToCache:(NSDictionary *)dataDic;
+//异步更新
++ (void)asyWriteScoreDataToCache:(NSDictionary *)dataDic;
+
++ (NSDictionary *)readScoreUpdateDataFromCache;
+
+//更新打分数据缓存，本地更新
++ (BOOL)writeScoreUpdateDataToCache:(NSDictionary *)dataDic;
+//异步更新
++ (void)asyWriteScoreUpdateDataToCache:(NSDictionary *)dataDic;
 
 //从文件中读取条款数据，demo
 + (NSDictionary *)readClauseDataFromFile;

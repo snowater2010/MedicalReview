@@ -9,10 +9,13 @@
 #import "MR_ClauseHeadView.h"
 #import "MR_ArrowView.h"
 #import "MR_ExplainView.h"
+#import "MR_ClauseView.h"
 
 @interface MR_ClauseHeadView ()
 
 @property(nonatomic, retain) MR_ArrowView *arrowView;
+@property(nonatomic, retain) MR_ScoreRadioView *scoreView;
+@property(nonatomic, retain) MR_ExplainView *explainView;
 
 @end
 
@@ -89,21 +92,23 @@
     float score_h = rect.size.height;
     CGRect scoreFrame = CGRectMake(score_x, score_y, score_w, score_h);
     MR_ScoreRadioView *scoreView = [[MR_ScoreRadioView alloc] initWithFrame:scoreFrame];
+    self.scoreView = scoreView;
+    [scoreView release];
     
     NSMutableArray *choiceData = [[NSMutableArray alloc] initWithCapacity:3];
-    NSDictionary *dicA = [[NSDictionary alloc] initWithObjectsAndKeys:@"A", @"key", @" A", @"name", nil];
+    NSDictionary *dicA = [[NSDictionary alloc] initWithObjectsAndKeys:@"0", @"key", @" A", @"name", nil];
     [choiceData addObject:dicA];
     [dicA release];
-    NSDictionary *dicB = [[NSDictionary alloc] initWithObjectsAndKeys:@"B", @"key", @" B", @"name", nil];
+    NSDictionary *dicB = [[NSDictionary alloc] initWithObjectsAndKeys:@"1", @"key", @" B", @"name", nil];
     [choiceData addObject:dicB];
     [dicB release];
-    NSDictionary *dicC = [[NSDictionary alloc] initWithObjectsAndKeys:@"C", @"key", @" C", @"name", nil];
+    NSDictionary *dicC = [[NSDictionary alloc] initWithObjectsAndKeys:@"2", @"key", @" C", @"name", nil];
     [choiceData addObject:dicC];
     [dicC release];
-    scoreView.choiceData = choiceData;
+    _scoreView.choiceData = choiceData;
     if (![Common isEmptyString:scoreValue])
-        scoreView.choiceIndex = scoreValue.intValue;
-    scoreView.delegate = self;
+        _scoreView.choiceIndex = scoreValue.intValue;
+    _scoreView.delegate = self;
     
     //explain
     float explain_x = score_x + score_w;
@@ -112,8 +117,10 @@
     float explain_h = rect.size.height;
     CGRect explainFrame = CGRectMake(explain_x, explain_y, explain_w, explain_h);
     MR_ExplainView *explainView = [[MR_ExplainView alloc] initWithFrame:explainFrame];
+    self.explainView = explainView;
+    [explainView release];
     if (![Common isEmptyString:scoreExplain])
-        explainView.wordExplan = scoreExplain;
+        _explainView.wordExplan = scoreExplain;
     
     //operate
     float operate_x = explain_x + explain_w;
@@ -127,15 +134,13 @@
     [self addSubview:nameView];
     [self addSubview:coverControl];
     [self addSubview:selfView];
-    [self addSubview:scoreView];
-    [self addSubview:explainView];
+    [self addSubview:_scoreView];
+    [self addSubview:_explainView];
     [self addSubview:operateView];
     
     [nameView release];
     [coverControl release];
     [selfView release];
-    [scoreView release];
-    [explainView release];
     [operateView release];
     
     [self showHeadState];
@@ -175,9 +180,33 @@
     }
 }
 
+#pragma mark -
+#pragma mark --- user method
+- (NSDictionary *)getHeadScore
+{
+    NSString *key = [_scoreView getCheckedKey];
+    if (key) {
+        NSString *explain = [_explainView getExplain];
+        
+        NSDictionary *scoreDic = [[[NSDictionary alloc] initWithObjectsAndKeys:
+                                  key, KEY_scoreValue,
+                                  explain, KEY_scoreExplain,
+                                  nil] autorelease];
+        return scoreDic;
+    }
+    else {
+        return nil;
+    }
+}
+
+#pragma mark -
+#pragma mark --- RadioButtonViewDelegate
+
 - (void)radioButtonGroupTaped:(NSString *)radioKey
 {
     _LOG_(radioKey);
+    if(_delegate && [_delegate respondsToSelector:@selector(clauseHeadScored:)])
+        [_delegate performSelector:@selector(clauseHeadScored:) withObject:radioKey];
 }
 
 @end

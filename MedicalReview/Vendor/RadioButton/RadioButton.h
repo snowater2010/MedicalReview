@@ -24,6 +24,7 @@
 @property(nonatomic,assign)id<RadioButtonDelegate> delegate;
 
 - (void)setChecked:(BOOL)isChecked;
--(void)otherButtonSelected:(id)sender;
+- (void)otherButtonSelected:(id)sender;
+- (BOOL)isChecked;
 
 @end

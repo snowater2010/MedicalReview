@@ -7,7 +7,6 @@
 //
 
 #import "MR_RootView.h"
-#import "MR_ClauseView.h"
 #import "MR_ScoreRadioView.h"
 #import "MR_OperateView.h"
 
@@ -16,14 +15,23 @@
 
 @class MR_ArrowView;
 
+@protocol ClauseHeadDelegate <NSObject>
+
+@optional
+- (void)clickClauseHead:(id)sender;
+- (void)clauseHeadScored:(NSString *)score;
+
+@end
+
 @interface MR_ClauseHeadView : MR_RootView <RadioButtonViewDelegate>
 
 @property(nonatomic, retain) NSDictionary *jsonData;
 @property(nonatomic, retain) NSDictionary *scoreData;
 
-@property(nonatomic, assign) id<ClauseDelegate> delegate;
+@property(nonatomic, assign) id<ClauseHeadDelegate> delegate;
 @property(nonatomic, assign) enum CLAUSE_HEAD_STATE headState;
 
 - (void)showHeadState;
+- (NSDictionary *)getHeadScore;
 
 @end

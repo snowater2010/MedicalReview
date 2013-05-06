@@ -13,5 +13,6 @@
 
 @property(nonatomic, retain) NSDictionary *jsonData;
 @property(nonatomic, retain) NSDictionary *scoreData;
+@property(nonatomic, retain) NSDictionary *localData;       //本地存储
 
 @end

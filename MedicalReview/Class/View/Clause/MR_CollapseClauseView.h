@@ -10,7 +10,7 @@
 
 #define CELL_MARGIN 10
 
-@interface MR_CollapseClauseView : UIScrollView <UIScrollViewDelegate, ClauseDelegate>
+@interface MR_CollapseClauseView : UIScrollView <UIScrollViewDelegate, ClauseHeadDelegate>
 
 @property(nonatomic, retain) NSArray *jsonData;
 @property(nonatomic, retain) NSDictionary *scoreData;

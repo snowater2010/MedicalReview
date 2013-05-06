@@ -55,6 +55,9 @@
     //键盘监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:)name:UIKeyboardWillHideNotification object:nil];
+    
+    //判断网络连接情况
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,27 +88,27 @@
 
 - (IBAction)doLogin:(id)sender
 {
-//    NSString *uId = @"abc";
-//    NSString *name = self.ibName.text;
-//    NSString *password = self.ibPassWord.text;
-//    
-//    if ([Common isEmptyString:name]) {
-//        _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_login_name_empty"));
-//        return;
-//    }
-//    
-//    if ([Common isEmptyString:password]) {
-//        _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_login_password_empty"));
-//        return;
-//    }
-//    
-//    MR_User *user = [[MR_User alloc] init];
-//    user.uId = uId;
-//    user.uName = name;
-//    user.uPassWord = password;
-//    user.isRememberPw = isRememberPw;
-//    [self initUserInfo:user];
-//    [user release];
+    NSString *uId = @"abc";
+    NSString *name = self.ibName.text;
+    NSString *password = self.ibPassWord.text;
+    
+    if ([Common isEmptyString:name]) {
+        _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_login_name_empty"));
+        return;
+    }
+    
+    if ([Common isEmptyString:password]) {
+        _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_login_password_empty"));
+        return;
+    }
+    
+    MR_User *user = [[MR_User alloc] init];
+    user.uId = uId;
+    user.uName = name;
+    user.uPassWord = password;
+    user.isRememberPw = isRememberPw;
+    [self initUserInfo:user];
+    [user release];
     
     [self visitMainPage];
     

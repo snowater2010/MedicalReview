@@ -7,8 +7,7 @@
 //
 
 #import "MR_ClauseView.h"
-#import "MR_ClauseHeadView.h"
-#import "MR_ClauseNodeView.h"
+#import "FileHelper.h"
 
 @implementation MR_ClauseView
 
@@ -68,6 +67,7 @@
         MR_ClauseNodeView *nodeView = [[MR_ClauseNodeView alloc] initWithFrame:nodeFrame];
         nodeView.jsonData = pointDic;
         nodeView.scoreData = [_scoreData objectForKey:pointId];
+        nodeView.delegate = self;
         
         [_contentView addSubview:nodeView];
         [nodeView release];
@@ -96,6 +96,34 @@
 }
 
 #pragma mark -
+#pragma mark -- user method
+
+//更新打分缓存数据
+- (void)updateScoreCache
+{
+    //head data
+    NSDictionary *headScoreDic = [[_headView getHeadScore] retain];
+    NSMutableDictionary *allScoreDic = [[NSMutableDictionary alloc] initWithDictionary:headScoreDic];
+    [headScoreDic release];
+    
+    //node data
+    for (MR_ClauseNodeView *nodeView in _contentView.subviews) {
+        NSDictionary *scoreDic = [nodeView getNodeScore];
+        [allScoreDic addEntriesFromDictionary:scoreDic];
+    }
+    
+    //combine data
+    NSString *attrId = [_jsonData objectForKey:KEY_attrId];
+    NSDictionary *clauseScoreDic = [[NSDictionary alloc] initWithObjectsAndKeys:allScoreDic, attrId, nil];
+    
+    [allScoreDic release];
+    
+    //update score data
+    [FileHelper asyWriteScoreDataToCache:clauseScoreDic];
+//    [FileHelper asyWriteScoreUpdateDataToCache:clauseScoreDic];
+}
+
+#pragma mark -
 #pragma mark -- ClauseHeadDelegate
 
 - (void)clickClauseHead:(id)sender
@@ -108,6 +136,21 @@
 {
     self.headView.headState = _headState;
     [self.headView showHeadState];
+}
+
+- (void)clauseHeadScored:(NSString *)score
+{
+    
+    
+    //更新缓存
+    [self updateScoreCache];
+}
+
+#pragma mark -- ClauseNodeDelegate
+
+- (void)clauseNodeScored:(NSString *)score
+{
+    _LOG_FORMAT_(@"Node Scored___%@", score);
 }
 
 @end
