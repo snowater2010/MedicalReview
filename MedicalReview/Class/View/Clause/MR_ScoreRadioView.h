@@ -26,4 +26,6 @@
 @property(nonatomic, assign) id<RadioButtonViewDelegate> delegate;
 @property(nonatomic, assign) float textSize;
 
+- (NSString *)getCheckedKey;
+
 @end

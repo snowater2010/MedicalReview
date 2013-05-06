@@ -79,18 +79,18 @@
          CGContextRef context = UIGraphicsGetCurrentContext();
          UIGraphicsPushContext(context);
          CGContextBeginPath(context);
-         //*******************************************************************************
+         //
          //这之间的内容决定你画的是什么图形
          CGContextAddArc(context, 70, 40, 10, 0.0, 2*M_PI, NO);// (70, 40)为圆心 10 是半径
          //这之间的内容决定你画的是什么图形
-         //*******************************************************************************
+         //
          CGContextFillPath(context);
          UIGraphicsPopContext();
-         //*******************************************************************************
+         //
          //根据需要，你可以在这里绘制Cell内容来定制你的cell
          //那些不需要响应点击等事件的元素都可以绘制到CustomView上
          //需要响应点击事件等的UIView，如UIButton则需要addSubview到cell.contentView上
-         //*******************************************************************************
+         //
          */
     
 }

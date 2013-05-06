@@ -27,6 +27,7 @@
 		F606A0BA1724CBD000490D04 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F606A0B71724CBD000490D04 /* Default-568h@2x.png */; };
 		F606A0BB1724CBD000490D04 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F606A0B81724CBD000490D04 /* Default.png */; };
 		F606A0BC1724CBD000490D04 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F606A0B91724CBD000490D04 /* Default@2x.png */; };
+		F61C0BF41737AB77005CA95A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = F61C0BF31737AB77005CA95A /* Reachability.m */; };
 		F623AC401728FBB40060DD4E /* MR_PathNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F623AC3F1728FBB40060DD4E /* MR_PathNodeView.m */; };
 		F623AC51172906740060DD4E /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = F623AC50172906740060DD4E /* NIDropDown.m */; };
 		F62BF839172E2FC400054E55 /* MR_ClauseHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF830172E2FC400054E55 /* MR_ClauseHeadView.m */; };
@@ -115,6 +116,8 @@
 		F606A0B71724CBD000490D04 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F606A0B81724CBD000490D04 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		F606A0B91724CBD000490D04 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		F61C0BF21737AB77005CA95A /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		F61C0BF31737AB77005CA95A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		F623AC3E1728FBB40060DD4E /* MR_PathNodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_PathNodeView.h; sourceTree = "<group>"; };
 		F623AC3F1728FBB40060DD4E /* MR_PathNodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_PathNodeView.m; sourceTree = "<group>"; };
 		F623AC4F172906740060DD4E /* NIDropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIDropDown.h; sourceTree = "<group>"; };
@@ -362,6 +365,15 @@
 			path = Image;
 			sourceTree = "<group>";
 		};
+		F61C0BF11737AB77005CA95A /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				F61C0BF21737AB77005CA95A /* Reachability.h */,
+				F61C0BF31737AB77005CA95A /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		F623AC4E172906740060DD4E /* NIDropDown */ = {
 			isa = PBXGroup;
 			children = (
@@ -575,6 +587,7 @@
 		F6E078B61724F43C00C00E6B /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				F61C0BF11737AB77005CA95A /* Reachability */,
 				F67E1557172F683D004FF751 /* RadioButton */,
 				F623AC4E172906740060DD4E /* NIDropDown */,
 				F67E55731726ACAA00573BF8 /* GTMBase64 */,
@@ -730,6 +743,7 @@
 				3E8BDB54172EDBB900218B91 /* MR_PathCell.m in Sources */,
 				F63A89D4173000A00007B5C7 /* MR_OperateView.m in Sources */,
 				F63AC96B173634FB00C8C7C3 /* MR_ClauseTable.m in Sources */,
+				F61C0BF41737AB77005CA95A /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

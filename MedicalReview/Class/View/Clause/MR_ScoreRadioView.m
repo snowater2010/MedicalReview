@@ -116,4 +116,17 @@
     }
 }
 
+- (NSString *)getCheckedKey
+{
+    for (int i = 0; i < [_rb_instances count]; i++) {
+        RadioButton *button = [_rb_instances objectAtIndex:i];
+        if ([button isChecked]) {
+            NSString *key = [[_choiceData objectAtIndex:i] objectForKey:@"key"];
+            NSString *result = [[[NSString alloc] initWithString:key] autorelease];
+            return result;
+        }
+    }
+    return nil;
+}
+
 @end

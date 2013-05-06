@@ -10,9 +10,19 @@
 #import "MR_ScoreRadioView.h"
 #import "MR_OperateView.h"
 
+@protocol ClauseNodeDelegate <NSObject>
+
+@optional
+- (void)clauseNodeScored:(NSString *)score;
+
+@end
+
 @interface MR_ClauseNodeView : MR_RootView <RadioButtonViewDelegate, OperateDelegate>
 
 @property(nonatomic, retain) NSDictionary *jsonData;
 @property(nonatomic, retain) NSDictionary *scoreData;
+@property(nonatomic, assign) id<ClauseNodeDelegate> delegate;
+
+- (NSDictionary *)getNodeScore;
 
 @end

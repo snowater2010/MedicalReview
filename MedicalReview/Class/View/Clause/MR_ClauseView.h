@@ -7,6 +7,8 @@
 //
 
 #import "MR_RootView.h"
+#import "MR_ClauseHeadView.h"
+#import "MR_ClauseNodeView.h"
 
 #define DEFAULT_CELL_HEIGHT 50
 
@@ -19,19 +21,12 @@ enum CLAUSE_HEAD_STATE {
 
 @class MR_ClauseHeadView;
 
-@protocol ClauseDelegate <NSObject>
-
-@optional
-- (void)clickClauseHead:(id)sender;
-
-@end
-
-@interface MR_ClauseView : MR_RootView <ClauseDelegate>
+@interface MR_ClauseView : MR_RootView <ClauseHeadDelegate, ClauseNodeDelegate>
 
 @property(nonatomic, retain) NSDictionary *jsonData;
 @property(nonatomic, retain) NSDictionary *scoreData;
 @property(nonatomic, assign) float cellHeight;
-@property(nonatomic, retain) id<ClauseDelegate> delegate;
+@property(nonatomic, retain) id<ClauseHeadDelegate> delegate;
 @property(nonatomic, retain) MR_ClauseHeadView *headView;
 @property(nonatomic, retain) UIView *contentView;
 @property(nonatomic, assign) enum CLAUSE_HEAD_STATE headState;

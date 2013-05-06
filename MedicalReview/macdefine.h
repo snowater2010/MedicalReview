@@ -18,6 +18,7 @@
 #define CACHE_PATH          @"cache"                //自定义缓存路径
 #define CACHE_CLAUSE        @"cache_clause"         //条款缓存文件名
 #define CACHE_SCORE         @"cache_score"          //打分缓存文件名
+#define CACHE_SCORE_UPDATE  @"cache_score_update"   //打分缓存文件名，本地更新，待上传
 
 #define USER_DEFAULT_KEY    @"MR_User_Default"      //存储登陆信息
 
@@ -152,6 +153,12 @@ enum SORT_TYPE
             [bgTable release];\
         }\
 
+
+//上锁，解锁
+#define _lock       NSLock *lock = [[NSLock alloc] init];\
+                    [lock lock];
+#define _unlock     [lock unlock];\
+                    [lock release];
 
 //clause data keys
 #define KEY_pathName            @"pathName"
