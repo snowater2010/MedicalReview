@@ -12,8 +12,11 @@
 "alert_login_password_empty"    = "密码不能为空";
 "alert_login_error"             = "用户名或密码错误";
 
+//request
 "request_error"                 = "数据请求错误";
+"request_data_error"            = "数据格式错误";
 
+//button
 "button_shortcut"               = "快捷";
 "button_delete"                 = "删除";
 "button_link"                   = "评审要素";

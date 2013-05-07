@@ -10,4 +10,7 @@
 
 @interface MR_Doctor : MR_User
 
+@property(nonatomic, retain) NSString *hospitalId;
+@property(nonatomic, retain) NSString *hospitalName;
+
 @end

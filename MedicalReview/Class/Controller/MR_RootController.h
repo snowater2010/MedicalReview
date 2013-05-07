@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ASIFormDataRequest.h"
+
+#define TAG_REQUEST_LOGIN       101
+#define TAG_REQUEST_DATA        102
 
 @interface MR_RootController : UIViewController <ASIHTTPRequestDelegate, UITextFieldDelegate>
+
+@property (retain, nonatomic) ASIFormDataRequest *request;
 
 - (id)initWithFrame:(CGRect)frame;
 - (void)loadRootView;
