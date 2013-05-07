@@ -10,4 +10,22 @@
 
 @implementation MR_Doctor
 
+- (id)initWithData:(NSDictionary *)userDic
+{
+    if (self = [super init]) {
+        if (userDic) {
+            self.hospitalId = [userDic objectForKey:KEY_userHospitalId];
+            self.hospitalName = [userDic objectForKey:KEY_userHospitalName];
+        }
+    }
+    return self;
+}
+
+-(void)dealloc
+{
+    self.hospitalId = nil;
+    self.hospitalName = nil;
+    [super dealloc];
+}
+
 @end

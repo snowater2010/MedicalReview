@@ -15,6 +15,7 @@
 - (void)dealloc
 {
     self.globalinfo = nil;
+    self.hostReach = nil;
     
     [_window release];
     [super dealloc];
@@ -22,6 +23,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //.....
+    //开启网络状况的监听
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name: kReachabilityChangedNotification
+                                               object: nil];
+    _hostReach = [[Reachability reachabilityWithHostName:@"www.google.com"] retain];//可以以多种形式初始化
+    [_hostReach startNotifier];  //开始监听,会启动一个run loop
+    [self updateInterfaceWithReachability: _hostReach];
+    //.....
+    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     
@@ -34,6 +46,30 @@
     [rootCtro release];
     
     return YES;
+}
+
+// 连接改变
+- (void) reachabilityChanged: (NSNotification* )note
+{
+    Reachability* curReach = [note object];
+    NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+    [self updateInterfaceWithReachability: curReach];
+}
+
+//处理连接改变后的情况
+- (void) updateInterfaceWithReachability: (Reachability*) curReach
+{
+    //对连接改变做出响应的处理动作。
+    NetworkStatus status = [curReach currentReachabilityStatus];
+    
+    if (status == NotReachable) {  //没有连接到网络就弹出提实况
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"My App Name"
+                                                        message:@"NotReachable"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"YES" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
 }
 
 - (void)initApp

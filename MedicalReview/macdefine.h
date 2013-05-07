@@ -13,7 +13,9 @@
 
 #define ENABLE_CACHE 0   //是否启用缓存,1为启用
 
-#define SERVICE_URL         @"https://api.douban.com/v2/book/1220562"
+#define SERVICE_URL         @"http://222.173.30.135:8088/ylpj/webif"
+//#define SERVICE_URL         @"http://124.133.27.146:8080/ylpj/webif"
+
 
 #define CACHE_PATH          @"cache"                //自定义缓存路径
 #define CACHE_CLAUSE        @"cache_clause"         //条款缓存文件名
@@ -160,6 +162,10 @@ enum SORT_TYPE
 #define _unlock     [lock unlock];\
                     [lock release];
 
+//login
+#define KEY_errCode             @"errCode"
+#define KEY_errMsg              @"errMsg"
+
 //clause data keys
 #define KEY_pathName            @"pathName"
 #define KEY_nodeList            @"nodeList"
@@ -178,8 +184,10 @@ enum SORT_TYPE
 #define KEY_scoreExplain        @"scoreExplain"
 
 //user
-#define KEY_userId              @"userId"
-#define KEY_userName            @"userName"
+#define KEY_userId              @"expertNo"
+#define KEY_userName            @"expertName"
+#define KEY_userHospitalId      @"hospitalId"
+#define KEY_userHospitalName    @"hospitalName"
 #define KEY_userPassword        @"userPassword"
 #define KEY_userIsRemember      @"userIsRemember"
 

@@ -10,13 +10,13 @@
 #import "MR_User.h"
 #import "MR_MainCtro.h"
 #import "FileHelper.h"
+#import "ASIFormDataRequest.h"
 
 @interface MR_LoginCtro ()
 {
     BOOL isRememberPw;  //is remember password
     float loginViewY;
 }
-@property (retain, nonatomic) ASIHTTPRequest *request;
 
 @end
 
@@ -68,9 +68,6 @@
 
 - (void)dealloc
 {
-    //must do request release
-    [_request doRelease];
-    
     //remove keyboard notification
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
@@ -110,9 +107,11 @@
     [self initUserInfo:user];
     [user release];
     
-    [self visitMainPage];
+//    [self doRequestLogin];
     
-//    [self doRequest];
+    NSString *responseData = @"{\"errCode\":\"0\",\"expertName\":\"zjgxy\",\"expertNo\":\"201207000000355\",\"hospitalId\":\"1047000\",\"hospitalName\":\"山东医院\"}";
+    NSDictionary *loginDic = [responseData objectFromJSONString];
+    [self requestResult:loginDic tag:TAG_REQUEST_LOGIN];
 }
 
 - (void)nameChanged
@@ -142,40 +141,79 @@
 
 #pragma mark -
 #pragma mark -- ASIHTTPRequest
-//获取网络数据
--(void)doRequest
+//登陆请求
+- (void)doRequestLogin
 {
     _GET_APP_DELEGATE_(appDelegate);
     NSString *serverUrl = appDelegate.globalinfo.serverInfo.strWebServiceUrl;
     
-    self.request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:serverUrl]];
-    _request.persistentConnectionTimeoutSeconds = 5;
-    _request.delegate = self;
-    [_request startAsynchronous];
+    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:serverUrl]];
+    self.request.tag = TAG_REQUEST_LOGIN;
+    
+    [self.request setPostValue:@"login" forKey:@"module"];
+    [self.request setPostValue:@"psgxy" forKey:@"uid"];
+    [self.request setPostValue:@"zjgxy_01" forKey:@"pwd"];
+    
+    self.request.delegate = self;
+    [self.request startAsynchronous];
+    
 }
 
--(void)requestFinished:(ASIHTTPRequest *)request
+//上传本地数据，获得服务器最新数据
+- (void)doRequestData
 {
-    request.responseEncoding = NSUTF8StringEncoding;
-    NSString *responseData = [request responseString];
+    _GET_APP_DELEGATE_(appDelegate);
+    NSString *serverUrl = appDelegate.globalinfo.serverInfo.strWebServiceUrl;
     
-    NSDictionary* retDic = [responseData objectFromJSONString];
-    _LOG_(retDic)
+    //是否有条款缓存
+    BOOL isClauseCache = [FileHelper ifHaveClauseCache];
+    BOOL isScoreUpdateCache = [FileHelper ifHaveScoreUpdateCache];
     
-    //init user info
-    MR_User *user = [[MR_User alloc] initWithData:retDic];
-    user.isRememberPw = isRememberPw;
-    [self initUserInfo:user];
-    [user release];
+    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:serverUrl]];
+    self.request.tag = TAG_REQUEST_DATA;
     
-    //clause cache，1 or 0
-    BOOL updateClause = [[retDic objectForKey:@"updateClause"] boolValue];
-    if (!updateClause) {
-        //如果服务器没有更新，取本地缓存
-        BOOL ifClauseCache = [FileHelper ifHaveClauseCache];
-        if (!ifClauseCache) {
-            //如果没有本地缓存，向服务器请求（同步请求，显示进度条）
-            
+    [self.request setPostValue:@"getData" forKey:@"module"];
+    [self.request setPostValue:[NSNumber numberWithBool:isClauseCache] forKey:@"clauseCache"];
+    [self.request setPostValue:[NSNumber numberWithBool:isScoreUpdateCache] forKey:@"scoreCache"];
+    if (isScoreUpdateCache) {
+        NSDictionary *scoreUpdateCache = [FileHelper readScoreUpdateDataFromCache];
+        NSString *strscoreUpdateCache = [scoreUpdateCache JSONString];
+        
+        [self.request appendPostData:[strscoreUpdateCache dataUsingEncoding:NSNonLossyASCIIStringEncoding]];
+    }
+    
+    self.request.delegate = self;
+    [self.request startAsynchronous];
+    
+}
+
+//处理所有请求的结果
+- (void)requestResult:(NSDictionary *)dataDic tag:(int)tag
+{
+    if (tag == TAG_REQUEST_LOGIN) {
+        //登陆
+        
+        //init user info
+        MR_User *user = [[MR_User alloc] initWithData:dataDic];
+        user.isRememberPw = isRememberPw;
+        [self initUserInfo:user];
+        [user release];
+        
+//        [self doRequestData];
+    }
+    else if (tag == TAG_REQUEST_DATA) {
+        //获取数据
+        
+        //clause cache，1 or 0
+        BOOL updateClause = [[dataDic objectForKey:@"updateClause"] boolValue];
+        if (updateClause) {
+            //如果服务器有更新，覆盖本地缓存
+            NSDictionary *clauseCache = [dataDic objectForKey:@"clauseData"];
+            BOOL result = [FileHelper writeClauseDataToCache:clauseCache];
+        }
+        else {
+            //如果服务器没有更新，取本地缓存
+            NSDictionary *clauseCache = [FileHelper readClauseDataFromCache];
         }
     }
     

@@ -12,8 +12,9 @@
 {
     BOOL customFrame;
 }
+
 @property(nonatomic, assign) CGRect initViewFrame;
-@property(nonatomic, retain) UIView *nowEditView;
+//@property(nonatomic, retain) UIView *nowEditView;
 
 @end
 
@@ -88,12 +89,62 @@
 
 - (void)dealloc
 {
-    [_nowEditView release];
+    //must do request release
+    if (_request) {
+        [_request doRelease];
+    }
     [super dealloc];
 }
 
 #pragma mark -
 #pragma mark -- ASIHTTPRequestDelegate
+
+-(void)requestFinished:(ASIHTTPRequest *)request
+{
+    request.responseEncoding = NSUTF8StringEncoding;
+    NSString *responseData = [request responseString];
+    
+    //demo
+//    responseData = @"{\"errCode\":\"0\",\"expertName\":\"zjgxy\",\"expertNo\":\"201207000000355\",\"hospitalId\":\"1047000\",\"hospitalName\":\"山东医院\"}";
+//    responseData = @"{\"errCode\":\"2\",\"errMsg\":\"密码错误\"}";
+    
+    BOOL ok = YES;
+    NSString *message = nil;
+    NSDictionary* retDic = nil;
+    
+    if ([Common isEmptyString:responseData]) {
+        ok = NO;
+    }
+    else {
+        retDic = [responseData objectFromJSONString];
+        if (retDic) {
+            NSString *errCode = [retDic objectForKey:KEY_errCode];
+            if (![errCode isEqualToString:@"0"]) {
+                ok = NO;
+                message = [retDic objectForKey:KEY_errMsg];
+            }
+        }
+        else {
+            ok = NO;
+        }
+    }
+    
+    if (ok) {
+        [self requestResult:retDic tag:request.tag];
+    }
+    else {
+        if (message) {
+            _ALERT_SIMPLE_(message);
+        }
+        else {
+            _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"request_data_error"));
+        }
+    }
+}
+
+- (void)requestResult:(NSDictionary *)dataDic tag:(int)tag
+{
+}
 
 - (void)requestFailed:(ASIHTTPRequest *)request
 {

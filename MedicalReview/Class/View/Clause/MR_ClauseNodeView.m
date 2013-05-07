@@ -63,7 +63,7 @@
     NSDictionary *dicB = [[NSDictionary alloc] initWithObjectsAndKeys:@"1", @"key", @"不通过", @"name", nil];
     [choiceData addObject:dicB];
     [dicB release];
-    NSDictionary *dicC = [[NSDictionary alloc] initWithObjectsAndKeys:@"2", @"key", @"不适应", @"name", nil];
+    NSDictionary *dicC = [[NSDictionary alloc] initWithObjectsAndKeys:@"2", @"key", @"不适用", @"name", nil];
     [choiceData addObject:dicC];
     [dicC release];
     _scoreView.choiceData = choiceData;
