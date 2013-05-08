@@ -18,9 +18,15 @@
 #import "MR_ClauseTable.h"
 
 @interface MR_PathScoreCtro ()
+{
+    BOOL menuShow;
+}
 
 @property(nonatomic, retain) MR_PathNodeView *pathNodeView;
 @property(nonatomic, retain) MR_CollapseClauseView *clauseView;
+
+@property(nonatomic, retain) MR_LeftPageView *leftPageView;
+@property(nonatomic, retain) MR_MainPageView *mainPageView;
 
 @end
 
@@ -30,7 +36,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization //test
+        menuShow = NO;
     }
     return self;
 }
@@ -67,6 +73,9 @@
     self.clauseView = nil;
     self.jsonData = nil;
     self.scoreData = nil;
+    
+    self.leftPageView = nil;
+    self.mainPageView = nil;
     [super dealloc];
 }
 
@@ -78,10 +87,15 @@
     CGRect rootFrame = self.view.frame;
     
     //left
-    CGRect leftFrame = CGRectMake(0, 0, rootFrame.size.width*0.18, rootFrame.size.height);
+    float left_w = rootFrame.size.width*0.18;
+    float left_h = rootFrame.size.height;
+    float left_x = -left_h;
+    float left_y = 0;
+    CGRect leftFrame = CGRectMake(left_x, left_y, left_w, left_h);
     MR_LeftPageView *leftPageView = [[MR_LeftPageView alloc] initWithFrame:leftFrame];
-    [self.view addSubview:leftPageView];
+    self.leftPageView = leftPageView;
     [leftPageView release];
+    [self.view addSubview:_leftPageView];
     
     //path node
     MR_PathNodeView *pathNodeView = [[MR_PathNodeView alloc] initWithFrame:leftPageView.bounds];
@@ -91,10 +105,23 @@
     [pathNodeView release];
     
     //main
-    CGRect mainFrame = CGRectMake(leftFrame.size.width, 0, rootFrame.size.width-leftFrame.size.width, rootFrame.size.height);
+    float main_x = 0;
+    float main_y = 0;
+    float main_w = rootFrame.size.width;
+    float main_h = rootFrame.size.height;
+    CGRect mainFrame = CGRectMake(main_x, main_y, main_w, main_h);
     MR_MainPageView *mainPageView = [[MR_MainPageView alloc] initWithFrame:mainFrame];
-    [self.view addSubview:mainPageView];
-    [mainPageView release];
+    
+    //top
+    float top_x = 0;
+    float top_y = 0;
+    float top_w = main_w;
+    float top_h = main_h * 0.15;
+    CGRect topFrame = CGRectMake(top_x, top_y, top_w, top_h);
+    UIView *topView = [[UIView alloc] initWithFrame:topFrame];
+    topView.backgroundColor = [UIColor lightGrayColor];
+    [mainPageView addSubview:topView];
+    [topView release];
     
     //clause table
     NSDictionary *dic1 = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -115,9 +142,9 @@
     NSArray *tableHead = [NSArray arrayWithObjects:dic1, dic2, dic3, dic4, dic5, nil];
     
     float head_x = 0;
-    float head_y = 0;
-    float head_w = mainFrame.size.width;
-    float head_h = mainFrame.size.height * 0.05;
+    float head_y = top_y + top_h;
+    float head_w = main_w;
+    float head_h = main_h * 0.05;
     CGRect headFrame = CGRectMake(head_x, head_y, head_w, head_h);
     MR_ClauseTable *headView = [[MR_ClauseTable alloc] initWithFrame:headFrame];
     headView.backgroundColor = [UIColor blackColor];
@@ -125,6 +152,7 @@
     [mainPageView addSubview:headView];
     [headView release];
     
+    //clause
     float clause_x = 0;
     float clause_y = head_y + head_h;
     float clause_w = mainFrame.size.width;
@@ -134,16 +162,29 @@
     self.clauseView = clauseView;
     [mainPageView addSubview:clauseView];
     [clauseView release];
+    
+    //menu control
+    CGRect menuBtFrame = CGRectMake(head_x, head_y, head_h, head_h);
+    UIButton *menuBt = [[UIButton alloc] initWithFrame:menuBtFrame];
+    menuBt.backgroundColor = [UIColor redColor];
+    [menuBt addTarget:self action:@selector(menuTrigger:) forControlEvents:UIControlEventTouchUpInside];
+    [mainPageView addSubview:menuBt];
+    
+    self.mainPageView = mainPageView;
+    [mainPageView release];
+    [self.view addSubview:_mainPageView];
+    
+    [self.view bringSubviewToFront:_leftPageView];
 }
 
 - (void)initData
 {
     //从缓存读取数据
-//    self.jsonData = [FileHelper readClauseDataFromFile];
-//    self.scoreData = [FileHelper readScoreDataFromFile];
+    self.jsonData = [FileHelper readClauseDataFromFile];
+    self.scoreData = [FileHelper readScoreDataFromFile];
     
-    self.jsonData = [FileHelper readClauseDataFromCache];
-    self.scoreData = [FileHelper readScoreDataFromCache];
+//    self.jsonData = [FileHelper readClauseDataFromCache];
+//    self.scoreData = [FileHelper readScoreDataFromCache];
     
 //    //合并打分数据
 //    NSDictionary *score = [FileHelper readScoreDataFromCache];
@@ -152,6 +193,28 @@
 //    [scoreAll addEntriesFromDictionary:scoreUpdate];
 //    self.scoreData = scoreAll;
 //    [scoreAll release];
+}
+
+- (void)menuTrigger:(id)sender
+{
+    menuShow = !menuShow;
+    
+    _ANIMATIONS_INIT_BEGIN_(0.25);
+    
+    CGRect leftFrame = _leftPageView.frame;
+    CGRect mainFrame = _mainPageView.frame;
+    if (menuShow) {
+        leftFrame.origin.x = 0;
+        mainFrame.origin.x = leftFrame.size.width;
+    }
+    else {
+        leftFrame.origin.x = leftFrame.origin.x - leftFrame.size.width;
+        mainFrame.origin.x = 0;
+    }
+    _leftPageView.frame = leftFrame;
+    _mainPageView.frame = mainFrame;
+    
+    _ANIMATIONS_INIT_END_;
 }
 
 #pragma mark -

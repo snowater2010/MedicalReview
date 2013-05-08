@@ -8,6 +8,8 @@
 
 #import "MR_RootController.h"
 
+#define BUTTON_MARGIN 10
+
 @interface MR_MainCtro : MR_RootController
 
 @property(nonatomic, retain) UIViewController *mainController;

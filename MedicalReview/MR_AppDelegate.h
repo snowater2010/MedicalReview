@@ -8,14 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "GlobalInfo.h"
-#import "Reachability.h"
 
 @interface MR_AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (retain, nonatomic) GlobalInfo *globalinfo;
-
-@property (retain, nonatomic) Reachability* hostReach;
 
 @end

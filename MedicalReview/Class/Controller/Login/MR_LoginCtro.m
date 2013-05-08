@@ -18,6 +18,8 @@
     float loginViewY;
 }
 
+@property(nonatomic, retain) MR_User *loginUser;
+
 @end
 
 @implementation MR_LoginCtro
@@ -71,6 +73,8 @@
     //remove keyboard notification
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
+    self.loginUser = nil;
+    
     [super dealloc];
 }
 
@@ -85,9 +89,15 @@
 
 - (IBAction)doLogin:(id)sender
 {
-    NSString *uId = @"abc";
     NSString *name = self.ibName.text;
     NSString *password = self.ibPassWord.text;
+    
+    MR_User *user = [[MR_User alloc] init];
+    user.uName = name;
+    user.uPassWord = password;
+    user.isRememberPw = isRememberPw;
+    self.loginUser = user;
+    [user release];
     
     if ([Common isEmptyString:name]) {
         _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_login_name_empty"));
@@ -98,14 +108,6 @@
         _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_login_password_empty"));
         return;
     }
-    
-    MR_User *user = [[MR_User alloc] init];
-    user.uId = uId;
-    user.uName = name;
-    user.uPassWord = password;
-    user.isRememberPw = isRememberPw;
-    [self initUserInfo:user];
-    [user release];
     
 //    [self doRequestLogin];
     
@@ -151,8 +153,8 @@
     self.request.tag = TAG_REQUEST_LOGIN;
     
     [self.request setPostValue:@"login" forKey:@"module"];
-    [self.request setPostValue:@"psgxy" forKey:@"uid"];
-    [self.request setPostValue:@"zjgxy_01" forKey:@"pwd"];
+    [self.request setPostValue:@"psgxy" forKey:@"uid"];         //loginUser.uName
+    [self.request setPostValue:@"zjgxy_01" forKey:@"pwd"];      //loginUser.uPassWord
     
     self.request.delegate = self;
     [self.request startAsynchronous];
@@ -194,10 +196,7 @@
         //登陆
         
         //init user info
-        MR_User *user = [[MR_User alloc] initWithData:dataDic];
-        user.isRememberPw = isRememberPw;
-        [self initUserInfo:user];
-        [user release];
+        [self initUserInfo:dataDic];
         
 //        [self doRequestData];
     }
@@ -210,10 +209,8 @@
             //如果服务器有更新，覆盖本地缓存
             NSDictionary *clauseCache = [dataDic objectForKey:@"clauseData"];
             BOOL result = [FileHelper writeClauseDataToCache:clauseCache];
-        }
-        else {
-            //如果服务器没有更新，取本地缓存
-            NSDictionary *clauseCache = [FileHelper readClauseDataFromCache];
+            if (!result)
+                _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_clause_cache_update_error"));
         }
     }
     
@@ -235,15 +232,18 @@
     }
 }
 
-- (void)initUserInfo:(MR_User *)user
+- (void)initUserInfo:(NSDictionary *)dataDic
 {
+    NSString *userId = [dataDic objectForKey:KEY_userId];
+    _loginUser.uId = userId;
+    
     //default info
-    [self saveUserForName:user];
-    [self saveUser:user forKey:USER_DEFAULT_KEY];
+    [self saveUserForName:_loginUser];
+    [self saveUser:_loginUser forKey:USER_DEFAULT_KEY];
     
     //global info
     _GET_APP_DELEGATE_(appDelegate);
-    appDelegate.globalinfo.userInfo.user = user;
+    appDelegate.globalinfo.userInfo.user = _loginUser;
 }
 
 - (void)visitMainPage

@@ -64,9 +64,63 @@
     CGRect rootFrame = self.view.frame;
     
     //top
-    CGRect topFrame = CGRectMake(0, 0, rootFrame.size.width, rootFrame.size.height*0.1);
+    float top_x = 0;
+    float top_y = 0;
+    float top_w = rootFrame.size.width;
+    float top_h = rootFrame.size.height*0.1;
+    CGRect topFrame = CGRectMake(top_x, top_y, top_w, top_h);
     MR_TopPageView *topPageView = [[MR_TopPageView alloc] initWithFrame:topFrame];
     [self.view addSubview:topPageView];
+    [topPageView release];
+    
+    float buttonSize = top_h / 2;
+    //退出
+    float button1_h = buttonSize;
+    float button1_w = buttonSize;
+    float button1_x = top_w - buttonSize - BUTTON_MARGIN;
+    float button1_y = top_h - buttonSize;
+    CGRect button1Frame = CGRectMake(button1_x, button1_y, button1_w, button1_h);
+    UIButton *button1 = [[UIButton alloc] initWithFrame:button1Frame];
+    button1.tag = -1;
+    [button1 setTitle:@"退出" forState:UIControlStateNormal];
+    button1.titleLabel.textColor = [UIColor blackColor];
+    button1.layer.borderWidth = 1;
+    button1.layer.borderColor = [[UIColor blackColor] CGColor];
+    [button1 addTarget:self action:@selector(menuButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [topPageView addSubview:button1];
+    [button1 release];
+    
+    //章节评审
+    float button2_h = buttonSize;
+    float button2_w = buttonSize;
+    float button2_x = top_w - (buttonSize + BUTTON_MARGIN)*2;
+    float button2_y = top_h - buttonSize;
+    CGRect button2Frame = CGRectMake(button2_x, button2_y, button2_w, button2_h);
+    UIButton *button2 = [[UIButton alloc] initWithFrame:button2Frame];
+    button2.tag = 1;
+    [button2 setTitle:@"章节" forState:UIControlStateNormal];
+    button2.titleLabel.textColor = [UIColor blackColor];
+    button2.layer.borderWidth = 1;
+    button2.layer.borderColor = [[UIColor blackColor] CGColor];
+    [button2 addTarget:self action:@selector(menuButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [topPageView addSubview:button2];
+    [button2 release];
+    
+    //路径评审
+    float button3_h = buttonSize;
+    float button3_w = buttonSize;
+    float button3_x = top_w - (buttonSize + BUTTON_MARGIN)*3;
+    float button3_y = top_h - buttonSize;
+    CGRect button3Frame = CGRectMake(button3_x, button3_y, button3_w, button3_h);
+    UIButton *button3 = [[UIButton alloc] initWithFrame:button3Frame];
+    button3.tag = 0;
+    [button3 setTitle:@"路径" forState:UIControlStateNormal];
+    button3.titleLabel.textColor = [UIColor blackColor];
+    button3.layer.borderWidth = 1;
+    button3.layer.borderColor = [[UIColor blackColor] CGColor];
+    [button3 addTarget:self action:@selector(menuButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [topPageView addSubview:button3];
+    [button3 release];
     
     //main
     CGRect mainFrame = CGRectMake(0, topFrame.size.height, rootFrame.size.width, rootFrame.size.height-topFrame.size.height);
@@ -74,6 +128,7 @@
     mainPageView.tag = 100;
     mainPageView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:mainPageView];
+    [mainPageView release];
 }
 
 - (void)visitFunction:(int)index
@@ -88,12 +143,22 @@
             self.mainController = controller;
             [controller release];
             break;
-        } 
+        }
+        case -1:
+        {
+            exit(0);
+        }
         default:
             break;
     }
     
     [mainPageView addSubview:_mainController.view];
+}
+
+- (void)menuButtonPressed:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    [self visitFunction:button.tag];
 }
 
 @end
