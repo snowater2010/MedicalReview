@@ -8,7 +8,8 @@
 
 #import "MR_RootController.h"
 
-#define BUTTON_MARGIN 10
+#define MENU_BUTTON_MARGIN 20
+#define MENU_BUTTON_SIZE 50
 
 @interface MR_MainCtro : MR_RootController
 

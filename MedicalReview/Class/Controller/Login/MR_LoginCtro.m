@@ -37,6 +37,9 @@
 {
     [super viewDidLoad];
     
+    _ibLoginView.layer.cornerRadius = 15.0;
+    _ibLoginView.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.7];
+    
     _ibName.delegate = self;
     
     isRememberPw = NO;
@@ -220,7 +223,7 @@
 }
 
 #pragma mark -
-#pragma mark -- user method
+#pragma mark -- Utilities
 
 - (void)showRememberPic
 {

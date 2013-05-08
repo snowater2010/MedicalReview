@@ -156,7 +156,7 @@
     float clause_x = 0;
     float clause_y = head_y + head_h;
     float clause_w = mainFrame.size.width;
-    float clause_h = mainFrame.size.height - head_h;
+    float clause_h = mainFrame.size.height - head_h - top_h;
     CGRect clauseFrame = CGRectMake(clause_x, clause_y, clause_w, clause_h);
     MR_CollapseClauseView *clauseView = [[MR_CollapseClauseView alloc] initWithFrame:clauseFrame];
     self.clauseView = clauseView;
