@@ -228,19 +228,19 @@
         NSDictionary *pathFormat = [dataDic objectForKey:KEY_pathFormat];
         NSDictionary *chaptersFormat = [dataDic objectForKey:KEY_chaptersFormat];
         //条款
-//        if (allClause) {
-//            //如果服务器有更新，覆盖本地缓存
-//            BOOL result = [FileHelper writeClauseDataToCache:allClause];
-//            if (!result)
-//                _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_clause_cache_update_error"));
-//        }
-//        //路径
-//        if (pathFormat) {
-//            //如果服务器有更新，覆盖本地缓存
-//            BOOL result = [FileHelper writeData:pathFormat toCacheFile:CACHE_PATH];
-//            if (!result)
-//                _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_path_cache_update_error"));
-//        }
+        if (allClause) {
+            //如果服务器有更新，覆盖本地缓存
+            BOOL result = [FileHelper writeClauseDataToCache:allClause];
+            if (!result)
+                _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_clause_cache_update_error"));
+        }
+        //路径
+        if (pathFormat) {
+            //如果服务器有更新，覆盖本地缓存
+            BOOL result = [FileHelper writeData:pathFormat toCacheFile:CACHE_PATH];
+            if (!result)
+                _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_path_cache_update_error"));
+        }
         
         [_hud hide:YES];
         
