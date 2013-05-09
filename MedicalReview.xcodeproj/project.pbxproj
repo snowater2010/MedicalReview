@@ -63,6 +63,7 @@
 		F678A94317278AA3000DAB46 /* MR_LoginCtro.m in Sources */ = {isa = PBXBuildFile; fileRef = F678A94117278AA3000DAB46 /* MR_LoginCtro.m */; };
 		F678A94417278AA3000DAB46 /* MR_LoginCtro.xib in Resources */ = {isa = PBXBuildFile; fileRef = F678A94217278AA3000DAB46 /* MR_LoginCtro.xib */; };
 		F678A9A11727DA68000DAB46 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F678A9A01727DA68000DAB46 /* Localizable.strings */; };
+		F67BA169173C07E2001F7228 /* json_loaddata.txt in Resources */ = {isa = PBXBuildFile; fileRef = F67BA168173C07E2001F7228 /* json_loaddata.txt */; };
 		F67CC73E17280D0100004FD4 /* MR_MainCtro.m in Sources */ = {isa = PBXBuildFile; fileRef = F67CC73D17280D0100004FD4 /* MR_MainCtro.m */; };
 		F67E1551172F4660004FF751 /* MR_ScoreRadioView.m in Sources */ = {isa = PBXBuildFile; fileRef = F67E1550172F465F004FF751 /* MR_ScoreRadioView.m */; };
 		F67E155D172F6913004FF751 /* RadioButton-Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = F67E155B172F6913004FF751 /* RadioButton-Selected.png */; };
@@ -184,6 +185,7 @@
 		F678A94117278AA3000DAB46 /* MR_LoginCtro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_LoginCtro.m; sourceTree = "<group>"; };
 		F678A94217278AA3000DAB46 /* MR_LoginCtro.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MR_LoginCtro.xib; sourceTree = "<group>"; };
 		F678A9A01727DA68000DAB46 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		F67BA168173C07E2001F7228 /* json_loaddata.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json_loaddata.txt; sourceTree = "<group>"; };
 		F67CC73C17280D0100004FD4 /* MR_MainCtro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_MainCtro.h; sourceTree = "<group>"; };
 		F67CC73D17280D0100004FD4 /* MR_MainCtro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_MainCtro.m; sourceTree = "<group>"; };
 		F67E154F172F465F004FF751 /* MR_ScoreRadioView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ScoreRadioView.h; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 		F6E078BB1724F4C900C00E6B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				F67BA168173C07E2001F7228 /* json_loaddata.txt */,
 				F6EF2AFF17390D2400BC3355 /* json_score.txt */,
 				F689D9B6172A4A1400E50D16 /* json_clause.txt */,
 				F678A9A01727DA68000DAB46 /* Localizable.strings */,
@@ -712,6 +715,7 @@
 				F65CCD0F173A8B63002C23EF /* logout.png in Resources */,
 				F65CCD16173A954F002C23EF /* Icon.png in Resources */,
 				F65CCD17173A954F002C23EF /* Icon@2x.png in Resources */,
+				F67BA169173C07E2001F7228 /* json_loaddata.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

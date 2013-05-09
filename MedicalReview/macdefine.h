@@ -21,6 +21,7 @@
 #define CACHE_CLAUSE        @"cache_clause"         //条款缓存文件名
 #define CACHE_SCORE         @"cache_score"          //打分缓存文件名
 #define CACHE_SCORE_UPDATE  @"cache_score_update"   //打分缓存文件名，本地更新，待上传
+#define CACHE_PATH          @"cache_path"           //路径缓存文件名
 
 #define USER_DEFAULT_KEY    @"MR_User_Default"      //存储登陆信息
 
@@ -165,6 +166,11 @@ enum SORT_TYPE
 //login
 #define KEY_errCode             @"errCode"
 #define KEY_errMsg              @"errMsg"
+
+//all
+#define KEY_allClause           @"allClause"
+#define KEY_pathFormat          @"pathFormat"
+#define KEY_chaptersFormat      @"chaptersFormat"
 
 //clause data keys
 #define KEY_pathName            @"pathName"

@@ -261,8 +261,67 @@
     return result;
 }
 
++ (BOOL)ifHaveCacheFile:(NSString *)fileName
+{
+    _GET_APP_DELEGATE_(appDelegate);
+    NSString *userName = appDelegate.globalinfo.userInfo.user.loginName;
+    
+    NSFileManager *fileManger = [NSFileManager defaultManager];
+    
+    NSString *userPath = [[FileHelper getDocumentPath] stringByAppendingPathComponent:userName];
+    if (![fileManger fileExistsAtPath:userPath]) {
+        return NO;
+    }
+    else {
+        NSString *filePath = [userPath stringByAppendingPathComponent:fileName];
+        if (![fileManger fileExistsAtPath:filePath])
+            return NO;
+        else
+            return YES;
+    }
+}
+
++ (NSString*)getCacheFilePath:(NSString *)fileName
+{
+    _GET_APP_DELEGATE_(appDelegate);
+    NSString *userName = appDelegate.globalinfo.userInfo.user.loginName;
+    
+    NSString *userPath = [[FileHelper getDocumentPath] stringByAppendingPathComponent:userName];
+    
+    //if the user folder not exist, create it
+    NSFileManager *fileManger = [NSFileManager defaultManager];
+    if (![fileManger fileExistsAtPath:userPath]) {
+        [fileManger createDirectoryAtPath:userPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    
+    NSString *scorePath = [userPath stringByAppendingPathComponent:fileName];
+    NSString *result = [[[NSString alloc] initWithString:scorePath] autorelease];
+    return result;
+}
+
++ (BOOL)writeData:(NSDictionary *)dataDic toCacheFile:(NSString *)fileName
+{
+    if (!dataDic)
+        return NO;
+    
+    NSString *cachePath = [FileHelper getCacheFilePath:fileName];
+    //不知道writeToFile方法是否是线程安全的，所以上锁
+    _lock;
+    BOOL result = [dataDic writeToFile:cachePath atomically:YES];
+    _unlock;
+    
+    return result;
+}
+
 #pragma mark -
 #pragma mark --- demo file
++ (NSDictionary *)readDataFileWithName:(NSString *)fileName
+{
+    NSString *filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
+    NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
+    NSDictionary *jsonDic = [[NSDictionary dictionaryWithDictionary:[jsonData objectFromJSONData]] autorelease];
+    return jsonDic;
+}
 + (NSDictionary *)readClauseDataFromFile
 {
     NSString *fileName = @"json_clause.txt";

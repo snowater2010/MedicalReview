@@ -14,8 +14,11 @@
 "alert_login_password_empty"        = "密码不能为空";
 "alert_login_error"                 = "用户名或密码错误";
 "alert_clause_cache_update_error"   = "条款更新失败";
+"alert_path_cache_update_error"     = "路径更新失败";
 
 //request
+"request_msg_wait_login"            = "登陆中...";
+"request_msg_wait_loaddata"         = "数据同步中，请稍候...";
 "request_error"                     = "数据请求错误";
 "request_data_error"                = "数据格式错误";
 

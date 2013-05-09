@@ -61,4 +61,15 @@
 //从文件中读取打分数据，demo
 + (NSDictionary *)readScoreDataFromFile;
 
+
+//------------
+
++ (BOOL)ifHaveCacheFile:(NSString *)fileName;
++ (NSString*)getCacheFilePath:(NSString *)fileName;
++ (BOOL)writeData:(NSDictionary *)dataDic toCacheFile:(NSString *)fileName;
+
+//从文件中读取条款数据
++ (NSDictionary *)readDataFileWithName:(NSString *)fileName;
+
+
 @end

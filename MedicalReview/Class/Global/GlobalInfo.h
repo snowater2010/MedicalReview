@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 medical.review. All rights reserved.
 //
 
-#import "MR_User.h"
+#import "MR_Doctor.h"
 
 //服务器信息
 @interface ServerInfo : NSObject
@@ -19,7 +19,7 @@
 //userInfo
 @interface UserInfo : NSObject
 
-@property(nonatomic, retain) MR_User *user;
+@property(nonatomic, retain) MR_Doctor *user;
 
 -(BOOL)isLeaderUser;
 -(BOOL)isMemberUser;
