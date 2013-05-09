@@ -10,7 +10,14 @@
 
 @interface MR_Doctor : MR_User
 
+@property(nonatomic, retain) NSString *expertNo;
+@property(nonatomic, retain) NSString *expertName;
+@property(nonatomic, retain) NSString *reviewId;
+@property(nonatomic, retain) NSString *groupId;
 @property(nonatomic, retain) NSString *hospitalId;
 @property(nonatomic, retain) NSString *hospitalName;
+
+- (id)initWithData:(NSDictionary *)userDic;
+- (NSDictionary *)user2Data;
 
 @end

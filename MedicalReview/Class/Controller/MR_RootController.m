@@ -116,6 +116,7 @@
         ok = NO;
     }
     else {
+        _LOG_(responseData);
         retDic = [responseData objectFromJSONString];
         if (retDic) {
             NSString *errCode = [retDic objectForKey:KEY_errCode];

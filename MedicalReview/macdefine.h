@@ -13,8 +13,8 @@
 
 #define ENABLE_CACHE 0   //是否启用缓存,1为启用
 
-#define SERVICE_URL         @"http://222.173.30.135:8088/ylpj/webif"
-//#define SERVICE_URL         @"http://124.133.27.146:8080/ylpj/webif"
+//#define SERVICE_URL         @"http://222.173.30.135:8088/ylpj/webif"
+#define SERVICE_URL         @"http://124.133.27.146:8080/ylgl/webif"
 
 
 #define CACHE_PATH          @"cache"                //自定义缓存路径
@@ -184,12 +184,16 @@ enum SORT_TYPE
 #define KEY_scoreExplain        @"scoreExplain"
 
 //user
-#define KEY_userId              @"expertNo"
-#define KEY_userName            @"expertName"
+#define KEY_loginName           @"loginName"
+#define KEY_loginPassWord       @"loginPassWord"
+#define KEY_loginIsRememberPw   @"loginIsRememberPw"
+
+#define KEY_userExpertNod       @"expertNo"
+#define KEY_userExpertName      @"expertName"
+#define KEY_userReviewId        @"reviewId"
+#define KEY_userGroupId         @"groupId"
 #define KEY_userHospitalId      @"hospitalId"
 #define KEY_userHospitalName    @"hospitalName"
-#define KEY_userPassword        @"userPassword"
-#define KEY_userIsRemember      @"userIsRemember"
 
 //table
 #define KEY_tableName           @"tableName"

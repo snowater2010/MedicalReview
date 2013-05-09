@@ -13,7 +13,7 @@
 - (id)init
 {
     if (self = [super init]) {
-        self.isRememberPw = NO;
+        self.loginIsRememberPw = NO;
     }
     return self;
 }
@@ -22,33 +22,38 @@
 {
     if (self = [super init]) {
         if (userDic) {
-            self.uId = [userDic objectForKey:KEY_userId];
-            self.uName = [userDic objectForKey:KEY_userName];
-            self.uPassWord = [userDic objectForKey:KEY_userPassword];
-            NSNumber *isRemember = [userDic objectForKey:KEY_userIsRemember];
+            self.loginName = [userDic objectForKey:KEY_loginName];
+            self.loginPassWord = [userDic objectForKey:KEY_loginPassWord];
+            NSNumber *isRemember = [userDic objectForKey:KEY_loginIsRememberPw];
             if (isRemember) {
-                self.isRememberPw = [isRemember boolValue];
+                self.loginIsRememberPw = [isRemember boolValue];
             }
         }
     }
     return self;
 }
 
+- (void)setLoginName:(NSString *)name passWord:(NSString *)passWord isRememberPw:(BOOL)isRememberPw
+{
+    self.loginName = name;
+    self.loginPassWord = passWord;
+    self.loginIsRememberPw = isRememberPw;
+}
+
 - (NSDictionary *)user2Data
 {
     NSDictionary *userDic = [[[NSDictionary alloc] initWithObjectsAndKeys:
-                              _uId, KEY_userId,
-                              _uName, KEY_userName,
-                              _uPassWord, KEY_userPassword,
-                              [NSNumber numberWithBool:_isRememberPw], KEY_userIsRemember,
+                              _loginName, KEY_loginName,
+                              _loginPassWord, KEY_loginPassWord,
+                              [NSNumber numberWithBool:_loginIsRememberPw], KEY_loginIsRememberPw,
                               nil] autorelease];
     return userDic;
 }
 
 -(void)dealloc
 {
-    self.uId = nil;
-    self.uName = nil;
+    self.loginName = nil;
+    self.loginPassWord = nil;
     [super dealloc];
 }
 

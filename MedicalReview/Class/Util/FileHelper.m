@@ -98,7 +98,7 @@
 + (NSString*)getScoreCacheFilePath
 {
     _GET_APP_DELEGATE_(appDelegate);
-    NSString *userName = appDelegate.globalinfo.userInfo.user.uName;
+    NSString *userName = appDelegate.globalinfo.userInfo.user.loginName;
     
     NSString *userPath = [[FileHelper getDocumentPath] stringByAppendingPathComponent:userName];
     
@@ -117,7 +117,7 @@
 + (NSString*)getScoreUpdateCacheFilePath
 {
     _GET_APP_DELEGATE_(appDelegate);
-    NSString *userName = appDelegate.globalinfo.userInfo.user.uName;
+    NSString *userName = appDelegate.globalinfo.userInfo.user.loginName;
     
     NSString *userPath = [[FileHelper getDocumentPath] stringByAppendingPathComponent:userName];
     
@@ -135,7 +135,7 @@
 + (BOOL)ifHaveScoreCache
 {
     _GET_APP_DELEGATE_(appDelegate);
-    NSString *userName = appDelegate.globalinfo.userInfo.user.uName;
+    NSString *userName = appDelegate.globalinfo.userInfo.user.loginName;
     
     NSFileManager *fileManger = [NSFileManager defaultManager];
     
@@ -155,7 +155,7 @@
 + (BOOL)ifHaveScoreUpdateCache
 {
     _GET_APP_DELEGATE_(appDelegate);
-    NSString *userName = appDelegate.globalinfo.userInfo.user.uName;
+    NSString *userName = appDelegate.globalinfo.userInfo.user.loginName;
     
     NSFileManager *fileManger = [NSFileManager defaultManager];
     

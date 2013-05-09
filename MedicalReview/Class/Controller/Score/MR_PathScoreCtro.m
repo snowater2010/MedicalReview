@@ -180,8 +180,15 @@
 - (void)initData
 {
     //从缓存读取数据
-    self.jsonData = [FileHelper readClauseDataFromFile];
-    self.scoreData = [FileHelper readScoreDataFromFile];
+    if ([FileHelper ifHaveClauseCache])
+        self.jsonData = [FileHelper readClauseDataFromCache];
+    else
+        self.jsonData = [FileHelper readClauseDataFromFile];
+    
+    if ([FileHelper ifHaveScoreCache]) 
+        self.scoreData = [FileHelper readScoreDataFromCache];
+    else
+        self.scoreData = [FileHelper readScoreDataFromFile];
     
 //    self.jsonData = [FileHelper readClauseDataFromCache];
 //    self.scoreData = [FileHelper readScoreDataFromCache];

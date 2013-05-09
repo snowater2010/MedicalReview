@@ -8,12 +8,12 @@
 
 @interface MR_User : NSObject
 
-@property(nonatomic, retain) NSString *uId;
-@property(nonatomic, retain) NSString *uName;
-@property(nonatomic, retain) NSString *uPassWord;
-@property(nonatomic, assign) BOOL isRememberPw;
+@property(nonatomic, retain) NSString *loginName;
+@property(nonatomic, retain) NSString *loginPassWord;
+@property(nonatomic, assign) BOOL loginIsRememberPw;
 
 - (id)initWithData:(NSDictionary *)userDic;
+- (void)setLoginName:(NSString *)name passWord:(NSString *)passWord isRememberPw:(BOOL)isRememberPw;
 - (NSDictionary *)user2Data;
 
 @end
