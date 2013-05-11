@@ -17,4 +17,16 @@
     return NO;
 }
 
++ (void)callDelegate:(id)delegate method:(SEL)seletor
+{
+    if ([delegate respondsToSelector:seletor])
+        [delegate performSelector:seletor];
+}
+
++ (void)callDelegate:(id)delegate method:(SEL)seletor withObject:(id)object
+{
+    if ([delegate respondsToSelector:seletor])
+        [delegate performSelector:seletor withObject:object];
+}
+
 @end

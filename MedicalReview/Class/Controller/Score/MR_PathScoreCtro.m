@@ -14,12 +14,12 @@
 #import "MR_ExplainView.h"
 #import "MR_PathCell.h"
 #import "FileHelper.h"
-#import "MR_ClauseTable.h"
 #import "MR_ClauseTopView.h"
 
 @interface MR_PathScoreCtro ()
 {
-    BOOL menuShow;
+    BOOL topShow;
+    BOOL leftShow;
 }
 
 @property(nonatomic, retain) NSDictionary *jsonData;
@@ -30,6 +30,7 @@
 @property(nonatomic, retain) MR_CollapseClauseView *clauseView;
 
 @property(nonatomic, retain) MR_LeftPageView *leftPageView;
+@property(nonatomic, retain) MR_ClauseTopView *topPageView;
 @property(nonatomic, retain) MR_MainPageView *mainPageView;
 
 @end
@@ -40,7 +41,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        menuShow = NO;
+        topShow = YES;
+        leftShow = NO;
     }
     return self;
 }
@@ -86,6 +88,7 @@
     
     self.leftPageView = nil;
     self.mainPageView = nil;
+    self.topPageView = nil;
     [super dealloc];
 }
 
@@ -130,8 +133,9 @@
     CGRect topFrame = CGRectMake(top_x, top_y, top_w, top_h);
     MR_ClauseTopView *topView = [[MR_ClauseTopView alloc] initWithFrame:topFrame];
     topView.backgroundColor = [UIColor lightGrayColor];
-    [mainPageView addSubview:topView];
+    self.topPageView = topView;
     [topView release];
+    [mainPageView addSubview:_topPageView];
     
     //clause table
     NSDictionary *dic1 = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -157,6 +161,7 @@
     float head_h = main_h * 0.05;
     CGRect headFrame = CGRectMake(head_x, head_y, head_w, head_h);
     MR_ClauseTable *headView = [[MR_ClauseTable alloc] initWithFrame:headFrame];
+    headView.delegate = self;
     headView.backgroundColor = [UIColor blackColor];
     headView.jsonData = tableHead;
     [mainPageView addSubview:headView];
@@ -178,7 +183,7 @@
     CGRect menuBtFrame = CGRectMake(head_x, head_y, head_h, head_h);
     UIButton *menuBt = [[UIButton alloc] initWithFrame:menuBtFrame];
     menuBt.backgroundColor = [UIColor redColor];
-    [menuBt addTarget:self action:@selector(menuTrigger:) forControlEvents:UIControlEventTouchUpInside];
+    [menuBt addTarget:self action:@selector(leftHider) forControlEvents:UIControlEventTouchUpInside];
     [mainPageView addSubview:menuBt];
     [menuBt release];
     
@@ -230,15 +235,40 @@
     }
 }
 
-- (void)menuTrigger:(id)sender
+- (void)tableClicked
 {
-    menuShow = !menuShow;
+    topShow = !topShow;
+    
+    _ANIMATIONS_INIT_BEGIN_(0.25);
+    
+    CGRect topFrame = _topPageView.frame;
+    CGRect mainFrame = _mainPageView.frame;
+    CGRect clauseFrame = _clauseView.frame;
+    if (topShow) {
+        mainFrame.origin.y = 0;
+        mainFrame.size.height = mainFrame.size.height - topFrame.size.height;
+        clauseFrame.size.height = clauseFrame.size.height - topFrame.size.height;
+    }
+    else {
+        mainFrame.origin.y = -topFrame.size.height;
+        mainFrame.size.height = mainFrame.size.height + topFrame.size.height;
+        clauseFrame.size.height = clauseFrame.size.height + topFrame.size.height;
+    }
+    _mainPageView.frame = mainFrame;
+    _clauseView.frame = clauseFrame;
+    
+    _ANIMATIONS_INIT_END_;
+}
+
+- (void)leftHider
+{
+    leftShow = !leftShow;
     
     _ANIMATIONS_INIT_BEGIN_(0.25);
     
     CGRect leftFrame = _leftPageView.frame;
     CGRect mainFrame = _mainPageView.frame;
-    if (menuShow) {
+    if (leftShow) {
         leftFrame.origin.x = 0;
         mainFrame.origin.x = leftFrame.size.width;
     }

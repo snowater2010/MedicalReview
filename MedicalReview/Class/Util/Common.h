@@ -10,4 +10,8 @@
 
 + (BOOL)isEmptyString:(NSString *)str;
 
++ (void)callDelegate:(id)delegate method:(SEL)seletor;
+
++ (void)callDelegate:(id)delegate method:(SEL)seletor withObject:(id)object;
+
 @end

@@ -9,8 +9,9 @@
 #import "MR_RootController.h"
 #import "MR_PathNodeView.h"
 #import "MR_ClauseView.h"
+#import "MR_ClauseTable.h"
 
-@interface MR_PathScoreCtro : MR_RootController <PathNodeDelegate, ClauseScoredDelegate>
+@interface MR_PathScoreCtro : MR_RootController <PathNodeDelegate, ClauseScoredDelegate, MR_ClauseTableDelegate>
 
 @property(nonatomic, retain) NSDictionary *scoreData;
 @property(nonatomic, retain) NSDictionary *localData;       //本地存储

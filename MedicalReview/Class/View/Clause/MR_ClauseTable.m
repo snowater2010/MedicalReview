@@ -43,6 +43,16 @@
             label_x += label_w;
         }
     }
+    
+    UIButton *button = [[UIButton alloc] initWithFrame:rect];
+    [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:button];
+    [button release];
+}
+
+- (void)buttonClicked:(id)sender
+{
+    [Common callDelegate:_delegate method:@selector(tableClicked)];
 }
 
 @end

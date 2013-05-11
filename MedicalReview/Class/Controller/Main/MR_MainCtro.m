@@ -119,6 +119,7 @@
     UIView *mainPageView = [[UIView alloc] initWithFrame:mainFrame];
     mainPageView.tag = 100;
     mainPageView.backgroundColor = [UIColor whiteColor];
+    mainPageView.clipsToBounds = YES;
     [self.view addSubview:mainPageView];
     [mainPageView release];
 }

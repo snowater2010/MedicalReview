@@ -14,6 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.clipsToBounds = YES;
         self.backgroundColor = [UIColor redColor];
     }
     return self;
