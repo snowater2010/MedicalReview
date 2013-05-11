@@ -23,4 +23,6 @@
 @property(nonatomic, retain) NSDictionary *scoreData;
 @property(nonatomic, assign) id<PathNodeDelegate> delegate;
 
+- (void)updateFinishCount:(NSString *)scoredClauseId;
+
 @end

@@ -351,12 +351,24 @@
 {
     //更新打分缓存
     [FileHelper asyWriteScoreDataToCache:_updateScoreData];
+    [self updatePathInfo];
 }
 
 - (void)doRequestUpdateFailed
 {
     //更新“打分更新”缓存
     [FileHelper asyWriteScoreUpdateDataToCache:_updateScoreData];
+    [self updatePathInfo];
+}
+
+- (void)updatePathInfo
+{
+    //更新左侧路径完成数
+    NSArray * allkeys = [_updateScoreData allKeys];
+    if (allkeys && allkeys.count > 0) {
+        NSString *scoredClauseId = [allkeys objectAtIndex:0];
+        [_pathNodeView updateFinishCount:scoredClauseId];
+    }
 }
 
 @end

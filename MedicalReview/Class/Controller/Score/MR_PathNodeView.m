@@ -169,7 +169,38 @@
     [super dealloc];
 }
 
-#pragma mark -------------------
+#pragma mark -
+#pragma mark Utilities
+
+- (void)updateFinishCount:(NSString *)scoredClauseId
+{
+    if ([Common isEmptyString:scoredClauseId])
+        return;
+    
+    //已经打过分
+    if (_scoreData) {
+        NSArray * allkeys = [_scoreData allKeys];
+        if (allkeys && [allkeys containsObject:scoredClauseId])
+            return;
+    }
+    
+    //新增打分
+    for (NSMutableDictionary *pathDic in self.nodeData) {
+        NSArray *clauseArr = [pathDic objectForKey:KEY_clauseList];
+        if (clauseArr) {
+            for (NSDictionary *clauseDic in clauseArr) {
+                NSString *clauseId = [clauseDic objectForKey:KEY_clauseId];
+                if ([scoredClauseId isEqualToString:clauseId]) {
+                    int finish = [[pathDic objectForKey:KEY_finishCount] intValue];
+                    [pathDic setValue:[NSNumber numberWithInt:++finish] forKey:KEY_finishCount];
+                }
+            }
+        }
+    }
+    [self.tableView reloadData];
+}
+
+#pragma mark -
 #pragma mark UITableView delegate
 //委托里 @required 的必须实现
 
