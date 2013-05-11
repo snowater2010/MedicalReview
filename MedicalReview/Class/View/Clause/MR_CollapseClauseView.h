@@ -14,5 +14,6 @@
 
 @property(nonatomic, retain) NSArray *jsonData;
 @property(nonatomic, retain) NSDictionary *scoreData;
+@property(nonatomic, assign) id<ClauseScoredDelegate> scoredDelegate;
 
 @end

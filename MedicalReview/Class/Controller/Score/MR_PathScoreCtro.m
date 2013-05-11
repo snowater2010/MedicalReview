@@ -24,6 +24,7 @@
 
 @property(nonatomic, retain) NSDictionary *jsonData;
 @property(nonatomic, retain) NSArray *pathData;
+@property(nonatomic, retain) NSDictionary *updateScoreData;
 
 @property(nonatomic, retain) MR_PathNodeView *pathNodeView;
 @property(nonatomic, retain) MR_CollapseClauseView *clauseView;
@@ -55,9 +56,10 @@
     [super viewDidLoad];
     
     [self initData];
-
+    
     _pathNodeView.jsonData = [NSArray arrayWithObjects:_jsonData, nil];
     _pathNodeView.pathData = _pathData;
+    _pathNodeView.scoreData = _scoreData;
     
     //第一次取第一条数据
     NSDictionary *pathDic = [_pathData objectAtIndex:0];
@@ -80,6 +82,7 @@
     self.jsonData = nil;
     self.scoreData = nil;
     self.pathData = nil;
+    self.updateScoreData = nil;
     
     self.leftPageView = nil;
     self.mainPageView = nil;
@@ -166,6 +169,7 @@
     float clause_h = mainFrame.size.height - head_h - top_h;
     CGRect clauseFrame = CGRectMake(clause_x, clause_y, clause_w, clause_h);
     MR_CollapseClauseView *clauseView = [[MR_CollapseClauseView alloc] initWithFrame:clauseFrame];
+    clauseView.scoredDelegate = self;
     self.clauseView = clauseView;
     [mainPageView addSubview:clauseView];
     [clauseView release];
@@ -204,17 +208,26 @@
         self.pathData = [allData objectForKey:KEY_pathFormat];
     }
     
+    self.scoreData = [self getInitScoreData];
+}
+
+- (NSDictionary *)getInitScoreData
+{
     //score
     NSDictionary *scoreCache = [FileHelper readDataFromCache:CACHE_SCORE];
     NSDictionary *updateScoreCache = [FileHelper readDataFromCache:CACHE_SCORE_UPDATE];
-    NSMutableDictionary *allScore = [[NSMutableDictionary alloc] initWithCapacity:0];
-    if (scoreCache)
-        [allScore addEntriesFromDictionary:scoreCache];
-    if (updateScoreCache)
-        [allScore addEntriesFromDictionary:updateScoreCache];
-    if (allScore && allScore.count > 0)
-        self.scoreData = allScore;
-    [allScore release];
+    if (scoreCache || updateScoreCache) {
+        NSMutableDictionary *allScore = [[[NSMutableDictionary alloc] initWithCapacity:0] autorelease];
+        if (scoreCache)
+            [allScore addEntriesFromDictionary:scoreCache];
+        if (updateScoreCache)
+            [allScore addEntriesFromDictionary:updateScoreCache];
+        
+        return allScore;
+    }
+    else {
+        return nil;
+    }
 }
 
 - (void)menuTrigger:(id)sender
@@ -245,6 +258,7 @@
 {
     if (nodeData) {
         _clauseView.jsonData = [self getClauseByNode:nodeData];
+        _clauseView.scoreData = [self getInitScoreData];
         [_clauseView setNeedsDisplay];
     }
 }
@@ -262,6 +276,87 @@
         }
     }
     return clauseArr;
+}
+
+#pragma mark -
+#pragma mark ClauseScoredDelegate
+- (void)clauseScored:(NSDictionary *)updateScoreData
+{
+    self.updateScoreData = updateScoreData;
+    [self doReaquestUpdateScoreData];
+}
+
+#pragma mark -
+#pragma mark -- request to update data
+
+- (void)doReaquestUpdateScoreData
+{
+    //异步请求服务器更新数据
+    _GET_APP_DELEGATE_(appDelegate);
+    NSString *serverUrl = appDelegate.globalinfo.serverInfo.strWebServiceUrl;
+    
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:serverUrl]];
+    
+    [request setPostValue:@"updateScore" forKey:@"module"];
+    [request setDefaultPostValue];
+    
+    if (_updateScoreData) {
+        NSString *strscoreCache = [_updateScoreData JSONString];
+        if (strscoreCache)
+            [request appendPostData:[strscoreCache dataUsingEncoding:NSNonLossyASCIIStringEncoding]];
+    }
+    
+    request.delegate = self;
+    [request startAsynchronous];
+}
+
+-(void)requestFinished:(ASIHTTPRequest *)request
+{
+    request.responseEncoding = NSUTF8StringEncoding;
+    NSString *responseData = [request responseString];
+    
+    BOOL ok = YES;
+    NSDictionary* retDic = nil;
+    
+    if ([Common isEmptyString:responseData]) {
+        ok = NO;
+    }
+    else {
+        retDic = [responseData objectFromJSONString];
+        if (retDic) {
+            NSString *errCode = [retDic objectForKey:KEY_errCode];
+            if (![errCode isEqualToString:@"0"]) {
+                ok = NO;
+            }
+        }
+        else {
+            ok = NO;
+        }
+    }
+    
+    if (ok) {
+        [self doRequestUpdateSucess];
+    }
+    else {
+        [self doRequestUpdateFailed];
+    }
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    [self doRequestUpdateFailed];
+}
+
+- (void)doRequestUpdateSucess
+{
+    //更新打分缓存
+    [FileHelper asyWriteScoreDataToCache:_updateScoreData];
+}
+
+- (void)doRequestUpdateFailed
+{
+    //更新“打分更新”缓存
+    [FileHelper asyWriteScoreUpdateDataToCache:_updateScoreData];
 }
 
 @end

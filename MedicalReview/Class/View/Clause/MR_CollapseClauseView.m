@@ -54,6 +54,7 @@
         MR_ClauseView * clauseView = [[MR_ClauseView alloc] initWithFrame:cellFrame cellHeight:DEFAULT_CELL_HEIGHT];
         clauseView.tag = i;
         clauseView.delegate = self;
+        clauseView.scoredDelegate = _scoredDelegate;
         clauseView.jsonData = clauseDic;
         clauseView.scoreData = scoreDic;
         

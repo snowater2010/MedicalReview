@@ -109,12 +109,49 @@
 - (void)setNodeDataAtIndex:(int)index
 {
     NSArray *nodeList = [[_pathData objectAtIndex:index] objectForKey:KEY_nodeList];
-    if (nodeList) {
-        self.nodeData = nodeList;
-    }
-    else {
+    if (!nodeList)
+    {
         self.nodeData = nil;
+        return;
     }
+    
+    NSMutableArray *nodes = [[NSMutableArray alloc] initWithCapacity:nodeList.count];
+    
+    BOOL hasScore = NO;
+    NSArray *allkeys = nil;
+    if (_scoreData) {
+        allkeys = [_scoreData allKeys];
+        if (allkeys && allkeys.count > 0)
+            hasScore = YES;
+    }
+    
+    //计算总数和完成数
+    for (NSDictionary *pathDic in nodeList) {
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:pathDic];
+        
+        int total = 0;
+        int finish = 0;
+        NSArray *clauseArr = [pathDic objectForKey:KEY_clauseList];
+        if (clauseArr) {
+            if (hasScore) {
+                for (NSDictionary *clauseDic in clauseArr) {
+                    NSString *clauseId = [clauseDic objectForKey:KEY_clauseId];
+                    if ([allkeys containsObject:clauseId]) {
+                        finish ++;
+                    }
+                }
+            }
+            total = clauseArr.count;
+        }
+        
+        [dic setValue:[NSNumber numberWithInt:total] forKey:KEY_totalCount];
+        [dic setValue:[NSNumber numberWithInt:finish] forKey:KEY_finishCount];
+        [nodes addObject:dic];
+        [dic release];
+    }
+    
+    self.nodeData = nodes;
+    [nodes release];
 }
 
 -(void)rel{
@@ -125,6 +162,7 @@
 {
     self.jsonData = nil;
     self.pathData = nil;
+    self.scoreData = nil;
     self.dropDown = nil;
     self.nodeData = nil;
     self.tableView = nil;

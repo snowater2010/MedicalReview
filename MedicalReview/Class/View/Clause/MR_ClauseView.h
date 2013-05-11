@@ -21,6 +21,13 @@ enum CLAUSE_HEAD_STATE {
 
 @class MR_ClauseHeadView;
 
+@protocol ClauseScoredDelegate <NSObject>
+
+@optional
+- (void)clauseScored:(NSDictionary *)updateScoreData;
+
+@end
+
 @interface MR_ClauseView : MR_RootView <ASIHTTPRequestDelegate, ClauseHeadDelegate, ClauseNodeDelegate>
 
 @property(nonatomic, retain) NSDictionary *jsonData;
@@ -30,10 +37,11 @@ enum CLAUSE_HEAD_STATE {
 @property(nonatomic, retain) MR_ClauseHeadView *headView;
 @property(nonatomic, retain) UIView *contentView;
 @property(nonatomic, assign) enum CLAUSE_HEAD_STATE headState;
+@property(nonatomic, assign) id<ClauseScoredDelegate> scoredDelegate;
 
 - (id)initWithFrame:(CGRect)frame cellHeight:(float)cellHeight;
 - (float)getAllHeight;
-
+- (NSDictionary *)getUpdateScoreData;
 - (void)showHeadState;
 
 @end

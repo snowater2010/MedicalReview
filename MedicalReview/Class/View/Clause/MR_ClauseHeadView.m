@@ -33,7 +33,7 @@
 - (void)drawRect:(CGRect)rect
 {
     NSString *name = [_jsonData objectForKey:KEY_clauseName];
-    NSString *scoreValue = [_scoreData objectForKey:KEY_scoreValue];
+    NSString *scoreValue  = [_scoreData objectForKey:KEY_scoreValue];
     NSString *scoreExplain = [_scoreData objectForKey:KEY_scoreExplain];
     
     //name view
@@ -203,6 +203,9 @@
 #pragma mark --- MR_PopSelectListDelegate
 - (void)selectedAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ([_scoreView getSelectedIndex] == NO_SELECT_INDEX)
+        return;
+    
     if(_delegate && [_delegate respondsToSelector:@selector(clauseHeadScored:)])
         [_delegate performSelector:@selector(clauseHeadScored:)];
 }
