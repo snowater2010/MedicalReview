@@ -39,7 +39,7 @@
 + (NSDictionary *)readClauseDataFromCache;
 
 //将条款数据写入缓存
-+ (BOOL)writeClauseDataToCache:(NSDictionary *)dataDic;
++ (BOOL)writeClauseDataToCache:(id)dataDic;
 
 + (NSDictionary *)readScoreDataFromCache;
 
@@ -66,10 +66,11 @@
 
 + (BOOL)ifHaveCacheFile:(NSString *)fileName;
 + (NSString*)getCacheFilePath:(NSString *)fileName;
-+ (BOOL)writeData:(NSDictionary *)dataDic toCacheFile:(NSString *)fileName;
++ (BOOL)writeData:(id)dataDic toCacheFile:(NSString *)fileName;
++ (id)readDataFromCache:(NSString *)fileName;
 
 //从文件中读取条款数据
-+ (NSDictionary *)readDataFileWithName:(NSString *)fileName;
++ (id)readDataFileWithName:(NSString *)fileName;
 
 
 @end

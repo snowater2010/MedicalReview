@@ -43,8 +43,8 @@
         
         NSDictionary *clauseDic = [_jsonData objectAtIndex:i];
         
-        NSString *attrID = [clauseDic objectForKey:KEY_attrId];
-        NSDictionary *scoreDic = [_scoreData objectForKey:attrID];
+        NSString *clauseId = [clauseDic objectForKey:KEY_clauseId];
+        NSDictionary *scoreDic = [_scoreData objectForKey:clauseId];
         
         CGRect cellFrame = CGRectMake(0,
                                       totalHeight,

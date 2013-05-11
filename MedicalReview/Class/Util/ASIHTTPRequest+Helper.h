@@ -18,3 +18,9 @@
 + (ASIHTTPRequest*)doRequestForUrl:(NSString*)str_url;
 
 @end
+
+@interface ASIFormDataRequest (Helper)
+
+- (void)setDefaultPostValue;
+
+@end

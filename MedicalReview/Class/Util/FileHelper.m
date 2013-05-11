@@ -59,7 +59,7 @@
     return [[NSFileManager defaultManager] fileExistsAtPath:clausePath];
 }
 
-+ (NSDictionary *)readClauseDataFromCache
++ (id)readClauseDataFromCache
 {
     NSDictionary *result = nil;
     
@@ -74,7 +74,7 @@
     return result;
 }
 
-+ (BOOL)writeClauseDataToCache:(NSDictionary *)dataDic
++ (BOOL)writeClauseDataToCache:(id)dataDic
 {
     if (!dataDic)
         return NO;
@@ -299,7 +299,7 @@
     return result;
 }
 
-+ (BOOL)writeData:(NSDictionary *)dataDic toCacheFile:(NSString *)fileName
++ (BOOL)writeData:(id)dataDic toCacheFile:(NSString *)fileName
 {
     if (!dataDic)
         return NO;
@@ -313,14 +313,28 @@
     return result;
 }
 
++ (id)readDataFromCache:(NSString *)fileName
+{
+    NSDictionary *result = nil;
+    
+    if ([self ifHaveCacheFile:fileName]) {
+        NSString *cachePath = [FileHelper getCacheFilePath:fileName];
+        NSDictionary *jsonDic = [NSDictionary dictionaryWithContentsOfFile:cachePath];
+        
+        result = [[[NSDictionary alloc] initWithDictionary:jsonDic] autorelease];
+    }
+    
+    return result;
+}
+
 #pragma mark -
 #pragma mark --- demo file
-+ (NSDictionary *)readDataFileWithName:(NSString *)fileName
++ (id)readDataFileWithName:(NSString *)fileName
 {
     NSString *filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
     NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
-    NSDictionary *jsonDic = [[NSDictionary dictionaryWithDictionary:[jsonData objectFromJSONData]] autorelease];
-    return jsonDic;
+    
+    return [jsonData objectFromJSONData];
 }
 + (NSDictionary *)readClauseDataFromFile
 {

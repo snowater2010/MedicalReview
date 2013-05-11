@@ -8,7 +8,6 @@
 
 #import "MR_PathScoreCtro.h"
 #import "MR_LeftPageView.h"
-#import "MR_TopPageView.h"
 #import "MR_MainPageView.h"
 #import "MR_PathNodeView.h"
 #import "MR_CollapseClauseView.h"
@@ -16,11 +15,15 @@
 #import "MR_PathCell.h"
 #import "FileHelper.h"
 #import "MR_ClauseTable.h"
+#import "MR_ClauseTopView.h"
 
 @interface MR_PathScoreCtro ()
 {
     BOOL menuShow;
 }
+
+@property(nonatomic, retain) NSDictionary *jsonData;
+@property(nonatomic, retain) NSArray *pathData;
 
 @property(nonatomic, retain) MR_PathNodeView *pathNodeView;
 @property(nonatomic, retain) MR_CollapseClauseView *clauseView;
@@ -52,12 +55,15 @@
     [super viewDidLoad];
     
     [self initData];
-    
+
     _pathNodeView.jsonData = [NSArray arrayWithObjects:_jsonData, nil];
+    _pathNodeView.pathData = _pathData;
     
-    NSArray *nodeList = [_jsonData objectForKey:KEY_nodeList];
-    NSArray *clauseList = [[nodeList objectAtIndex:0] objectForKey:KEY_clauseList];
-    _clauseView.jsonData = clauseList;
+    //第一次取第一条数据
+    NSDictionary *pathDic = [_pathData objectAtIndex:0];
+    NSArray *nodeList = [pathDic objectForKey:KEY_nodeList];
+    NSArray *nodeData = [[nodeList objectAtIndex:0] objectForKey:KEY_clauseList];
+    _clauseView.jsonData = [self getClauseByNode:nodeData];
     _clauseView.scoreData = _scoreData;
 }
 
@@ -73,6 +79,7 @@
     self.clauseView = nil;
     self.jsonData = nil;
     self.scoreData = nil;
+    self.pathData = nil;
     
     self.leftPageView = nil;
     self.mainPageView = nil;
@@ -116,9 +123,9 @@
     float top_x = 0;
     float top_y = 0;
     float top_w = main_w;
-    float top_h = main_h * 0.15;
+    float top_h = main_h * 0.1;
     CGRect topFrame = CGRectMake(top_x, top_y, top_w, top_h);
-    UIView *topView = [[UIView alloc] initWithFrame:topFrame];
+    MR_ClauseTopView *topView = [[MR_ClauseTopView alloc] initWithFrame:topFrame];
     topView.backgroundColor = [UIColor lightGrayColor];
     [mainPageView addSubview:topView];
     [topView release];
@@ -132,7 +139,7 @@
                           @"0.05", KEY_tableWidth, nil];
     NSDictionary *dic3 = [NSDictionary dictionaryWithObjectsAndKeys:
                           @"评测结果", KEY_tableName,
-                          @"0.18", KEY_tableWidth, nil];
+                          @"0.2", KEY_tableWidth, nil];
     NSDictionary *dic4 = [NSDictionary dictionaryWithObjectsAndKeys:
                           @"评测说明", KEY_tableName,
                           @"0.2", KEY_tableWidth, nil];
@@ -169,6 +176,7 @@
     menuBt.backgroundColor = [UIColor redColor];
     [menuBt addTarget:self action:@selector(menuTrigger:) forControlEvents:UIControlEventTouchUpInside];
     [mainPageView addSubview:menuBt];
+    [menuBt release];
     
     self.mainPageView = mainPageView;
     [mainPageView release];
@@ -179,27 +187,34 @@
 
 - (void)initData
 {
-    //从缓存读取数据
+    //clause
     if ([FileHelper ifHaveClauseCache])
         self.jsonData = [FileHelper readClauseDataFromCache];
-    else
-        self.jsonData = [FileHelper readClauseDataFromFile];
+    else {
+        NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
+        self.jsonData = [allData objectForKey:KEY_allClause];
+    }
     
-    if ([FileHelper ifHaveScoreCache]) 
-        self.scoreData = [FileHelper readScoreDataFromCache];
-    else
-        self.scoreData = [FileHelper readScoreDataFromFile];
+    //path
+    if ([FileHelper ifHaveCacheFile:CACHE_PATH]) {
+        self.pathData = [FileHelper readDataFromCache:CACHE_PATH];
+    }
+    else {
+        NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
+        self.pathData = [allData objectForKey:KEY_pathFormat];
+    }
     
-//    self.jsonData = [FileHelper readClauseDataFromCache];
-//    self.scoreData = [FileHelper readScoreDataFromCache];
-    
-//    //合并打分数据
-//    NSDictionary *score = [FileHelper readScoreDataFromCache];
-//    NSDictionary *scoreUpdate = [FileHelper readScoreUpdateDataFromCache];
-//    NSMutableDictionary *scoreAll = [[NSMutableDictionary alloc] initWithDictionary:score];
-//    [scoreAll addEntriesFromDictionary:scoreUpdate];
-//    self.scoreData = scoreAll;
-//    [scoreAll release];
+    //score
+    NSDictionary *scoreCache = [FileHelper readDataFromCache:CACHE_SCORE];
+    NSDictionary *updateScoreCache = [FileHelper readDataFromCache:CACHE_SCORE_UPDATE];
+    NSMutableDictionary *allScore = [[NSMutableDictionary alloc] initWithCapacity:0];
+    if (scoreCache)
+        [allScore addEntriesFromDictionary:scoreCache];
+    if (updateScoreCache)
+        [allScore addEntriesFromDictionary:updateScoreCache];
+    if (allScore && allScore.count > 0)
+        self.scoreData = allScore;
+    [allScore release];
 }
 
 - (void)menuTrigger:(id)sender
@@ -229,9 +244,24 @@
 - (void)nodeSelected:(NSArray *)nodeData;
 {
     if (nodeData) {
-        _clauseView.jsonData = nodeData;
+        _clauseView.jsonData = [self getClauseByNode:nodeData];
         [_clauseView setNeedsDisplay];
     }
+}
+
+- (NSArray *)getClauseByNode:(NSArray *)nodeData
+{
+    NSMutableArray *clauseArr = [[[NSMutableArray alloc] initWithCapacity:0] autorelease];
+    for (NSDictionary *nodeDic in nodeData) {
+        NSString *nodeId = [nodeDic objectForKey:KEY_clauseId];
+        for (NSDictionary *clauseDic in _jsonData) {
+            NSString *clauseId = [clauseDic objectForKey:KEY_clauseId];
+            if ([nodeId isEqualToString:clauseId]) {
+                [clauseArr addObject:clauseDic];
+            }
+        }
+    }
+    return clauseArr;
 }
 
 @end

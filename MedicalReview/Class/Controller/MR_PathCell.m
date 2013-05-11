@@ -32,12 +32,10 @@
      //*******************************************************************************
      //绘制Cell内容，NSString UIImage 等有drawInRect或者drawAtPoint 方法的都可以在这里绘制
      //*******************************************************************************
-     [[UIColor redColor] set];
-    
      NSString *imageName;
     
      if(!self.selected){
-          if ([_cellModel objectForKey:@"totalCount"]==[_cellModel objectForKey:@"finishCount"]) {
+          if ([_cellModel objectForKey:KEY_totalCount]==[_cellModel objectForKey:KEY_finishCount]) {
                imageName = @"festival_cell_bg_3.9.png";
             
                //self.backgroundColor = [UIColor purpleColor];
@@ -67,8 +65,10 @@
     
      //绘制一个字符串 drawInRect: 在某个区域内 withFont: 以什么字体
      //[_model drawInRect:CGRectMake(60, 5, 200, 30) withFont:[UIFont systemFontOfSize:18]];
-     NSString *name = [NSString stringWithFormat:@"%@",[_cellModel objectForKey:@"nodeName"]];
-     NSString *desc = [NSString stringWithFormat:@"(共%@款，已录入%@款)",[_cellModel objectForKey:@"totalCount"],[_cellModel objectForKey:@"finishCount"]];
+     NSString *name = [NSString stringWithFormat:@"%@",[_cellModel objectForKey:KEY_nodeName]];
+     NSString *total = [_cellModel objectForKey:KEY_totalCount];
+     NSString *finish = [_cellModel objectForKey:KEY_finishCount];
+    NSString *desc = [NSString stringWithFormat:@"(共%@款，已录入%@款)",total,finish];
     
      [name drawInRect:CGRectMake(10, 5, 200, 30) withFont:[UIFont systemFontOfSize:18]];
      [desc drawInRect:CGRectMake(10, 40, 200, 30) withFont:[UIFont systemFontOfSize:12]];

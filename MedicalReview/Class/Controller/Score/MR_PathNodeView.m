@@ -25,6 +25,7 @@
     if (self) {
         self.backgroundColor = [UIColor orangeColor];
         _jsonData = nil;
+        _pathData = nil;
         _nodeData = nil;
         _dropDown = nil;
     }
@@ -33,10 +34,10 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    if (!_jsonData || _jsonData.count <= 0) {
+    if (!_pathData || _pathData.count <= 0) {
         return;
     }
-    NSDictionary *dic = [_jsonData objectAtIndex:0];
+    NSDictionary *dic = [_pathData objectAtIndex:0];
     NSString *pathName = [dic objectForKey:KEY_pathName];
     [self setNodeDataAtIndex:0];
     
@@ -79,8 +80,8 @@
 
 - (IBAction)selectClicked:(id)sender {
     
-    NSMutableArray *pathArr = [[NSMutableArray alloc] initWithCapacity:_jsonData.count];
-    for (NSDictionary *dic in _jsonData) {
+    NSMutableArray *pathArr = [[NSMutableArray alloc] initWithCapacity:_pathData.count];
+    for (NSDictionary *dic in _pathData) {
         NSString *pathName = [dic objectForKey:KEY_pathName];
         [pathArr addObject:pathName];
     }
@@ -107,7 +108,7 @@
 
 - (void)setNodeDataAtIndex:(int)index
 {
-    NSArray *nodeList = [[_jsonData objectAtIndex:index] objectForKey:KEY_nodeList];
+    NSArray *nodeList = [[_pathData objectAtIndex:index] objectForKey:KEY_nodeList];
     if (nodeList) {
         self.nodeData = nodeList;
     }
@@ -123,6 +124,7 @@
 - (void)dealloc
 {
     self.jsonData = nil;
+    self.pathData = nil;
     self.dropDown = nil;
     self.nodeData = nil;
     self.tableView = nil;
@@ -162,8 +164,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    _LOG_([[self.nodeData objectAtIndex:indexPath.row] objectForKey:@"nodeName"]);
     
     NSDictionary *dic = [_nodeData objectAtIndex:indexPath.row];
     NSArray *clauseList = [dic objectForKey:KEY_clauseList];

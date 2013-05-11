@@ -114,7 +114,9 @@
         return;
     }
     
-    [self doRequestLogin];
+//    [self doRequestLogin];
+    
+    [self visitMainPage];
 }
 
 - (void)nameChanged
@@ -168,16 +170,8 @@
 //上传本地数据，获得服务器最新数据
 - (void)doRequestData
 {
-    //ylpj/webif?module=loadData&uid=zj0311&reviewId=2012000000000000819&expertNo=201207000000328&groupId=1
-    
     _GET_APP_DELEGATE_(appDelegate);
     NSString *serverUrl = appDelegate.globalinfo.serverInfo.strWebServiceUrl;
-    NSString *uid = _loginName;
-    NSString *reviewId = appDelegate.globalinfo.userInfo.user.reviewId;
-    NSString *expertNo = appDelegate.globalinfo.userInfo.user.expertNo;
-    NSString *groupId = appDelegate.globalinfo.userInfo.user.groupId;
-    
-//    module=loadData&uid=zj0311&reviewId=2012000000000000819&expertNo=201207000000328&groupId=1
     
     //是否有条款缓存
     BOOL isClauseCache = [FileHelper ifHaveClauseCache];
@@ -187,10 +181,7 @@
     self.request.tag = TAG_REQUEST_DATA;
     
     [self.request setPostValue:@"loadData" forKey:@"module"];
-    [self.request setPostValue:uid forKey:@"uid"];
-    [self.request setPostValue:reviewId forKey:@"reviewId"];
-    [self.request setPostValue:expertNo forKey:@"expertNo"];
-    [self.request setPostValue:groupId forKey:@"groupId"];
+    [self.request setDefaultPostValue];
     [self.request setPostValue:[NSNumber numberWithBool:isClauseCache] forKey:@"clauseCache"];
     [self.request setPostValue:[NSNumber numberWithBool:isScoreUpdateCache] forKey:@"scoreCache"];
     if (isScoreUpdateCache) {
@@ -224,22 +215,26 @@
         //获取数据
         
         //clause cache，1 or 0
-        NSDictionary *allClause = [dataDic objectForKey:KEY_allClause];
-        NSDictionary *pathFormat = [dataDic objectForKey:KEY_pathFormat];
-        NSDictionary *chaptersFormat = [dataDic objectForKey:KEY_chaptersFormat];
+        NSArray *allClause = [dataDic objectForKey:KEY_allClause];
+        NSArray *pathFormat = [dataDic objectForKey:KEY_pathFormat];
+        NSArray *chaptersFormat = [dataDic objectForKey:KEY_chaptersFormat];
         //条款
         if (allClause) {
-            //如果服务器有更新，覆盖本地缓存
             BOOL result = [FileHelper writeClauseDataToCache:allClause];
             if (!result)
                 _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_clause_cache_update_error"));
         }
         //路径
         if (pathFormat) {
-            //如果服务器有更新，覆盖本地缓存
             BOOL result = [FileHelper writeData:pathFormat toCacheFile:CACHE_PATH];
             if (!result)
                 _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_path_cache_update_error"));
+        }
+        //章节
+        if (chaptersFormat) {
+            BOOL result = [FileHelper writeData:chaptersFormat toCacheFile:CACHE_CHAPTER];
+            if (!result)
+                _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_chapter_cache_update_error"));
         }
         
         [_hud hide:YES];

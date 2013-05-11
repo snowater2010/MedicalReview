@@ -10,14 +10,12 @@
 #import "MR_ArrowView.h"
 #import "MR_ExplainView.h"
 #import "MR_ClauseView.h"
-#import "DDExpandableButton.h"
 
 @interface MR_ClauseHeadView ()
 
 @property(nonatomic, retain) MR_ArrowView *arrowView;
-@property(nonatomic, retain) DDExpandableButton *scoreView;
 @property(nonatomic, retain) MR_ExplainView *explainView;
-@property(nonatomic, retain) NSArray *scoreArray;
+@property(nonatomic, retain) MR_PopSelectListView *scoreView;
 
 @end
 
@@ -34,7 +32,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    NSString *name = [_jsonData objectForKey:KEY_indexName];
+    NSString *name = [_jsonData objectForKey:KEY_clauseName];
     NSString *scoreValue = [_scoreData objectForKey:KEY_scoreValue];
     NSString *scoreExplain = [_scoreData objectForKey:KEY_scoreExplain];
     
@@ -85,31 +83,33 @@
     float self_h = rect.size.height;
     CGRect selfFrame = CGRectMake(self_x, self_y, self_w, self_h);
     UILabel *selfView = [[UILabel alloc] initWithFrame:selfFrame];
-    selfView.backgroundColor = [UIColor purpleColor];
+    selfView.backgroundColor = [UIColor lightGrayColor];
     
     //score
+    NSArray *scoreArray = [NSArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", nil];
+    
     float score_x = self_x + self_w;
     float score_y = 0;
-    float score_w = rect.size.width * 0.1;
+    float score_w = rect.size.width * 0.2;
     float score_h = rect.size.height;
-    float torchModeButtonWidth = 91;
-    float torchModeButtonHeight = 38;
-    CGPoint torchModeButtonPoint = CGPointMake(score_x+(score_w-torchModeButtonWidth)/2, score_y+(score_h-torchModeButtonHeight)/2);
-    self.scoreArray = [NSArray arrayWithObjects:@"-", @"A", @"B", @"C", @"D", @"E", nil];
-    DDExpandableButton *torchModeButton = [[DDExpandableButton alloc] initWithPoint:torchModeButtonPoint leftTitle:@"评分" buttons:_scoreArray];
-	[torchModeButton addTarget:self action:@selector(toggleFlashlight:) forControlEvents:UIControlEventValueChanged];
-	[torchModeButton setVerticalPadding:10];
-    [torchModeButton setHorizontalPadding:20];
-    torchModeButton.backgroundColor = [UIColor lightGrayColor];
-    [torchModeButton setAlpha:1.0];
-    [torchModeButton updateDisplay];
     
+    MR_PopSelectListView *scoreView = [[MR_PopSelectListView alloc] initWithFrame:CGRectMake(score_x, score_y, score_w, score_h)];
+    scoreView.delegate = self;
+    scoreView.scoreArray = scoreArray;
+    scoreView.backgroundColor = [UIColor redColor];
+    //init data
     if (![Common isEmptyString:scoreValue])
-        [torchModeButton setSelectedItem:scoreValue.intValue];
-    
-    self.scoreView = torchModeButton;
-    [self addSubview:_scoreView];
-    [torchModeButton release];
+    {
+        for (int i = 0, j = scoreArray.count; i < j; i++) {
+            NSString *score = [scoreArray objectAtIndex:i];
+            if ([scoreValue isEqualToString:score]) {
+                [scoreView selectAtIndex:i];
+                break;
+            }
+        }
+    }
+    self.scoreView = scoreView;
+    [scoreView release];
     
     //explain
     float explain_x = score_x + score_w;
@@ -145,8 +145,6 @@
     [operateView release];
     
     [self showHeadState];
-    
-    [self bringSubviewToFront:torchModeButton];
 }
 
 - (void)dealloc
@@ -154,7 +152,7 @@
     self.jsonData = nil;
     self.scoreData = nil;
     self.arrowView = nil;
-    self.scoreArray = nil;
+    self.scoreView = nil;
     [super dealloc];
 }
 
@@ -188,34 +186,22 @@
 #pragma mark --- user method
 - (NSDictionary *)getHeadScore
 {
-    int index = _scoreView.selectedItem;
-    
-    if (index == 0) {
+    if ([_scoreView getSelectedIndex] == NO_SELECT_INDEX)
         return nil;
-    }
-    else {
-        NSString *score = [_scoreArray objectAtIndex:index];
-        NSString *explain = [_explainView getExplain];
-        
-        NSDictionary *scoreDic = [[[NSDictionary alloc] initWithObjectsAndKeys:
-                                   score, KEY_scoreValue,
-                                   explain, KEY_scoreExplain,
-                                   nil] autorelease];
-        return scoreDic;
-    }
+    
+    NSString *score = [_scoreView getSelectedValue];
+    NSString *explain = [_explainView getExplain];
+    
+    NSDictionary *scoreDic = [[[NSDictionary alloc] initWithObjectsAndKeys:
+                               score, KEY_scoreValue,
+                               explain, KEY_scoreExplain,
+                               nil] autorelease];
+    return scoreDic;
 }
 
 #pragma mark -
-#pragma mark --- RadioButtonViewDelegate
-
-- (void)radioButtonGroupTaped:(NSString *)radioKey
-{
-    _LOG_(radioKey);
-    if(_delegate && [_delegate respondsToSelector:@selector(clauseHeadScored:)])
-        [_delegate performSelector:@selector(clauseHeadScored:) withObject:radioKey];
-}
-
-- (void)toggleFlashlight:(DDExpandableButton *)sender
+#pragma mark --- MR_PopSelectListDelegate
+- (void)selectedAtIndexPath:(NSIndexPath *)indexPath
 {
     if(_delegate && [_delegate respondsToSelector:@selector(clauseHeadScored:)])
         [_delegate performSelector:@selector(clauseHeadScored:)];

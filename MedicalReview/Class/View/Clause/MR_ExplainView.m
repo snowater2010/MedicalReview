@@ -26,7 +26,7 @@
     UITextView *explainView = [[UITextView alloc] initWithFrame:textFrame];
     explainView.tag = TAG_VIEW_EXPLAIN;
     explainView.font = [UIFont systemFontOfSize:_textSize];
-    explainView.backgroundColor = [UIColor greenColor];
+    explainView.backgroundColor = [UIColor lightGrayColor];
     explainView.text = _wordExplan;
     explainView.font = [UIFont systemFontOfSize:DEFAULT_TEXT_SIZE];
     

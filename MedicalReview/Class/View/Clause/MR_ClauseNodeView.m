@@ -30,7 +30,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    NSString *name = [_jsonData objectForKey:KEY_indexName];
+    NSString *name = [_jsonData objectForKey:KEY_attrName];
     NSString *scoreValue = [_scoreData objectForKey:KEY_scoreValue];
     NSString *scoreExplain = [_scoreData objectForKey:KEY_scoreExplain];
     
@@ -46,10 +46,20 @@
     nameLabel.text = name;
     nameLabel.font = [UIFont systemFontOfSize:NAME_TEXT_SIZE];
     
+    //----------------------
+    //self score
+    float self_x = name_x + name_w;
+    float self_y = 0;
+    float self_w = rect.size.width * 0.05;
+    float self_h = rect.size.height;
+    CGRect selfFrame = CGRectMake(self_x, self_y, self_w, self_h);
+    UILabel *selfView = [[UILabel alloc] initWithFrame:selfFrame];
+    selfView.backgroundColor = [UIColor lightGrayColor];
+    
     //score
-    float score_x = name_x + name_w;
+    float score_x = self_x + self_w;
     float score_y = 0;
-    float score_w = rect.size.width * 0.23;
+    float score_w = rect.size.width * 0.2;
     float score_h = rect.size.height;
     CGRect scoreFrame = CGRectMake(score_x, score_y, score_w, score_h);
     MR_ScoreRadioView *scoreView = [[MR_ScoreRadioView alloc] initWithFrame:scoreFrame];
@@ -93,10 +103,12 @@
     operateView.isHasLink = YES;
     
     [self addSubview:nameLabel];
+    [self addSubview:selfView];
     [self addSubview:_scoreView];
     [self addSubview:_explainView];
     [self addSubview:operateView];
     [nameLabel release];
+    [selfView release];
     [operateView release];
 }
 

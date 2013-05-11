@@ -21,7 +21,7 @@ enum CLAUSE_HEAD_STATE {
 
 @class MR_ClauseHeadView;
 
-@interface MR_ClauseView : MR_RootView <ClauseHeadDelegate, ClauseNodeDelegate>
+@interface MR_ClauseView : MR_RootView <ASIHTTPRequestDelegate, ClauseHeadDelegate, ClauseNodeDelegate>
 
 @property(nonatomic, retain) NSDictionary *jsonData;
 @property(nonatomic, retain) NSDictionary *scoreData;

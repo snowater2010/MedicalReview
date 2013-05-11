@@ -7,8 +7,8 @@
 //
 
 #import "MR_RootView.h"
-#import "MR_ScoreRadioView.h"
 #import "MR_OperateView.h"
+#import "MR_PopSelectListView.h"
 
 #define ARROW_SIZE 12
 #define ARROW_MARGIN 2
@@ -23,7 +23,7 @@
 
 @end
 
-@interface MR_ClauseHeadView : MR_RootView <RadioButtonViewDelegate>
+@interface MR_ClauseHeadView : MR_RootView <MR_PopSelectListDelegate>
 
 @property(nonatomic, retain) NSDictionary *jsonData;
 @property(nonatomic, retain) NSDictionary *scoreData;

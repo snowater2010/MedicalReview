@@ -11,7 +11,7 @@
 #define TAG_VIEW_EXPLAIN    0101
 
 #define DEFAULT_TEXT_SIZE   14
-#define BUTTON_TEXT_SIZE    14
+#define BUTTON_TEXT_SIZE    16
 
 @interface MR_ExplainView : MR_RootView
 

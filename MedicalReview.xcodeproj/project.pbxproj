@@ -51,6 +51,8 @@
 		F641715617258B7600648A5E /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = F641712D17258B7600648A5E /* ASINetworkQueue.m */; };
 		F641716D1725922100648A5E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = F641716C1725922100648A5E /* Reachability.m */; };
 		F64171731725957600648A5E /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = F64171721725957400648A5E /* NSString+Helper.m */; };
+		F64F326B173E0E4B00AF7A15 /* MR_ClauseTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = F64F326A173E0E4B00AF7A15 /* MR_ClauseTopView.m */; };
+		F64F327B173E47C100AF7A15 /* MR_PopSelectListView.m in Sources */ = {isa = PBXBuildFile; fileRef = F64F327A173E47C100AF7A15 /* MR_PopSelectListView.m */; };
 		F65CCD04173A818F002C23EF /* login_login.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F65CCD03173A818F002C23EF /* login_login.jpg */; };
 		F65CCD07173A831C002C23EF /* top_bg.gif in Resources */ = {isa = PBXBuildFile; fileRef = F65CCD06173A831C002C23EF /* top_bg.gif */; };
 		F65CCD09173A8640002C23EF /* lujing_s.png in Resources */ = {isa = PBXBuildFile; fileRef = F65CCD08173A8640002C23EF /* lujing_s.png */; };
@@ -59,7 +61,6 @@
 		F65CCD0F173A8B63002C23EF /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = F65CCD0E173A8B63002C23EF /* logout.png */; };
 		F65CCD16173A954F002C23EF /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F65CCD14173A954E002C23EF /* Icon.png */; };
 		F65CCD17173A954F002C23EF /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F65CCD15173A954E002C23EF /* Icon@2x.png */; };
-		F65CCD31173A9E01002C23EF /* DDExpandableButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F65CCD30173A9E01002C23EF /* DDExpandableButton.m */; };
 		F678A94317278AA3000DAB46 /* MR_LoginCtro.m in Sources */ = {isa = PBXBuildFile; fileRef = F678A94117278AA3000DAB46 /* MR_LoginCtro.m */; };
 		F678A94417278AA3000DAB46 /* MR_LoginCtro.xib in Resources */ = {isa = PBXBuildFile; fileRef = F678A94217278AA3000DAB46 /* MR_LoginCtro.xib */; };
 		F678A9A11727DA68000DAB46 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F678A9A01727DA68000DAB46 /* Localizable.strings */; };
@@ -171,6 +172,10 @@
 		F641716C1725922100648A5E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		F64171711725957400648A5E /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
 		F64171721725957400648A5E /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
+		F64F3269173E0E4B00AF7A15 /* MR_ClauseTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ClauseTopView.h; sourceTree = "<group>"; };
+		F64F326A173E0E4B00AF7A15 /* MR_ClauseTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ClauseTopView.m; sourceTree = "<group>"; };
+		F64F3279173E47C100AF7A15 /* MR_PopSelectListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_PopSelectListView.h; sourceTree = "<group>"; };
+		F64F327A173E47C100AF7A15 /* MR_PopSelectListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_PopSelectListView.m; sourceTree = "<group>"; };
 		F65CCD03173A818F002C23EF /* login_login.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = login_login.jpg; sourceTree = "<group>"; };
 		F65CCD06173A831C002C23EF /* top_bg.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = top_bg.gif; sourceTree = "<group>"; };
 		F65CCD08173A8640002C23EF /* lujing_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lujing_s.png; sourceTree = "<group>"; };
@@ -179,8 +184,6 @@
 		F65CCD0E173A8B63002C23EF /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
 		F65CCD14173A954E002C23EF /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		F65CCD15173A954E002C23EF /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
-		F65CCD2F173A9E01002C23EF /* DDExpandableButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDExpandableButton.h; sourceTree = "<group>"; };
-		F65CCD30173A9E01002C23EF /* DDExpandableButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDExpandableButton.m; sourceTree = "<group>"; };
 		F678A94017278AA3000DAB46 /* MR_LoginCtro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_LoginCtro.h; sourceTree = "<group>"; };
 		F678A94117278AA3000DAB46 /* MR_LoginCtro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_LoginCtro.m; sourceTree = "<group>"; };
 		F678A94217278AA3000DAB46 /* MR_LoginCtro.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MR_LoginCtro.xib; sourceTree = "<group>"; };
@@ -397,6 +400,8 @@
 		F62BF82E172E256300054E55 /* Clause */ = {
 			isa = PBXGroup;
 			children = (
+				F64F3269173E0E4B00AF7A15 /* MR_ClauseTopView.h */,
+				F64F326A173E0E4B00AF7A15 /* MR_ClauseTopView.m */,
 				F63AC969173634FA00C8C7C3 /* MR_ClauseTable.h */,
 				F63AC96A173634FB00C8C7C3 /* MR_ClauseTable.m */,
 				F62BF835172E2FC400054E55 /* MR_CollapseClauseView.h */,
@@ -464,13 +469,13 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
-		F65CCD2E173A9E01002C23EF /* DDExpandableButton */ = {
+		F64F3275173E472E00AF7A15 /* MyPopSelectList */ = {
 			isa = PBXGroup;
 			children = (
-				F65CCD2F173A9E01002C23EF /* DDExpandableButton.h */,
-				F65CCD30173A9E01002C23EF /* DDExpandableButton.m */,
+				F64F3279173E47C100AF7A15 /* MR_PopSelectListView.h */,
+				F64F327A173E47C100AF7A15 /* MR_PopSelectListView.m */,
 			);
-			path = DDExpandableButton;
+			path = MyPopSelectList;
 			sourceTree = "<group>";
 		};
 		F67CC73A17280CDB00004FD4 /* Main */ = {
@@ -609,7 +614,7 @@
 		F6E078B61724F43C00C00E6B /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				F65CCD2E173A9E01002C23EF /* DDExpandableButton */,
+				F64F3275173E472E00AF7A15 /* MyPopSelectList */,
 				F67E1557172F683D004FF751 /* RadioButton */,
 				F623AC4E172906740060DD4E /* NIDropDown */,
 				F67E55731726ACAA00573BF8 /* GTMBase64 */,
@@ -773,7 +778,8 @@
 				F63A89D4173000A00007B5C7 /* MR_OperateView.m in Sources */,
 				F63AC96B173634FB00C8C7C3 /* MR_ClauseTable.m in Sources */,
 				F6EF2B0317391F1200BC3355 /* MR_SectionScoreCtro.m in Sources */,
-				F65CCD31173A9E01002C23EF /* DDExpandableButton.m in Sources */,
+				F64F326B173E0E4B00AF7A15 /* MR_ClauseTopView.m in Sources */,
+				F64F327B173E47C100AF7A15 /* MR_PopSelectListView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

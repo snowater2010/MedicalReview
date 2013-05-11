@@ -19,6 +19,7 @@
 @interface MR_PathNodeView : MR_RootView <NIDropDownDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic, retain) NSArray *jsonData;
+@property(nonatomic, retain) NSArray *pathData;
 @property(nonatomic, assign) id<PathNodeDelegate> delegate;
 
 @end

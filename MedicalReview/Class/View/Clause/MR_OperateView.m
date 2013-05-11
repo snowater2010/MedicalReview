@@ -28,7 +28,7 @@
     CGRect deleteRect = CGRectMake(delete_x, delete_y, delete_w, delete_h);
     UIButton *deleteBt = [[UIButton alloc] initWithFrame:deleteRect];
     [deleteBt setTitle:_GET_LOCALIZED_STRING_(@"button_delete") forState:UIControlStateNormal];
-    deleteBt.titleLabel.font = [UIFont systemFontOfSize:OPERATE_TEXT_SIZE];
+    deleteBt.titleLabel.font = [UIFont systemFontOfSize:OPERATE_TEXT_SIZE+2];
     deleteBt.backgroundColor = [UIColor orangeColor];
     [deleteBt addTarget:_delegate action:@selector(doDelete) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:deleteBt];

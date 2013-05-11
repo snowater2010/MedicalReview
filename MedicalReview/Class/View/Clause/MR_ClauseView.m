@@ -9,6 +9,12 @@
 #import "MR_ClauseView.h"
 #import "FileHelper.h"
 
+@interface MR_ClauseView ()
+
+@property(nonatomic, retain) NSDictionary *updateScoreData;
+
+@end
+
 @implementation MR_ClauseView
 
 - (id)initWithFrame:(CGRect)frame cellHeight:(float)cellHeight
@@ -92,7 +98,81 @@
     self.jsonData = nil;
     self.scoreData = nil;
     self.headView = nil;
+    self.updateScoreData = nil;
     [super dealloc];
+}
+
+#pragma mark -
+#pragma mark -- request to update data
+
+- (void)doReaquestUpdateScoreData
+{
+    //异步请求服务器更新数据
+    _GET_APP_DELEGATE_(appDelegate);
+    NSString *serverUrl = appDelegate.globalinfo.serverInfo.strWebServiceUrl;
+    
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:serverUrl]];
+    
+    [request setPostValue:@"updateScore" forKey:@"module"];
+    [request setDefaultPostValue];
+    
+    if (_updateScoreData) {
+        NSString *strscoreCache = [_updateScoreData JSONString];
+        if (strscoreCache) 
+            [request appendPostData:[strscoreCache dataUsingEncoding:NSNonLossyASCIIStringEncoding]];
+    }
+    
+    request.delegate = self;
+    [request startAsynchronous];
+}
+
+-(void)requestFinished:(ASIHTTPRequest *)request
+{
+    request.responseEncoding = NSUTF8StringEncoding;
+    NSString *responseData = [request responseString];
+    
+    BOOL ok = YES;
+    NSDictionary* retDic = nil;
+    
+    if ([Common isEmptyString:responseData]) {
+        ok = NO;
+    }
+    else {
+        retDic = [responseData objectFromJSONString];
+        if (retDic) {
+            NSString *errCode = [retDic objectForKey:KEY_errCode];
+            if (![errCode isEqualToString:@"0"]) {
+                ok = NO;
+            }
+        }
+        else {
+            ok = NO;
+        }
+    }
+    
+    if (ok) {
+        [self doRequestUpdateSucess];
+    }
+    else {
+        [self doRequestUpdateFailed];
+    }
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    [self doRequestUpdateFailed];
+}
+
+- (void)doRequestUpdateSucess
+{
+    //更新打分缓存
+    [FileHelper asyWriteScoreDataToCache:_updateScoreData];
+}
+
+- (void)doRequestUpdateFailed
+{
+    //更新“打分更新”缓存
+    [FileHelper asyWriteScoreUpdateDataToCache:_updateScoreData];
 }
 
 #pragma mark -
@@ -113,14 +193,12 @@
     }
     
     //combine data
-    NSString *attrId = [_jsonData objectForKey:KEY_attrId];
-    NSDictionary *clauseScoreDic = [[NSDictionary alloc] initWithObjectsAndKeys:allScoreDic, attrId, nil];
+    NSString *clauseId = [_jsonData objectForKey:KEY_clauseId];
+    self.updateScoreData = [NSDictionary dictionaryWithObjectsAndKeys:allScoreDic, clauseId, nil];
     
     [allScoreDic release];
     
-    //update score data
-    [FileHelper asyWriteScoreDataToCache:clauseScoreDic];
-//    [FileHelper asyWriteScoreUpdateDataToCache:clauseScoreDic];
+    [self doReaquestUpdateScoreData];
 }
 
 #pragma mark -
@@ -140,9 +218,6 @@
 
 - (void)clauseHeadScored:(NSString *)score
 {
-    
-    
-    //更新缓存
     [self updateScoreCache];
 }
 
