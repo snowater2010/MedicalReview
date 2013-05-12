@@ -59,17 +59,21 @@
     selfView.backgroundColor = [UIColor lightGrayColor];
     
     //score
-    float score_margin = 5;
+    float score_margin = 3;
     float score_x = self_x + self_w + score_margin;
     float score_y = score_margin;
     float score_w = rect.size.width * 0.18 - score_margin * 2;
     float score_h = rect.size.height - score_margin * 2;
+    if (score_h > 40) {
+        score_h = 40;
+        score_y = (rect.size.height - score_h) / 2;
+    }
     CGRect scoreFrame = CGRectMake(score_x, score_y, score_w, score_h);
     NSArray *scoreArray = [NSArray arrayWithObjects:@"通过", @"不通过", @"不适用", nil];
     UISegmentedControl *scoreSeg = [[UISegmentedControl alloc] initWithItems:scoreArray];
     scoreSeg.frame = scoreFrame;
     scoreSeg.segmentedControlStyle = UISegmentedControlStyleBordered;
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor],UITextAttributeTextColor,  [UIFont systemFontOfSize:13],UITextAttributeFont ,[UIColor whiteColor],UITextAttributeTextShadowColor ,nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor],UITextAttributeTextColor,  [UIFont systemFontOfSize:NAME_TEXT_SIZE],UITextAttributeFont ,[UIColor whiteColor],UITextAttributeTextShadowColor ,nil];
     [scoreSeg setTitleTextAttributes:dic forState:UIControlStateNormal];
     [scoreSeg addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
     if (![Common isEmptyString:scoreValue])
