@@ -185,4 +185,19 @@
 //    self.nowEditView = textField;
 //}
 
+- (NSArray *)getClauseFrom:(NSArray *)allClause byNode:(NSArray *)nodeData
+{
+    NSMutableArray *clauseArr = [[[NSMutableArray alloc] initWithCapacity:0] autorelease];
+    for (NSDictionary *nodeDic in nodeData) {
+        NSString *nodeId = [nodeDic objectForKey:KEY_clauseId];
+        for (NSDictionary *clauseDic in allClause) {
+            NSString *clauseId = [clauseDic objectForKey:KEY_clauseId];
+            if ([nodeId isEqualToString:clauseId]) {
+                [clauseArr addObject:clauseDic];
+            }
+        }
+    }
+    return clauseArr;
+}
+
 @end

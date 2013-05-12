@@ -104,6 +104,13 @@
     [self setNodeDataAtIndex:index];
     [_tableView reloadData];
     [self rel];
+    
+    //选区第一个
+    [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+    
+    NSDictionary *dic = [_nodeData objectAtIndex:0];
+    NSArray *clauseList = [dic objectForKey:KEY_clauseList];
+    [Common callDelegate:_delegate method:@selector(nodeSelected:) withObject:clauseList];
 }
 
 - (void)setNodeDataAtIndex:(int)index

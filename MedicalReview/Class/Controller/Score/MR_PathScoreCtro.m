@@ -22,7 +22,7 @@
     BOOL leftShow;
 }
 
-@property(nonatomic, retain) NSDictionary *jsonData;
+@property(nonatomic, retain) NSArray *jsonData;
 @property(nonatomic, retain) NSArray *pathData;
 @property(nonatomic, retain) NSDictionary *updateScoreData;
 
@@ -67,7 +67,7 @@
     NSDictionary *pathDic = [_pathData objectAtIndex:0];
     NSArray *nodeList = [pathDic objectForKey:KEY_nodeList];
     NSArray *nodeData = [[nodeList objectAtIndex:0] objectForKey:KEY_clauseList];
-    _clauseView.jsonData = [self getClauseByNode:nodeData];
+    _clauseView.jsonData = [self getClauseFrom:_jsonData byNode:nodeData];
     _clauseView.scoreData = _scoreData;
 }
 
@@ -287,25 +287,10 @@
 - (void)nodeSelected:(NSArray *)nodeData;
 {
     if (nodeData) {
-        _clauseView.jsonData = [self getClauseByNode:nodeData];
+        _clauseView.jsonData = [self getClauseFrom:_jsonData byNode:nodeData];
         _clauseView.scoreData = [self getInitScoreData];
         [_clauseView setNeedsDisplay];
     }
-}
-
-- (NSArray *)getClauseByNode:(NSArray *)nodeData
-{
-    NSMutableArray *clauseArr = [[[NSMutableArray alloc] initWithCapacity:0] autorelease];
-    for (NSDictionary *nodeDic in nodeData) {
-        NSString *nodeId = [nodeDic objectForKey:KEY_clauseId];
-        for (NSDictionary *clauseDic in _jsonData) {
-            NSString *clauseId = [clauseDic objectForKey:KEY_clauseId];
-            if ([nodeId isEqualToString:clauseId]) {
-                [clauseArr addObject:clauseDic];
-            }
-        }
-    }
-    return clauseArr;
 }
 
 #pragma mark -

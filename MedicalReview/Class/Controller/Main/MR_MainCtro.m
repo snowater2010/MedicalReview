@@ -9,6 +9,7 @@
 #import "MR_MainCtro.h"
 #import "MR_TopPageView.h"
 #import "MR_PathScoreCtro.h"
+#import "MR_ChapterScoreCtro.h"
 
 @interface MR_MainCtro ()
 
@@ -41,7 +42,7 @@
 //    NSDictionary *jsonDic = [jsonData objectFromJSONData];
 //    NSString *pathName = [jsonDic objectForKey:KEY_pathName];
     
-    [self visitFunction:0];
+    [self visitFunction:1];
 }
 
 - (void)didReceiveMemoryWarning
@@ -137,6 +138,13 @@
             [controller release];
             break;
         }
+        case 1:
+        {
+            UIViewController *controller = [[MR_ChapterScoreCtro alloc] initWithFrame:mainFrame];
+            self.mainController = controller;
+            [controller release];
+            break;
+        }
         case -1:
         {
             exit(0);
@@ -145,6 +153,9 @@
             break;
     }
     
+    for (UIView *subView in mainPageView.subviews) {
+        [subView removeFromSuperview];
+    }
     [mainPageView addSubview:_mainController.view];
 }
 

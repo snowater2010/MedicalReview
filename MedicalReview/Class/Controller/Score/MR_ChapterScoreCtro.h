@@ -7,7 +7,8 @@
 //
 
 #import "MR_RootController.h"
+#import "MR_ChapterHeadView.h"
 
-@interface MR_SectionScoreCtro : MR_RootController
+@interface MR_ChapterScoreCtro : MR_RootController <ChapterHeadDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @end

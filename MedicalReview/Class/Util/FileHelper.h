@@ -36,7 +36,7 @@
 + (BOOL)removeFileAtPath:(NSString*)path;
 
 //从缓存中读取条款数据
-+ (NSDictionary *)readClauseDataFromCache;
++ (id)readClauseDataFromCache;
 
 //将条款数据写入缓存
 + (BOOL)writeClauseDataToCache:(id)dataDic;

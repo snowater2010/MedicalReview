@@ -13,7 +13,6 @@
 
 @optional
 - (void)nodeSelected:(NSArray *)nodeData;
-
 @end
 
 @interface MR_PathNodeView : MR_RootView <NIDropDownDelegate, UITableViewDataSource, UITableViewDelegate>

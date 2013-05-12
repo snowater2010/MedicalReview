@@ -18,4 +18,6 @@
 - (id)initWithFrame:(CGRect)frame;
 - (void)loadRootView;
 
+- (NSArray *)getClauseFrom:(NSArray *)allClause byNode:(NSArray *)nodeData;
+
 @end

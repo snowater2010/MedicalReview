@@ -179,6 +179,11 @@ enum SORT_TYPE
 #define KEY_totalCount          @"totalCount"
 #define KEY_finishCount         @"finishCount"
 
+//chapter data
+#define KEY_chapterName         @"chapterName"
+#define KEY_sectionList         @"sectionList"
+#define KEY_sectionName         @"sectionName"
+
 //clause data keys
 #define KEY_clauseList          @"clauseList"
 #define KEY_clauseId            @"clauseId"
