@@ -8,12 +8,11 @@
 
 #import "MR_ClauseNodeView.h"
 #import "MR_ClauseHeadView.h"
-#import "MR_ScoreRadioView.h"
 #import "MR_ExplainView.h"
 #import "MR_ClauseView.h"
 
 @interface MR_ClauseNodeView ()
-@property(nonatomic, retain) MR_ScoreRadioView *scoreView;
+@property(nonatomic, retain) UISegmentedControl *scoreView;
 @property(nonatomic, retain) MR_ExplainView *explainView;
 @end
 
@@ -54,35 +53,32 @@
     float self_h = rect.size.height;
     CGRect selfFrame = CGRectMake(self_x, self_y, self_w, self_h);
     UILabel *selfView = [[UILabel alloc] initWithFrame:selfFrame];
+    selfView.text = @"暂无";
+    selfView.font = [UIFont systemFontOfSize:NAME_TEXT_SIZE];
+    selfView.textAlignment = NSTextAlignmentCenter;
     selfView.backgroundColor = [UIColor lightGrayColor];
     
     //score
-    float score_x = self_x + self_w;
-    float score_y = 0;
-    float score_w = rect.size.width * 0.2;
-    float score_h = rect.size.height;
+    float score_margin = 5;
+    float score_x = self_x + self_w + score_margin;
+    float score_y = score_margin;
+    float score_w = rect.size.width * 0.18 - score_margin * 2;
+    float score_h = rect.size.height - score_margin * 2;
     CGRect scoreFrame = CGRectMake(score_x, score_y, score_w, score_h);
-    MR_ScoreRadioView *scoreView = [[MR_ScoreRadioView alloc] initWithFrame:scoreFrame];
-    self.scoreView = scoreView;
-    [scoreView release];
-    
-    NSMutableArray *choiceData = [[NSMutableArray alloc] initWithCapacity:3];
-    NSDictionary *dicA = [[NSDictionary alloc] initWithObjectsAndKeys:@"0", @"key", @"通过", @"name", nil];
-    [choiceData addObject:dicA];
-    [dicA release];
-    NSDictionary *dicB = [[NSDictionary alloc] initWithObjectsAndKeys:@"1", @"key", @"不通过", @"name", nil];
-    [choiceData addObject:dicB];
-    [dicB release];
-    NSDictionary *dicC = [[NSDictionary alloc] initWithObjectsAndKeys:@"2", @"key", @"不适用", @"name", nil];
-    [choiceData addObject:dicC];
-    [dicC release];
-    _scoreView.choiceData = choiceData;
+    NSArray *scoreArray = [NSArray arrayWithObjects:@"通过", @"不通过", @"不适用", nil];
+    UISegmentedControl *scoreSeg = [[UISegmentedControl alloc] initWithItems:scoreArray];
+    scoreSeg.frame = scoreFrame;
+    scoreSeg.segmentedControlStyle = UISegmentedControlStyleBordered;
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor],UITextAttributeTextColor,  [UIFont systemFontOfSize:13],UITextAttributeFont ,[UIColor whiteColor],UITextAttributeTextShadowColor ,nil];
+    [scoreSeg setTitleTextAttributes:dic forState:UIControlStateNormal];
+    [scoreSeg addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
     if (![Common isEmptyString:scoreValue])
-        _scoreView.choiceIndex = scoreValue.intValue;
-    _scoreView.delegate = self;
+        scoreSeg.selectedSegmentIndex = scoreValue.intValue;
+    self.scoreView = scoreSeg;
+    [scoreSeg release];
     
     //explain
-    float explain_x = score_x + score_w;
+    float explain_x = score_x + score_w + score_margin;
     float explain_y = 0;
     float explain_w = rect.size.width * 0.2;
     float explain_h = rect.size.height;
@@ -125,7 +121,7 @@
 #pragma mark --- user method
 - (NSDictionary *)getNodeScore
 {
-    NSString *key = [_scoreView getCheckedKey];
+    NSString *key = [NSString stringWithFormat:@"%d", _scoreView.selectedSegmentIndex];
     if (key) {
         NSString *attrId = [_jsonData objectForKey:KEY_attrId];
         NSString *explain = [_explainView getExplain];
@@ -143,14 +139,11 @@
     }
 }
 
-#pragma mark -
-#pragma mark --- RadioButtonViewDelegate
-
-- (void)radioButtonGroupTaped:(NSString *)radioKey
-{
-    _LOG_(radioKey);
+- (void)segmentAction:(UISegmentedControl *)seg
+{    
+    NSString *strIndex = [NSString stringWithFormat:@"%d", seg.selectedSegmentIndex];
     if(_delegate && [_delegate respondsToSelector:@selector(clauseNodeScored:)])
-        [_delegate performSelector:@selector(clauseNodeScored:) withObject:radioKey];
+        [_delegate performSelector:@selector(clauseNodeScored:) withObject:strIndex];
 }
 
 #pragma mark -

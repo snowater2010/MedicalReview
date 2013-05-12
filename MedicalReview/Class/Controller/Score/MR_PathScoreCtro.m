@@ -144,7 +144,7 @@
                           @"0.05", KEY_tableWidth, nil];
     NSDictionary *dic3 = [NSDictionary dictionaryWithObjectsAndKeys:
                           @"评测结果", KEY_tableName,
-                          @"0.2", KEY_tableWidth, nil];
+                          @"0.18", KEY_tableWidth, nil];
     NSDictionary *dic4 = [NSDictionary dictionaryWithObjectsAndKeys:
                           @"评测说明", KEY_tableName,
                           @"0.2", KEY_tableWidth, nil];

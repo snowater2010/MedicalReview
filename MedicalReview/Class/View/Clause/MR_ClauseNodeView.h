@@ -7,7 +7,6 @@
 //
 
 #import "MR_RootView.h"
-#import "MR_ScoreRadioView.h"
 #import "MR_OperateView.h"
 
 @protocol ClauseNodeDelegate <NSObject>
@@ -17,7 +16,7 @@
 
 @end
 
-@interface MR_ClauseNodeView : MR_RootView <RadioButtonViewDelegate, OperateDelegate>
+@interface MR_ClauseNodeView : MR_RootView <OperateDelegate>
 
 @property(nonatomic, retain) NSDictionary *jsonData;
 @property(nonatomic, retain) NSDictionary *scoreData;

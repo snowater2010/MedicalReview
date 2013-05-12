@@ -90,7 +90,7 @@
     
     float score_x = self_x + self_w;
     float score_y = 0;
-    float score_w = rect.size.width * 0.2;
+    float score_w = rect.size.width * 0.18;
     float score_h = rect.size.height;
     
     MR_PopSelectListView *scoreView = [[MR_PopSelectListView alloc] initWithFrame:CGRectMake(score_x, score_y, score_w, score_h)];

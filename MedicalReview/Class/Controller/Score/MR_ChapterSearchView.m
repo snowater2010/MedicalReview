@@ -93,9 +93,9 @@
     [super dealloc];
 }
 
-- (void)segmentAction:(UISegmentedControl *)Seg {
+- (void)segmentAction:(UISegmentedControl *)seg {
     
-    NSInteger Index = Seg.selectedSegmentIndex;
+    NSInteger Index = seg.selectedSegmentIndex;
     
     switch (Index) {
             
