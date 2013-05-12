@@ -30,7 +30,8 @@
 		F623AC401728FBB40060DD4E /* MR_PathNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F623AC3F1728FBB40060DD4E /* MR_PathNodeView.m */; };
 		F623AC51172906740060DD4E /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = F623AC50172906740060DD4E /* NIDropDown.m */; };
 		F62862AF173F66180090C00D /* MR_ChapterScoreCtro.m in Sources */ = {isa = PBXBuildFile; fileRef = F62862AE173F66170090C00D /* MR_ChapterScoreCtro.m */; };
-		F62862B2173F68160090C00D /* MR_ChapterHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62862B1173F68160090C00D /* MR_ChapterHeadView.m */; };
+		F62862B8173F84310090C00D /* MR_ChapterHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62862B7173F84300090C00D /* MR_ChapterHeadView.m */; };
+		F62862BB173F84600090C00D /* MR_ChapterSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62862BA173F84600090C00D /* MR_ChapterSearchView.m */; };
 		F62BF839172E2FC400054E55 /* MR_ClauseHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF830172E2FC400054E55 /* MR_ClauseHeadView.m */; };
 		F62BF83A172E2FC400054E55 /* MR_ClauseNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF832172E2FC400054E55 /* MR_ClauseNodeView.m */; };
 		F62BF83B172E2FC400054E55 /* MR_ClauseView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF834172E2FC400054E55 /* MR_ClauseView.m */; };
@@ -131,8 +132,10 @@
 		F623AC50172906740060DD4E /* NIDropDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIDropDown.m; sourceTree = "<group>"; };
 		F62862AD173F66170090C00D /* MR_ChapterScoreCtro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ChapterScoreCtro.h; sourceTree = "<group>"; };
 		F62862AE173F66170090C00D /* MR_ChapterScoreCtro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ChapterScoreCtro.m; sourceTree = "<group>"; };
-		F62862B0173F68160090C00D /* MR_ChapterHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ChapterHeadView.h; sourceTree = "<group>"; };
-		F62862B1173F68160090C00D /* MR_ChapterHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ChapterHeadView.m; sourceTree = "<group>"; };
+		F62862B6173F842F0090C00D /* MR_ChapterHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ChapterHeadView.h; sourceTree = "<group>"; };
+		F62862B7173F84300090C00D /* MR_ChapterHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ChapterHeadView.m; sourceTree = "<group>"; };
+		F62862B9173F845F0090C00D /* MR_ChapterSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ChapterSearchView.h; sourceTree = "<group>"; };
+		F62862BA173F84600090C00D /* MR_ChapterSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ChapterSearchView.m; sourceTree = "<group>"; };
 		F62BF82F172E2FC400054E55 /* MR_ClauseHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ClauseHeadView.h; sourceTree = "<group>"; };
 		F62BF830172E2FC400054E55 /* MR_ClauseHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ClauseHeadView.m; sourceTree = "<group>"; };
 		F62BF831172E2FC400054E55 /* MR_ClauseNodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ClauseNodeView.h; sourceTree = "<group>"; };
@@ -529,8 +532,10 @@
 				3E8BDB53172EDBB900218B91 /* MR_PathCell.m */,
 				F62862AD173F66170090C00D /* MR_ChapterScoreCtro.h */,
 				F62862AE173F66170090C00D /* MR_ChapterScoreCtro.m */,
-				F62862B0173F68160090C00D /* MR_ChapterHeadView.h */,
-				F62862B1173F68160090C00D /* MR_ChapterHeadView.m */,
+				F62862B6173F842F0090C00D /* MR_ChapterHeadView.h */,
+				F62862B7173F84300090C00D /* MR_ChapterHeadView.m */,
+				F62862B9173F845F0090C00D /* MR_ChapterSearchView.h */,
+				F62862BA173F84600090C00D /* MR_ChapterSearchView.m */,
 			);
 			path = Score;
 			sourceTree = "<group>";
@@ -785,7 +790,8 @@
 				F64F326B173E0E4B00AF7A15 /* MR_ClauseTopView.m in Sources */,
 				F64F327B173E47C100AF7A15 /* MR_PopSelectListView.m in Sources */,
 				F62862AF173F66180090C00D /* MR_ChapterScoreCtro.m in Sources */,
-				F62862B2173F68160090C00D /* MR_ChapterHeadView.m in Sources */,
+				F62862B8173F84310090C00D /* MR_ChapterHeadView.m in Sources */,
+				F62862BB173F84600090C00D /* MR_ChapterSearchView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

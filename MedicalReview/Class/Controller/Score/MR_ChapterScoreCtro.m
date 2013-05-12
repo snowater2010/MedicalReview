@@ -11,6 +11,7 @@
 #import "MR_MainPageView.h"
 #import "MR_ClauseTable.h"
 #import "MR_CollapseClauseView.h"
+#import "MR_ChapterSearchView.h"
 #import "FileHelper.h"
 
 @interface MR_ChapterScoreCtro ()
@@ -130,11 +131,8 @@
     float top_w = main_w;
     float top_h = main_h * 0.1;
     CGRect topFrame = CGRectMake(top_x, top_y, top_w, top_h);
-//    MR_ClauseTopView *topView = [[MR_ClauseTopView alloc] initWithFrame:topFrame];
-//    topView.backgroundColor = [UIColor lightGrayColor];
-//    self.topPageView = topView;
-//    [topView release];
-//    [mainPageView addSubview:_topPageView];
+    MR_ChapterSearchView *topView = [[MR_ChapterSearchView alloc] initWithFrame:topFrame];
+    [mainPageView addSubview:topView];
     
     //clause table
     NSDictionary *dic1 = [NSDictionary dictionaryWithObjectsAndKeys:
