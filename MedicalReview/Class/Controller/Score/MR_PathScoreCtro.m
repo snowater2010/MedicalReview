@@ -24,7 +24,6 @@
 
 @property(nonatomic, retain) NSArray *jsonData;
 @property(nonatomic, retain) NSArray *pathData;
-@property(nonatomic, retain) NSDictionary *updateScoreData;
 
 @property(nonatomic, retain) MR_PathNodeView *pathNodeView;
 @property(nonatomic, retain) MR_CollapseClauseView *clauseView;
@@ -84,7 +83,6 @@
     self.jsonData = nil;
     self.scoreData = nil;
     self.pathData = nil;
-    self.updateScoreData = nil;
     
     self.leftPageView = nil;
     self.mainPageView = nil;
@@ -295,95 +293,10 @@
 
 #pragma mark -
 #pragma mark ClauseScoredDelegate
-- (void)clauseScored:(NSDictionary *)updateScoreData
+- (void)clauseScored:(NSString *)scoredClauseId
 {
-    self.updateScoreData = updateScoreData;
-    [self doReaquestUpdateScoreData];
-}
-
-#pragma mark -
-#pragma mark -- request to update data
-
-- (void)doReaquestUpdateScoreData
-{
-    //异步请求服务器更新数据
-    _GET_APP_DELEGATE_(appDelegate);
-    NSString *serverUrl = appDelegate.globalinfo.serverInfo.strWebServiceUrl;
-    
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:serverUrl]];
-    
-    [request setPostValue:@"updateScore" forKey:@"module"];
-    [request setDefaultPostValue];
-    
-    if (_updateScoreData) {
-        NSString *strscoreCache = [_updateScoreData JSONString];
-        if (strscoreCache)
-            [request appendPostData:[strscoreCache dataUsingEncoding:NSNonLossyASCIIStringEncoding]];
-    }
-    
-    request.delegate = self;
-    [request startAsynchronous];
-}
-
--(void)requestFinished:(ASIHTTPRequest *)request
-{
-    request.responseEncoding = NSUTF8StringEncoding;
-    NSString *responseData = [request responseString];
-    
-    BOOL ok = YES;
-    NSDictionary* retDic = nil;
-    
-    if ([Common isEmptyString:responseData]) {
-        ok = NO;
-    }
-    else {
-        retDic = [responseData objectFromJSONString];
-        if (retDic) {
-            NSString *errCode = [retDic objectForKey:KEY_errCode];
-            if (![errCode isEqualToString:@"0"]) {
-                ok = NO;
-            }
-        }
-        else {
-            ok = NO;
-        }
-    }
-    
-    if (ok) {
-        [self doRequestUpdateSucess];
-    }
-    else {
-        [self doRequestUpdateFailed];
-    }
-}
-
-- (void)requestFailed:(ASIHTTPRequest *)request
-{
-    [self doRequestUpdateFailed];
-}
-
-- (void)doRequestUpdateSucess
-{
-    //更新打分缓存
-    [FileHelper asyWriteScoreDataToCache:_updateScoreData];
-    [self updatePathInfo];
-}
-
-- (void)doRequestUpdateFailed
-{
-    //更新“打分更新”缓存
-    [FileHelper asyWriteScoreUpdateDataToCache:_updateScoreData];
-    [self updatePathInfo];
-}
-
-- (void)updatePathInfo
-{
-    //更新左侧路径完成数
-    NSArray * allkeys = [_updateScoreData allKeys];
-    if (allkeys && allkeys.count > 0) {
-        NSString *scoredClauseId = [allkeys objectAtIndex:0];
+    if (scoredClauseId)
         [_pathNodeView updateFinishCount:scoredClauseId];
-    }
 }
 
 @end

@@ -11,6 +11,8 @@
 
 @interface MR_ClauseView ()
 
+@property(nonatomic, retain) NSDictionary *updateScoreData;
+
 @end
 
 @implementation MR_ClauseView
@@ -95,6 +97,7 @@
 {
     self.jsonData = nil;
     self.scoreData = nil;
+    self.updateScoreData = nil;
     self.headView = nil;
     [super dealloc];
 }
@@ -146,12 +149,9 @@
 
 - (void)clauseHeadScored:(NSString *)score
 {
-    NSDictionary *updateScoreDate = [[self getUpdateScoreData] retain];
-    
-    if (updateScoreDate && [_scoredDelegate respondsToSelector:@selector(clauseScored:)])
-        [_scoredDelegate performSelector:@selector(clauseScored:) withObject:updateScoreDate];
-    
-    [updateScoreDate release];
+    self.updateScoreData = [self getUpdateScoreData];
+    if (_updateScoreData)
+        [self doReaquestUpdateScoreData];
 }
 
 #pragma mark -- ClauseNodeDelegate
@@ -159,6 +159,93 @@
 - (void)clauseNodeScored:(NSString *)score
 {
     _LOG_FORMAT_(@"Node Scored___%@", score);
+}
+
+#pragma mark -
+#pragma mark -- request to update data
+
+- (void)doReaquestUpdateScoreData
+{
+    //异步请求服务器更新数据
+    _GET_APP_DELEGATE_(appDelegate);
+    NSString *serverUrl = appDelegate.globalinfo.serverInfo.strWebServiceUrl;
+    
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:serverUrl]];
+    
+    [request setPostValue:@"updateScore" forKey:@"module"];
+    [request setDefaultPostValue];
+    
+    if (_updateScoreData) {
+        NSString *strscoreCache = [_updateScoreData JSONString];
+        if (strscoreCache)
+            [request appendPostData:[strscoreCache dataUsingEncoding:NSNonLossyASCIIStringEncoding]];
+    }
+    
+    request.delegate = self;
+    [request startAsynchronous];
+}
+
+-(void)requestFinished:(ASIHTTPRequest *)request
+{
+    request.responseEncoding = NSUTF8StringEncoding;
+    NSString *responseData = [request responseString];
+    
+    BOOL ok = YES;
+    NSDictionary* retDic = nil;
+    
+    if ([Common isEmptyString:responseData]) {
+        ok = NO;
+    }
+    else {
+        retDic = [responseData objectFromJSONString];
+        if (retDic) {
+            NSString *errCode = [retDic objectForKey:KEY_errCode];
+            if (![errCode isEqualToString:@"0"]) {
+                ok = NO;
+            }
+        }
+        else {
+            ok = NO;
+        }
+    }
+    
+    if (ok) {
+        [self doRequestUpdateSucess];
+    }
+    else {
+        [self doRequestUpdateFailed];
+    }
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    [self doRequestUpdateFailed];
+}
+
+- (void)doRequestUpdateSucess
+{
+    //更新打分缓存
+    [FileHelper asyWriteScoreDataToCache:_updateScoreData];
+    
+    //通知打分完成
+    if ([_scoredDelegate respondsToSelector:@selector(clauseScored:)])
+    {
+        NSString *clauseId = [_jsonData objectForKey:KEY_clauseId];
+        [_scoredDelegate performSelector:@selector(clauseScored:) withObject:clauseId];
+    }
+}
+
+- (void)doRequestUpdateFailed
+{
+    //更新“打分更新”缓存
+    [FileHelper asyWriteScoreUpdateDataToCache:_updateScoreData];
+
+    //通知打分完成
+    if ([_scoredDelegate respondsToSelector:@selector(clauseScored:)])
+    {
+        NSString *clauseId = [_jsonData objectForKey:KEY_clauseId];
+        [_scoredDelegate performSelector:@selector(clauseScored:) withObject:clauseId];
+    }
 }
 
 @end

@@ -24,7 +24,7 @@ enum CLAUSE_HEAD_STATE {
 @protocol ClauseScoredDelegate <NSObject>
 
 @optional
-- (void)clauseScored:(NSDictionary *)updateScoreData;
+- (void)clauseScored:(NSString *)scoredClauseId;
 
 @end
 
