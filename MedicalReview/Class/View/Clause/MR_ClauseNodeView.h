@@ -9,10 +9,12 @@
 #import "MR_RootView.h"
 #import "MR_OperateView.h"
 
+#define NO_SELECT_VALUE UISegmentedControlNoSegment
+
 @protocol ClauseNodeDelegate <NSObject>
 
 @optional
-- (void)clauseNodeScored:(NSString *)score;
+- (void)clauseNodeScored:(id)sender;
 
 @end
 
@@ -20,8 +22,12 @@
 
 @property(nonatomic, retain) NSDictionary *jsonData;
 @property(nonatomic, retain) NSDictionary *scoreData;
+@property(nonatomic, retain) NSArray *scoreArray;
 @property(nonatomic, assign) id<ClauseNodeDelegate> delegate;
 
 - (NSDictionary *)getNodeScore;
+- (int)getNodeSelectIndex;
+- (void)changeNodeScore:(int)index;
+- (NSString *)getNodeAttrId;
 
 @end

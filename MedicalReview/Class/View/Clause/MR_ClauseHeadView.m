@@ -86,8 +86,6 @@
     selfView.backgroundColor = [UIColor lightGrayColor];
     
     //score
-    NSArray *scoreArray = [NSArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", nil];
-    
     float score_x = self_x + self_w;
     float score_y = 0;
     float score_w = rect.size.width * 0.18;
@@ -95,13 +93,13 @@
     
     MR_PopSelectListView *scoreView = [[MR_PopSelectListView alloc] initWithFrame:CGRectMake(score_x, score_y, score_w, score_h)];
     scoreView.delegate = self;
-    scoreView.scoreArray = scoreArray;
+    scoreView.scoreArray = _scoreArray;
     scoreView.backgroundColor = [UIColor redColor];
     //init data
     if (![Common isEmptyString:scoreValue])
     {
-        for (int i = 0, j = scoreArray.count; i < j; i++) {
-            NSString *score = [scoreArray objectAtIndex:i];
+        for (int i = 0, j = _scoreArray.count; i < j; i++) {
+            NSString *score = [_scoreArray objectAtIndex:i];
             if ([scoreValue isEqualToString:score]) {
                 [scoreView selectAtIndex:i];
                 break;
@@ -151,6 +149,7 @@
 {
     self.jsonData = nil;
     self.scoreData = nil;
+    self.scoreArray = nil;
     self.arrowView = nil;
     self.scoreView = nil;
     [super dealloc];
@@ -164,22 +163,22 @@
 
 - (void)showHeadState
 {
-    switch (_headState) {
-        case CLAUSE_HEAD_STATE_OPEN:
-        {
-            CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI/2);
-            _arrowView.transform = transform;
-            break;
-        }
-        case CLAUSE_HEAD_STATE_CLOSE:
-        {
-            CGAffineTransform transform = CGAffineTransformMakeRotation(0);
-            _arrowView.transform = transform;
-            break;
-        }
-        default:
-            break;
-    }
+//    switch (_headState) {
+//        case CLAUSE_HEAD_STATE_OPEN:
+//        {
+//            CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI/2);
+//            _arrowView.transform = transform;
+//            break;
+//        }
+//        case CLAUSE_HEAD_STATE_CLOSE:
+//        {
+//            CGAffineTransform transform = CGAffineTransformMakeRotation(0);
+//            _arrowView.transform = transform;
+//            break;
+//        }
+//        default:
+//            break;
+//    }
 }
 
 #pragma mark -
@@ -199,6 +198,11 @@
     return scoreDic;
 }
 
+- (void)changeNodeScore:(int)index
+{
+    [_scoreView selectAtIndex:index];
+}
+
 #pragma mark -
 #pragma mark --- MR_PopSelectListDelegate
 - (void)selectedAtIndexPath:(NSIndexPath *)indexPath
@@ -206,8 +210,7 @@
     if ([_scoreView getSelectedIndex] == NO_SELECT_INDEX)
         return;
     
-    if(_delegate && [_delegate respondsToSelector:@selector(clauseHeadScored:)])
-        [_delegate performSelector:@selector(clauseHeadScored:)];
+    [Common callDelegate:_delegate method:@selector(clauseHeadScored:) withObject:[NSNumber numberWithInt:indexPath.row]];
 }
 
 @end

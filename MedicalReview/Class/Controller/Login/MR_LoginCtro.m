@@ -21,7 +21,6 @@
 @property(nonatomic, retain) NSString *loginName;
 @property(nonatomic, retain) NSString *loginPassWord;
 @property(nonatomic, assign) BOOL isRememberPw;
-@property(nonatomic, retain) MBProgressHUD *hud;
 
 @end
 
@@ -64,13 +63,6 @@
     //键盘监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:)name:UIKeyboardWillHideNotification object:nil];
-    
-    //progress hud
-    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
-    hud.dimBackground = YES;
-    self.hud = hud;
-    [hud release];
-    [self.view addSubview:_hud];
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,7 +78,6 @@
     
     self.loginName = nil;
     self.loginPassWord = nil;
-    self.hud = nil;
     [super dealloc];
 }
 
@@ -114,9 +105,9 @@
         return;
     }
     
-//    [self doRequestLogin];
-    
-    [self visitMainPage];
+    [self doRequestLogin];
+//    
+//    [self visitMainPage];
 }
 
 - (void)nameChanged
@@ -149,8 +140,7 @@
 //登陆请求
 - (void)doRequestLogin
 {
-    _hud.labelText = _GET_LOCALIZED_STRING_(@"request_msg_wait_login");
-    [_hud show:YES];
+    [self.view showLoadingWithText:_GET_LOCALIZED_STRING_(@"request_msg_wait_login")];
     
     _GET_APP_DELEGATE_(appDelegate);
     NSString *serverUrl = appDelegate.globalinfo.serverInfo.strWebServiceUrl;
@@ -170,6 +160,8 @@
 //上传本地数据，获得服务器最新数据
 - (void)doRequestData
 {
+    [self.view showLoadingWithText:_GET_LOCALIZED_STRING_(@"request_msg_wait_loaddata")];
+    
     _GET_APP_DELEGATE_(appDelegate);
     NSString *serverUrl = appDelegate.globalinfo.serverInfo.strWebServiceUrl;
     
@@ -191,13 +183,13 @@
         [self.request appendPostData:[strscoreUpdateCache dataUsingEncoding:NSNonLossyASCIIStringEncoding]];
     }
     
-    self.request.timeOutSeconds = 30;
+    self.request.timeOutSeconds = 3000;
     self.request.delegate = self;
     [self.request startAsynchronous];
 }
 
 //处理所有请求的结果
-- (void)requestResult:(NSDictionary *)dataDic tag:(int)tag
+- (void)responseSuccess:(NSDictionary *)dataDic tag:(int)tag
 {
     if (tag == TAG_REQUEST_LOGIN) {
         //登陆
@@ -206,42 +198,55 @@
         [self initUserInfo:dataDic];
         
         //request data
-        _hud.labelText = _GET_LOCALIZED_STRING_(@"request_msg_wait_loaddata");
-//        [self doRequestData];
-        NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
-        [self requestResult:allData tag:TAG_REQUEST_DATA];
+        [self doRequestData];
+        
+//        //demo
+//        if ([FileHelper ifHaveClauseCache]) {
+//            [self visitMainPage];
+//        } else {
+//            [self doRequestData];
+//        }
     }
     else if (tag == TAG_REQUEST_DATA) {
         //获取数据
+        if (dataDic) {
+            //clause cache，1 or 0
+            NSArray *allClause = [dataDic objectForKey:KEY_allClause];
+            NSArray *pathFormat = [dataDic objectForKey:KEY_pathFormat];
+            NSArray *chaptersFormat = [dataDic objectForKey:KEY_chaptersFormat];
+            //条款
+            if (allClause) {
+                BOOL result = [FileHelper writeClauseDataToCache:allClause];
+                if (!result)
+                    _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_clause_cache_update_error"));
+            }
+            //路径
+            if (pathFormat) {
+                BOOL result = [FileHelper writeData:pathFormat toCacheFile:CACHE_PATH];
+                if (!result)
+                    _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_path_cache_update_error"));
+            }
+            //章节
+            if (chaptersFormat) {
+                BOOL result = [FileHelper writeData:chaptersFormat toCacheFile:CACHE_CHAPTER];
+                if (!result)
+                    _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_chapter_cache_update_error"));
+            }
+        }
         
-        //clause cache，1 or 0
-        NSArray *allClause = [dataDic objectForKey:KEY_allClause];
-        NSArray *pathFormat = [dataDic objectForKey:KEY_pathFormat];
-        NSArray *chaptersFormat = [dataDic objectForKey:KEY_chaptersFormat];
-        //条款
-        if (allClause) {
-            BOOL result = [FileHelper writeClauseDataToCache:allClause];
-            if (!result)
-                _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_clause_cache_update_error"));
-        }
-        //路径
-        if (pathFormat) {
-            BOOL result = [FileHelper writeData:pathFormat toCacheFile:CACHE_PATH];
-            if (!result)
-                _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_path_cache_update_error"));
-        }
-        //章节
-        if (chaptersFormat) {
-            BOOL result = [FileHelper writeData:chaptersFormat toCacheFile:CACHE_CHAPTER];
-            if (!result)
-                _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_chapter_cache_update_error"));
-        }
+        //同步成功后，清除本地更新缓存
+//        [FileHelper removeScoreUpdateCacheFile];
         
-        [_hud hide:YES];
+        [self.view hideLoading];
         
         //进入主页
         [self visitMainPage];
     }
+}
+//处理失败请求的结果
+- (void)responseFailed:(int)tag
+{
+    [self.view hideLoading];
 }
 
 #pragma mark -

@@ -20,4 +20,5 @@
     #import "Common.h"
     #import "MyLog.h"
     #import "NSString+Helper.h"
+    #import "UIView+Helper.h"
 #endif

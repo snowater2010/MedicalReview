@@ -12,7 +12,6 @@
 #import "MR_ChapterScoreCtro.h"
 
 @interface MR_MainCtro ()
-
 @end
 
 @implementation MR_MainCtro
@@ -36,13 +35,7 @@
 {
     [super viewDidLoad];
     
-//    NSString *fileName = @"json_clause.txt";
-//    NSString *filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
-//    NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
-//    NSDictionary *jsonDic = [jsonData objectFromJSONData];
-//    NSString *pathName = [jsonDic objectForKey:KEY_pathName];
-    
-    [self visitFunction:1];
+    [self visitFunction:0];
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,7 +64,7 @@
     float top_h = rootFrame.size.height*0.1;
     CGRect topFrame = CGRectMake(top_x, top_y, top_w, top_h);
     MR_TopPageView *topPageView = [[MR_TopPageView alloc] initWithFrame:topFrame];
-    topPageView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"top_bg.gif"]];
+//    topPageView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"top_bg.gif"]];
     [self.view addSubview:topPageView];
     [topPageView release];
     
@@ -133,14 +126,14 @@
     switch (index) {
         case 0:
         {
-            UIViewController *controller = [[MR_PathScoreCtro alloc] initWithFrame:mainFrame];
+            MR_PathScoreCtro *controller = [[MR_PathScoreCtro alloc] initWithFrame:mainFrame];
             self.mainController = controller;
             [controller release];
             break;
         }
         case 1:
         {
-            UIViewController *controller = [[MR_ChapterScoreCtro alloc] initWithFrame:mainFrame];
+            MR_ChapterScoreCtro *controller = [[MR_ChapterScoreCtro alloc] initWithFrame:mainFrame];
             self.mainController = controller;
             [controller release];
             break;

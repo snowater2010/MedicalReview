@@ -61,16 +61,11 @@
 
 + (id)readClauseDataFromCache
 {
-    NSDictionary *result = nil;
-    
+    NSArray *result = nil;
     if ([self ifHaveClauseCache]) {
         NSString *cachePath = [FileHelper getClauseCacheFilePath];
-        NSDictionary *jsonDic = [NSDictionary dictionaryWithContentsOfFile:cachePath];
-        
-        result = [[[NSDictionary alloc] initWithDictionary:jsonDic] autorelease];
-        _LOG_(@"读取条款缓存成功！");
+        result = [[[NSArray alloc] initWithContentsOfFile:cachePath] autorelease];
     }
-    
     return result;
 }
 
@@ -130,6 +125,15 @@
     NSString *scorePath = [userPath stringByAppendingPathComponent:CACHE_SCORE_UPDATE];
     NSString *result = [[[NSString alloc] initWithString:scorePath] autorelease];
     return result;
+}
+
+//删除用户的打分缓存路径(本地更新)
++ (void)removeScoreUpdateCacheFile
+{
+    if ([FileHelper ifHaveScoreUpdateCache]) {
+        NSString *path = [FileHelper getScoreUpdateCacheFilePath];
+        [FileHelper removeFileAtPath:path];
+    }
 }
 
 + (BOOL)ifHaveScoreCache
@@ -315,15 +319,11 @@
 
 + (id)readDataFromCache:(NSString *)fileName
 {
-    NSDictionary *result = nil;
-    
+    NSArray *result = nil;
     if ([self ifHaveCacheFile:fileName]) {
         NSString *cachePath = [FileHelper getCacheFilePath:fileName];
-        NSDictionary *jsonDic = [NSDictionary dictionaryWithContentsOfFile:cachePath];
-        
-        result = [[[NSDictionary alloc] initWithDictionary:jsonDic] autorelease];
+        result = [[[NSArray alloc] initWithContentsOfFile:cachePath] autorelease];
     }
-    
     return result;
 }
 

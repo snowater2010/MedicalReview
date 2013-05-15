@@ -56,7 +56,8 @@
     //第一次取第一条数据
     NSDictionary *sectionDic = [_sectionData objectAtIndex:0];
     NSArray *nodeData = [sectionDic objectForKey:KEY_clauseList];
-    _clauseView.jsonData = [self getClauseFrom:_clauseData byNode:nodeData];
+    _clauseView.nodeData = nodeData;
+    _clauseView.clauseData = [self getClauseFrom:_clauseData byNode:nodeData];
     _clauseView.scoreData = _scoreData;
 }
 
@@ -208,8 +209,8 @@
 - (NSDictionary *)getInitScoreData
 {
     //score
-    NSDictionary *scoreCache = [FileHelper readDataFromCache:CACHE_SCORE];
-    NSDictionary *updateScoreCache = [FileHelper readDataFromCache:CACHE_SCORE_UPDATE];
+    NSDictionary *scoreCache = [FileHelper readScoreDataFromCache];
+    NSDictionary *updateScoreCache = [FileHelper readScoreUpdateDataFromCache];
     if (scoreCache || updateScoreCache) {
         NSMutableDictionary *allScore = [[[NSMutableDictionary alloc] initWithCapacity:0] autorelease];
         if (scoreCache)
@@ -246,6 +247,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
+        cell.textLabel.backgroundColor = [UIColor clearColor];
         cell.textLabel.font = [UIFont systemFontOfSize:15];
         cell.textLabel.numberOfLines = 0;
     }
@@ -263,7 +265,7 @@
     int row = indexPath.row;
     NSDictionary *sectionDic = [_sectionData objectAtIndex:row];
     NSArray *nodeData = [sectionDic objectForKey:KEY_clauseList];
-    _clauseView.jsonData = [self getClauseFrom:_clauseData byNode:nodeData];
+    _clauseView.clauseData = [self getClauseFrom:_clauseData byNode:nodeData];
     [_clauseView setNeedsDisplay];
 }
 
@@ -280,7 +282,7 @@
     
     NSDictionary *sectionDic = [_sectionData objectAtIndex:0];
     NSArray *nodeData = [sectionDic objectForKey:KEY_clauseList];
-    _clauseView.jsonData = [self getClauseFrom:_clauseData byNode:nodeData];
+    _clauseView.clauseData = [self getClauseFrom:_clauseData byNode:nodeData];
     [_clauseView setNeedsDisplay];
 }
 

@@ -15,6 +15,7 @@
 #import "MR_PathCell.h"
 #import "FileHelper.h"
 #import "MR_ClauseTopView.h"
+#import "MR_TableClauseView.h"
 
 @interface MR_PathScoreCtro ()
 {
@@ -27,6 +28,7 @@
 
 @property(nonatomic, retain) MR_PathNodeView *pathNodeView;
 @property(nonatomic, retain) MR_CollapseClauseView *clauseView;
+@property(nonatomic, retain) MR_TableClauseView *clauseTableView;
 
 @property(nonatomic, retain) MR_LeftPageView *leftPageView;
 @property(nonatomic, retain) MR_ClauseTopView *topPageView;
@@ -66,8 +68,15 @@
     NSDictionary *pathDic = [_pathData objectAtIndex:0];
     NSArray *nodeList = [pathDic objectForKey:KEY_nodeList];
     NSArray *nodeData = [[nodeList objectAtIndex:0] objectForKey:KEY_clauseList];
-    _clauseView.jsonData = [self getClauseFrom:_jsonData byNode:nodeData];
+    _clauseView.nodeData = nodeData;
+    _clauseView.clauseData = [self getClauseFrom:_jsonData byNode:nodeData];
     _clauseView.scoreData = _scoreData;
+    
+    
+    _clauseTableView.nodeData = nodeData;
+    _clauseTableView.clauseData = [self getClauseFrom:_jsonData byNode:nodeData];
+    _clauseTableView.scoreData = _scoreData;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -87,6 +96,7 @@
     self.leftPageView = nil;
     self.mainPageView = nil;
     self.topPageView = nil;
+    self.clauseTableView = nil;
     [super dealloc];
 }
 
@@ -171,16 +181,23 @@
     float clause_w = mainFrame.size.width;
     float clause_h = mainFrame.size.height - head_h - top_h;
     CGRect clauseFrame = CGRectMake(clause_x, clause_y, clause_w, clause_h);
+    
+    MR_TableClauseView *clauseTableView = [[MR_TableClauseView alloc] initWithFrame:clauseFrame];
+    self.clauseTableView = clauseTableView;
+    [clauseTableView release];
+    [mainPageView addSubview:_clauseTableView];
+    
+    
     MR_CollapseClauseView *clauseView = [[MR_CollapseClauseView alloc] initWithFrame:clauseFrame];
     clauseView.scoredDelegate = self;
     self.clauseView = clauseView;
-    [mainPageView addSubview:clauseView];
+//    [mainPageView addSubview:clauseView];
     [clauseView release];
     
     //menu control
     CGRect menuBtFrame = CGRectMake(head_x, head_y, head_h, head_h);
     UIButton *menuBt = [[UIButton alloc] initWithFrame:menuBtFrame];
-    menuBt.backgroundColor = [UIColor redColor];
+    [menuBt setBackgroundImage:[UIImage imageNamed:@"ButtonMenu@2x.png"] forState:UIControlStateNormal];
     [menuBt addTarget:self action:@selector(leftHider) forControlEvents:UIControlEventTouchUpInside];
     [mainPageView addSubview:menuBt];
     [menuBt release];
@@ -217,8 +234,8 @@
 - (NSDictionary *)getInitScoreData
 {
     //score
-    NSDictionary *scoreCache = [FileHelper readDataFromCache:CACHE_SCORE];
-    NSDictionary *updateScoreCache = [FileHelper readDataFromCache:CACHE_SCORE_UPDATE];
+    NSDictionary *scoreCache = [FileHelper readScoreDataFromCache];
+    NSDictionary *updateScoreCache = [FileHelper readScoreUpdateDataFromCache];
     if (scoreCache || updateScoreCache) {
         NSMutableDictionary *allScore = [[[NSMutableDictionary alloc] initWithCapacity:0] autorelease];
         if (scoreCache)
@@ -285,9 +302,16 @@
 - (void)nodeSelected:(NSArray *)nodeData;
 {
     if (nodeData) {
-        _clauseView.jsonData = [self getClauseFrom:_jsonData byNode:nodeData];
+        _clauseView.nodeData = nodeData;
+        _clauseView.clauseData = [self getClauseFrom:_jsonData byNode:nodeData];
         _clauseView.scoreData = [self getInitScoreData];
         [_clauseView setNeedsDisplay];
+        
+        
+        _clauseTableView.nodeData = nodeData;
+        _clauseTableView.clauseData = [self getClauseFrom:_jsonData byNode:nodeData];
+        _clauseTableView.scoreData = [self getInitScoreData];
+        [_clauseTableView reloadData];
     }
 }
 

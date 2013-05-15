@@ -22,8 +22,9 @@
 
 - (void)dealloc
 {
-    self.jsonData = nil;
+    self.clauseData = nil;
     self.scoreData = nil;
+    self.nodeData = nil;
     [super dealloc];
 }
 
@@ -39,11 +40,12 @@
     }
     
     // Add cells
-    for (int i = 0; i < _jsonData.count; i++) {
+    for (int i = 0; i < _nodeData.count; i++) {
         
-        NSDictionary *clauseDic = [_jsonData objectAtIndex:i];
+        NSDictionary *clauseDic = [_clauseData objectAtIndex:i];
+        NSDictionary *nodeDic = [_nodeData objectAtIndex:i];
         
-        NSString *clauseId = [clauseDic objectForKey:KEY_clauseId];
+        NSString *clauseId = [nodeDic objectForKey:KEY_clauseId];
         NSDictionary *scoreDic = [_scoreData objectForKey:clauseId];
         
         CGRect cellFrame = CGRectMake(0,
@@ -55,8 +57,9 @@
         clauseView.tag = i;
         clauseView.delegate = self;
         clauseView.scoredDelegate = _scoredDelegate;
-        clauseView.jsonData = clauseDic;
+        clauseView.clauseData = clauseDic;
         clauseView.scoreData = scoreDic;
+        clauseView.nodeData = nodeDic;
         
         // Add cell
         [self addSubview:clauseView];
@@ -136,7 +139,7 @@
 #pragma mark - Reposition Cells
 -(void)repositionCollapseClickCellsBelowIndex:(int)index withOffset:(float)offset {
     
-    for (int yy = index+1; yy < _jsonData.count; yy++) {
+    for (int yy = index+1; yy < _clauseData.count; yy++) {
         MR_ClauseView *clauseView = (MR_ClauseView *)[self viewWithTag:yy];
         CGRect frame = clauseView.frame;
         frame.origin.y = frame.origin.y + offset;

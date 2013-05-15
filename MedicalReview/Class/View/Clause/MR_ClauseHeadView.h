@@ -27,11 +27,12 @@
 
 @property(nonatomic, retain) NSDictionary *jsonData;
 @property(nonatomic, retain) NSDictionary *scoreData;
+@property(nonatomic, retain) NSArray *scoreArray;
 
 @property(nonatomic, assign) id<ClauseHeadDelegate> delegate;
-@property(nonatomic, assign) enum CLAUSE_HEAD_STATE headState;
 
 - (void)showHeadState;
 - (NSDictionary *)getHeadScore;
+- (void)changeNodeScore:(int)index;
 
 @end

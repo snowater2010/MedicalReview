@@ -41,6 +41,9 @@
 //将条款数据写入缓存
 + (BOOL)writeClauseDataToCache:(id)dataDic;
 
+//删除用户的打分缓存路径(本地更新
++ (void)removeScoreUpdateCacheFile;
+
 + (NSDictionary *)readScoreDataFromCache;
 
 //更新打分数据缓存

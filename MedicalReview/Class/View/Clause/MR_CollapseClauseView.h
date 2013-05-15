@@ -12,8 +12,9 @@
 
 @interface MR_CollapseClauseView : UIScrollView <UIScrollViewDelegate, ClauseHeadDelegate>
 
-@property(nonatomic, retain) NSArray *jsonData;
+@property(nonatomic, retain) NSArray *clauseData;
 @property(nonatomic, retain) NSDictionary *scoreData;
+@property(nonatomic, retain) NSArray *nodeData;
 @property(nonatomic, assign) id<ClauseScoredDelegate> scoredDelegate;
 
 @end

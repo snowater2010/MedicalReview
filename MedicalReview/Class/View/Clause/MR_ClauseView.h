@@ -30,8 +30,9 @@ enum CLAUSE_HEAD_STATE {
 
 @interface MR_ClauseView : MR_RootView <ASIHTTPRequestDelegate, ClauseHeadDelegate, ClauseNodeDelegate>
 
-@property(nonatomic, retain) NSDictionary *jsonData;
+@property(nonatomic, retain) NSDictionary *clauseData;
 @property(nonatomic, retain) NSDictionary *scoreData;
+@property(nonatomic, retain) NSDictionary *nodeData;
 @property(nonatomic, assign) float cellHeight;
 @property(nonatomic, retain) id<ClauseHeadDelegate> delegate;
 @property(nonatomic, retain) MR_ClauseHeadView *headView;

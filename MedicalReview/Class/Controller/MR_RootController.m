@@ -110,29 +110,20 @@
     
     BOOL ok = YES;
     NSString *message = nil;
-    NSDictionary* retDic = nil;
-    
-    if ([Common isEmptyString:responseData]) {
-        ok = NO;
-    }
-    else {
-        retDic = [responseData objectFromJSONString];
-        if (retDic) {
-            NSString *errCode = [retDic objectForKey:KEY_errCode];
-            if (![errCode isEqualToString:@"0"]) {
-                ok = NO;
-                message = [retDic objectForKey:KEY_errMsg];
-            }
-        }
-        else {
+    NSDictionary* retDic = [responseData objectFromJSONString];
+    if (retDic) {
+        NSString *errCode = [retDic objectForKey:KEY_errCode];
+        if (![errCode isEqualToString:@"0"]) {
             ok = NO;
+            message = [retDic objectForKey:KEY_errMsg];
         }
     }
     
     if (ok) {
-        [self requestResult:retDic tag:request.tag];
+        [self responseSuccess:retDic tag:request.tag];
     }
     else {
+        [self responseFailed:request.tag];
         if (message) {
             _ALERT_SIMPLE_(message);
         }
@@ -142,15 +133,19 @@
     }
 }
 
-- (void)requestResult:(NSDictionary *)dataDic tag:(int)tag
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+//    NSError *error = [request error];
+    [self responseFailed:request.tag];
+    _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"request_error"));
+}
+
+- (void)responseSuccess:(NSDictionary *)dataDic tag:(int)tag
 {
 }
 
-- (void)requestFailed:(ASIHTTPRequest *)request
+- (void)responseFailed:(int)tag
 {
-    NSError *error = [request error];
-    _LOG_(error);
-    _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"request_error"));
 }
 
 ////键盘事件
@@ -194,6 +189,7 @@
             NSString *clauseId = [clauseDic objectForKey:KEY_clauseId];
             if ([nodeId isEqualToString:clauseId]) {
                 [clauseArr addObject:clauseDic];
+                continue;
             }
         }
     }

@@ -22,7 +22,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
+//        self.backgroundColor = [UIColor blueColor];
     }
     return self;
 }
@@ -44,6 +44,7 @@
     nameLabel.numberOfLines = 0;
     nameLabel.text = name;
     nameLabel.font = [UIFont systemFontOfSize:NAME_TEXT_SIZE];
+    nameLabel.backgroundColor = [UIColor clearColor];
     
     //----------------------
     //self score
@@ -56,7 +57,7 @@
     selfView.text = @"暂无";
     selfView.font = [UIFont systemFontOfSize:NAME_TEXT_SIZE];
     selfView.textAlignment = NSTextAlignmentCenter;
-    selfView.backgroundColor = [UIColor lightGrayColor];
+    selfView.backgroundColor = [UIColor clearColor];
     
     //score
     float score_margin = 3;
@@ -69,8 +70,7 @@
         score_y = (rect.size.height - score_h) / 2;
     }
     CGRect scoreFrame = CGRectMake(score_x, score_y, score_w, score_h);
-    NSArray *scoreArray = [NSArray arrayWithObjects:@"通过", @"不通过", @"不适用", nil];
-    UISegmentedControl *scoreSeg = [[UISegmentedControl alloc] initWithItems:scoreArray];
+    UISegmentedControl *scoreSeg = [[UISegmentedControl alloc] initWithItems:_scoreArray];
     scoreSeg.frame = scoreFrame;
     scoreSeg.segmentedControlStyle = UISegmentedControlStyleBordered;
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor],UITextAttributeTextColor,  [UIFont systemFontOfSize:NAME_TEXT_SIZE],UITextAttributeFont ,[UIColor whiteColor],UITextAttributeTextShadowColor ,nil];
@@ -117,17 +117,19 @@
     self.jsonData = nil;
     self.scoreData = nil;
     self.scoreView = nil;
+    self.scoreArray = nil;
     self.explainView = nil;
     [super dealloc];
 }
 
 #pragma mark -
-#pragma mark --- user method
+#pragma mark --- Utilities
+
 - (NSDictionary *)getNodeScore
 {
     NSString *key = [NSString stringWithFormat:@"%d", _scoreView.selectedSegmentIndex];
     if (key) {
-        NSString *attrId = [_jsonData objectForKey:KEY_attrId];
+        NSString *attrId = [self getNodeAttrId];
         NSString *explain = [_explainView getExplain];
         
         NSDictionary *scoreDic = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -143,11 +145,27 @@
     }
 }
 
+- (NSString *)getNodeAttrId
+{
+    return [_jsonData objectForKey:KEY_attrId];
+}
+
+- (int)getNodeSelectIndex
+{
+    return _scoreView.selectedSegmentIndex;
+}
+
+- (void)changeNodeScore:(int)index
+{
+    _scoreView.selectedSegmentIndex = index;
+}
+
+#pragma mark -
+#pragma mark --- segment action
+
 - (void)segmentAction:(UISegmentedControl *)seg
-{    
-    NSString *strIndex = [NSString stringWithFormat:@"%d", seg.selectedSegmentIndex];
-    if(_delegate && [_delegate respondsToSelector:@selector(clauseNodeScored:)])
-        [_delegate performSelector:@selector(clauseNodeScored:) withObject:strIndex];
+{
+    [Common callDelegate:_delegate method:@selector(clauseNodeScored:) withObject:self];
 }
 
 #pragma mark -

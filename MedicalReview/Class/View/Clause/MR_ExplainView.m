@@ -14,6 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor clearColor];
         _readOnly = NO;
         _textSize = 17;
     }
@@ -29,6 +30,7 @@
     explainView.backgroundColor = [UIColor lightGrayColor];
     explainView.text = _wordExplan;
     explainView.font = [UIFont systemFontOfSize:DEFAULT_TEXT_SIZE];
+    explainView.backgroundColor = [UIColor clearColor];
     
     CGRect buttonFrame = CGRectMake(rect.size.width*0.75, 0, rect.size.width*0.25, rect.size.height);
     UIButton *button = [[UIButton alloc] initWithFrame:buttonFrame];
