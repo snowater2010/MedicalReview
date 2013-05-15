@@ -61,10 +61,10 @@
 
 + (id)readClauseDataFromCache
 {
-    NSArray *result = nil;
+    NSDictionary *result = nil;
     if ([self ifHaveClauseCache]) {
         NSString *cachePath = [FileHelper getClauseCacheFilePath];
-        result = [[[NSArray alloc] initWithContentsOfFile:cachePath] autorelease];
+        result = [[[NSDictionary alloc] initWithContentsOfFile:cachePath] autorelease];
     }
     return result;
 }

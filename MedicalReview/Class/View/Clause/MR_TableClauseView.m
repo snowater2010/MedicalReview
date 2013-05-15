@@ -16,6 +16,9 @@
 @property(nonatomic, retain) UITableView *tableview;
 @property(nonatomic, retain) NSMutableArray *sectionArray;
 
+@property(nonatomic, retain) NSArray *headScoreArray;
+@property(nonatomic, retain) NSArray *nodeScoreArray;
+
 @end
 
 @implementation MR_TableClauseView
@@ -25,18 +28,20 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.sectionArray = [NSMutableArray arrayWithCapacity:0];
+        self.headScoreArray = [NSArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", nil];
+        self.nodeScoreArray = [NSArray arrayWithObjects:@"通过", @"不通过", nil];
     }
     return self;
 }
 
 - (void)drawRect:(CGRect)rect
 {
+    [_sectionArray removeAllObjects];
+    
     //content view
-
     self.selfSize = rect.size;
     
     UITableView *tableview = [[UITableView alloc] initWithFrame:rect style:UITableViewStylePlain];
-    tableview.backgroundColor = [UIColor purpleColor];
     tableview.delegate = self;
     tableview.dataSource = self;
     self.tableview = tableview;
@@ -50,6 +55,9 @@
     self.scoreData = nil;
     self.nodeData = nil;
     self.tableview = nil;
+    self.sectionArray = nil;
+    self.headScoreArray = nil;
+    self.nodeScoreArray = nil;
     [super dealloc];
 }
 
@@ -57,6 +65,7 @@
 #pragma mark Utilities
 - (void)reloadData
 {
+    [_sectionArray removeAllObjects];
     [_tableview reloadData];
 }
 
@@ -116,7 +125,7 @@
     MR_ClauseHeadView *headView = [[[MR_ClauseHeadView alloc] initWithFrame:headFrame] autorelease];
     headView.tag = section;
     headView.delegate = self;
-    headView.jsonData = clauseDic;
+    headView.clauseData = clauseDic;
     headView.scoreData = scoreDic;
     headView.scoreArray = [NSArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", nil];
     
@@ -145,14 +154,14 @@
 {
     int section = indexPath.section;
     
-    NSDictionary *clauseDic = [_clauseData objectAtIndex:section];
     NSDictionary *nodeDic = [_nodeData objectAtIndex:section];
-    
+    NSString *clauseId = [nodeDic objectForKey:KEY_clauseId];
     NSArray *pathPointList = [nodeDic objectForKey:KEY_pointList];
-    NSArray *clausePointList = [clauseDic objectForKey:KEY_pointList];
+    
+    NSDictionary *clauseDic = [_clauseData objectAtIndex:section];
+    NSDictionary *scoreDic = [_scoreData objectForKey:clauseId];
     
     static NSString *CellTableIdentifier = @"CellTableClauseIdentifier ";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellTableIdentifier];
     if (!cell) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellTableIdentifier] autorelease];
@@ -171,8 +180,8 @@
         CGRect nodeFrame = CGRectMake(0, contentY, _selfSize.width, DEFAULT_CELL_HEIGHT);
 
         MR_ClauseNodeView *nodeView = [[MR_ClauseNodeView alloc] initWithFrame:nodeFrame];
-        nodeView.jsonData = [self getPoint:clausePointList byid:pointId];
-        nodeView.scoreData = [_scoreData objectForKey:pointId];
+        nodeView.clauseData = [clauseDic objectForKey:pointId];
+        nodeView.scoreData = [scoreDic objectForKey:pointId];
         nodeView.scoreArray = [NSArray arrayWithObjects:@"通过", @"不通过", nil];
 //        nodeView.delegate = self;
 

@@ -25,13 +25,13 @@
 
 @interface MR_ClauseHeadView : MR_RootView <MR_PopSelectListDelegate>
 
-@property(nonatomic, retain) NSDictionary *jsonData;
+@property(nonatomic, retain) NSDictionary *clauseData;
 @property(nonatomic, retain) NSDictionary *scoreData;
 @property(nonatomic, retain) NSArray *scoreArray;
 
 @property(nonatomic, assign) id<ClauseHeadDelegate> delegate;
 
-- (void)showHeadState;
+- (void)changeHeadState;
 - (NSDictionary *)getHeadScore;
 - (void)changeNodeScore:(int)index;
 

@@ -11,6 +11,7 @@
 
 @interface MR_ClauseView ()
 
+
 @property(nonatomic, retain) NSArray *headScoreArray;
 @property(nonatomic, retain) NSArray *nodeScoreArray;
 @property(nonatomic, retain) NSDictionary *updateScoreData;
@@ -26,7 +27,7 @@
         self.clipsToBounds = YES;
         _clauseData = nil;
         _cellHeight = cellHeight;
-        _headState = CLAUSE_HEAD_STATE_CLOSE;
+//        _headState = CLAUSE_HEAD_STATE_CLOSE;
         
         self.headScoreArray = [NSArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", nil];
         self.nodeScoreArray = [NSArray arrayWithObjects:@"通过", @"不通过", nil];
@@ -53,7 +54,7 @@
     CGRect headFrame = CGRectMake(head_x, head_y, head_w, head_h);
     MR_ClauseHeadView *headView = [[MR_ClauseHeadView alloc] initWithFrame:headFrame];
     headView.delegate = self;
-    headView.jsonData = _clauseData;
+    headView.clauseData = _clauseData;
     headView.scoreData = _scoreData;
     headView.scoreArray = _headScoreArray;
     self.headView = headView;
@@ -79,7 +80,7 @@
         CGRect nodeFrame = CGRectMake(0, contentY, rect.size.width, _cellHeight);
         
         MR_ClauseNodeView *nodeView = [[MR_ClauseNodeView alloc] initWithFrame:nodeFrame];
-        nodeView.jsonData = [self getPoint:clausePointList byid:pointId];
+        nodeView.clauseData = [self getPoint:clausePointList byid:pointId];
         nodeView.scoreData = [_scoreData objectForKey:pointId];
         nodeView.scoreArray = _nodeScoreArray;
         nodeView.delegate = self;

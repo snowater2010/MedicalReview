@@ -24,7 +24,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor orangeColor];
-        _jsonData = nil;
         _pathData = nil;
         _nodeData = nil;
         _dropDown = nil;
@@ -167,7 +166,6 @@
 
 - (void)dealloc
 {
-    self.jsonData = nil;
     self.pathData = nil;
     self.scoreData = nil;
     self.dropDown = nil;

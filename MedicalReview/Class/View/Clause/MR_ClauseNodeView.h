@@ -20,7 +20,7 @@
 
 @interface MR_ClauseNodeView : MR_RootView <OperateDelegate>
 
-@property(nonatomic, retain) NSDictionary *jsonData;
+@property(nonatomic, retain) NSDictionary *clauseData;
 @property(nonatomic, retain) NSDictionary *scoreData;
 @property(nonatomic, retain) NSArray *scoreArray;
 @property(nonatomic, assign) id<ClauseNodeDelegate> delegate;

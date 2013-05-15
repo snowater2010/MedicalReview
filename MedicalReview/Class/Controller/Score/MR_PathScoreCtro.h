@@ -13,7 +13,4 @@
 
 @interface MR_PathScoreCtro : MR_RootController <PathNodeDelegate, ClauseScoredDelegate, MR_ClauseTableDelegate>
 
-@property(nonatomic, retain) NSDictionary *scoreData;
-@property(nonatomic, retain) NSDictionary *localData;       //本地存储
-
 @end

@@ -10,19 +10,19 @@
 #import "MR_LeftPageView.h"
 #import "MR_MainPageView.h"
 #import "MR_ClauseTable.h"
-#import "MR_CollapseClauseView.h"
 #import "MR_ChapterSearchView.h"
 #import "FileHelper.h"
+#import "MR_TableClauseView.h"
 
 @interface MR_ChapterScoreCtro ()
 
-@property(nonatomic, retain) NSArray *clauseData;
-@property(nonatomic, retain) NSDictionary *scoreData;
+@property(nonatomic, retain) NSDictionary *clauseData;
 @property(nonatomic, retain) NSArray *chapterData;
 @property(nonatomic, retain) NSArray *sectionData;
+@property(nonatomic, retain) NSDictionary *scoreData;
 
-@property(nonatomic, retain) MR_CollapseClauseView *clauseView;
-@property(nonatomic, retain) MR_ChapterHeadView *chapterView;
+@property(nonatomic, retain) MR_TableClauseView *clauseView;
+@property(nonatomic, retain) MR_ChapterHeadView *chapterHeadView;
 @property(nonatomic, retain) UITableView *chapterTable;
 
 @end
@@ -50,7 +50,7 @@
 	
     [self initData];
     
-    _chapterView.chapterData = _chapterData;
+    _chapterHeadView.chapterData = _chapterData;
     [_chapterTable reloadData];
     
     //第一次取第一条数据
@@ -75,7 +75,7 @@
     self.sectionData = nil;
     
     self.clauseView = nil;
-    self.chapterView = nil;
+    self.chapterHeadView = nil;
     [super dealloc];
 }
 
@@ -92,11 +92,11 @@
     float chapter_w = rootFrame.size.width;
     float chapter_h = 30;
     CGRect chapterFrame = CGRectMake(chapter_x, chapter_y, chapter_w, chapter_h);
-    MR_ChapterHeadView *chapterView = [[MR_ChapterHeadView alloc] initWithFrame:chapterFrame];
-    chapterView.delegate = self;
-    [self.view addSubview:chapterView];
-    self.chapterView = chapterView;
-    [chapterView release];
+    MR_ChapterHeadView *chapterHeadView = [[MR_ChapterHeadView alloc] initWithFrame:chapterFrame];
+    chapterHeadView.delegate = self;
+    [self.view addSubview:chapterHeadView];
+    self.chapterHeadView = chapterHeadView;
+    [chapterHeadView release];
     
     //left
     float left_x = 0;
@@ -170,7 +170,7 @@
     float clause_w = mainFrame.size.width;
     float clause_h = mainFrame.size.height - head_h - top_h;
     CGRect clauseFrame = CGRectMake(clause_x, clause_y, clause_w, clause_h);
-    MR_CollapseClauseView *clauseView = [[MR_CollapseClauseView alloc] initWithFrame:clauseFrame];
+    MR_TableClauseView *clauseView = [[MR_TableClauseView alloc] initWithFrame:clauseFrame];
     self.clauseView = clauseView;
     [mainPageView addSubview:clauseView];
     [clauseView release];
@@ -225,6 +225,16 @@
     }
 }
 
+//选择左边节点时，clauseviewtable初始化
+- (void)selecteLeftNodeAtIndex:(int)index
+{
+    NSDictionary *sectionDic = [_sectionData objectAtIndex:index];
+    NSArray *nodeData = [sectionDic objectForKey:KEY_clauseList];
+    _clauseView.nodeData = nodeData;
+    _clauseView.clauseData = [self getClauseFrom:_clauseData byNode:nodeData];
+    [_clauseView reloadData];
+}
+
 #pragma mark -
 #pragma mark UITableView delegate
 
@@ -262,11 +272,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    int row = indexPath.row;
-    NSDictionary *sectionDic = [_sectionData objectAtIndex:row];
-    NSArray *nodeData = [sectionDic objectForKey:KEY_clauseList];
-    _clauseView.clauseData = [self getClauseFrom:_clauseData byNode:nodeData];
-    [_clauseView setNeedsDisplay];
+    [self selecteLeftNodeAtIndex:indexPath.row];
 }
 
 #pragma mark -
@@ -280,12 +286,8 @@
     //选取第一个
     [_chapterTable selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
     
-    NSDictionary *sectionDic = [_sectionData objectAtIndex:0];
-    NSArray *nodeData = [sectionDic objectForKey:KEY_clauseList];
-    _clauseView.clauseData = [self getClauseFrom:_clauseData byNode:nodeData];
-    [_clauseView setNeedsDisplay];
+    //换章节的时候，初始化第一个节点
+    [self selecteLeftNodeAtIndex:0];
 }
-
-
 
 @end

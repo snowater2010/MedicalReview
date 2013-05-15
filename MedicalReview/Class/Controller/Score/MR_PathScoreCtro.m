@@ -10,7 +10,6 @@
 #import "MR_LeftPageView.h"
 #import "MR_MainPageView.h"
 #import "MR_PathNodeView.h"
-#import "MR_CollapseClauseView.h"
 #import "MR_ExplainView.h"
 #import "MR_PathCell.h"
 #import "FileHelper.h"
@@ -23,11 +22,11 @@
     BOOL leftShow;
 }
 
-@property(nonatomic, retain) NSArray *jsonData;
+@property(nonatomic, retain) NSDictionary *clauseData;
 @property(nonatomic, retain) NSArray *pathData;
+@property(nonatomic, retain) NSDictionary *scoreData;
 
 @property(nonatomic, retain) MR_PathNodeView *pathNodeView;
-@property(nonatomic, retain) MR_CollapseClauseView *clauseView;
 @property(nonatomic, retain) MR_TableClauseView *clauseTableView;
 
 @property(nonatomic, retain) MR_LeftPageView *leftPageView;
@@ -60,7 +59,6 @@
     
     [self initData];
     
-    _pathNodeView.jsonData = [NSArray arrayWithObjects:_jsonData, nil];
     _pathNodeView.pathData = _pathData;
     _pathNodeView.scoreData = _scoreData;
     
@@ -68,13 +66,9 @@
     NSDictionary *pathDic = [_pathData objectAtIndex:0];
     NSArray *nodeList = [pathDic objectForKey:KEY_nodeList];
     NSArray *nodeData = [[nodeList objectAtIndex:0] objectForKey:KEY_clauseList];
-    _clauseView.nodeData = nodeData;
-    _clauseView.clauseData = [self getClauseFrom:_jsonData byNode:nodeData];
-    _clauseView.scoreData = _scoreData;
-    
     
     _clauseTableView.nodeData = nodeData;
-    _clauseTableView.clauseData = [self getClauseFrom:_jsonData byNode:nodeData];
+    _clauseTableView.clauseData = [self getClauseFrom:_clauseData byNode:nodeData];
     _clauseTableView.scoreData = _scoreData;
     
 }
@@ -88,8 +82,7 @@
 - (void)dealloc
 {
     self.pathNodeView = nil;
-    self.clauseView = nil;
-    self.jsonData = nil;
+    self.clauseData = nil;
     self.scoreData = nil;
     self.pathData = nil;
     
@@ -187,13 +180,6 @@
     [clauseTableView release];
     [mainPageView addSubview:_clauseTableView];
     
-    
-    MR_CollapseClauseView *clauseView = [[MR_CollapseClauseView alloc] initWithFrame:clauseFrame];
-    clauseView.scoredDelegate = self;
-    self.clauseView = clauseView;
-//    [mainPageView addSubview:clauseView];
-    [clauseView release];
-    
     //menu control
     CGRect menuBtFrame = CGRectMake(head_x, head_y, head_h, head_h);
     UIButton *menuBt = [[UIButton alloc] initWithFrame:menuBtFrame];
@@ -213,10 +199,10 @@
 {
     //clause
     if ([FileHelper ifHaveClauseCache])
-        self.jsonData = [FileHelper readClauseDataFromCache];
+        self.clauseData = [FileHelper readClauseDataFromCache];
     else {
         NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
-        self.jsonData = [allData objectForKey:KEY_allClause];
+        self.clauseData = [allData objectForKey:KEY_allClause];
     }
     
     //path
@@ -258,7 +244,7 @@
     
     CGRect topFrame = _topPageView.frame;
     CGRect mainFrame = _mainPageView.frame;
-    CGRect clauseFrame = _clauseView.frame;
+    CGRect clauseFrame = _clauseTableView.frame;
     if (topShow) {
         mainFrame.origin.y = 0;
         mainFrame.size.height = mainFrame.size.height - topFrame.size.height;
@@ -270,7 +256,7 @@
         clauseFrame.size.height = clauseFrame.size.height + topFrame.size.height;
     }
     _mainPageView.frame = mainFrame;
-    _clauseView.frame = clauseFrame;
+    _clauseTableView.frame = clauseFrame;
     
     _ANIMATIONS_INIT_END_;
 }
@@ -302,14 +288,8 @@
 - (void)nodeSelected:(NSArray *)nodeData;
 {
     if (nodeData) {
-        _clauseView.nodeData = nodeData;
-        _clauseView.clauseData = [self getClauseFrom:_jsonData byNode:nodeData];
-        _clauseView.scoreData = [self getInitScoreData];
-        [_clauseView setNeedsDisplay];
-        
-        
         _clauseTableView.nodeData = nodeData;
-        _clauseTableView.clauseData = [self getClauseFrom:_jsonData byNode:nodeData];
+        _clauseTableView.clauseData = [self getClauseFrom:_clauseData byNode:nodeData];
         _clauseTableView.scoreData = [self getInitScoreData];
         [_clauseTableView reloadData];
     }

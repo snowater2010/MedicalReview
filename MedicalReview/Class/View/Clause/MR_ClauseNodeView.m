@@ -29,7 +29,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    NSString *name = [_jsonData objectForKey:KEY_attrName];
+    NSString *name = [_clauseData objectForKey:KEY_attrName];
     NSString *scoreValue = [_scoreData objectForKey:KEY_scoreValue];
     NSString *scoreExplain = [_scoreData objectForKey:KEY_scoreExplain];
     
@@ -114,7 +114,7 @@
 
 - (void)dealloc
 {
-    self.jsonData = nil;
+    self.clauseData = nil;
     self.scoreData = nil;
     self.scoreView = nil;
     self.scoreArray = nil;
@@ -147,7 +147,7 @@
 
 - (NSString *)getNodeAttrId
 {
-    return [_jsonData objectForKey:KEY_attrId];
+    return [_clauseData objectForKey:KEY_attrId];
 }
 
 - (int)getNodeSelectIndex

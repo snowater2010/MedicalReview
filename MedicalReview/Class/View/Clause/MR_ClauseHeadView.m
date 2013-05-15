@@ -12,6 +12,9 @@
 #import "MR_ClauseView.h"
 
 @interface MR_ClauseHeadView ()
+{
+    BOOL showNode;
+}
 
 @property(nonatomic, retain) MR_ArrowView *arrowView;
 @property(nonatomic, retain) MR_ExplainView *explainView;
@@ -32,7 +35,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    NSString *name = [_jsonData objectForKey:KEY_clauseName];
+    NSString *name = [_clauseData objectForKey:KEY_clauseName];
     NSString *scoreValue  = [_scoreData objectForKey:KEY_scoreValue];
     NSString *scoreExplain = [_scoreData objectForKey:KEY_scoreExplain];
     
@@ -142,12 +145,12 @@
     [selfView release];
     [operateView release];
     
-    [self showHeadState];
+    [self changeHeadState];
 }
 
 - (void)dealloc
 {
-    self.jsonData = nil;
+    self.clauseData = nil;
     self.scoreData = nil;
     self.scoreArray = nil;
     self.arrowView = nil;
@@ -157,28 +160,23 @@
 
 - (void)clickClauseHead
 {
+    [self changeHeadState];
+    
     if(_delegate && [_delegate respondsToSelector:@selector(clickClauseHead:)])
         [_delegate performSelector:@selector(clickClauseHead:) withObject:self];
 }
 
-- (void)showHeadState
+- (void)changeHeadState
 {
-//    switch (_headState) {
-//        case CLAUSE_HEAD_STATE_OPEN:
-//        {
-//            CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI/2);
-//            _arrowView.transform = transform;
-//            break;
-//        }
-//        case CLAUSE_HEAD_STATE_CLOSE:
-//        {
-//            CGAffineTransform transform = CGAffineTransformMakeRotation(0);
-//            _arrowView.transform = transform;
-//            break;
-//        }
-//        default:
-//            break;
-//    }
+    if (showNode) {
+        CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI/2);
+        _arrowView.transform = transform;
+    }
+    else {
+        CGAffineTransform transform = CGAffineTransformMakeRotation(0);
+        _arrowView.transform = transform;
+    }
+    showNode = !showNode;
 }
 
 #pragma mark -
