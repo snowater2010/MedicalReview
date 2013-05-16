@@ -18,6 +18,7 @@
 
 @property(nonatomic, retain) NSArray *headScoreArray;
 @property(nonatomic, retain) NSArray *nodeScoreArray;
+@property(nonatomic, retain) NSDictionary *updateScoreData;
 
 @end
 
@@ -58,6 +59,7 @@
     self.sectionArray = nil;
     self.headScoreArray = nil;
     self.nodeScoreArray = nil;
+    self.updateScoreData = nil;
     [super dealloc];
 }
 
@@ -80,8 +82,43 @@
     return nil;
 }
 
+- (NSDictionary *)getScoreDataWithHeaderView:(MR_ClauseHeadView *)clauseHeadView
+{
+    int section = clauseHeadView.tag;
+    
+    NSDictionary *headScoreDic = [clauseHeadView getScoreData];
+    if (!headScoreDic) {
+        return nil;
+    }
+    
+    NSMutableDictionary *allScoreDic = [[NSMutableDictionary alloc] initWithDictionary:headScoreDic];
+    
+    //node data
+    if ([_tableview numberOfRowsInSection:section] > 0) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+        UITableViewCell *cell = [_tableview cellForRowAtIndexPath:indexPath];
+        for (UIView *nodeView in cell.contentView.subviews) {
+            if (nodeView.class == [MR_ClauseNodeView class]) {
+                NSDictionary *scoreDic = [(MR_ClauseNodeView *)nodeView getScoreData];
+                if (scoreDic)
+                    [allScoreDic addEntriesFromDictionary:scoreDic];
+            }
+        }
+    }
+    
+    //combine data
+    NSString *clauseId = clauseHeadView.clauseId;
+    
+    NSDictionary *result = [[[NSDictionary alloc] initWithObjectsAndKeys:allScoreDic, clauseId, nil] autorelease];
+    
+    [allScoreDic release];
+    
+    return result;
+}
+
+
 #pragma mark -
-#pragma mark ClauseHeadDelegate
+#pragma mark ClauseHeadDelegate + ClauseNodeDelegate
 
 - (void)clickClauseHead:(id)sender
 {
@@ -90,14 +127,175 @@
     
     NSArray* rowToInsert = [[NSMutableArray alloc] initWithObjects:[NSIndexPath indexPathForRow:0 inSection:tag], nil];
     
-    if ([Common isValue:tag inNumberArray:_sectionArray]) {
-        [Common removeValue:tag inNumberArray:&_sectionArray];
-        [_tableview deleteRowsAtIndexPaths:rowToInsert withRowAnimation:UITableViewRowAnimationFade];
+    [_tableview beginUpdates];
+    if ([_sectionArray containsObject:[NSNumber numberWithInt:tag]]) {
+        [_sectionArray removeObject:[NSNumber numberWithInt:tag]];
+        [_tableview deleteRowsAtIndexPaths:rowToInsert withRowAnimation:UITableViewRowAnimationTop];
     }
     else {
-        [Common addValue:tag inNumberArray:&_sectionArray];
-        [_tableview insertRowsAtIndexPaths:rowToInsert withRowAnimation:UITableViewRowAnimationFade];
+        [_sectionArray addObject:[NSNumber numberWithInt:tag]];
+        [_tableview insertRowsAtIndexPaths:rowToInsert withRowAnimation:UITableViewRowAnimationTop];
     }
+    [_tableview endUpdates];
+}
+
+- (void)clauseHeadScored:(MR_ClauseHeadView *)sender
+{
+    int headSection = sender.tag;
+    
+    //现在的打分
+    int scoreIndex = [sender getScoreSelectIndex];
+    NSString *scoreValue = [sender getScoreValue];
+    NSString *scoreExplain = [sender getScoreExplain];
+    
+    NSString *clauseId = sender.clauseId;
+    NSDictionary *clausePoints = [[_clauseData objectAtIndex:headSection] objectForKey:KEY_pointList];
+    NSDictionary *scoreDic = [_scoreData objectForKey:clauseId];
+    NSDictionary *scorePoints = [[_scoreData objectForKey:clauseId] objectForKey:KEY_pointList];
+    
+    //更新head打分
+    [scoreDic setValue:scoreValue forKey:KEY_scoreValue];
+    [scoreDic setValue:scoreExplain forKey:KEY_scoreExplain];
+    
+    int pointCount = clausePoints.count;
+    NSString *clauseKeys[pointCount];
+    NSDictionary *clauseObjects[pointCount];
+    [clausePoints getObjects:clauseObjects andKeys:clauseKeys];
+    
+//    int scoreCount = [scoreDic count];
+//    NSString *scoreKeys[scoreCount];
+//    NSDictionary *scoreObjects[scoreCount];
+//    [scoreDic getObjects:scoreObjects andKeys:scoreKeys];
+    NSArray *scoreKeys = [scorePoints allKeys];
+    
+    //更新node打分
+    switch (scoreIndex) {
+        case 0://所有要点都选A
+        {
+            //更新节点界面
+            [self updateNodeViewScore:0 inSectioin:headSection];
+            //更新节点打分
+            
+            for (int i = 0; i < pointCount; i++)
+            {
+                NSString *clauseKey = clauseKeys[i];
+//                NSDictionary *clauseInfo = clauseObjects[i];
+//                NSString *attrLevel = [clauseInfo objectForKey:KEY_attrLevel];
+                
+//                NSMutableDictionary *scorePointDic = [NSMutableDictionary dictionaryWithCapacity:0];
+                if ([scoreKeys containsObject:clauseKey])
+                {
+                    NSDictionary *scorePointDic = [scorePoints objectForKey:clauseKey];
+                    [scorePointDic setValue:@"0" forKey:KEY_scoreValue];
+                }   
+                else
+                {
+                    NSDictionary *scorePointDic = [NSDictionary dictionaryWithObjectsAndKeys:@"0", KEY_scoreValue, @"", KEY_scoreExplain, nil];
+                    [scorePoints setValue:scorePointDic forKey:clauseKey];
+                }
+            }
+        }
+            break;
+        case 1:
+            [self updateNodeViewScore:1 inSectioin:headSection];
+            break;
+        default:
+            [self updateNodeViewScore:NO_SELECT_VALUE inSectioin:headSection];
+            break;
+    }
+    
+    //update score
+    self.updateScoreData = _scoreData;
+    if (_updateScoreData)
+        [self doReaquestUpdateScoreData];
+}
+
+- (void)clauseNodeScored:(MR_ClauseNodeView *)sender
+{
+    
+}
+
+//如果有node节点，更新界面打分
+- (void)updateNodeViewScore:(int)scoreIndex inSectioin:(int)section
+{
+    if ([_tableview numberOfRowsInSection:section] > 0) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+        UITableViewCell *cell = [_tableview cellForRowAtIndexPath:indexPath];
+        for (UIView *nodeView in cell.contentView.subviews) {
+            if (nodeView.class == [MR_ClauseNodeView class]) {
+                [(MR_ClauseNodeView *)nodeView changeNodeScore:scoreIndex];
+            }
+        }
+    }
+}
+
+#pragma mark -
+#pragma mark -- request to update data
+
+- (void)doReaquestUpdateScoreData
+{
+    //异步请求服务器更新数据
+    _GET_APP_DELEGATE_(appDelegate);
+    NSString *serverUrl = appDelegate.globalinfo.serverInfo.strWebServiceUrl;
+    
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:serverUrl]];
+    
+    [request setPostValue:@"upLoadData" forKey:@"module"];
+    [request setDefaultPostValue];
+    
+    if (_updateScoreData) {
+        NSString *strscoreCache = [_updateScoreData JSONString];
+        if (strscoreCache)
+            [request appendPostData:[strscoreCache dataUsingEncoding:NSNonLossyASCIIStringEncoding]];
+    }
+    
+    request.delegate = self;
+    [request startAsynchronous];
+}
+
+-(void)requestFinished:(ASIHTTPRequest *)request
+{
+    request.responseEncoding = NSUTF8StringEncoding;
+    NSString *responseData = [request responseString];
+    
+    BOOL ok = YES;
+    NSDictionary* retDic = [responseData objectFromJSONString];
+    if (retDic) {
+        NSString *errCode = [retDic objectForKey:KEY_errCode];
+        if (![errCode isEqualToString:@"0"]) {
+            ok = NO;
+        }
+    }
+    
+    if (ok) {
+        [self doRequestUpdateSucess];
+    }
+    else {
+        [self doRequestUpdateFailed];
+    }
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    [self doRequestUpdateFailed];
+}
+
+- (void)doRequestUpdateSucess
+{
+    //更新打分缓存
+    [FileHelper asyWriteScoreDataToCache:_updateScoreData];
+    
+    //通知打分完成
+    [Common callDelegate:_scoredDelegate method:@selector(clauseScored:) withObject:_updateScoreData];
+}
+
+- (void)doRequestUpdateFailed
+{
+    //更新“打分更新”缓存
+    [FileHelper asyWriteScoreUpdateDataToCache:_updateScoreData];
+    
+    //通知打分完成
+    [Common callDelegate:_scoredDelegate method:@selector(clauseScored:) withObject:_updateScoreData];
 }
 
 #pragma mark -
@@ -125,9 +323,11 @@
     MR_ClauseHeadView *headView = [[[MR_ClauseHeadView alloc] initWithFrame:headFrame] autorelease];
     headView.tag = section;
     headView.delegate = self;
+    headView.clauseId = clauseId;
     headView.clauseData = clauseDic;
     headView.scoreData = scoreDic;
-    headView.scoreArray = [NSArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", nil];
+    headView.scoreArray = _headScoreArray;
+    headView.isOpen = [_sectionArray containsObject:[NSNumber numberWithInt:section]];
     
     return headView;
 }
@@ -135,7 +335,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([Common isValue:section inNumberArray:_sectionArray]) {
+    if ([_sectionArray containsObject:[NSNumber numberWithInt:section]]) {
         return 1;
     }
     return 0;
@@ -156,12 +356,12 @@
     
     NSDictionary *nodeDic = [_nodeData objectAtIndex:section];
     NSString *clauseId = [nodeDic objectForKey:KEY_clauseId];
-    NSArray *pathPointList = [nodeDic objectForKey:KEY_pointList];
+    NSArray *pointList = [nodeDic objectForKey:KEY_pointList];
     
-    NSDictionary *clauseDic = [_clauseData objectAtIndex:section];
-    NSDictionary *scoreDic = [_scoreData objectForKey:clauseId];
+    NSDictionary *clauseDic = [[_clauseData objectAtIndex:section] objectForKey:KEY_pointList];
+    NSDictionary *scoreDic = [[_scoreData objectForKey:clauseId] objectForKey:KEY_pointList];
     
-    static NSString *CellTableIdentifier = @"CellTableClauseIdentifier ";
+    static NSString *CellTableIdentifier = @"TableClauseCellIdentifier ";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellTableIdentifier];
     if (!cell) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellTableIdentifier] autorelease];
@@ -174,16 +374,18 @@
     }
     
     float contentY = 0.0f;
-    for (int i = 0; i < pathPointList.count; i++) {
-        NSDictionary *pointDic = [pathPointList objectAtIndex:i];
-        NSString *pointId = [pointDic objectForKey:KEY_attrId];
+    for (int i = 0; i < pointList.count; i++) {
+        NSDictionary *pointDic = [pointList objectAtIndex:i];
+        NSString *attrId = [pointDic objectForKey:KEY_attrId];
         CGRect nodeFrame = CGRectMake(0, contentY, _selfSize.width, DEFAULT_CELL_HEIGHT);
 
         MR_ClauseNodeView *nodeView = [[MR_ClauseNodeView alloc] initWithFrame:nodeFrame];
-        nodeView.clauseData = [clauseDic objectForKey:pointId];
-        nodeView.scoreData = [scoreDic objectForKey:pointId];
-        nodeView.scoreArray = [NSArray arrayWithObjects:@"通过", @"不通过", nil];
-//        nodeView.delegate = self;
+        nodeView.attrId = attrId;
+        nodeView.clauseData = [clauseDic objectForKey:attrId];
+        nodeView.scoreData = [scoreDic objectForKey:attrId];
+        nodeView.scoreArray = _nodeScoreArray;
+        nodeView.delegate = self;
+        nodeView.tag = section;
 
         if (i % 2 == 0) {
             nodeView.backgroundColor = [UIColor grayColor];

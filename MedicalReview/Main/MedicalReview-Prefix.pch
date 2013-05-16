@@ -21,4 +21,5 @@
     #import "MyLog.h"
     #import "NSString+Helper.h"
     #import "UIView+Helper.h"
+    #import "FileHelper.h"
 #endif

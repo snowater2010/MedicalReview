@@ -8,9 +8,9 @@
 
 #import "MR_RootController.h"
 #import "MR_PathNodeView.h"
-#import "MR_ClauseView.h"
+#import "MR_TableClauseView.h"
 #import "MR_ClauseTable.h"
 
-@interface MR_PathScoreCtro : MR_RootController <PathNodeDelegate, ClauseScoredDelegate, MR_ClauseTableDelegate>
+@interface MR_PathScoreCtro : MR_RootController <PathNodeDelegate, TableClauseViewDelegate, MR_ClauseTableDelegate>
 
 @end

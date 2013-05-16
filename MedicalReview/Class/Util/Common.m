@@ -34,34 +34,4 @@
         [delegate performSelector:seletor withObject:object];
 }
 
-+ (BOOL)isValue:(int)value inNumberArray:(NSArray *)valueArr
-{
-    for (NSNumber *number in valueArr) {
-        if (value == number.intValue) {
-            return YES;
-        }
-    }
-    return NO;
-}
-
-+ (void)addValue:(int)value inNumberArray:(NSMutableArray **)valueArr
-{
-    if (![self isValue:value inNumberArray:*valueArr])
-        [*valueArr addObject:[NSNumber numberWithInt:value]];
-}
-
-+ (void)removeValue:(int)value inNumberArray:(NSMutableArray **)valueArr
-{
-    NSNumber *removeNumber = nil;
-    for (NSNumber *number in *valueArr) {
-        if (value == number.intValue) {
-            removeNumber = number;
-            break;
-        }
-    }
-    if (removeNumber) {
-        [*valueArr removeObject:removeNumber];
-    }
-}
-
 @end

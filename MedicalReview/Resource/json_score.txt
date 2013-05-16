@@ -1,34 +1,36 @@
 {
-    "m1111": {
+  "m1111": {
+    "scoreValue": "1",
+    "scoreExplain": "head测评说明",
+    "pointList": {
+      "Z2418": {
+        "scoreValue": "0",
+        "scoreExplain": "Z2418测评说明"
+      },
+      "Z2419": {
         "scoreValue": "1",
-        "scoreExplain": "head测评说明",
-        "Z2418": {
-            "scoreValue": "0",
-            "scoreExplain": "Z2418测评说明"
-        },
-        "Z2419": {
-            "scoreValue": "1",
-            "scoreExplain": "Z2419测评说明"
-        },
-        "Z2420": {
-            "scoreValue": "2",
-            "scoreExplain": "Z2420测评说明"
-        },
-        "Z2421": {
-            "scoreValue": "0",
-            "scoreExplain": "Z2421测评说明"
-        },
-        "Z2422": {
-            "scoreValue": "1",
-            "scoreExplain": "Z2422测评说明"
-        },
-        "Z2423": {
-            "scoreValue": "2",
-            "scoreExplain": "Z2423测评说明"
-        },
-        "Z2424": {
-            "scoreValue": "0",
-            "scoreExplain": "Z2424测评说明"
-        }
+        "scoreExplain": "Z2419测评说明"
+      },
+      "Z2420": {
+        "scoreValue": "2",
+        "scoreExplain": "Z2420测评说明"
+      },
+      "Z2421": {
+        "scoreValue": "0",
+        "scoreExplain": "Z2421测评说明"
+      },
+      "Z2422": {
+        "scoreValue": "1",
+        "scoreExplain": "Z2422测评说明"
+      },
+      "Z2423": {
+        "scoreValue": "2",
+        "scoreExplain": "Z2423测评说明"
+      },
+      "Z2424": {
+        "scoreValue": "0",
+        "scoreExplain": "Z2424测评说明"
+      }
     }
+  }
 }

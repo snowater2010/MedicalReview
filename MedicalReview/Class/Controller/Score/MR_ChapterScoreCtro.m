@@ -11,7 +11,6 @@
 #import "MR_MainPageView.h"
 #import "MR_ClauseTable.h"
 #import "MR_ChapterSearchView.h"
-#import "FileHelper.h"
 #import "MR_TableClauseView.h"
 
 @interface MR_ChapterScoreCtro ()
@@ -206,25 +205,6 @@
     self.scoreData = [self getInitScoreData];
 }
 
-- (NSDictionary *)getInitScoreData
-{
-    //score
-    NSDictionary *scoreCache = [FileHelper readScoreDataFromCache];
-    NSDictionary *updateScoreCache = [FileHelper readScoreUpdateDataFromCache];
-    if (scoreCache || updateScoreCache) {
-        NSMutableDictionary *allScore = [[[NSMutableDictionary alloc] initWithCapacity:0] autorelease];
-        if (scoreCache)
-            [allScore addEntriesFromDictionary:scoreCache];
-        if (updateScoreCache)
-            [allScore addEntriesFromDictionary:updateScoreCache];
-        
-        return allScore;
-    }
-    else {
-        return nil;
-    }
-}
-
 //选择左边节点时，clauseviewtable初始化
 - (void)selecteLeftNodeAtIndex:(int)index
 {
@@ -232,6 +212,7 @@
     NSArray *nodeData = [sectionDic objectForKey:KEY_clauseList];
     _clauseView.nodeData = nodeData;
     _clauseView.clauseData = [self getClauseFrom:_clauseData byNode:nodeData];
+    _clauseView.scoreData = [self getInitScoreData];
     [_clauseView reloadData];
 }
 

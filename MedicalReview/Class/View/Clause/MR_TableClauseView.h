@@ -8,12 +8,21 @@
 
 #import "MR_RootView.h"
 #import "MR_ClauseHeadView.h"
+#import "MR_ClauseNodeView.h"
 
-@interface MR_TableClauseView : MR_RootView <ClauseHeadDelegate, UITableViewDelegate, UITableViewDataSource>
+@protocol TableClauseViewDelegate <NSObject>
+
+@optional
+- (void)clauseScored:(NSDictionary *)scoredData;
+
+@end
+
+@interface MR_TableClauseView : MR_RootView <ClauseHeadDelegate, ClauseNodeDelegate,  UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic, retain) NSArray *clauseData;
 @property(nonatomic, retain) NSDictionary *scoreData;
 @property(nonatomic, retain) NSArray *nodeData;
+@property(nonatomic, assign) id<TableClauseViewDelegate> scoredDelegate;
 
 - (void)reloadData;
 

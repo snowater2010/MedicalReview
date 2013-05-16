@@ -19,12 +19,14 @@
 
 @optional
 - (void)clickClauseHead:(id)sender;
-- (void)clauseHeadScored:(NSString *)score;
+- (void)clauseHeadScored:(id)sender;
 
 @end
 
 @interface MR_ClauseHeadView : MR_RootView <MR_PopSelectListDelegate>
 
+@property(nonatomic, assign) BOOL isOpen;
+@property(nonatomic, retain) NSString *clauseId;
 @property(nonatomic, retain) NSDictionary *clauseData;
 @property(nonatomic, retain) NSDictionary *scoreData;
 @property(nonatomic, retain) NSArray *scoreArray;
@@ -32,7 +34,10 @@
 @property(nonatomic, assign) id<ClauseHeadDelegate> delegate;
 
 - (void)changeHeadState;
-- (NSDictionary *)getHeadScore;
+- (NSDictionary *)getScoreData;
 - (void)changeNodeScore:(int)index;
+- (int)getScoreSelectIndex;
+- (NSString *)getScoreValue;
+- (NSString *)getScoreExplain;
 
 @end

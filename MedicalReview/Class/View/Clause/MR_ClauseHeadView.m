@@ -12,9 +12,6 @@
 #import "MR_ClauseView.h"
 
 @interface MR_ClauseHeadView ()
-{
-    BOOL showNode;
-}
 
 @property(nonatomic, retain) MR_ArrowView *arrowView;
 @property(nonatomic, retain) MR_ExplainView *explainView;
@@ -28,7 +25,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
+        _isOpen = NO;
     }
     return self;
 }
@@ -58,6 +55,7 @@
     self.arrowView = arrowView;
     [arrowView release];
     [nameView addSubview:_arrowView];
+    [self changeHeadState];
     
     //name label
     float name_x = arrow_x + arrow_w + ARROW_MARGIN;
@@ -144,12 +142,11 @@
     [coverControl release];
     [selfView release];
     [operateView release];
-    
-    [self changeHeadState];
 }
 
 - (void)dealloc
 {
+    self.clauseId = nil;
     self.clauseData = nil;
     self.scoreData = nil;
     self.scoreArray = nil;
@@ -160,6 +157,7 @@
 
 - (void)clickClauseHead
 {
+    _isOpen = !_isOpen;
     [self changeHeadState];
     
     if(_delegate && [_delegate respondsToSelector:@selector(clickClauseHead:)])
@@ -168,7 +166,7 @@
 
 - (void)changeHeadState
 {
-    if (showNode) {
+    if (_isOpen) {
         CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI/2);
         _arrowView.transform = transform;
     }
@@ -176,12 +174,11 @@
         CGAffineTransform transform = CGAffineTransformMakeRotation(0);
         _arrowView.transform = transform;
     }
-    showNode = !showNode;
 }
 
 #pragma mark -
-#pragma mark --- user method
-- (NSDictionary *)getHeadScore
+#pragma mark Utilities
+- (NSDictionary *)getScoreData
 {
     if ([_scoreView getSelectedIndex] == NO_SELECT_INDEX)
         return nil;
@@ -196,6 +193,21 @@
     return scoreDic;
 }
 
+- (int)getScoreSelectIndex
+{
+    return [_scoreView getSelectedIndex];
+}
+
+- (NSString *)getScoreValue
+{
+    return [_scoreView getSelectedValue];
+}
+
+- (NSString *)getScoreExplain
+{
+    return [_explainView getExplain];
+}
+
 - (void)changeNodeScore:(int)index
 {
     [_scoreView selectAtIndex:index];
@@ -208,7 +220,7 @@
     if ([_scoreView getSelectedIndex] == NO_SELECT_INDEX)
         return;
     
-    [Common callDelegate:_delegate method:@selector(clauseHeadScored:) withObject:[NSNumber numberWithInt:indexPath.row]];
+    [Common callDelegate:_delegate method:@selector(clauseHeadScored:) withObject:self];
 }
 
 @end

@@ -170,6 +170,7 @@ enum SORT_TYPE
 #define KEY_allClause           @"allClause"
 #define KEY_pathFormat          @"pathFormat"
 #define KEY_chaptersFormat      @"chaptersFormat"
+#define KEY_clauseScore         @"clauseScore"
 
 //path data
 #define KEY_pathName            @"pathName"
@@ -191,6 +192,7 @@ enum SORT_TYPE
 #define KEY_attrId              @"attrId"
 #define KEY_attrName            @"attrName"
 #define KEY_pointList           @"pointList"
+#define KEY_attrLevel           @"attrLevel"
 #define KEY_datainSpection      @"datainSpection"
 #define KEY_proofLink           @"proofLink"
 #define KEY_wordExplan          @"wordExplan"

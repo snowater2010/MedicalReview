@@ -7,7 +7,6 @@
 //
 
 #import "MR_ClauseView.h"
-#import "FileHelper.h"
 
 @interface MR_ClauseView ()
 
@@ -137,7 +136,7 @@
 - (NSDictionary *)getUpdateScoreData
 {
     //head data
-    NSDictionary *headScoreDic = [_headView getHeadScore];
+    NSDictionary *headScoreDic = [_headView getScoreData];
     if (!headScoreDic) {
         return nil;
     }
@@ -146,7 +145,34 @@
     
     //node data
     for (MR_ClauseNodeView *nodeView in _contentView.subviews) {
-        NSDictionary *scoreDic = [nodeView getNodeScore];
+        NSDictionary *scoreDic = [nodeView getScoreData];
+        if (scoreDic)
+            [allScoreDic addEntriesFromDictionary:scoreDic];
+    }
+    
+    //combine data
+    NSString *clauseId = [_clauseData objectForKey:KEY_clauseId];
+    
+    NSDictionary *result = [[[NSDictionary alloc] initWithObjectsAndKeys:allScoreDic, clauseId, nil] autorelease];
+    
+    [allScoreDic release];
+    
+    return result;
+}
+
+- (NSDictionary *)getScoreDataInSection:(int)section
+{
+    //head data
+    NSDictionary *headScoreDic = [_headView getScoreData];
+    if (!headScoreDic) {
+        return nil;
+    }
+    
+    NSMutableDictionary *allScoreDic = [[NSMutableDictionary alloc] initWithDictionary:headScoreDic];
+    
+    //node data
+    for (MR_ClauseNodeView *nodeView in _contentView.subviews) {
+        NSDictionary *scoreDic = [nodeView getScoreData];
         if (scoreDic)
             [allScoreDic addEntriesFromDictionary:scoreDic];
     }

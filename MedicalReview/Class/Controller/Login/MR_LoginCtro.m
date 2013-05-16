@@ -9,7 +9,6 @@
 #import "MR_LoginCtro.h"
 #import "MR_Doctor.h"
 #import "MR_MainCtro.h"
-#import "FileHelper.h"
 #import "ASIFormDataRequest.h"
 #import "MBProgressHUD.h"
 
@@ -200,7 +199,7 @@
         //request data
         [self doRequestData];
         
-//        //demo
+        //demo
 //        if ([FileHelper ifHaveClauseCache]) {
 //            [self visitMainPage];
 //        } else {
@@ -214,6 +213,7 @@
             NSArray *allClause = [dataDic objectForKey:KEY_allClause];
             NSArray *pathFormat = [dataDic objectForKey:KEY_pathFormat];
             NSArray *chaptersFormat = [dataDic objectForKey:KEY_chaptersFormat];
+            NSArray *clauseScore = [dataDic objectForKey:KEY_clauseScore];
             //条款
             if (allClause) {
                 BOOL result = [FileHelper writeClauseDataToCache:allClause];
@@ -231,6 +231,12 @@
                 BOOL result = [FileHelper writeData:chaptersFormat toCacheFile:CACHE_CHAPTER];
                 if (!result)
                     _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_chapter_cache_update_error"));
+            }
+            //打分
+            if (clauseScore) {
+                BOOL result = [FileHelper writeData:clauseScore toCacheFile:CACHE_SCORE];
+                if (!result)
+                    _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_score_cache_update_error"));
             }
         }
         

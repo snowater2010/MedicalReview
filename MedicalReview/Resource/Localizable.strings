@@ -16,6 +16,7 @@
 "alert_clause_cache_update_error"   = "条款更新失败";
 "alert_path_cache_update_error"     = "路径数据更新失败";
 "alert_chapter_cache_update_error"  = "章节数据更新失败";
+"alert_score_cache_update_error"    = "打分数据更新失败";
 
 //request
 "request_msg_wait_login"            = "登陆中...";

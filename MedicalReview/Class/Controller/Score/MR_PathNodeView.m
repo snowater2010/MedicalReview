@@ -177,8 +177,13 @@
 #pragma mark -
 #pragma mark Utilities
 
-- (void)updateFinishCount:(NSString *)scoredClauseId
+- (void)updateFinishCount:(NSDictionary *)scoredData
 {
+    NSString *scoredClauseId = nil;
+    if (scoredData && scoredData.count > 0) {
+        scoredClauseId = [[scoredData allKeys] objectAtIndex:0];
+    }
+    
     if ([Common isEmptyString:scoredClauseId])
         return;
     
@@ -203,6 +208,11 @@
         }
     }
     [self.tableView reloadData];
+    
+    //更新数据
+    NSMutableDictionary *newScoreData = [NSMutableDictionary dictionaryWithDictionary:_scoreData];
+    [newScoreData addEntriesFromDictionary:scoredData];
+    self.scoreData = newScoreData;
 }
 
 #pragma mark -

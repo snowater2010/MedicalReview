@@ -12,7 +12,6 @@
 #import "MR_PathNodeView.h"
 #import "MR_ExplainView.h"
 #import "MR_PathCell.h"
-#import "FileHelper.h"
 #import "MR_ClauseTopView.h"
 #import "MR_TableClauseView.h"
 
@@ -69,8 +68,7 @@
     
     _clauseTableView.nodeData = nodeData;
     _clauseTableView.clauseData = [self getClauseFrom:_clauseData byNode:nodeData];
-    _clauseTableView.scoreData = _scoreData;
-    
+    _clauseTableView.scoreData = [self getScoreFrom:_scoreData byNode:nodeData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -176,6 +174,7 @@
     CGRect clauseFrame = CGRectMake(clause_x, clause_y, clause_w, clause_h);
     
     MR_TableClauseView *clauseTableView = [[MR_TableClauseView alloc] initWithFrame:clauseFrame];
+    clauseTableView.scoredDelegate = self;
     self.clauseTableView = clauseTableView;
     [clauseTableView release];
     [mainPageView addSubview:_clauseTableView];
@@ -215,25 +214,6 @@
     }
     
     self.scoreData = [self getInitScoreData];
-}
-
-- (NSDictionary *)getInitScoreData
-{
-    //score
-    NSDictionary *scoreCache = [FileHelper readScoreDataFromCache];
-    NSDictionary *updateScoreCache = [FileHelper readScoreUpdateDataFromCache];
-    if (scoreCache || updateScoreCache) {
-        NSMutableDictionary *allScore = [[[NSMutableDictionary alloc] initWithCapacity:0] autorelease];
-        if (scoreCache)
-            [allScore addEntriesFromDictionary:scoreCache];
-        if (updateScoreCache)
-            [allScore addEntriesFromDictionary:updateScoreCache];
-        
-        return allScore;
-    }
-    else {
-        return nil;
-    }
 }
 
 - (void)tableClicked
@@ -288,19 +268,22 @@
 - (void)nodeSelected:(NSArray *)nodeData;
 {
     if (nodeData) {
+        //重新读取数据（可以优化，不必每次以重新读取来更新数据）
+        self.scoreData = [self getInitScoreData];
+        
         _clauseTableView.nodeData = nodeData;
         _clauseTableView.clauseData = [self getClauseFrom:_clauseData byNode:nodeData];
-        _clauseTableView.scoreData = [self getInitScoreData];
+        _clauseTableView.scoreData = [self getScoreFrom:_scoreData byNode:nodeData];
         [_clauseTableView reloadData];
     }
 }
 
 #pragma mark -
 #pragma mark ClauseScoredDelegate
-- (void)clauseScored:(NSString *)scoredClauseId
+- (void)clauseScored:(NSDictionary *)scoredData
 {
-    if (scoredClauseId)
-        [_pathNodeView updateFinishCount:scoredClauseId];
+    if (scoredData && scoredData.count > 0)
+        [_pathNodeView updateFinishCount:scoredData]; 
 }
 
 @end

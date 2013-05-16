@@ -182,6 +182,9 @@
 
 - (NSArray *)getClauseFrom:(NSDictionary *)allClause byNode:(NSArray *)nodeData
 {
+    if (!allClause)
+        return nil;
+    
     NSArray *keyArr = [allClause allKeys];
     NSMutableArray *clauseArr = [[[NSMutableArray alloc] initWithCapacity:0] autorelease];
     for (NSDictionary *nodeDic in nodeData) {
@@ -193,6 +196,50 @@
         }
     }
     return clauseArr;
+}
+
+- (NSDictionary *)getScoreFrom:(NSDictionary *)allScore byNode:(NSArray *)nodeData
+{
+    if (!allScore)
+        return nil;
+    
+    //score
+    NSArray *scoreKeys = [allScore allKeys];
+    NSMutableDictionary *scoreNodeDic = [[[NSMutableDictionary alloc] initWithCapacity:0] autorelease];
+    
+    for (NSDictionary *nodeDic in nodeData)
+    {
+        NSString *nodeId = [nodeDic objectForKey:KEY_clauseId];
+        
+        if ([scoreKeys containsObject:nodeId])
+        {
+            NSDictionary *scoreDic = [allScore objectForKey:nodeId];
+            if (scoreDic)
+                [scoreNodeDic setValue:scoreDic forKey:nodeId];
+        }
+    }
+    return scoreNodeDic;
+}
+
+- (NSDictionary *)getInitScoreData
+{
+//    return [FileHelper readDataFileWithName:@"json_score.txt"];
+    
+    //score
+    NSDictionary *scoreCache = [FileHelper readScoreDataFromCache];
+    NSDictionary *updateScoreCache = [FileHelper readScoreUpdateDataFromCache];
+    if (scoreCache || updateScoreCache) {
+        NSMutableDictionary *allScore = [[[NSMutableDictionary alloc] initWithCapacity:0] autorelease];
+        if (scoreCache)
+            [allScore addEntriesFromDictionary:scoreCache];
+        if (updateScoreCache)
+            [allScore addEntriesFromDictionary:updateScoreCache];
+        
+        return allScore;
+    }
+    else {
+        return nil;
+    }
 }
 
 @end

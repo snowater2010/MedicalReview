@@ -114,6 +114,7 @@
 
 - (void)dealloc
 {
+    self.attrId = nil;
     self.clauseData = nil;
     self.scoreData = nil;
     self.scoreView = nil;
@@ -123,20 +124,19 @@
 }
 
 #pragma mark -
-#pragma mark --- Utilities
+#pragma mark Utilities
 
-- (NSDictionary *)getNodeScore
+- (NSDictionary *)getScoreData
 {
     NSString *key = [NSString stringWithFormat:@"%d", _scoreView.selectedSegmentIndex];
     if (key) {
-        NSString *attrId = [self getNodeAttrId];
         NSString *explain = [_explainView getExplain];
         
         NSDictionary *scoreDic = [[NSDictionary alloc] initWithObjectsAndKeys:
                                    key, KEY_scoreValue,
                                    explain, KEY_scoreExplain,
                                    nil];
-        NSDictionary *result = [[[NSDictionary alloc] initWithObjectsAndKeys:scoreDic, attrId, nil] autorelease];
+        NSDictionary *result = [[[NSDictionary alloc] initWithObjectsAndKeys:scoreDic, _attrId, nil] autorelease];
         [scoreDic release];
         return result;
     }
@@ -145,12 +145,7 @@
     }
 }
 
-- (NSString *)getNodeAttrId
-{
-    return [_clauseData objectForKey:KEY_attrId];
-}
-
-- (int)getNodeSelectIndex
+- (int)getScoreSelectIndex
 {
     return _scoreView.selectedSegmentIndex;
 }
@@ -161,7 +156,7 @@
 }
 
 #pragma mark -
-#pragma mark --- segment action
+#pragma mark segment action
 
 - (void)segmentAction:(UISegmentedControl *)seg
 {
@@ -169,7 +164,7 @@
 }
 
 #pragma mark -
-#pragma mark --- OperateDelegate
+#pragma mark OperateDelegate
 
 - (void)doDelete
 {
