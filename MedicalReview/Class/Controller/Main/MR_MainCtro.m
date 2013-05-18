@@ -64,7 +64,7 @@
     float top_h = rootFrame.size.height*0.1;
     CGRect topFrame = CGRectMake(top_x, top_y, top_w, top_h);
     MR_TopPageView *topPageView = [[MR_TopPageView alloc] initWithFrame:topFrame];
-//    topPageView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"top_bg.gif"]];
+    topPageView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"top_bg.gif"]];
     [self.view addSubview:topPageView];
     [topPageView release];
     

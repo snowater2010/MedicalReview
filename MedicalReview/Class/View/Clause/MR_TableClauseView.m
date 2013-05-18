@@ -150,12 +150,23 @@
     
     NSString *clauseId = sender.clauseId;
     NSDictionary *clausePoints = [[_clauseData objectAtIndex:headSection] objectForKey:KEY_pointList];
-    NSDictionary *scoreDic = [_scoreData objectForKey:clauseId];
-    NSDictionary *scorePoints = [[_scoreData objectForKey:clauseId] objectForKey:KEY_pointList];
     
     //更新head打分
+    if (!_scoreData)
+        self.scoreData = [NSMutableDictionary dictionary];
+    
+    if (![[_scoreData allKeys] containsObject:clauseId])
+        [_scoreData setValue:[NSMutableDictionary dictionary] forKey:clauseId];
+    
+    NSMutableDictionary *scoreDic = [_scoreData objectForKey:clauseId];
     [scoreDic setValue:scoreValue forKey:KEY_scoreValue];
     [scoreDic setValue:scoreExplain forKey:KEY_scoreExplain];
+    
+    //更新node打分
+    if (![[scoreDic allKeys] containsObject:KEY_pointList])
+        [scoreDic setValue:[NSMutableDictionary dictionary] forKey:KEY_pointList];
+    
+    NSMutableDictionary *scorePoints = [scoreDic objectForKey:KEY_pointList];
     
     int pointCount = clausePoints.count;
     NSString *clauseKeys[pointCount];
@@ -168,7 +179,6 @@
 //    [scoreDic getObjects:scoreObjects andKeys:scoreKeys];
     NSArray *scoreKeys = [scorePoints allKeys];
     
-    //更新node打分
     switch (scoreIndex) {
         case 0://所有要点都选A
         {
@@ -182,17 +192,11 @@
 //                NSDictionary *clauseInfo = clauseObjects[i];
 //                NSString *attrLevel = [clauseInfo objectForKey:KEY_attrLevel];
                 
-//                NSMutableDictionary *scorePointDic = [NSMutableDictionary dictionaryWithCapacity:0];
-                if ([scoreKeys containsObject:clauseKey])
-                {
-                    NSDictionary *scorePointDic = [scorePoints objectForKey:clauseKey];
-                    [scorePointDic setValue:@"0" forKey:KEY_scoreValue];
-                }   
-                else
-                {
-                    NSDictionary *scorePointDic = [NSDictionary dictionaryWithObjectsAndKeys:@"0", KEY_scoreValue, @"", KEY_scoreExplain, nil];
-                    [scorePoints setValue:scorePointDic forKey:clauseKey];
-                }
+                if (![scoreKeys containsObject:clauseKey])
+                    [scorePoints setValue:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"", KEY_scoreValue, @"", KEY_scoreExplain, nil] forKey:clauseKey];
+                
+                NSMutableDictionary *scorePointDic = [scorePoints objectForKey:clauseKey];
+                [scorePointDic setValue:@"0" forKey:KEY_scoreValue];
             }
         }
             break;
@@ -241,6 +245,7 @@
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:serverUrl]];
     
     [request setPostValue:@"upLoadData" forKey:@"module"];
+    [request setPostValue:@"upLoadData" forKey:@"module2"];
     [request setDefaultPostValue];
     
     if (_updateScoreData) {
@@ -248,6 +253,17 @@
         if (strscoreCache)
             [request appendPostData:[strscoreCache dataUsingEncoding:NSNonLossyASCIIStringEncoding]];
     }
+    
+    
+    //debug message
+    NSString *url = [NSString stringWithFormat:@"%@［%@］", serverUrl, @"upLoadData"];
+    _ALERT_SIMPLE_(url);
+    
+    NSString *postData = [[NSString alloc] initWithData:request.postBody encoding:NSNonLossyASCIIStringEncoding];
+    NSString *post = [NSString stringWithFormat:@"postBody:%@", postData];
+    _ALERT_SIMPLE_(post);
+    [postData release];
+    //debug message
     
     request.delegate = self;
     [request startAsynchronous];

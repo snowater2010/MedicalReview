@@ -15,6 +15,7 @@
 
 //#define SERVICE_URL         @"http://222.173.30.135:8088/ylpj/webif"
 #define SERVICE_URL         @"http://124.133.27.146:8080/ylgl/webif"
+//#define SERVICE_URL         @"http://192.168.1.107:8080/ylpj/webif"
 
 #define CACHE_CLAUSE        @"cache_clause"         //条款缓存文件名
 #define CACHE_SCORE         @"cache_score"          //打分缓存文件名

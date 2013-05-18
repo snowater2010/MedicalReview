@@ -108,14 +108,18 @@
 //    responseData = @"{\"errCode\":\"0\",\"expertName\":\"zjgxy\",\"expertNo\":\"201207000000355\",\"hospitalId\":\"1047000\",\"hospitalName\":\"山东医院\"}";
 //    responseData = @"{\"errCode\":\"2\",\"errMsg\":\"密码错误\"}";
     
-    BOOL ok = YES;
+    BOOL ok = NO;
     NSString *message = nil;
-    NSDictionary* retDic = [responseData objectFromJSONString];
-    if (retDic) {
-        NSString *errCode = [retDic objectForKey:KEY_errCode];
-        if (![errCode isEqualToString:@"0"]) {
-            ok = NO;
-            message = [retDic objectForKey:KEY_errMsg];
+    NSDictionary* retDic;
+    if ([Common isNotEmptyString:responseData]) {
+        retDic = [responseData objectFromJSONString];
+        if (retDic) {
+            NSString *errCode = [retDic objectForKey:KEY_errCode];
+            if ([errCode isEqualToString:@"0"]) {
+                ok = YES;
+            } else {
+                message = [retDic objectForKey:KEY_errMsg];
+            }
         }
     }
     
@@ -125,10 +129,10 @@
     else {
         [self responseFailed:request.tag];
         if (message) {
-            _ALERT_SIMPLE_(message);
+//            _ALERT_SIMPLE_(message);
         }
         else {
-            _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"request_data_error"));
+//            _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"request_data_error"));
         }
     }
 }
@@ -137,7 +141,7 @@
 {
 //    NSError *error = [request error];
     [self responseFailed:request.tag];
-    _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"request_error"));
+//    _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"request_error"));
 }
 
 - (void)responseSuccess:(NSDictionary *)dataDic tag:(int)tag

@@ -104,8 +104,12 @@
         return;
     }
     
+    //取消输入状态，隐藏键盘
+    [_ibName resignFirstResponder];
+    [_ibPassWord resignFirstResponder];
+    
     [self doRequestLogin];
-//    
+    
 //    [self visitMainPage];
 }
 
@@ -151,6 +155,15 @@
     [self.request setPostValue:_loginName forKey:@"uid"];
     [self.request setPostValue:_loginPassWord forKey:@"pwd"];
     
+//    NSDictionary *scoreUpdateCache = [FileHelper readScoreDataFromFile];
+//    NSString *strscoreUpdateCache = [scoreUpdateCache JSONString];
+//    [self.request appendPostData:[strscoreUpdateCache dataUsingEncoding:NSNonLossyASCIIStringEncoding]];
+//    
+//    NSString *postData = [[NSString alloc] initWithData:self.request.postBody encoding:NSNonLossyASCIIStringEncoding];
+//    NSString *post = [NSString stringWithFormat:@"postBody:%@", postData];
+//    [postData release];
+//    _ALERT_SIMPLE_(post);
+    
     self.request.delegate = self;
     [self.request startAsynchronous];
     
@@ -181,6 +194,14 @@
         
         [self.request appendPostData:[strscoreUpdateCache dataUsingEncoding:NSNonLossyASCIIStringEncoding]];
     }
+    
+//    NSString *url = [NSString stringWithFormat:@"%@［%@］", serverUrl, @"loadData"];
+//    _ALERT_SIMPLE_(url);
+//    
+//     NSString *postData = [[NSString alloc] initWithData:self.request.postBody encoding:NSNonLossyASCIIStringEncoding];
+//    NSString *post = [NSString stringWithFormat:@"postBody:%@", postData];
+//    _ALERT_SIMPLE_(post);
+//    [postData release];
     
     self.request.timeOutSeconds = 3000;
     self.request.delegate = self;
