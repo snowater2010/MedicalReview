@@ -35,8 +35,6 @@
 		F62862BB173F84600090C00D /* MR_ChapterSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62862BA173F84600090C00D /* MR_ChapterSearchView.m */; };
 		F62BF839172E2FC400054E55 /* MR_ClauseHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF830172E2FC400054E55 /* MR_ClauseHeadView.m */; };
 		F62BF83A172E2FC400054E55 /* MR_ClauseNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF832172E2FC400054E55 /* MR_ClauseNodeView.m */; };
-		F62BF83B172E2FC400054E55 /* MR_ClauseView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF834172E2FC400054E55 /* MR_ClauseView.m */; };
-		F62BF83C172E2FC400054E55 /* MR_CollapseClauseView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF836172E2FC400054E55 /* MR_CollapseClauseView.m */; };
 		F62BF83D172E2FC400054E55 /* MR_ExplainView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF838172E2FC400054E55 /* MR_ExplainView.m */; };
 		F62BF85C172E68DE00054E55 /* MR_ArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62BF85B172E68DC00054E55 /* MR_ArrowView.m */; };
 		F63A89D4173000A00007B5C7 /* MR_OperateView.m in Sources */ = {isa = PBXBuildFile; fileRef = F63A89D31730009F0007B5C7 /* MR_OperateView.m */; };
@@ -145,10 +143,6 @@
 		F62BF830172E2FC400054E55 /* MR_ClauseHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ClauseHeadView.m; sourceTree = "<group>"; };
 		F62BF831172E2FC400054E55 /* MR_ClauseNodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ClauseNodeView.h; sourceTree = "<group>"; };
 		F62BF832172E2FC400054E55 /* MR_ClauseNodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ClauseNodeView.m; sourceTree = "<group>"; };
-		F62BF833172E2FC400054E55 /* MR_ClauseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ClauseView.h; sourceTree = "<group>"; };
-		F62BF834172E2FC400054E55 /* MR_ClauseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ClauseView.m; sourceTree = "<group>"; };
-		F62BF835172E2FC400054E55 /* MR_CollapseClauseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_CollapseClauseView.h; sourceTree = "<group>"; };
-		F62BF836172E2FC400054E55 /* MR_CollapseClauseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_CollapseClauseView.m; sourceTree = "<group>"; };
 		F62BF837172E2FC400054E55 /* MR_ExplainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ExplainView.h; sourceTree = "<group>"; };
 		F62BF838172E2FC400054E55 /* MR_ExplainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ExplainView.m; sourceTree = "<group>"; };
 		F62BF85A172E68DB00054E55 /* MR_ArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ArrowView.h; sourceTree = "<group>"; };
@@ -420,12 +414,8 @@
 				F64F326A173E0E4B00AF7A15 /* MR_ClauseTopView.m */,
 				F63AC969173634FA00C8C7C3 /* MR_ClauseTable.h */,
 				F63AC96A173634FB00C8C7C3 /* MR_ClauseTable.m */,
-				F62BF835172E2FC400054E55 /* MR_CollapseClauseView.h */,
-				F62BF836172E2FC400054E55 /* MR_CollapseClauseView.m */,
 				F64A26E717429F480085B509 /* MR_TableClauseView.h */,
 				F64A26E817429F480085B509 /* MR_TableClauseView.m */,
-				F62BF833172E2FC400054E55 /* MR_ClauseView.h */,
-				F62BF834172E2FC400054E55 /* MR_ClauseView.m */,
 				F62BF82F172E2FC400054E55 /* MR_ClauseHeadView.h */,
 				F62BF830172E2FC400054E55 /* MR_ClauseHeadView.m */,
 				F62BF831172E2FC400054E55 /* MR_ClauseNodeView.h */,
@@ -793,8 +783,6 @@
 				F623AC51172906740060DD4E /* NIDropDown.m in Sources */,
 				F62BF839172E2FC400054E55 /* MR_ClauseHeadView.m in Sources */,
 				F62BF83A172E2FC400054E55 /* MR_ClauseNodeView.m in Sources */,
-				F62BF83B172E2FC400054E55 /* MR_ClauseView.m in Sources */,
-				F62BF83C172E2FC400054E55 /* MR_CollapseClauseView.m in Sources */,
 				F62BF83D172E2FC400054E55 /* MR_ExplainView.m in Sources */,
 				F62BF85C172E68DE00054E55 /* MR_ArrowView.m in Sources */,
 				F67E1551172F4660004FF751 /* MR_ScoreRadioView.m in Sources */,

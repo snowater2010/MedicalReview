@@ -9,7 +9,7 @@
 #import "MR_ClauseNodeView.h"
 #import "MR_ClauseHeadView.h"
 #import "MR_ExplainView.h"
-#import "MR_ClauseView.h"
+#import "MR_TableClauseView.h"
 
 @interface MR_ClauseNodeView ()
 @property(nonatomic, retain) UISegmentedControl *scoreView;
@@ -77,7 +77,19 @@
     [scoreSeg setTitleTextAttributes:dic forState:UIControlStateNormal];
     [scoreSeg addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
     if (![Common isEmptyString:scoreValue])
-        scoreSeg.selectedSegmentIndex = scoreValue.intValue;
+    {
+        switch (scoreValue.intValue) {
+            case 0:
+                scoreSeg.selectedSegmentIndex = 1;
+                break;
+            case 1:
+                scoreSeg.selectedSegmentIndex = 0;
+                break;
+            default:
+                scoreSeg.selectedSegmentIndex = UISegmentedControlNoSegment;
+                break;
+        }
+    }
     self.scoreView = scoreSeg;
     [scoreSeg release];
     

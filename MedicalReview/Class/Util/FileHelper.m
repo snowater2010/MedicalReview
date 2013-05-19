@@ -34,7 +34,6 @@
 		[fileManager removeItemAtPath:path error:&removeError];
 		if (removeError)
         {
-            NSLog(@"file remove failed :%@", [removeError domain]);
 			return NO;
 		}
 	}
@@ -185,7 +184,6 @@
         NSDictionary *jsonDic = [NSDictionary dictionaryWithContentsOfFile:cachePath];
         
         result = [[[NSDictionary alloc] initWithDictionary:jsonDic] autorelease];
-        _LOG_(@"读取条款缓存成功！");
     }
     
     return result;
@@ -231,7 +229,6 @@
         NSDictionary *jsonDic = [NSDictionary dictionaryWithContentsOfFile:cachePath];
         
         result = [[[NSDictionary alloc] initWithDictionary:jsonDic] autorelease];
-        _LOG_(@"读取条款缓存成功！");
     }
     
     return result;

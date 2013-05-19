@@ -7,7 +7,6 @@
 //
 
 #import "MR_TableClauseView.h"
-#import "MR_ClauseView.h"
 #import "MR_ClauseHeadView.h"
 #import "NSArray+Helper.h"
 
@@ -171,11 +170,15 @@
         NSDictionary *pointDic = [scorePoints objectForKey:pointKey];
         NSString *attrLevel = [pointDic objectForKey:KEY_attrLevel];
         
-        if ([_headScoreArray getIndexWithString:attrLevel] >= scoreIndex) {
-            [pointDic setValue:@"0" forKey:KEY_scoreValue];
+        int levelIndex = [_headScoreArray getIndexWithString:attrLevel];
+        if (levelIndex >= scoreIndex) {
+            [pointDic setValue:@"1" forKey:KEY_scoreValue];
         }
         else {
-            [pointDic setValue:@"" forKey:KEY_scoreValue];
+            if (scoreIndex == _headScoreArray.count-1)
+                [pointDic setValue:@"2" forKey:KEY_scoreValue];
+            else
+                [pointDic setValue:@"3" forKey:KEY_scoreValue];
         }
     }
     [_tableview reloadData];
@@ -262,16 +265,15 @@
             [request appendPostData:[strscoreCache dataUsingEncoding:NSNonLossyASCIIStringEncoding]];
     }
     
-    
-    //debug message
-    NSString *url = [NSString stringWithFormat:@"%@［%@］", serverUrl, @"upLoadData"];
-    _ALERT_SIMPLE_(url);
-    
-    NSString *postData = [[NSString alloc] initWithData:request.postBody encoding:NSNonLossyASCIIStringEncoding];
-    NSString *post = [NSString stringWithFormat:@"postBody:%@", postData];
-    _ALERT_SIMPLE_(post);
-    [postData release];
-    //debug message
+//    //debug message
+//    NSString *url = [NSString stringWithFormat:@"%@［%@］", serverUrl, @"upLoadData"];
+//    _ALERT_SIMPLE_(url);
+//    
+//    NSString *postData = [[NSString alloc] initWithData:request.postBody encoding:NSNonLossyASCIIStringEncoding];
+//    NSString *post = [NSString stringWithFormat:@"postBody:%@", postData];
+//    _ALERT_SIMPLE_(post);
+//    [postData release];
+//    //debug message
     
     request.delegate = self;
     [request startAsynchronous];

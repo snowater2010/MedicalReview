@@ -9,7 +9,7 @@
 #import "MR_ClauseHeadView.h"
 #import "MR_ArrowView.h"
 #import "MR_ExplainView.h"
-#import "MR_ClauseView.h"
+#import "MR_TableClauseView.h"
 
 @interface MR_ClauseHeadView ()
 

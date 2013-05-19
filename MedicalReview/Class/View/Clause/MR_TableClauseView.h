@@ -10,6 +10,9 @@
 #import "MR_ClauseHeadView.h"
 #import "MR_ClauseNodeView.h"
 
+#define DEFAULT_CELL_HEIGHT 50
+#define NAME_TEXT_SIZE 14
+
 @protocol TableClauseViewDelegate <NSObject>
 
 @optional
