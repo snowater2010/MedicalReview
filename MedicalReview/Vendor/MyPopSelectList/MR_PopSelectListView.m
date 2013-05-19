@@ -63,10 +63,11 @@
     }
     
     UIButton *button = [[UIButton alloc] initWithFrame:rect];
+    NSString *defaultTitle = @"";
     if (_selectIndex != NO_SELECT_INDEX) {
-        NSString *defaultTitle = [_scoreArray objectAtIndex:_selectIndex];
-        [button setTitle:defaultTitle forState:UIControlStateNormal];
+        defaultTitle = [_scoreArray objectAtIndex:_selectIndex];
     }
+    [button setTitle:defaultTitle forState:UIControlStateNormal];
     [button setTitleColor:_textColor forState:UIControlStateNormal];
     [button addTarget:self action:@selector(showPopover:) forControlEvents:UIControlEventTouchUpInside];
     self.button = button;
@@ -126,6 +127,12 @@
 - (void)selectAtIndex:(int)index
 {
     self.selectIndex = index;
+    
+    NSString *defaultTitle = @"";
+    if (_selectIndex != NO_SELECT_INDEX) {
+        defaultTitle = [_scoreArray objectAtIndex:_selectIndex];
+    }
+    [self.button setTitle:defaultTitle forState:UIControlStateNormal];
 }
 
 - (int)getSelectedIndex

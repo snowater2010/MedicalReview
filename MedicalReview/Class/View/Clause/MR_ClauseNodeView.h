@@ -15,7 +15,6 @@
 
 @optional
 - (void)clauseNodeScored:(id)sender;
-
 @end
 
 @interface MR_ClauseNodeView : MR_RootView <OperateDelegate>

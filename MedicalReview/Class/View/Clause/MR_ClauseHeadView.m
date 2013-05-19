@@ -129,6 +129,7 @@
     float operate_h = rect.size.height;
     CGRect operateFrame = CGRectMake(operate_x, operate_y, operate_w, operate_h);
     MR_OperateView *operateView = [[MR_OperateView alloc] initWithFrame:operateFrame];
+    operateView.delegate = self;
     operateView.isHasLink = YES;
     
     [self addSubview:nameView];
@@ -214,13 +215,25 @@
 }
 
 #pragma mark -
-#pragma mark --- MR_PopSelectListDelegate
+#pragma mark MR_PopSelectListDelegate
 - (void)selectedAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([_scoreView getSelectedIndex] == NO_SELECT_INDEX)
         return;
     
     [Common callDelegate:_delegate method:@selector(clauseHeadScored:) withObject:self];
+}
+
+#pragma mark -
+#pragma mark OperateDelegate
+- (void)doDelete
+{
+    [self changeScore:NO_SELECT_INDEX];
+    [Common callDelegate:_delegate method:@selector(clauseHeadScored:) withObject:self];
+    
+}
+- (void)doLink{
+    
 }
 
 @end

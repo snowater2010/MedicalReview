@@ -23,7 +23,7 @@
 
 @end
 
-@interface MR_ClauseHeadView : MR_RootView <MR_PopSelectListDelegate>
+@interface MR_ClauseHeadView : MR_RootView <MR_PopSelectListDelegate, OperateDelegate>
 
 @property(nonatomic, assign) BOOL isOpen;
 @property(nonatomic, retain) NSString *clauseId;

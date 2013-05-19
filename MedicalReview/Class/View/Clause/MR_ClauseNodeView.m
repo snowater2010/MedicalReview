@@ -86,7 +86,7 @@
                 scoreSeg.selectedSegmentIndex = 0;
                 break;
             default:
-                scoreSeg.selectedSegmentIndex = UISegmentedControlNoSegment;
+                scoreSeg.selectedSegmentIndex = NO_SELECT_VALUE;
                 break;
         }
     }
@@ -197,7 +197,8 @@
 
 - (void)doDelete
 {
-    _LOG_(@"doDelete");
+    _scoreView.selectedSegmentIndex = NO_SELECT_VALUE;
+    [Common callDelegate:_delegate method:@selector(clauseNodeScored:) withObject:self];
 }
 - (void)doLink
 {

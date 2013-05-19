@@ -20,7 +20,7 @@
 
 @end
 
-@interface MR_TableClauseView : MR_RootView <ClauseHeadDelegate, ClauseNodeDelegate,  UITableViewDelegate, UITableViewDataSource>
+@interface MR_TableClauseView : MR_RootView <ClauseHeadDelegate, ClauseNodeDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic, retain) NSArray *clauseData;
 @property(nonatomic, retain) NSDictionary *scoreData;
