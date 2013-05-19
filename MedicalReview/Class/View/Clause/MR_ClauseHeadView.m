@@ -208,7 +208,7 @@
     return [_explainView getExplain];
 }
 
-- (void)changeNodeScore:(int)index
+- (void)changeScore:(int)index
 {
     [_scoreView selectAtIndex:index];
 }

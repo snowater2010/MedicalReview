@@ -27,7 +27,9 @@
 @property(nonatomic, assign) id<ClauseNodeDelegate> delegate;
 
 - (NSDictionary *)getScoreData;
-- (void)changeNodeScore:(int)index;
+- (void)changeScore:(int)index;
+- (NSString *)getScoreValue;
+- (NSString *)getScoreExplain;
 - (int)getScoreSelectIndex;
 
 @end

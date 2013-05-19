@@ -35,7 +35,7 @@
 
 - (void)changeHeadState;
 - (NSDictionary *)getScoreData;
-- (void)changeNodeScore:(int)index;
+- (void)changeScore:(int)index;
 - (int)getScoreSelectIndex;
 - (NSString *)getScoreValue;
 - (NSString *)getScoreExplain;

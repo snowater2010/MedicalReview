@@ -152,7 +152,6 @@
 {
     int headSection = sender.tag;
     
-    //现在的打分
     int scoreIndex = [sender getScoreSelectIndex];
     NSString *scoreValue = [sender getScoreValue];
     NSString *scoreExplain = [sender getScoreExplain];
@@ -191,7 +190,100 @@
 
 - (void)clauseNodeScored:(MR_ClauseNodeView *)sender
 {
+    int section = sender.tag;
+    NSString *value = sender.getScoreValue;
+    NSString *attrId = sender.attrId;
     
+    //clause points
+    NSDictionary *nodeDic = [_nodeData objectAtIndex:section];
+    NSString *clauseId = [nodeDic objectForKey:KEY_clauseId];
+    
+    NSDictionary *clausePoints = [[_clauseData objectAtIndex:section] objectForKey:KEY_pointList];
+    int pointCount = clausePoints.count;
+    NSString *clauseKeys[pointCount];
+    NSDictionary *clauseObjects[pointCount];
+    [clausePoints getObjects:clauseObjects andKeys:clauseKeys];
+    
+    //score
+    NSDictionary *scoreDic = [self getScoreDataDic:clauseId inSection:section];
+    NSDictionary *pointsDic = [scoreDic objectForKey:KEY_pointList];
+    [[pointsDic objectForKey:attrId] setValue:value forKey:KEY_scoreValue];
+    
+    //可以抽取单独方法，防止分组数改变
+    BOOL passA = YES;
+    BOOL passB = YES;
+    BOOL passC = YES;
+    BOOL noPassA = NO;
+    BOOL noPassB = NO;
+    BOOL noPassC = NO;
+    for (int i = 0; i < pointCount; i++)
+    {
+        NSString *clauseKey = clauseKeys[i];
+        NSDictionary *clauseInfo = clauseObjects[i];
+        NSString *attrLevel = [clauseInfo objectForKey:KEY_attrLevel];
+        
+        NSDictionary *pointScoreDic = [pointsDic objectForKey:clauseKey];
+        NSString *scoreValue = [pointScoreDic objectForKey:KEY_scoreValue];
+        int value = [Common isEmptyString:scoreValue] ? UISegmentedControlNoSegment : scoreValue.intValue;
+        
+        if ([attrLevel isEqualToString:@"A"]) {
+            if (value != 1) {
+                passA = NO;
+            }
+            if (value == 0) {
+                noPassA = YES;
+            }
+        }
+        else if ([attrLevel isEqualToString:@"B"]) {
+            if (value != 1) {
+                passB = NO;
+            }
+            if (value == 0) {
+                noPassB = YES;
+            }
+        }
+        else if ([attrLevel isEqualToString:@"C"]) {
+            if (value != 1) {
+                passC = NO;
+            }
+            if (value == 0) {
+                noPassC = YES;
+            }
+        }
+    }
+    
+    //可以抽取个递归方法
+    NSString *result = @"";
+    if (noPassC)
+    {
+        result = @"D";
+    }
+    else if(passC)
+    {
+        if (noPassB)
+        {
+            result = @"C";
+        }
+        else if(passB)
+        {
+            if (noPassA)
+            {
+                result = @"B";
+            }
+            else if(passA)
+            {
+                result = @"A";
+            }
+        }
+    }
+    
+    [scoreDic setValue:result forKey:KEY_scoreValue];
+    [_tableview reloadData];
+    
+    //update score
+    self.updateScoreData = [NSDictionary dictionaryWithObjectsAndKeys:scoreDic, clauseId, nil];
+    if (_updateScoreData)
+        [self doReaquestUpdateScoreData];
 }
 
 //根据条款，获得打分数据，包括所有要点

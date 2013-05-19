@@ -162,7 +162,24 @@
     return _scoreView.selectedSegmentIndex;
 }
 
-- (void)changeNodeScore:(int)index
+- (NSString *)getScoreValue
+{
+    int index = _scoreView.selectedSegmentIndex;
+    if (index == 0) {
+        return @"1";
+    }
+    else if(index == 1) {
+        return @"0";
+    }
+    return @"3";//待确认
+}
+
+- (NSString *)getScoreExplain
+{
+    return [_explainView getExplain];
+}
+
+- (void)changeScore:(int)index
 {
     _scoreView.selectedSegmentIndex = index;
 }
