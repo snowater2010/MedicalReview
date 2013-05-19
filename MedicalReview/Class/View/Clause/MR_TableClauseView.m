@@ -9,6 +9,7 @@
 #import "MR_TableClauseView.h"
 #import "MR_ClauseView.h"
 #import "MR_ClauseHeadView.h"
+#import "NSArray+Helper.h"
 
 @interface MR_TableClauseView ()
 
@@ -38,6 +39,15 @@
 - (void)drawRect:(CGRect)rect
 {
     [_sectionArray removeAllObjects];
+    
+    NSMutableDictionary *mScoreData;
+    if (_scoreData) {
+        mScoreData = [NSMutableDictionary dictionaryWithDictionary:_scoreData];
+    }
+    else {
+        mScoreData = [NSMutableDictionary dictionaryWithCapacity:0];
+    }
+    self.scoreData = mScoreData;
     
     //content view
     self.selfSize = rect.size;
@@ -147,69 +157,31 @@
     int scoreIndex = [sender getScoreSelectIndex];
     NSString *scoreValue = [sender getScoreValue];
     NSString *scoreExplain = [sender getScoreExplain];
-    
     NSString *clauseId = sender.clauseId;
-    NSDictionary *clausePoints = [[_clauseData objectAtIndex:headSection] objectForKey:KEY_pointList];
     
-    //更新head打分
-    if (!_scoreData)
-        self.scoreData = [NSMutableDictionary dictionary];
-    
-    if (![[_scoreData allKeys] containsObject:clauseId])
-        [_scoreData setValue:[NSMutableDictionary dictionary] forKey:clauseId];
-    
-    NSMutableDictionary *scoreDic = [_scoreData objectForKey:clauseId];
+    NSDictionary *scoreDic = [self getScoreDataDic:clauseId inSection:headSection];
     [scoreDic setValue:scoreValue forKey:KEY_scoreValue];
     [scoreDic setValue:scoreExplain forKey:KEY_scoreExplain];
     
-    //更新node打分
-    if (![[scoreDic allKeys] containsObject:KEY_pointList])
-        [scoreDic setValue:[NSMutableDictionary dictionary] forKey:KEY_pointList];
-    
     NSMutableDictionary *scorePoints = [scoreDic objectForKey:KEY_pointList];
-    
-    int pointCount = clausePoints.count;
-    NSString *clauseKeys[pointCount];
-    NSDictionary *clauseObjects[pointCount];
-    [clausePoints getObjects:clauseObjects andKeys:clauseKeys];
-    
-//    int scoreCount = [scoreDic count];
-//    NSString *scoreKeys[scoreCount];
-//    NSDictionary *scoreObjects[scoreCount];
-//    [scoreDic getObjects:scoreObjects andKeys:scoreKeys];
     NSArray *scoreKeys = [scorePoints allKeys];
     
-    switch (scoreIndex) {
-        case 0://所有要点都选A
-        {
-            //更新节点界面
-            [self updateNodeViewScore:0 inSectioin:headSection];
-            //更新节点打分
-            
-            for (int i = 0; i < pointCount; i++)
-            {
-                NSString *clauseKey = clauseKeys[i];
-//                NSDictionary *clauseInfo = clauseObjects[i];
-//                NSString *attrLevel = [clauseInfo objectForKey:KEY_attrLevel];
-                
-                if (![scoreKeys containsObject:clauseKey])
-                    [scorePoints setValue:[NSMutableDictionary dictionaryWithObjectsAndKeys:@"", KEY_scoreValue, @"", KEY_scoreExplain, nil] forKey:clauseKey];
-                
-                NSMutableDictionary *scorePointDic = [scorePoints objectForKey:clauseKey];
-                [scorePointDic setValue:@"0" forKey:KEY_scoreValue];
-            }
+    for (NSString *pointKey in scoreKeys)
+    {
+        NSDictionary *pointDic = [scorePoints objectForKey:pointKey];
+        NSString *attrLevel = [pointDic objectForKey:KEY_attrLevel];
+        
+        if ([_headScoreArray getIndexWithString:attrLevel] >= scoreIndex) {
+            [pointDic setValue:@"0" forKey:KEY_scoreValue];
         }
-            break;
-        case 1:
-            [self updateNodeViewScore:1 inSectioin:headSection];
-            break;
-        default:
-            [self updateNodeViewScore:NO_SELECT_VALUE inSectioin:headSection];
-            break;
+        else {
+            [pointDic setValue:@"" forKey:KEY_scoreValue];
+        }
     }
+    [_tableview reloadData];
     
     //update score
-    self.updateScoreData = _scoreData;
+    self.updateScoreData = [NSDictionary dictionaryWithObjectsAndKeys:scoreDic, clauseId, nil];
     if (_updateScoreData)
         [self doReaquestUpdateScoreData];
 }
@@ -219,18 +191,54 @@
     
 }
 
-//如果有node节点，更新界面打分
-- (void)updateNodeViewScore:(int)scoreIndex inSectioin:(int)section
+//根据条款，获得打分数据，包括所有要点
+- (NSDictionary *)getScoreDataDic:(NSString *)clauseId inSection:(int)section
 {
-    if ([_tableview numberOfRowsInSection:section] > 0) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
-        UITableViewCell *cell = [_tableview cellForRowAtIndexPath:indexPath];
-        for (UIView *nodeView in cell.contentView.subviews) {
-            if (nodeView.class == [MR_ClauseNodeView class]) {
-                [(MR_ClauseNodeView *)nodeView changeNodeScore:scoreIndex];
-            }
-        }
+    NSDictionary *scoreDic = [_scoreData objectForKey:clauseId];
+    NSMutableDictionary *mScoreDic;
+    if (scoreDic) {
+        mScoreDic = [NSMutableDictionary dictionaryWithDictionary:scoreDic];
     }
+    else {
+        mScoreDic = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"", KEY_scoreValue, @"", KEY_scoreExplain, nil];
+    }
+    [_scoreData setValue:mScoreDic forKey:clauseId];
+    
+    NSDictionary *scorePointDic = [mScoreDic objectForKey:KEY_pointList];
+    NSMutableDictionary *mScorePointDic;
+    if (scorePointDic) {
+        mScorePointDic = [NSMutableDictionary dictionaryWithDictionary:scorePointDic];
+    }
+    else {
+        mScorePointDic = [NSMutableDictionary dictionaryWithCapacity:0];
+    }
+    [mScoreDic setValue:mScorePointDic forKey:KEY_pointList];
+    
+    //clause points
+    NSDictionary *clausePoints = [[_clauseData objectAtIndex:section] objectForKey:KEY_pointList];
+    int pointCount = clausePoints.count;
+    NSString *clauseKeys[pointCount];
+    NSDictionary *clauseObjects[pointCount];
+    [clausePoints getObjects:clauseObjects andKeys:clauseKeys];
+    
+    for (int i = 0; i < pointCount; i++)
+    {
+        NSString *clauseKey = clauseKeys[i];
+        NSDictionary *clauseInfo = clauseObjects[i];
+        NSString *attrLevel = [clauseInfo objectForKey:KEY_attrLevel];
+        
+        NSDictionary *point = [mScorePointDic objectForKey:clauseKey];
+        NSMutableDictionary *mPoint;
+        if (point) {
+            mPoint = [NSMutableDictionary dictionaryWithDictionary:point];
+            [mPoint setValue:attrLevel forKey:KEY_attrLevel];
+        }
+        else {
+            mPoint = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"", KEY_scoreValue, @"", KEY_scoreExplain, attrLevel, KEY_attrLevel, nil];
+        }
+        [mScorePointDic setValue:mPoint forKey:clauseKey];
+    }
+    return mScoreDic;
 }
 
 #pragma mark -

@@ -108,9 +108,9 @@
     [_ibName resignFirstResponder];
     [_ibPassWord resignFirstResponder];
     
-    [self doRequestLogin];
+//    [self doRequestLogin];
     
-//    [self visitMainPage];
+    [self visitMainPage];
 }
 
 - (void)nameChanged

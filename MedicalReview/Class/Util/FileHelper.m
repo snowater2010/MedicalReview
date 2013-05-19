@@ -333,7 +333,6 @@
 {
     NSString *filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
     NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
-    
     return [jsonData objectFromJSONData];
 }
 + (NSDictionary *)readClauseDataFromFile
@@ -341,8 +340,7 @@
     NSString *fileName = @"json_clause.txt";
     NSString *filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
     NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
-    NSDictionary *jsonDic = [[[NSDictionary alloc] initWithDictionary:[jsonData objectFromJSONData]] autorelease];
-    return jsonDic;
+    return [jsonData objectFromJSONData];
 }
 
 + (NSDictionary *)readScoreDataFromFile
@@ -350,8 +348,7 @@
     NSString *fileName = @"json_score.txt";
     NSString *filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
     NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
-    NSDictionary *jsonDic = [[[NSDictionary alloc] initWithDictionary:[jsonData objectFromJSONData]] autorelease];
-    return jsonDic;
+    return [jsonData objectFromJSONData];
 }
 
 @end

@@ -129,10 +129,10 @@
     else {
         [self responseFailed:request.tag];
         if (message) {
-//            _ALERT_SIMPLE_(message);
+            _ALERT_SIMPLE_(message);
         }
         else {
-//            _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"request_data_error"));
+            _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"request_data_error"));
         }
     }
 }
@@ -141,7 +141,7 @@
 {
 //    NSError *error = [request error];
     [self responseFailed:request.tag];
-//    _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"request_error"));
+    _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"request_error"));
 }
 
 - (void)responseSuccess:(NSDictionary *)dataDic tag:(int)tag
