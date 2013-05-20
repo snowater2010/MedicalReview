@@ -108,9 +108,9 @@
     [_ibName resignFirstResponder];
     [_ibPassWord resignFirstResponder];
     
-//    [self doRequestLogin];
+    [self doRequestLogin];
     
-    [self visitMainPage];
+//    [self visitMainPage];
 }
 
 - (void)nameChanged
@@ -161,11 +161,6 @@
     if (strscoreUpdateCache)
         [self.request setPostValue:strscoreUpdateCache forKey:@"postData"];
     
-    NSString *postData = [[NSString alloc] initWithData:self.request.postBody encoding:NSNonLossyASCIIStringEncoding];
-    NSString *post = [NSString stringWithFormat:@"postBody:%@", postData];
-    [postData release];
-    _ALERT_SIMPLE_(post);
-    
     self.request.delegate = self;
     [self.request startAsynchronous];
     
@@ -197,14 +192,6 @@
         [self.request appendPostData:[strscoreUpdateCache dataUsingEncoding:NSNonLossyASCIIStringEncoding]];
     }
     
-//    NSString *url = [NSString stringWithFormat:@"%@［%@］", serverUrl, @"loadData"];
-//    _ALERT_SIMPLE_(url);
-//    
-//     NSString *postData = [[NSString alloc] initWithData:self.request.postBody encoding:NSNonLossyASCIIStringEncoding];
-//    NSString *post = [NSString stringWithFormat:@"postBody:%@", postData];
-//    _ALERT_SIMPLE_(post);
-//    [postData release];
-    
     self.request.timeOutSeconds = 3000;
     self.request.delegate = self;
     [self.request startAsynchronous];
@@ -220,7 +207,8 @@
         [self initUserInfo:dataDic];
         
         //request data
-        [self doRequestData];
+//        [self doRequestData];
+        [self visitMainPage];
     }
     else if (tag == TAG_REQUEST_DATA) {
         //获取数据

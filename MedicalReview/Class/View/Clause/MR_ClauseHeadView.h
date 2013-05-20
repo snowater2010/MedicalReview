@@ -26,6 +26,7 @@
 @interface MR_ClauseHeadView : MR_RootView <MR_PopSelectListDelegate, OperateDelegate>
 
 @property(nonatomic, assign) BOOL isOpen;
+@property(nonatomic, assign) int section;
 @property(nonatomic, retain) NSString *clauseId;
 @property(nonatomic, retain) NSDictionary *clauseData;
 @property(nonatomic, retain) NSDictionary *scoreData;

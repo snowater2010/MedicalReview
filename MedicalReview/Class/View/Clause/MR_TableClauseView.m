@@ -151,25 +151,25 @@
 - (void)clickClauseHead:(id)sender
 {
     MR_ClauseHeadView *clauseHeadView = (MR_ClauseHeadView *)sender;
-    int tag = clauseHeadView.tag;
+    int sectioin = clauseHeadView.section;
     
     int rowNumber = 0;
-    NSArray *pointsArr = [[_nodeData objectAtIndex:tag] objectForKey:KEY_pointList];
+    NSArray *pointsArr = [[_nodeData objectAtIndex:sectioin] objectForKey:KEY_pointList];
     if (pointsArr)
         rowNumber = pointsArr.count;
     
     NSMutableArray* rowToDo = [[NSMutableArray alloc] initWithCapacity:rowNumber];
     for (int i = 0; i < rowNumber; i++) {
-        [rowToDo addObject:[NSIndexPath indexPathForRow:i inSection:tag]];
+        [rowToDo addObject:[NSIndexPath indexPathForRow:i inSection:sectioin]];
     }
     
     [_tableview beginUpdates];
-    if ([_sectionArray containsObject:[NSNumber numberWithInt:tag]]) {
-        [_sectionArray removeObject:[NSNumber numberWithInt:tag]];
+    if ([_sectionArray containsObject:[NSNumber numberWithInt:sectioin]]) {
+        [_sectionArray removeObject:[NSNumber numberWithInt:sectioin]];
         [_tableview deleteRowsAtIndexPaths:rowToDo withRowAnimation:UITableViewRowAnimationTop];
     }
     else {
-        [_sectionArray addObject:[NSNumber numberWithInt:tag]];
+        [_sectionArray addObject:[NSNumber numberWithInt:sectioin]];
         [_tableview insertRowsAtIndexPaths:rowToDo withRowAnimation:UITableViewRowAnimationTop];
     }
     [_tableview endUpdates];
@@ -179,7 +179,7 @@
 
 - (void)clauseHeadScored:(MR_ClauseHeadView *)sender
 {
-    int section = sender.tag;
+    int section = sender.section;
     
     int scoreIndex = [sender getScoreSelectIndex];
     NSString *scoreValue = [sender getScoreValue];
@@ -214,7 +214,8 @@
     }
     
     //refresh node score on page
-    [self updateNodeViewScore:scoreDic inSectioin:section];
+    [_tableview reloadData];
+//    [self updateNodeViewScore:scoreDic inSectioin:section];
     
     //update score
     self.updateScoreData = [NSDictionary dictionaryWithObjectsAndKeys:scoreDic, clauseId, nil];
@@ -224,13 +225,10 @@
 
 - (void)clauseNodeScored:(MR_ClauseNodeView *)sender
 {
-    int section = sender.tag - TAG_CELL_NODE_VIEW;
+    int section = sender.section;
     NSString *value = sender.getScoreValue;
     NSString *attrId = sender.attrId;
-    
-    //clause points
-    NSDictionary *nodeDic = [_nodeData objectAtIndex:section];
-    NSString *clauseId = [nodeDic objectForKey:KEY_clauseId];
+    NSString *clauseId = sender.clauseId;
     
     NSDictionary *clausePoints = [[_clauseData objectAtIndex:section] objectForKey:KEY_pointList];
     int pointCount = clausePoints.count;
@@ -308,8 +306,8 @@
     [scoreDic setValue:result forKey:KEY_scoreValue];
     
     //refresh head score on page
-//    [_tableview reloadData];
-    [self updateHeadViewScore:scoreDic inSectioin:section];
+    [_tableview reloadData];
+//    [self updateHeadViewScore:scoreDic inSectioin:section];
     
     //update score
     self.updateScoreData = [NSDictionary dictionaryWithObjectsAndKeys:scoreDic, clauseId, nil];
@@ -317,33 +315,33 @@
         [self doReaquestUpdateScoreData];
 }
 
-//更新head界面打分
-- (void)updateHeadViewScore:(NSDictionary *)scoreDic inSectioin:(int)section
-{
-    if (_tableHadeViews.count > section)
-    {
-        MR_ClauseHeadView *headView = (MR_ClauseHeadView *)[_tableHadeViews objectAtIndex:section];
-        NSString *headScore = [scoreDic objectForKey:KEY_scoreValue];
-        [headView changeScoreWithValue:headScore];
-    }
-}
-
-//如果展开node节点，更新界面打分
-- (void)updateNodeViewScore:(NSDictionary *)scoreDic inSectioin:(int)section
-{
-    NSDictionary *pointsDic = [scoreDic objectForKey:KEY_pointList];
-    
-    for (int i = 0, j = [_tableview numberOfRowsInSection:section]; i < j; i++) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:section];
-        UITableViewCell *cell = [_tableview cellForRowAtIndexPath:indexPath];
-        
-        MR_ClauseNodeView *nodeView = (MR_ClauseNodeView *)[cell viewWithTag:TAG_CELL_NODE_VIEW+section];
-        NSString *attrId = nodeView.attrId;
-        NSDictionary *pointScore = [pointsDic objectForKey:attrId];
-        NSString *scoreValue = [pointScore objectForKey:KEY_scoreValue];
-        [nodeView changeScoreWithValue:scoreValue];
-    }
-}
+////更新head界面打分
+//- (void)updateHeadViewScore:(NSDictionary *)scoreDic inSectioin:(int)section
+//{
+//    if (_tableHadeViews.count > section)
+//    {
+//        MR_ClauseHeadView *headView = (MR_ClauseHeadView *)[_tableHadeViews objectAtIndex:section];
+//        NSString *headScore = [scoreDic objectForKey:KEY_scoreValue];
+//        [headView changeScoreWithValue:headScore];
+//    }
+//}
+//
+////如果展开node节点，更新界面打分
+//- (void)updateNodeViewScore:(NSDictionary *)scoreDic inSectioin:(int)section
+//{
+//    NSDictionary *pointsDic = [scoreDic objectForKey:KEY_pointList];
+//    
+//    for (int i = 0, j = [_tableview numberOfRowsInSection:section]; i < j; i++) {
+//        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:section];
+//        UITableViewCell *cell = [_tableview cellForRowAtIndexPath:indexPath];
+//        
+//        MR_ClauseNodeView *nodeView = (MR_ClauseNodeView *)[cell viewWithTag:TAG_CELL_NODE_VIEW+section];
+//        NSString *attrId = nodeView.attrId;
+//        NSDictionary *pointScore = [pointsDic objectForKey:attrId];
+//        NSString *scoreValue = [pointScore objectForKey:KEY_scoreValue];
+//        [nodeView changeScoreWithValue:scoreValue];
+//    }
+//}
 
 #pragma mark -
 #pragma mark -- request to update data
@@ -365,16 +363,6 @@
         if (strscoreCache)
             [request setPostValue:strscoreCache forKey:@"postData"];
     }
-    
-//    //debug message
-//    NSString *url = [NSString stringWithFormat:@"%@［%@］", serverUrl, @"upLoadData"];
-//    _ALERT_SIMPLE_(url);
-//    
-//    NSString *postData = [[NSString alloc] initWithData:request.postBody encoding:NSNonLossyASCIIStringEncoding];
-//    NSString *post = [NSString stringWithFormat:@"postBody:%@", postData];
-//    _ALERT_SIMPLE_(post);
-//    [postData release];
-//    //debug message
     
     request.delegate = self;
     [request startAsynchronous];
@@ -448,7 +436,7 @@
     float head_h = DEFAULT_CELL_HEIGHT;
     CGRect headFrame = CGRectMake(head_x, head_y, head_w, head_h);
     MR_ClauseHeadView *headView = [[[MR_ClauseHeadView alloc] initWithFrame:headFrame] autorelease];
-    headView.tag = section;
+    headView.section = section;
     headView.delegate = self;
     headView.clauseId = clauseId;
     headView.clauseData = clauseDic;
@@ -478,12 +466,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    int section = indexPath.section;
-//    NSDictionary *nodeDic = [_nodeData objectAtIndex:section];
-//    NSArray *pathPointList = [nodeDic objectForKey:KEY_pointList];
-//    
-//    return DEFAULT_CELL_HEIGHT * pathPointList.count;
-    
     return DEFAULT_CELL_HEIGHT;
 }
 
@@ -506,37 +488,31 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-    }
-    
-    for (UIView *view in cell.contentView.subviews) {
-        [view removeFromSuperview];
+        CGRect nodeFrame = CGRectMake(0, 0, _selfSize.width, DEFAULT_CELL_HEIGHT);
+        MR_ClauseNodeView *nodeView = [[MR_ClauseNodeView alloc] initWithFrame:nodeFrame withScoreArray:_nodeScoreArray];
+        nodeView.delegate = self;
+        nodeView.tag = TAG_CELL_NODE_VIEW;
+        [cell.contentView addSubview:nodeView];
+        [nodeView release];
     }
     
     NSDictionary *pointDic = [pointList objectAtIndex:row];
     NSString *attrId = [pointDic objectForKey:KEY_attrId];
     
-    CGRect nodeFrame = CGRectMake(0, 0, _selfSize.width, DEFAULT_CELL_HEIGHT);
-    MR_ClauseNodeView *nodeView = [[MR_ClauseNodeView alloc] initWithFrame:nodeFrame];
-    nodeView.tag = TAG_CELL_NODE_VIEW + section;
-//    [cell.contentView addSubview:nodeView];
-//    
-//    MR_ClauseNodeView *nodeView = (MR_ClauseNodeView *)[cell viewWithTag:TAG_CELL_NODE_VIEW];
+    MR_ClauseNodeView *nodeView = (MR_ClauseNodeView *)[cell.contentView viewWithTag:TAG_CELL_NODE_VIEW];
+    nodeView.section = section;
     nodeView.attrId = attrId;
+    nodeView.clauseId = clauseId;
     nodeView.clauseData = [clauseDic objectForKey:attrId];
     nodeView.scoreData = [scoreDic objectForKey:attrId];
-    nodeView.scoreArray = _nodeScoreArray;
-    nodeView.delegate = self;
-//    nodeView.tag = section;
-//    [nodeView refreshDatas];
+    
+    [nodeView refreshDatas];
     
     if (row % 2 == 0) {
         nodeView.backgroundColor = [UIColor grayColor];
     } else {
         nodeView.backgroundColor = [UIColor lightGrayColor];
     }
-    
-    [cell.contentView addSubview:nodeView];
-    [nodeView release];
     
     return cell;
 }
