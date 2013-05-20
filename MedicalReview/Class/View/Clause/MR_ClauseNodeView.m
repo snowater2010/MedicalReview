@@ -171,7 +171,7 @@
     else if(index == 1) {
         return @"0";
     }
-    return @"3";//待确认
+    return @"";
 }
 
 - (NSString *)getScoreExplain
@@ -179,9 +179,21 @@
     return [_explainView getExplain];
 }
 
-- (void)changeScore:(int)index
+- (void)changeScoreWithIndex:(int)index
 {
     _scoreView.selectedSegmentIndex = index;
+}
+
+- (void)changeScoreWithValue:(NSString *)value
+{
+    int index = NO_SELECT_VALUE;
+    if ([value isEqualToString:@"1"]) {
+        index = 0;
+    }
+    else if([value isEqualToString:@"0"]) {
+        index = 1;
+    }
+    [self changeScoreWithIndex:index];
 }
 
 #pragma mark -

@@ -214,6 +214,14 @@
     [_scoreView selectAtIndex:index];
 }
 
+- (void)changeScoreWithValue:(NSString *)value
+{
+    int index = [_scoreArray getIndexWithString:value];
+    if (index == NO_STRING_INDEX)
+        index = NO_SELECT_INDEX;
+    [self changeScore:index];
+}
+
 #pragma mark -
 #pragma mark MR_PopSelectListDelegate
 - (void)selectedAtIndexPath:(NSIndexPath *)indexPath

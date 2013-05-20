@@ -27,6 +27,7 @@
 
 - (NSDictionary *)getScoreData;
 - (void)changeScore:(int)index;
+- (void)changeScoreWithValue:(NSString *)value;
 - (NSString *)getScoreValue;
 - (NSString *)getScoreExplain;
 - (int)getScoreSelectIndex;

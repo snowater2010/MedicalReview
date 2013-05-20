@@ -108,9 +108,9 @@
     [_ibName resignFirstResponder];
     [_ibPassWord resignFirstResponder];
     
-//    [self doRequestLogin];
+    [self doRequestLogin];
     
-    [self visitMainPage];
+//    [self visitMainPage];
 }
 
 - (void)nameChanged
@@ -152,17 +152,19 @@
     self.request.tag = TAG_REQUEST_LOGIN;
     
     [self.request setPostValue:@"login" forKey:@"module"];
+    [self.request setPostValue:@"login" forKey:@"module2"];
     [self.request setPostValue:_loginName forKey:@"uid"];
     [self.request setPostValue:_loginPassWord forKey:@"pwd"];
     
-//    NSDictionary *scoreUpdateCache = [FileHelper readScoreDataFromFile];
-//    NSString *strscoreUpdateCache = [scoreUpdateCache JSONString];
-//    [self.request appendPostData:[strscoreUpdateCache dataUsingEncoding:NSNonLossyASCIIStringEncoding]];
-//    
-//    NSString *postData = [[NSString alloc] initWithData:self.request.postBody encoding:NSNonLossyASCIIStringEncoding];
-//    NSString *post = [NSString stringWithFormat:@"postBody:%@", postData];
-//    [postData release];
-//    _ALERT_SIMPLE_(post);
+    NSDictionary *scoreUpdateCache = [FileHelper readScoreUpdateDataFromCache];
+    NSString *strscoreUpdateCache = [scoreUpdateCache JSONString];
+    if (strscoreUpdateCache)
+        [self.request setPostValue:strscoreUpdateCache forKey:@"postData"];
+    
+    NSString *postData = [[NSString alloc] initWithData:self.request.postBody encoding:NSNonLossyASCIIStringEncoding];
+    NSString *post = [NSString stringWithFormat:@"postBody:%@", postData];
+    [postData release];
+    _ALERT_SIMPLE_(post);
     
     self.request.delegate = self;
     [self.request startAsynchronous];
@@ -219,13 +221,6 @@
         
         //request data
         [self doRequestData];
-        
-        //demo
-//        if ([FileHelper ifHaveClauseCache]) {
-//            [self visitMainPage];
-//        } else {
-//            [self doRequestData];
-//        }
     }
     else if (tag == TAG_REQUEST_DATA) {
         //获取数据

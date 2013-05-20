@@ -8,6 +8,12 @@
 
 #import "MR_ExplainView.h"
 
+@interface MR_ExplainView ()
+
+//@property(nonatomic, retain) UIPopoverController *viewPop;
+
+@end
+
 @implementation MR_ExplainView
 
 - (id)initWithFrame:(CGRect)frame
@@ -51,6 +57,7 @@
 - (void)dealloc
 {
     self.wordExplan = nil;
+//    self.viewPop = nil;
     [super dealloc];
 }
 
@@ -58,7 +65,7 @@
 {
     UITextView *explainView = (UITextView *)[self viewWithTag:TAG_VIEW_EXPLAIN];
     explainView.text = @"select something";
-    _LOG_(@"MR_ExplainView btPressed!");
+    
 }
 
 - (NSString *)getExplain
