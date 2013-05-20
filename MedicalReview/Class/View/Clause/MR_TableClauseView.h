@@ -12,6 +12,7 @@
 
 #define DEFAULT_CELL_HEIGHT 50
 #define NAME_TEXT_SIZE 14
+#define TAG_CELL_NODE_VIEW 10000
 
 @protocol TableClauseViewDelegate <NSObject>
 

@@ -25,8 +25,9 @@
 @property(nonatomic, retain) NSArray *scoreArray;
 @property(nonatomic, assign) id<ClauseNodeDelegate> delegate;
 
+- (void)refreshDatas;
 - (NSDictionary *)getScoreData;
-- (void)changeScore:(int)index;
+- (void)changeScoreWithIndex:(int)index;
 - (void)changeScoreWithValue:(NSString *)value;
 - (NSString *)getScoreValue;
 - (NSString *)getScoreExplain;

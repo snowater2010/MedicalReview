@@ -12,6 +12,7 @@
 #import "MR_TableClauseView.h"
 
 @interface MR_ClauseNodeView ()
+@property(nonatomic, retain) UILabel *nameLabel;
 @property(nonatomic, retain) UISegmentedControl *scoreView;
 @property(nonatomic, retain) MR_ExplainView *explainView;
 @end
@@ -25,6 +26,15 @@
 //        self.backgroundColor = [UIColor blueColor];
     }
     return self;
+}
+
+- (void)refreshDatas
+{
+    NSString *name = [_clauseData objectForKey:KEY_attrName];
+    NSString *scoreValue = [_scoreData objectForKey:KEY_scoreValue];
+    NSString *scoreExplain = [_scoreData objectForKey:KEY_scoreExplain];
+    
+    _nameLabel.text = name;
 }
 
 - (void)drawRect:(CGRect)rect
@@ -45,6 +55,7 @@
     nameLabel.text = name;
     nameLabel.font = [UIFont systemFontOfSize:NAME_TEXT_SIZE];
     nameLabel.backgroundColor = [UIColor clearColor];
+    self.nameLabel = nameLabel;
     
     //----------------------
     //self score
@@ -130,6 +141,7 @@
     self.clauseData = nil;
     self.scoreData = nil;
     self.scoreView = nil;
+    self.nameLabel = nil;
     self.scoreArray = nil;
     self.explainView = nil;
     [super dealloc];
