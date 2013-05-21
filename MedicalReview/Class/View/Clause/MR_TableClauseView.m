@@ -214,8 +214,7 @@
     }
     
     //refresh node score on page
-    [_tableview reloadData];
-//    [self updateNodeViewScore:scoreDic inSectioin:section];
+    [self updateNodeViewScore:scoreDic inSectioin:section];
     
     //update score
     self.updateScoreData = [NSDictionary dictionaryWithObjectsAndKeys:scoreDic, clauseId, nil];
@@ -306,8 +305,7 @@
     [scoreDic setValue:result forKey:KEY_scoreValue];
     
     //refresh head score on page
-    [_tableview reloadData];
-//    [self updateHeadViewScore:scoreDic inSectioin:section];
+    [self updateHeadViewScore:scoreDic inSectioin:section];
     
     //update score
     self.updateScoreData = [NSDictionary dictionaryWithObjectsAndKeys:scoreDic, clauseId, nil];
@@ -315,33 +313,33 @@
         [self doReaquestUpdateScoreData];
 }
 
-////更新head界面打分
-//- (void)updateHeadViewScore:(NSDictionary *)scoreDic inSectioin:(int)section
-//{
-//    if (_tableHadeViews.count > section)
-//    {
-//        MR_ClauseHeadView *headView = (MR_ClauseHeadView *)[_tableHadeViews objectAtIndex:section];
-//        NSString *headScore = [scoreDic objectForKey:KEY_scoreValue];
-//        [headView changeScoreWithValue:headScore];
-//    }
-//}
-//
-////如果展开node节点，更新界面打分
-//- (void)updateNodeViewScore:(NSDictionary *)scoreDic inSectioin:(int)section
-//{
-//    NSDictionary *pointsDic = [scoreDic objectForKey:KEY_pointList];
-//    
-//    for (int i = 0, j = [_tableview numberOfRowsInSection:section]; i < j; i++) {
-//        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:section];
-//        UITableViewCell *cell = [_tableview cellForRowAtIndexPath:indexPath];
-//        
-//        MR_ClauseNodeView *nodeView = (MR_ClauseNodeView *)[cell viewWithTag:TAG_CELL_NODE_VIEW+section];
-//        NSString *attrId = nodeView.attrId;
-//        NSDictionary *pointScore = [pointsDic objectForKey:attrId];
-//        NSString *scoreValue = [pointScore objectForKey:KEY_scoreValue];
-//        [nodeView changeScoreWithValue:scoreValue];
-//    }
-//}
+//更新head界面打分
+- (void)updateHeadViewScore:(NSDictionary *)scoreDic inSectioin:(int)section
+{
+    if (_tableHadeViews.count > section)
+    {
+        MR_ClauseHeadView *headView = (MR_ClauseHeadView *)[_tableHadeViews objectAtIndex:section];
+        NSString *headScore = [scoreDic objectForKey:KEY_scoreValue];
+        [headView changeScoreWithValue:headScore];
+    }
+}
+
+//如果展开node节点，更新界面打分
+- (void)updateNodeViewScore:(NSDictionary *)scoreDic inSectioin:(int)section
+{
+    NSDictionary *pointsDic = [scoreDic objectForKey:KEY_pointList];
+    
+    for (int i = 0, j = [_tableview numberOfRowsInSection:section]; i < j; i++) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:section];
+        UITableViewCell *cell = [_tableview cellForRowAtIndexPath:indexPath];
+        
+        MR_ClauseNodeView *nodeView = (MR_ClauseNodeView *)[cell viewWithTag:TAG_CELL_NODE_VIEW+section];
+        NSString *attrId = nodeView.attrId;
+        NSDictionary *pointScore = [pointsDic objectForKey:attrId];
+        NSString *scoreValue = [pointScore objectForKey:KEY_scoreValue];
+        [nodeView changeScoreWithValue:scoreValue];
+    }
+}
 
 #pragma mark -
 #pragma mark -- request to update data
