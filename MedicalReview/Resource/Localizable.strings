@@ -28,3 +28,6 @@
 "button_shortcut"                   = "快捷";
 "button_delete"                     = "删除";
 "button_link"                       = "评审要素";
+
+//title
+"title_explain_page"                = "打分说明";

@@ -7,8 +7,7 @@
 //
 
 #import "MR_RootView.h"
-
-#define TAG_VIEW_EXPLAIN    0101
+#import "MR_RootController.h"
 
 #define DEFAULT_TEXT_SIZE   14
 #define BUTTON_TEXT_SIZE    16
@@ -19,7 +18,23 @@
 @property(nonatomic, assign) float textSize;
 @property(nonatomic, assign) BOOL readOnly;
 
-- (void)btPressed;
+- (NSString *)getExplain;
+
+@end
+
+//explain editor
+
+@interface MR_ExplainCtro : MR_RootController
+
+- (NSString *)getExplain;
+- (void)setExplain:(NSString *)explain;
+
+@end
+
+//fast explain
+
+@interface MR_FastExplainCtro : MR_RootController
+
 - (NSString *)getExplain;
 
 @end
