@@ -367,7 +367,7 @@
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:section];
         UITableViewCell *cell = [_tableview cellForRowAtIndexPath:indexPath];
         
-        MR_ClauseNodeView *nodeView = (MR_ClauseNodeView *)[cell viewWithTag:TAG_CELL_NODE_VIEW+section];
+        MR_ClauseNodeView *nodeView = (MR_ClauseNodeView *)[cell viewWithTag:TAG_CELL_NODE_VIEW];
         NSString *attrId = nodeView.attrId;
         NSDictionary *pointScore = [pointsDic objectForKey:attrId];
         NSString *scoreValue = [pointScore objectForKey:KEY_scoreValue];
