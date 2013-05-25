@@ -123,14 +123,6 @@
     
     NSMutableArray *nodes = [[NSMutableArray alloc] initWithCapacity:nodeList.count];
     
-    BOOL hasScore = NO;
-    NSArray *allkeys = nil;
-    if (_scoreData) {
-        allkeys = [_scoreData allKeys];
-        if (allkeys && allkeys.count > 0)
-            hasScore = YES;
-    }
-    
     //计算总数和完成数
     for (NSDictionary *pathDic in nodeList) {
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:pathDic];
@@ -139,12 +131,12 @@
         int finish = 0;
         NSArray *clauseArr = [pathDic objectForKey:KEY_clauseList];
         if (clauseArr) {
-            if (hasScore) {
-                for (NSDictionary *clauseDic in clauseArr) {
-                    NSString *clauseId = [clauseDic objectForKey:KEY_clauseId];
-                    if ([allkeys containsObject:clauseId]) {
-                        finish ++;
-                    }
+            for (NSDictionary *clauseDic in clauseArr) {
+                NSString *clauseId = [clauseDic objectForKey:KEY_clauseId];
+                NSDictionary *scoreDic = [_scoreData objectForKey:clauseId];
+                NSString *scoreValue = [scoreDic objectForKey:KEY_scoreValue];
+                if ([Common isNotEmptyString:scoreValue]) {
+                    finish ++;
                 }
             }
             total = clauseArr.count;
@@ -187,22 +179,32 @@
     if ([Common isEmptyString:scoredClauseId])
         return;
     
-    //已经打过分
-    if (_scoreData) {
-        NSArray * allkeys = [_scoreData allKeys];
-        if (allkeys && [allkeys containsObject:scoredClauseId])
-            return;
-    }
-    
-    //新增打分
+    //修改打分
     for (NSMutableDictionary *pathDic in self.nodeData) {
         NSArray *clauseArr = [pathDic objectForKey:KEY_clauseList];
         if (clauseArr) {
             for (NSDictionary *clauseDic in clauseArr) {
                 NSString *clauseId = [clauseDic objectForKey:KEY_clauseId];
                 if ([scoredClauseId isEqualToString:clauseId]) {
-                    int finish = [[pathDic objectForKey:KEY_finishCount] intValue];
-                    [pathDic setValue:[NSNumber numberWithInt:++finish] forKey:KEY_finishCount];
+                    NSString *newScore = [[scoredData objectForKey:clauseId] objectForKey:KEY_scoreValue];
+                    NSString *oldScore = [[_scoreData objectForKey:clauseId] objectForKey:KEY_scoreValue];
+                    
+                    int addNum = 0;
+                    if ([Common isNotEmptyString:oldScore]) {
+                        if ([Common isEmptyString:newScore]) {
+                            addNum = -1;
+                        }
+                    } else {
+                        if ([Common isNotEmptyString:newScore]) {
+                            addNum = 1;
+                        }
+                    }
+                    
+                    if (addNum != 0) {
+                        int finish = [[pathDic objectForKey:KEY_finishCount] intValue];
+                        finish += addNum;
+                        [pathDic setValue:[NSNumber numberWithInt:finish] forKey:KEY_finishCount];
+                    }
                 }
             }
         }

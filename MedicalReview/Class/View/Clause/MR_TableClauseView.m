@@ -215,9 +215,10 @@
     [self updateNodeViewScore:scoreDic inSectioin:section];
     
     //update score
-    self.updateScoreData = [NSDictionary dictionaryWithObjectsAndKeys:scoreDic, clauseId, nil];
-    if (_updateScoreData)
-        [self doReaquestUpdateScoreData];
+    NSDictionary *newScoreData = [NSDictionary dictionaryWithObjectsAndKeys:scoreDic, clauseId, nil];
+    self.updateScoreData = newScoreData;
+    if (newScoreData)
+        [self doReaquestUpdateScoreData:newScoreData];
 }
 
 //update head explain
@@ -232,9 +233,10 @@
     [scoreDic setValue:scoreExplain forKey:KEY_scoreExplain];
     
     //update score
-    self.updateScoreData = [NSDictionary dictionaryWithObjectsAndKeys:scoreDic, clauseId, nil];
-    if (_updateScoreData)
-        [self doReaquestUpdateScoreData];
+    NSDictionary *newScoreData = [NSDictionary dictionaryWithObjectsAndKeys:scoreDic, clauseId, nil];
+    self.updateScoreData = newScoreData;
+    if (newScoreData)
+        [self doReaquestUpdateScoreData:newScoreData];
 }
 
 - (void)clauseNodeScored:(MR_ClauseNodeView *)sender
@@ -323,9 +325,10 @@
     [self updateHeadViewScore:scoreDic inSectioin:section];
     
     //update score
-    self.updateScoreData = [NSDictionary dictionaryWithObjectsAndKeys:scoreDic, clauseId, nil];
-    if (_updateScoreData)
-        [self doReaquestUpdateScoreData];
+    NSDictionary *newScoreData = [NSDictionary dictionaryWithObjectsAndKeys:scoreDic, clauseId, nil];
+    self.updateScoreData = newScoreData;
+    if (newScoreData)
+        [self doReaquestUpdateScoreData:newScoreData];
 }
 
 //update node explain text
@@ -342,9 +345,10 @@
     [[pointsDic objectForKey:attrId] setValue:explain forKey:KEY_scoreExplain];
     
     //update score
-    self.updateScoreData = [NSDictionary dictionaryWithObjectsAndKeys:scoreDic, clauseId, nil];
-    if (_updateScoreData)
-        [self doReaquestUpdateScoreData];
+    NSDictionary *newScoreData = [NSDictionary dictionaryWithObjectsAndKeys:scoreDic, clauseId, nil];
+    self.updateScoreData = newScoreData;
+    if (newScoreData)
+        [self doReaquestUpdateScoreData:newScoreData];
 }
 
 //更新head界面打分
@@ -378,23 +382,26 @@
 #pragma mark -
 #pragma mark -- request to update data
 
-- (void)doReaquestUpdateScoreData
+- (void)doReaquestUpdateScoreData:(NSDictionary *)newScoreData
 {
+    if (!newScoreData)
+        return;
+    
     //异步请求服务器更新数据
     _GET_APP_DELEGATE_(appDelegate);
     NSString *serverUrl = appDelegate.globalinfo.serverInfo.strWebServiceUrl;
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:serverUrl]];
     
+    request.userInfo = newScoreData;
+    
     [request setPostValue:@"upLoadData" forKey:@"module"];
     [request setPostValue:@"upLoadData" forKey:@"module2"];
     [request setDefaultPostValue];
     
-    if (_updateScoreData) {
-        NSString *strscoreCache = [_updateScoreData JSONString];
-        if (strscoreCache)
-            [request setPostValue:strscoreCache forKey:@"postData"];
-    }
+    NSString *strscoreCache = [newScoreData JSONString];
+    if (strscoreCache)
+        [request setPostValue:strscoreCache forKey:@"postData"];
     
     request.delegate = self;
     [request startAsynchronous];
@@ -414,35 +421,38 @@
         }
     }
     
+    NSDictionary *newScoreData = request.userInfo;
+    
     if (ok) {
-        [self doRequestUpdateSucess];
+        [self doRequestUpdateSucess:newScoreData];
     }
     else {
-        [self doRequestUpdateFailed];
+        [self doRequestUpdateFailed:newScoreData];
     }
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
-    [self doRequestUpdateFailed];
+    NSDictionary *newScoreData = request.userInfo;
+    [self doRequestUpdateFailed:newScoreData];
 }
 
-- (void)doRequestUpdateSucess
+- (void)doRequestUpdateSucess:(NSDictionary *)newScoreData
 {
     //更新打分缓存
-    [FileHelper asyWriteScoreDataToCache:_updateScoreData];
+    [FileHelper asyWriteScoreDataToCache:newScoreData];
     
     //通知打分完成
-    [Common callDelegate:_scoredDelegate method:@selector(clauseScored:) withObject:_updateScoreData];
+    [Common callDelegate:_scoredDelegate method:@selector(clauseScored:) withObject:newScoreData];
 }
 
-- (void)doRequestUpdateFailed
+- (void)doRequestUpdateFailed:(NSDictionary *)newScoreData
 {
     //更新“打分更新”缓存
-    [FileHelper asyWriteScoreUpdateDataToCache:_updateScoreData];
+    [FileHelper asyWriteScoreUpdateDataToCache:newScoreData];
     
     //通知打分完成
-    [Common callDelegate:_scoredDelegate method:@selector(clauseScored:) withObject:_updateScoreData];
+    [Common callDelegate:_scoredDelegate method:@selector(clauseScored:) withObject:newScoreData];
 }
 
 #pragma mark -
