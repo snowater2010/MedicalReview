@@ -8,6 +8,7 @@
 
 #import "MR_RootView.h"
 #import "MR_OperateView.h"
+#import "MR_ExplainView.h"
 
 #define NO_SELECT_VALUE UISegmentedControlNoSegment
 
@@ -15,9 +16,10 @@
 
 @optional
 - (void)clauseNodeScored:(id)sender;
+- (void)clauseNodeExplained:(id)sender;
 @end
 
-@interface MR_ClauseNodeView : MR_RootView <OperateDelegate>
+@interface MR_ClauseNodeView : MR_RootView <OperateDelegate, ExplainViewDelegate>
 
 @property(nonatomic, assign) int section;
 @property(nonatomic, retain) NSString *attrId;

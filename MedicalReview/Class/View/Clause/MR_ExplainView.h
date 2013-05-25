@@ -12,13 +12,22 @@
 #define DEFAULT_TEXT_SIZE   14
 #define BUTTON_TEXT_SIZE    16
 
+@protocol ExplainViewDelegate <NSObject>
+
+@optional
+- (void)explainChanged;
+
+@end
+
 @interface MR_ExplainView : MR_RootView
 
 @property(nonatomic, retain) NSString *wordExplan;
 @property(nonatomic, assign) float textSize;
 @property(nonatomic, assign) BOOL readOnly;
+@property(nonatomic, assign) id<ExplainViewDelegate> delegate;
 
 - (NSString *)getExplain;
+- (void)setExplain:(NSString *)explain;
 
 @end
 

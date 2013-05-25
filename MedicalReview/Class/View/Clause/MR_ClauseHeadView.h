@@ -9,6 +9,7 @@
 #import "MR_RootView.h"
 #import "MR_OperateView.h"
 #import "MR_PopSelectListView.h"
+#import "MR_ExplainView.h"
 
 #define ARROW_SIZE 12
 #define ARROW_MARGIN 2
@@ -20,10 +21,11 @@
 @optional
 - (void)clickClauseHead:(id)sender;
 - (void)clauseHeadScored:(id)sender;
+- (void)clauseHeadExplained:(id)sender;
 
 @end
 
-@interface MR_ClauseHeadView : MR_RootView <MR_PopSelectListDelegate, OperateDelegate>
+@interface MR_ClauseHeadView : MR_RootView <MR_PopSelectListDelegate, ExplainViewDelegate, OperateDelegate>
 
 @property(nonatomic, assign) BOOL isOpen;
 @property(nonatomic, assign) int section;

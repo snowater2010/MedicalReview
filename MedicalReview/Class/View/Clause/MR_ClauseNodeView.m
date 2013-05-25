@@ -90,6 +90,7 @@
     float explain_h = rect.size.height;
     CGRect explainFrame = CGRectMake(explain_x, explain_y, explain_w, explain_h);
     MR_ExplainView *explainView = [[MR_ExplainView alloc] initWithFrame:explainFrame];
+    explainView.delegate = self;
     self.explainView = explainView;
     [explainView release];
     
@@ -139,9 +140,9 @@
     }
     
     if ([Common isEmptyString:scoreExplain])
-        _explainView.wordExplan = @"";
+        [_explainView setExplain:@""];
     else
-        _explainView.wordExplan = scoreExplain;
+        [_explainView setExplain:scoreExplain];
 }
 
 - (void)refreshDatas
@@ -171,9 +172,9 @@
     }
     
     if ([Common isEmptyString:scoreExplain])
-        _explainView.wordExplan = @"";
+        [_explainView setExplain:@""];
     else
-        _explainView.wordExplan = scoreExplain;
+        [_explainView setExplain:scoreExplain];
 }
 
 //- (void)drawRect:(CGRect)rect
@@ -354,6 +355,13 @@
 - (void)segmentAction:(UISegmentedControl *)seg
 {
     [Common callDelegate:_delegate method:@selector(clauseNodeScored:) withObject:self];
+}
+
+#pragma mark -
+#pragma mark ExplainViewDelegate
+- (void)explainChanged
+{
+    [Common callDelegate:_delegate method:@selector(clauseNodeExplained:) withObject:self];
 }
 
 #pragma mark -

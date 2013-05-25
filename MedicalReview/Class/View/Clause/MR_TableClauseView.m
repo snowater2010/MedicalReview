@@ -183,12 +183,10 @@
     
     int scoreIndex = [sender getScoreSelectIndex];
     NSString *scoreValue = [sender getScoreValue];
-    NSString *scoreExplain = [sender getScoreExplain];
     NSString *clauseId = sender.clauseId;
     
     NSDictionary *scoreDic = [self getScoreDataDic:clauseId inSection:section];
     [scoreDic setValue:scoreValue forKey:KEY_scoreValue];
-    [scoreDic setValue:scoreExplain forKey:KEY_scoreExplain];
     
     NSMutableDictionary *scorePoints = [scoreDic objectForKey:KEY_pointList];
     NSArray *scoreKeys = [scorePoints allKeys];
@@ -222,10 +220,27 @@
         [self doReaquestUpdateScoreData];
 }
 
+//update head explain
+- (void)clauseHeadExplained:(MR_ClauseHeadView *)sender
+{
+    int section = sender.section;
+    
+    NSString *scoreExplain = [sender getScoreExplain];
+    NSString *clauseId = sender.clauseId;
+    
+    NSDictionary *scoreDic = [self getScoreDataDic:clauseId inSection:section];
+    [scoreDic setValue:scoreExplain forKey:KEY_scoreExplain];
+    
+    //update score
+    self.updateScoreData = [NSDictionary dictionaryWithObjectsAndKeys:scoreDic, clauseId, nil];
+    if (_updateScoreData)
+        [self doReaquestUpdateScoreData];
+}
+
 - (void)clauseNodeScored:(MR_ClauseNodeView *)sender
 {
     int section = sender.section;
-    NSString *value = sender.getScoreValue;
+    NSString *value = [sender getScoreValue];
     NSString *attrId = sender.attrId;
     NSString *clauseId = sender.clauseId;
     
@@ -306,6 +321,25 @@
     
     //refresh head score on page
     [self updateHeadViewScore:scoreDic inSectioin:section];
+    
+    //update score
+    self.updateScoreData = [NSDictionary dictionaryWithObjectsAndKeys:scoreDic, clauseId, nil];
+    if (_updateScoreData)
+        [self doReaquestUpdateScoreData];
+}
+
+//update node explain text
+- (void)clauseNodeExplained:(MR_ClauseNodeView *)sender
+{
+    int section = sender.section;
+    NSString *explain = [sender getScoreExplain];
+    NSString *attrId = sender.attrId;
+    NSString *clauseId = sender.clauseId;
+    
+    //score
+    NSDictionary *scoreDic = [self getScoreDataDic:clauseId inSection:section];
+    NSDictionary *pointsDic = [scoreDic objectForKey:KEY_pointList];
+    [[pointsDic objectForKey:attrId] setValue:explain forKey:KEY_scoreExplain];
     
     //update score
     self.updateScoreData = [NSDictionary dictionaryWithObjectsAndKeys:scoreDic, clauseId, nil];

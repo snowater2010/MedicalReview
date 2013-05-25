@@ -117,10 +117,11 @@
     float explain_h = rect.size.height;
     CGRect explainFrame = CGRectMake(explain_x, explain_y, explain_w, explain_h);
     MR_ExplainView *explainView = [[MR_ExplainView alloc] initWithFrame:explainFrame];
+    explainView.delegate = self;
     self.explainView = explainView;
     [explainView release];
     if (![Common isEmptyString:scoreExplain])
-        _explainView.wordExplan = scoreExplain;
+        [_explainView setExplain:scoreExplain];
     
     //operate
     float operate_x = explain_x + explain_w;
@@ -230,6 +231,13 @@
         return;
     
     [Common callDelegate:_delegate method:@selector(clauseHeadScored:) withObject:self];
+}
+
+#pragma mark -
+#pragma mark ExplainViewDelegate
+- (void)explainChanged
+{
+    [Common callDelegate:_delegate method:@selector(clauseHeadExplained:) withObject:self];
 }
 
 #pragma mark -

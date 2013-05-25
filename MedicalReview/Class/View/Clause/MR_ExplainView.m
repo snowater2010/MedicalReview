@@ -47,37 +47,40 @@
         
         self.viewPop = [UIPopoverController alloc];
         _viewPop.delegate = self;
+        
+        //view
+        CGRect rect = frame;
+        CGRect textFrame = CGRectMake(0, 0, rect.size.width*0.75, rect.size.height);
+        UITextView *explainView = [[UITextView alloc] initWithFrame:textFrame];
+        explainView.font = [UIFont systemFontOfSize:_textSize];
+        explainView.font = [UIFont systemFontOfSize:DEFAULT_TEXT_SIZE];
+        explainView.editable = NO;
+        self.explainTextView = explainView;
+        [self addSubview:explainView];
+        [explainView release];
+        
+        UIButton *textButon = [[UIButton alloc] initWithFrame:textFrame];
+        [textButon addTarget:self action:@selector(doEditExplain:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:textButon];
+        [textButon release];
+        
+        fastButtonFrame = CGRectMake(rect.size.width*0.75, 0, rect.size.width*0.25, rect.size.height);
+        UIButton *button = [[UIButton alloc] initWithFrame:fastButtonFrame];
+        [button addTarget:self action:@selector(doFastExplain:) forControlEvents:UIControlEventTouchUpInside];
+        button.backgroundColor = [UIColor blueColor];
+        [button setTitle:_GET_LOCALIZED_STRING_(@"button_shortcut") forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont systemFontOfSize:BUTTON_TEXT_SIZE];
+        button.enabled = !_readOnly;
+        [self addSubview:button];
+        [button release];
     }
     return self;
 }
 
-- (void)drawRect:(CGRect)rect
-{
-    CGRect textFrame = CGRectMake(0, 0, rect.size.width*0.75, rect.size.height);
-    UITextView *explainView = [[UITextView alloc] initWithFrame:textFrame];
-    explainView.font = [UIFont systemFontOfSize:_textSize];
-    explainView.text = _wordExplan;
-    explainView.font = [UIFont systemFontOfSize:DEFAULT_TEXT_SIZE];
-    explainView.editable = NO;
-    self.explainTextView = explainView;
-    [self addSubview:explainView];
-    [explainView release];
-    
-    UIButton *textButon = [[UIButton alloc] initWithFrame:textFrame];
-    [textButon addTarget:self action:@selector(doEditExplain:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:textButon];
-    [textButon release];
-    
-    fastButtonFrame = CGRectMake(rect.size.width*0.75, 0, rect.size.width*0.25, rect.size.height);
-    UIButton *button = [[UIButton alloc] initWithFrame:fastButtonFrame];
-    [button addTarget:self action:@selector(doFastExplain:) forControlEvents:UIControlEventTouchUpInside];
-    button.backgroundColor = [UIColor blueColor];
-    [button setTitle:_GET_LOCALIZED_STRING_(@"button_shortcut") forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:BUTTON_TEXT_SIZE];
-    button.enabled = !_readOnly;
-    [self addSubview:button];
-    [button release];
-}
+//- (void)drawRect:(CGRect)rect
+//{
+//    _explainTextView.text = _wordExplan;
+//}
 
 - (void)dealloc
 {
@@ -116,6 +119,11 @@
     return _explainTextView.text;
 }
 
+- (void)setExplain:(NSString *)explain
+{
+    _explainTextView.text = explain;
+}
+
 #pragma mark-
 #pragma UIPopoverControllerDelegate
 
@@ -125,6 +133,7 @@
     
     if (![_tempExplainText isEqualToString:text]) {
         _explainTextView.text = [_explainCtro getExplain];
+        [Common callDelegate:_delegate method:@selector(explainChanged)];
     }
 }
 
