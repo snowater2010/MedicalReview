@@ -190,6 +190,7 @@ enum SORT_TYPE
 #define KEY_clauseList          @"clauseList"
 #define KEY_clauseId            @"clauseId"
 #define KEY_clauseName          @"clauseName"
+#define KEY_formulaType         @"formulaType"
 #define KEY_attrId              @"attrId"
 #define KEY_attrName            @"attrName"
 #define KEY_pointList           @"pointList"
@@ -202,6 +203,11 @@ enum SORT_TYPE
 //score data keys
 #define KEY_scoreValue          @"scoreValue"
 #define KEY_scoreExplain        @"scoreExplain"
+
+//search key
+#define KEY_searchName          @"searchName"
+#define KEY_searchScored        @"searchScored"
+#define KEY_searchCore          @"searchCore"
 
 //user
 #define KEY_loginName           @"loginName"

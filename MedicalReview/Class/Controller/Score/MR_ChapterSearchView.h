@@ -8,8 +8,15 @@
 
 #import "MR_RootView.h"
 
+@protocol ChapterSearchDelegate <NSObject>
+
+@optional
+- (void)doSearch:(NSDictionary *)searchDic;
+
+@end
+
 @interface MR_ChapterSearchView : MR_RootView
 
-
+@property(nonatomic, assign) id<ChapterSearchDelegate> delegate;
 
 @end

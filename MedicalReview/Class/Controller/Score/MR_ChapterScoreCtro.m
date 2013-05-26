@@ -10,7 +10,6 @@
 #import "MR_LeftPageView.h"
 #import "MR_MainPageView.h"
 #import "MR_ClauseTable.h"
-#import "MR_ChapterSearchView.h"
 #import "MR_TableClauseView.h"
 
 @interface MR_ChapterScoreCtro ()
@@ -123,7 +122,6 @@
     CGRect mainFrame = CGRectMake(main_x, main_y, main_w, main_h);
     MR_MainPageView *mainPageView = [[MR_MainPageView alloc] initWithFrame:mainFrame];
     [self.view addSubview:mainPageView];
-    [mainPageView release];
     
     //top
     float top_x = 0;
@@ -132,7 +130,9 @@
     float top_h = main_h * 0.1;
     CGRect topFrame = CGRectMake(top_x, top_y, top_w, top_h);
     MR_ChapterSearchView *topView = [[MR_ChapterSearchView alloc] initWithFrame:topFrame];
+    topView.delegate = self;
     [mainPageView addSubview:topView];
+    [topView release];
     
     //clause table
     NSDictionary *dic1 = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -158,7 +158,6 @@
     float head_h = main_h * 0.05;
     CGRect headFrame = CGRectMake(head_x, head_y, head_w, head_h);
     MR_ClauseTable *headView = [[MR_ClauseTable alloc] initWithFrame:headFrame];
-    headView.backgroundColor = [UIColor blackColor];
     headView.jsonData = tableHead;
     [mainPageView addSubview:headView];
     [headView release];
@@ -173,6 +172,8 @@
     self.clauseView = clauseView;
     [mainPageView addSubview:clauseView];
     [clauseView release];
+    
+    [mainPageView release];
 }
 
 #pragma mark -
@@ -208,11 +209,14 @@
 //选择左边节点时，clauseviewtable初始化
 - (void)selecteLeftNodeAtIndex:(int)index
 {
+    //重新读取数据（可以优化，不必每次以重新读取来更新数据）
+    self.scoreData = [self getInitScoreData];
+    
     NSDictionary *sectionDic = [_sectionData objectAtIndex:index];
     NSArray *nodeData = [sectionDic objectForKey:KEY_clauseList];
     _clauseView.nodeData = nodeData;
     _clauseView.clauseData = [self getClauseFrom:_clauseData byNode:nodeData];
-    _clauseView.scoreData = [self getInitScoreData];
+    _clauseView.scoreData = [self getScoreFrom:_scoreData byNode:nodeData];
     [_clauseView reloadData];
 }
 
@@ -269,6 +273,71 @@
     
     //换章节的时候，初始化第一个节点
     [self selecteLeftNodeAtIndex:0];
+}
+
+#pragma mark -
+#pragma mark ChapterSearchDelegate
+
+- (void)doSearch:(NSDictionary *)searchDic
+{
+    //取消选取
+    [_chapterTable selectRowAtIndexPath:nil animated:YES scrollPosition:UITableViewScrollPositionTop];
+    
+    //重新读取数据（可以优化，不必每次以重新读取来更新数据）
+    self.scoreData = [self getInitScoreData];
+    
+    //过滤数据
+    NSString *name = [searchDic objectForKey:KEY_searchName];
+    int scoredIndex = [[searchDic objectForKey:KEY_searchScored] intValue];
+    BOOL isCore = [[searchDic objectForKey:KEY_searchCore] boolValue];
+    
+    NSMutableArray *nodeData = [[NSMutableArray alloc] initWithCapacity:0];
+    NSMutableArray *clauseData = [[NSMutableArray alloc] initWithCapacity:0];
+    for (NSDictionary *sectionDic in _sectionData) {
+        NSArray *nodeList = [sectionDic objectForKey:KEY_clauseList];
+        for (NSDictionary *nodeDic in nodeList) {
+            NSString *clauseId = [nodeDic objectForKey:KEY_clauseId];
+            NSDictionary *clauseDic = [_clauseData objectForKey:clauseId];
+            
+            if ([Common isNotEmptyString:name]) {
+                NSString *clauseName = [clauseDic objectForKey:KEY_clauseName];
+                if (![clauseName isContainsString:name]) {
+                    continue;
+                }
+            }
+            
+            if (scoredIndex != 0) {
+                NSDictionary *scoreDic = [_scoreData objectForKey:clauseId];
+                NSString *scoreValue = [scoreDic objectForKey:KEY_scoreValue];
+                if (scoredIndex == 1) {
+                    if ([Common isEmptyString:scoreValue]) {
+                        continue;
+                    }
+                }
+                else if (scoredIndex == 2) {
+                    if ([Common isNotEmptyString:scoreValue]) {
+                        continue;
+                    }
+                }
+            }
+            
+            if (isCore) {
+                NSString *formulaType = [clauseDic objectForKey:KEY_formulaType];
+                if (formulaType.intValue != 2) {
+                    continue;
+                }
+            }
+            
+            [nodeData addObject:nodeDic];
+            [clauseData addObject:clauseDic];
+            
+        }
+    }
+    
+    _clauseView.nodeData = nodeData;
+    _clauseView.clauseData = clauseData;
+    _clauseView.scoreData = [self getScoreFrom:_scoreData byNode:nodeData];
+    [_clauseView reloadData];
 }
 
 @end

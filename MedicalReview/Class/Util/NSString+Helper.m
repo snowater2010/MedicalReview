@@ -26,6 +26,15 @@
     return basic;
 }
 
+- (BOOL)isContainsString:(NSString *)str
+{
+    if (!str)
+        return NO;
+    
+    NSRange range = [self rangeOfString:str];
+    return range.length != 0;
+}
+
 //转千分位
 - (NSString *)toThousand
 {

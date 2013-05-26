@@ -8,6 +8,14 @@
 
 #import "MR_ChapterSearchView.h"
 
+@interface MR_ChapterSearchView ()
+
+@property(nonatomic, retain) UITextField *nameField;
+@property(nonatomic, retain) UISegmentedControl *scoredSeg;
+@property(nonatomic, retain) UISwitch *coreSwitch;
+
+@end
+
 @implementation MR_ChapterSearchView
 
 - (id)initWithFrame:(CGRect)frame
@@ -41,6 +49,7 @@
     UITextField *nameField = [[UITextField alloc] initWithFrame:CGRectMake(name2_x, name2_y, name2_w, name2_h)];
     nameField.borderStyle = UITextBorderStyleRoundedRect;
     [self addSubview:nameField];
+    self.nameField = nameField;
     [nameField release];
     
     float scored_w = 200;
@@ -52,6 +61,7 @@
     [scoredSeg setSelectedSegmentIndex:0];
     [scoredSeg addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:scoredSeg];
+    self.scoredSeg = scoredSeg;
     [scoredSeg release];
     
     float core_x = scored_x + scored_w + margin;
@@ -72,6 +82,7 @@
     UISwitch *coreSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(core2_x, core2_y, core2_w, core2_h)];
     [coreSwitch setOn:NO];
     [self addSubview:coreSwitch];
+    self.coreSwitch = coreSwitch;
     [coreSwitch release];
     
     float search_w = 60;
@@ -84,12 +95,16 @@
     [searchButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     searchButton.layer.borderWidth = 1;
     searchButton.layer.borderColor = [[UIColor blackColor] CGColor];
+    [searchButton addTarget:self action:@selector(doSearch:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:searchButton];
     [searchButton release];
 }
 
 - (void)dealloc
 {
+    self.nameField = nil;
+    self.scoredSeg = nil;
+    self.coreSwitch = nil;
     [super dealloc];
 }
 
@@ -114,6 +129,25 @@
             break;
             
     }
+}
+
+- (void)doSearch:(id)sender
+{
+    [_nameField resignFirstResponder];
+    
+    NSString *name = _nameField.text;
+    if ([Common isEmptyString:name])
+        name = @"";
+    int scoredIndex = _scoredSeg.selectedSegmentIndex;
+    BOOL isCore = _coreSwitch.isOn;
+    
+    NSDictionary *searchDic = [[[NSDictionary alloc] initWithObjectsAndKeys:
+                              name, KEY_searchName,
+                              [NSNumber numberWithInt:scoredIndex], KEY_searchScored,
+                              [NSNumber numberWithBool:isCore], KEY_searchCore,
+                              nil] autorelease];
+    
+    [Common callDelegate:_delegate method:@selector(doSearch:) withObject:searchDic];
 }
 
 @end
