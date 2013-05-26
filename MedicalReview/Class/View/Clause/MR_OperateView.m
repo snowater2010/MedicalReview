@@ -29,7 +29,7 @@
     UIButton *deleteBt = [[UIButton alloc] initWithFrame:deleteRect];
     [deleteBt setTitle:_GET_LOCALIZED_STRING_(@"button_delete") forState:UIControlStateNormal];
     deleteBt.titleLabel.font = [UIFont systemFontOfSize:OPERATE_TEXT_SIZE+2];
-    [deleteBt addTarget:_delegate action:@selector(doDelete) forControlEvents:UIControlEventTouchUpInside];
+    [deleteBt addTarget:self action:@selector(doDelete) forControlEvents:UIControlEventTouchUpInside];
     [deleteBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [deleteBt setBackgroundImage:[UIImage imageNamed:@"btn_img.png"] forState:UIControlStateNormal];
     [self addSubview:deleteBt];
@@ -50,7 +50,18 @@
         [self addSubview:linkBt];
         [linkBt release];
     }
-    
+}
+
+- (void)doDelete
+{
+    _ALERT_SELECT_(_GET_LOCALIZED_STRING_(@"alert_delete_score"), self, 0);
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        [Common callDelegate:_delegate method:@selector(doDelete)];
+    }
 }
 
 @end

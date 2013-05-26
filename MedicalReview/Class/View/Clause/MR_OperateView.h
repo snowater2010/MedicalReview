@@ -17,7 +17,7 @@
 
 @end
 
-@interface MR_OperateView : MR_RootView
+@interface MR_OperateView : MR_RootView <UIAlertViewDelegate>
 
 @property(nonatomic, assign) BOOL isHasLink;
 @property(nonatomic, assign) id<OperateDelegate> delegate;

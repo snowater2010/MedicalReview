@@ -17,6 +17,9 @@
 "alert_path_cache_update_error"     = "路径数据更新失败";
 "alert_chapter_cache_update_error"  = "章节数据更新失败";
 "alert_score_cache_update_error"    = "打分数据更新失败";
+"alert_change_clause_score"         = "您确定要改变测评结果吗？";
+"alert_change_point_score"          = "您确定要改变要点值？";
+"alert_delete_score"                = "您确定要删除评价结果？";
 
 //request
 "request_msg_wait_login"            = "登陆中...";

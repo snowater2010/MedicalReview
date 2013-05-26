@@ -8,7 +8,7 @@
 
 #import "MR_PopSelectListView.h"
 
-@interface MR_PopSelectListView ()
+@interface MR_PopSelectListView () <UIAlertViewDelegate>
 
 @property (nonatomic, assign) int selectIndex;
 @property (nonatomic, retain) UIButton *button;
@@ -101,25 +101,38 @@
 }
 
 - (void)showPopover:(id)sender {
+    
 	// Set the sender to a UIButton.
 	UIButton *tappedButton = (UIButton *)sender;
-	
+    
 	// Present the popover from the button that was tapped in the detail view.
 	[self.viewPopover presentPopoverFromRect:tappedButton.frame inView:self permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void)selectedAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.selectIndex = indexPath.row;
-    
-    NSString *selectName = [_scoreArray objectAtIndex:indexPath.row];
-    
-    [_button setTitle:selectName forState:UIControlStateNormal];
-    
-    [_viewPopover dismissPopoverAnimated:YES];
-    
-    if ([_delegate respondsToSelector:@selector(selectedAtIndexPath:)]) {
-        [_delegate selectedAtIndexPath:indexPath];
+    _ALERT_SELECT_(_GET_LOCALIZED_STRING_(@"alert_change_clause_score"), self, indexPath.row);
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        [_viewPopover dismissPopoverAnimated:YES];
+    }
+    if (buttonIndex == 1) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:alertView.tag inSection:0];
+        
+        self.selectIndex = indexPath.row;
+        
+        NSString *selectName = [_scoreArray objectAtIndex:_selectIndex];
+        
+        [_button setTitle:selectName forState:UIControlStateNormal];
+        
+        [_viewPopover dismissPopoverAnimated:YES];
+        
+        if ([_delegate respondsToSelector:@selector(selectedAtIndexPath:)]) {
+            [_delegate selectedAtIndexPath:indexPath];
+        }
     }
 }
 
