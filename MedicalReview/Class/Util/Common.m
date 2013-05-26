@@ -34,4 +34,14 @@
         [delegate performSelector:seletor withObject:object];
 }
 
+//根据16进制获取颜色
++ (UIColor *)colorWithR:(int)r withG:(int)g withB:(int)b
+{
+	UIColor* result = [[[UIColor alloc] initWithRed:((float) r / 255.0f)
+                                      green:((float) g / 255.0f)
+                                       blue:((float) b / 255.0f)
+                                      alpha:1.0f] autorelease];
+    return result;
+}
+
 @end

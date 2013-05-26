@@ -36,6 +36,8 @@
 
 - (void)buildViewInRect:(CGRect)rect
 {
+    CGColorRef borderColor = [[Common colorWithR:221 withG:221 withB:221] CGColor];
+    
     //name
     float name_x = ARROW_MARGIN * 2 + ARROW_SIZE;
     float name_y = 0;
@@ -47,6 +49,8 @@
     nameLabel.numberOfLines = 0;
     nameLabel.font = [UIFont systemFontOfSize:NAME_TEXT_SIZE];
     nameLabel.backgroundColor = [UIColor clearColor];
+    nameLabel.layer.borderWidth = 0.5;
+    nameLabel.layer.borderColor = borderColor;
     self.nameLabel = nameLabel;
     
     //----------------------
@@ -61,6 +65,8 @@
     selfView.font = [UIFont systemFontOfSize:NAME_TEXT_SIZE];
     selfView.textAlignment = NSTextAlignmentCenter;
     selfView.backgroundColor = [UIColor clearColor];
+    selfView.layer.borderWidth = 0.5;
+    selfView.layer.borderColor = borderColor;
     
     //score
     float score_margin = 3;
@@ -91,6 +97,8 @@
     CGRect explainFrame = CGRectMake(explain_x, explain_y, explain_w, explain_h);
     MR_ExplainView *explainView = [[MR_ExplainView alloc] initWithFrame:explainFrame];
     explainView.delegate = self;
+    explainView.layer.borderWidth = 0.5;
+    explainView.layer.borderColor = borderColor;
     self.explainView = explainView;
     [explainView release];
     
@@ -102,6 +110,8 @@
     CGRect operateFrame = CGRectMake(operate_x, operate_y, operate_w, operate_h);
     MR_OperateView *operateView = [[MR_OperateView alloc] initWithFrame:operateFrame];
     operateView.isHasLink = YES;
+    operateView.layer.borderWidth = 0.5;
+    operateView.layer.borderColor = borderColor;
     
     [self addSubview:nameLabel];
     [self addSubview:selfView];

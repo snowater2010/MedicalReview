@@ -55,6 +55,7 @@
     self.selfSize = rect.size;
     
     UITableView *tableview = [[UITableView alloc] initWithFrame:rect style:UITableViewStylePlain];
+    tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableview.delegate = self;
     tableview.dataSource = self;
     self.tableview = tableview;
@@ -487,11 +488,11 @@
     headView.isOpen = [_sectionArray containsObject:[NSNumber numberWithInt:section]];
     
     //save in a array
-    
     if (_tableHadeViews.count > section && [_tableHadeViews objectAtIndex:section])
         [_tableHadeViews replaceObjectAtIndex:section withObject:headView];
     else
         [_tableHadeViews insertObject:headView atIndex:section];
+    
     return headView;
 }
 
@@ -532,6 +533,9 @@
         
         CGRect nodeFrame = CGRectMake(0, 0, _selfSize.width, DEFAULT_CELL_HEIGHT);
         MR_ClauseNodeView *nodeView = [[MR_ClauseNodeView alloc] initWithFrame:nodeFrame withScoreArray:_nodeScoreArray];
+        nodeView.backgroundColor = [Common colorWithR:238 withG:238 withB:238];
+        nodeView.layer.borderColor = [[Common colorWithR:221 withG:221 withB:221] CGColor];
+        nodeView.layer.borderWidth = 0.5;
         nodeView.delegate = self;
         nodeView.tag = TAG_CELL_NODE_VIEW;
         [cell.contentView addSubview:nodeView];
@@ -549,12 +553,6 @@
     nodeView.scoreData = [scoreDic objectForKey:attrId];
     
     [nodeView refreshDatas];
-    
-    if (row % 2 == 0) {
-        nodeView.backgroundColor = [UIColor grayColor];
-    } else {
-        nodeView.backgroundColor = [UIColor lightGrayColor];
-    }
     
     return cell;
 }

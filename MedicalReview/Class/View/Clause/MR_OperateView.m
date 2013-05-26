@@ -29,8 +29,9 @@
     UIButton *deleteBt = [[UIButton alloc] initWithFrame:deleteRect];
     [deleteBt setTitle:_GET_LOCALIZED_STRING_(@"button_delete") forState:UIControlStateNormal];
     deleteBt.titleLabel.font = [UIFont systemFontOfSize:OPERATE_TEXT_SIZE+2];
-    deleteBt.backgroundColor = [UIColor orangeColor];
     [deleteBt addTarget:_delegate action:@selector(doDelete) forControlEvents:UIControlEventTouchUpInside];
+    [deleteBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [deleteBt setBackgroundImage:[UIImage imageNamed:@"btn_img.png"] forState:UIControlStateNormal];
     [self addSubview:deleteBt];
     [deleteBt release];
     
@@ -43,8 +44,9 @@
         UIButton *linkBt = [[UIButton alloc] initWithFrame:linkRect];
         [linkBt setTitle:_GET_LOCALIZED_STRING_(@"button_link") forState:UIControlStateNormal];
         linkBt.titleLabel.font = [UIFont systemFontOfSize:OPERATE_TEXT_SIZE];
-        linkBt.backgroundColor = [UIColor purpleColor];
         [linkBt addTarget:_delegate action:@selector(doLink) forControlEvents:UIControlEventTouchUpInside];
+        [linkBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [linkBt setBackgroundImage:[UIImage imageNamed:@"btn_img.png"] forState:UIControlStateNormal];
         [self addSubview:linkBt];
         [linkBt release];
     }

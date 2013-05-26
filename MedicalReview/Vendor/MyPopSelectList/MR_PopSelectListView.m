@@ -47,6 +47,8 @@
 
 - (void)doInit
 {
+    self.backgroundColor = [UIColor clearColor];
+    
     self.selectIndex = NO_SELECT_INDEX;
     self.backgroundColor = [UIColor whiteColor];
     self.textColor = [UIColor blackColor];
@@ -58,10 +60,6 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    if (!_scoreArray) {
-        return;
-    }
-    
     UIButton *button = [[UIButton alloc] initWithFrame:rect];
     NSString *defaultTitle = @"";
     if (_selectIndex != NO_SELECT_INDEX) {
@@ -70,6 +68,7 @@
     [button setTitle:defaultTitle forState:UIControlStateNormal];
     [button setTitleColor:_textColor forState:UIControlStateNormal];
     [button addTarget:self action:@selector(showPopover:) forControlEvents:UIControlEventTouchUpInside];
+    button.backgroundColor = [UIColor clearColor];
     self.button = button;
     [button release];
     [self addSubview:_button];

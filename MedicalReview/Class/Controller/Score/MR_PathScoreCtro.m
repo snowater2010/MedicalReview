@@ -31,6 +31,7 @@
 @property(nonatomic, retain) MR_LeftPageView *leftPageView;
 @property(nonatomic, retain) MR_ClauseTopView *topPageView;
 @property(nonatomic, retain) MR_MainPageView *mainPageView;
+@property(nonatomic, retain) UIButton *menuBt;
 
 @end
 
@@ -88,6 +89,7 @@
     self.mainPageView = nil;
     self.topPageView = nil;
     self.clauseTableView = nil;
+    self.menuBt = nil;
     [super dealloc];
 }
 
@@ -131,7 +133,8 @@
     float top_h = main_h * 0.1;
     CGRect topFrame = CGRectMake(top_x, top_y, top_w, top_h);
     MR_ClauseTopView *topView = [[MR_ClauseTopView alloc] initWithFrame:topFrame];
-    topView.backgroundColor = [UIColor lightGrayColor];
+    topView.layer.borderWidth = 1;
+    topView.layer.borderColor = [[Common colorWithR:153 withG:187 withB:232] CGColor];
     self.topPageView = topView;
     [topView release];
     [mainPageView addSubview:_topPageView];
@@ -161,7 +164,6 @@
     CGRect headFrame = CGRectMake(head_x, head_y, head_w, head_h);
     MR_ClauseTable *headView = [[MR_ClauseTable alloc] initWithFrame:headFrame];
     headView.delegate = self;
-    headView.backgroundColor = [UIColor blackColor];
     headView.jsonData = tableHead;
     [mainPageView addSubview:headView];
     [headView release];
@@ -182,9 +184,10 @@
     //menu control
     CGRect menuBtFrame = CGRectMake(head_x, head_y, head_h, head_h);
     UIButton *menuBt = [[UIButton alloc] initWithFrame:menuBtFrame];
-    [menuBt setBackgroundImage:[UIImage imageNamed:@"ButtonMenu@2x.png"] forState:UIControlStateNormal];
+    [menuBt setBackgroundImage:[UIImage imageNamed:@"shen.gif"] forState:UIControlStateNormal];
     [menuBt addTarget:self action:@selector(leftHider) forControlEvents:UIControlEventTouchUpInside];
     [mainPageView addSubview:menuBt];
+    self.menuBt = menuBt;
     [menuBt release];
     
     self.mainPageView = mainPageView;
@@ -244,6 +247,13 @@
 - (void)leftHider
 {
     leftShow = !leftShow;
+    
+    if (leftShow) {
+        [_menuBt setBackgroundImage:[UIImage imageNamed:@"suo.gif"] forState:UIControlStateNormal];
+    }
+    else {
+        [_menuBt setBackgroundImage:[UIImage imageNamed:@"shen.gif"] forState:UIControlStateNormal];
+    }
     
     _ANIMATIONS_INIT_BEGIN_(0.25);
     

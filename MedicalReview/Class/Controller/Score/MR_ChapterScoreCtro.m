@@ -131,6 +131,8 @@
     CGRect topFrame = CGRectMake(top_x, top_y, top_w, top_h);
     MR_ChapterSearchView *topView = [[MR_ChapterSearchView alloc] initWithFrame:topFrame];
     topView.delegate = self;
+    topView.layer.borderWidth = 1;
+    topView.layer.borderColor = [[Common colorWithR:153 withG:187 withB:232] CGColor];
     [mainPageView addSubview:topView];
     [topView release];
     

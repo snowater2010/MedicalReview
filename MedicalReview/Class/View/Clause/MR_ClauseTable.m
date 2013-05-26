@@ -14,7 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor purpleColor];
+        self.backgroundColor = [Common colorWithR:214 withG:230 withB:255];
     }
     return self;
 }
@@ -35,8 +35,9 @@
             labelView.text = tableName;
             labelView.textAlignment = UITextAlignmentCenter;
             labelView.font = [UIFont systemFontOfSize:TABLE_TEXT_SIZE];
-            labelView.layer.borderWidth = 1;
-            labelView.layer.borderColor = [[UIColor blackColor] CGColor];
+            labelView.layer.borderWidth = 0.5;
+            labelView.layer.borderColor = [[Common colorWithR:221 withG:221 withB:221] CGColor];
+            labelView.backgroundColor = [UIColor clearColor];
             [self addSubview:labelView];
             [labelView release];
             

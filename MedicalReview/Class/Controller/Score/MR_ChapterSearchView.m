@@ -22,7 +22,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor yellowColor];
+        self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
@@ -59,7 +59,6 @@
     UISegmentedControl *scoredSeg = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"全部", @"已录", @"未录", nil]];
     scoredSeg.frame = CGRectMake(scored_x, scored_y, scored_w, scored_h);
     [scoredSeg setSelectedSegmentIndex:0];
-    [scoredSeg addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
     [self addSubview:scoredSeg];
     self.scoredSeg = scoredSeg;
     [scoredSeg release];
@@ -93,9 +92,8 @@
     searchButton.backgroundColor = [UIColor whiteColor];
     [searchButton setTitle:@"查询" forState:UIControlStateNormal];
     [searchButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    searchButton.layer.borderWidth = 1;
-    searchButton.layer.borderColor = [[UIColor blackColor] CGColor];
     [searchButton addTarget:self action:@selector(doSearch:) forControlEvents:UIControlEventTouchUpInside];
+    [searchButton setBackgroundImage:[UIImage imageNamed:@"btn_img.png"] forState:UIControlStateNormal];
     [self addSubview:searchButton];
     [searchButton release];
 }
@@ -106,29 +104,6 @@
     self.scoredSeg = nil;
     self.coreSwitch = nil;
     [super dealloc];
-}
-
-- (void)segmentAction:(UISegmentedControl *)seg {
-    
-    NSInteger Index = seg.selectedSegmentIndex;
-    
-    switch (Index) {
-            
-        case 0:
-            
-            break;
-            
-        case 1:
-            
-            break;
-            
-        case 2:
-    
-            break;
-        default:
-            break;
-            
-    }
 }
 
 - (void)doSearch:(id)sender

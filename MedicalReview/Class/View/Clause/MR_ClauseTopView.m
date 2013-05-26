@@ -14,7 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        
     }
     return self;
 }
@@ -27,7 +27,9 @@
     float topLeft_h = rect.size.height;
     CGRect topLeftFrame = CGRectMake(topLeft_x, topLeft_y, topLeft_w, topLeft_h);
     UILabel *topLeftView = [[UILabel alloc] initWithFrame:topLeftFrame];
-    topLeftView.backgroundColor = [UIColor purpleColor];
+    topLeftView.backgroundColor = [Common colorWithR:239 withG:255 withB:255];
+    topLeftView.layer.borderWidth = 0.5;
+    topLeftView.layer.borderColor = [[Common colorWithR:153 withG:187 withB:232] CGColor];
     [self addSubview:topLeftView];
     [topLeftView release];
     
@@ -37,6 +39,8 @@
     float topLeft_h2 = rect.size.height;
     CGRect topLeftFrame2 = CGRectMake(topLeft_x2, topLeft_y2, topLeft_w2, topLeft_h2);
     UITextView *topLeftView2 = [[UITextView alloc] initWithFrame:topLeftFrame2];
+    topLeftView2.layer.borderWidth = 0.5;
+    topLeftView2.layer.borderColor = [[Common colorWithR:153 withG:187 withB:232] CGColor];
     topLeftView2.editable = NO;
     [self addSubview:topLeftView2];
     [topLeftView2 release];
@@ -47,7 +51,9 @@
     float topRight_h = rect.size.height;
     CGRect topRighFrame = CGRectMake(topRight_x, topRight_y, topRight_w, topRight_h);
     UILabel *topRighView = [[UILabel alloc] initWithFrame:topRighFrame];
-    topRighView.backgroundColor = [UIColor blueColor];
+    topRighView.backgroundColor = [Common colorWithR:239 withG:255 withB:255];
+    topRighView.layer.borderWidth = 0.5;
+    topRighView.layer.borderColor = [[Common colorWithR:153 withG:187 withB:232] CGColor];
     [self addSubview:topRighView];
     [topRighView release];
 
@@ -57,6 +63,8 @@
     float topRight_h2 = rect.size.height;
     CGRect topRighFrame2 = CGRectMake(topRight_x2, topRight_y2, topRight_w2, topRight_h2);
     UITextView *topRighView2 = [[UITextView alloc] initWithFrame:topRighFrame2];
+    topRighView2.layer.borderWidth = 0.5;
+    topRighView2.layer.borderColor = [[Common colorWithR:153 withG:187 withB:232] CGColor];
     topRighView2.editable = NO;
     [self addSubview:topRighView2];
     [topRighView2 release];

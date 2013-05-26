@@ -16,4 +16,6 @@
 
 + (void)callDelegate:(id)delegate method:(SEL)seletor withObject:(id)object;
 
++ (UIColor *)colorWithR:(int)r withG:(int)g withB:(int)b;
+
 @end

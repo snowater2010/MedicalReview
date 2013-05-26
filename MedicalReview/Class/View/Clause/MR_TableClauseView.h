@@ -10,7 +10,7 @@
 #import "MR_ClauseHeadView.h"
 #import "MR_ClauseNodeView.h"
 
-#define DEFAULT_CELL_HEIGHT 50
+#define DEFAULT_CELL_HEIGHT 60
 #define NAME_TEXT_SIZE 14
 #define TAG_CELL_NODE_VIEW 10000
 

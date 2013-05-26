@@ -23,7 +23,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor orangeColor];
+        self.backgroundColor = [UIColor clearColor];
         _pathData = nil;
         _nodeData = nil;
         _dropDown = nil;
@@ -41,9 +41,9 @@
     [self setNodeDataAtIndex:0];
     
     //dropdown list
-    float select_x = 10;
+    float select_x = 5;
     float select_y = 10;
-    float select_w = rect.size.width - 20;
+    float select_w = rect.size.width - 10;
     float select_h = 40;
     CGRect btnSelectFrame = CGRectMake(select_x, select_y, select_w, select_h);
     UIButton *btnSelect = [[UIButton alloc] initWithFrame:btnSelectFrame];
@@ -58,9 +58,9 @@
     [btnSelect setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     //tree node List
-    float tree_x = 10;
+    float tree_x = 5;
     float tree_y = select_y + select_h;
-    float tree_w = rect.size.width - 20;
+    float tree_w = rect.size.width - 10;
     float tree_h = rect.size.height - (select_y + select_h) -10;
     CGRect treeFrame = CGRectMake(tree_x, tree_y, tree_w, tree_h);
     
@@ -231,17 +231,10 @@
     if (cell == nil) {
         cell = [[MR_PathCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    //config the cell
-    //cell.textLabel.text = [[self.realData objectAtIndex:indexPath.row] objectForKey:@"nodeName"];
-    //cell.model = [[self.realData objectAtIndex:indexPath.row] objectForKey:@"nodeName"];
-    cell.cellModel = [self.nodeData objectAtIndex:indexPath.row];
-    UIView *backView = [[UIView alloc] initWithFrame:cell.frame];
-    cell.selectedBackgroundView = backView;
-    cell.selectedBackgroundView.backgroundColor = [UIColor clearColor];
-    //取消边框线
     
-    [cell setBackgroundView:[[UIView alloc] init]];    //取消边框线
-    cell.backgroundColor = [UIColor clearColor];
+    cell.cellModel = [self.nodeData objectAtIndex:indexPath.row];
+    
+    [cell refreshPageData];
     return cell;
 }
 

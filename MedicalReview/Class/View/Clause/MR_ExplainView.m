@@ -52,6 +52,7 @@
         CGRect rect = frame;
         CGRect textFrame = CGRectMake(0, 0, rect.size.width*0.75, rect.size.height);
         UITextView *explainView = [[UITextView alloc] initWithFrame:textFrame];
+        explainView.backgroundColor = [UIColor clearColor];
         explainView.font = [UIFont systemFontOfSize:_textSize];
         explainView.font = [UIFont systemFontOfSize:DEFAULT_TEXT_SIZE];
         explainView.editable = NO;
@@ -67,10 +68,11 @@
         fastButtonFrame = CGRectMake(rect.size.width*0.75, 0, rect.size.width*0.25, rect.size.height);
         UIButton *button = [[UIButton alloc] initWithFrame:fastButtonFrame];
         [button addTarget:self action:@selector(doFastExplain:) forControlEvents:UIControlEventTouchUpInside];
-        button.backgroundColor = [UIColor blueColor];
         [button setTitle:_GET_LOCALIZED_STRING_(@"button_shortcut") forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:BUTTON_TEXT_SIZE];
         button.enabled = !_readOnly;
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"btn_img.png"] forState:UIControlStateNormal];
         [self addSubview:button];
         [button release];
     }
