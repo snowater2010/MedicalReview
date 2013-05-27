@@ -36,8 +36,6 @@
 {
     [super viewDidLoad];
     
-    [self visitFunction:0];
-    
     //net reacher
     _GET_APP_DELEGATE_(appDelegate);
     NSString *serverUrl = appDelegate.globalinfo.serverInfo.strWebServiceUrl;
@@ -45,6 +43,8 @@
 	[hostReach startUpdatingWithBlock:^(AHReach *reach) {
 		[self updateAvailabilityWithReach:reach];
 	}];
+    
+    [self visitFunction:0];
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,7 +73,7 @@
     float top_h = rootFrame.size.height*0.1;
     CGRect topFrame = CGRectMake(top_x, top_y, top_w, top_h);
     MR_TopPageView *topPageView = [[MR_TopPageView alloc] initWithFrame:topFrame];
-//    topPageView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"top_bg.gif"]];
+    topPageView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"top_bg.gif"]];
     [self.view addSubview:topPageView];
     [topPageView release];
     
@@ -172,16 +172,13 @@
     
 	if([reach isReachableViaWiFi])
     {
-//        _ALERT_CONFIRM_(@"WAN", self, 0);
         isOnLine = YES;
     }
 	else if([reach isReachableViaWWAN])
     {
-//        _ALERT_CONFIRM_(@"WiFi", self, 0);
         isOnLine = YES;
     }
 	else {
-//        _ALERT_CONFIRM_(@"SHIT", self, 0);
         isOnLine = NO;
     }
     

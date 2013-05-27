@@ -71,7 +71,7 @@
 		F66C2A2A175258D000FFB968 /* btn_img.png in Resources */ = {isa = PBXBuildFile; fileRef = F66C2A29175258D000FFB968 /* btn_img.png */; };
 		F66C2A2D17525A7800FFB968 /* shen.gif in Resources */ = {isa = PBXBuildFile; fileRef = F66C2A2B17525A7700FFB968 /* shen.gif */; };
 		F66C2A2E17525A7800FFB968 /* suo.gif in Resources */ = {isa = PBXBuildFile; fileRef = F66C2A2C17525A7700FFB968 /* suo.gif */; };
-		F677285B1752F25C005BB1B4 /* AHReach.m in Sources */ = {isa = PBXBuildFile; fileRef = F677285A1752F25C005BB1B4 /* AHReach.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F677285B1752F25C005BB1B4 /* AHReach.m in Sources */ = {isa = PBXBuildFile; fileRef = F677285A1752F25C005BB1B4 /* AHReach.m */; };
 		F677286817533240005BB1B4 /* CFinishChart.m in Sources */ = {isa = PBXBuildFile; fileRef = F677286717533240005BB1B4 /* CFinishChart.m */; };
 		F677286C17533484005BB1B4 /* CGradientRect.m in Sources */ = {isa = PBXBuildFile; fileRef = F677286B17533484005BB1B4 /* CGradientRect.m */; };
 		F678A94317278AA3000DAB46 /* MR_LoginCtro.m in Sources */ = {isa = PBXBuildFile; fileRef = F678A94117278AA3000DAB46 /* MR_LoginCtro.m */; };
@@ -727,9 +727,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F606A0A41724BF3100490D04 /* Build configuration list for PBXNativeTarget "MedicalReview" */;
 			buildPhases = (
-				F606A0761724BF3100490D04 /* Sources */,
 				F606A0771724BF3100490D04 /* Frameworks */,
 				F606A0781724BF3100490D04 /* Resources */,
+				F606A0761724BF3100490D04 /* Sources */,
 			);
 			buildRules = (
 			);
