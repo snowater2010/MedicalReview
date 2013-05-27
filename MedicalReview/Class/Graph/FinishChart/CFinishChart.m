@@ -39,7 +39,11 @@
 	float fTop = 0;
 	float fMiddle;
 	float iFinishValue;
-	if(strActualValue >= strDesiredValue){
+    if (strDesiredValue == 0) {
+        iFinishValue = 0;
+		fMiddle = fLeft;
+    }
+	else if(strActualValue >= strDesiredValue){
 		iFinishValue = 100;
 		fMiddle = fRight;
 	}else{
@@ -52,36 +56,27 @@
 	gradientRect.mRate = 0.4;
 	
 	//画已完成部分
-	CGRect finishRect = CGRectMake(fLeft, fTop, fMiddle-fLeft, iFinishBarHeight);
-	[gradientRect setHighColorHex:@"#0000FF"];
+	CGRect finishRect = CGRectMake(fLeft, fTop, fMiddle-fLeft, iHeight);
+	[gradientRect setHighColorHex:@"#00FF00"];
 	[gradientRect drawRect:finishRect inContext:context];
-	
-	//	UIColor *finishColor = [UIColor blueColor];
-	//	CGContextSetStrokeColorWithColor(context, [[UIColor blackColor] CGColor]);
-	//	CGContextAddRect(context, finishRect);
-	//	CGContextSetFillColorWithColor(context, finishColor.CGColor);
-	//	CGContextFillPath(context);
 	
 	if(fMiddle != fRight){
 		//画未完成部分
-		CGRect notfinishRect = CGRectMake(fMiddle, fTop, fRight-fMiddle, iFinishBarHeight);
+		CGRect notfinishRect = CGRectMake(fMiddle, fTop, fRight-fMiddle, iHeight);
 		
-		[gradientRect setHighColorHex:@"#00FF00"];
+		[gradientRect setHighColorHex:@"#FFFFFF"];
 		[gradientRect drawRect:notfinishRect inContext:context];
-		
-		//		UIColor *notfinishColor = [UIColor greenColor];
-		//		CGContextSetStrokeColorWithColor(context, [[UIColor blackColor] CGColor]);
-		//		CGContextAddRect(context, notfinishRect);
-		//		CGContextSetFillColorWithColor(context, notfinishColor.CGColor);
-		//		CGContextFillPath(context);
 	}
 	
 	[gradientRect release];
 	
 	//画文字部分
-	CGContextSetFillColorWithColor(context, [[UIColor blueColor] CGColor]);
-	NSString* strFinishText = [NSString stringWithFormat:@"目标完成率：%.2f%%", iFinishValue];
-	[strFinishText drawAtPoint:CGPointMake(fLeft, fTop-20) withFont:[UIFont systemFontOfSize:10]];
+    NSString *strFinishText = [NSString stringWithFormat:@"%.1f%%", iFinishValue];
+    UIFont *font = [UIFont systemFontOfSize:12];
+    CGSize textSize = [strFinishText sizeWithFont:font];
+    
+    CGContextSetFillColorWithColor(context, [[UIColor blueColor] CGColor]);
+	[strFinishText drawAtPoint:CGPointMake((iWidth-textSize.width)/2, (iHeight-textSize.height)/2) withFont:font];
 }
 
 

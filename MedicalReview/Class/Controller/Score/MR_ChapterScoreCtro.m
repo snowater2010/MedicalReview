@@ -14,6 +14,10 @@
 #import "CFinishChart.h"
 
 @interface MR_ChapterScoreCtro ()
+{
+    int _totalCount;
+    int _finishCount;
+}
 
 @property(nonatomic, retain) NSDictionary *clauseData;
 @property(nonatomic, retain) NSArray *chapterData;
@@ -23,6 +27,7 @@
 @property(nonatomic, retain) MR_TableClauseView *clauseView;
 @property(nonatomic, retain) MR_ChapterHeadView *chapterHeadView;
 @property(nonatomic, retain) UITableView *chapterTable;
+@property(nonatomic, retain) UILabel *finishLabel;
 @property(nonatomic, retain) CFinishChart *finishChart;
 
 @end
@@ -50,9 +55,15 @@
 	
     [self initData];
     
-    float finishPercent = [self computeFinishPercent];
-    _finishChart.strActualValue = finishPercent * 100;
-    _finishChart.strDesiredValue = 100;
+    //finish percent
+    [self computeFinishPercent];
+    
+    NSString *finishStr = [NSString stringWithFormat:_GET_LOCALIZED_STRING_(@"page_score_percent"), _totalCount, _finishCount];
+    
+    _finishLabel.text = finishStr;
+    
+    _finishChart.strActualValue = _finishCount;
+    _finishChart.strDesiredValue = _totalCount;
     [_finishChart setNeedsDisplay];
     
     _chapterHeadView.chapterData = _chapterData;
@@ -81,6 +92,7 @@
     
     self.clauseView = nil;
     self.chapterHeadView = nil;
+    self.finishLabel = nil;
     self.finishChart = nil;
     [super dealloc];
 }
@@ -101,15 +113,25 @@
     float percent_h = 30;
     CGRect percentFrame = CGRectMake(percent_x, percent_y, percent_w, percent_h);
     UIView *percentView = [[UIView alloc] initWithFrame:percentFrame];
-    //    topView.delegate = self;
-    //    topView.layer.borderWidth = 1;
     [self.view addSubview:percentView];
     [percentView release];
     
-    CFinishChart *finishChart = [[CFinishChart alloc] initWithFrame:CGRectMake(0, 0, 200, percent_h)];
+    NSString *finishStr = _GET_LOCALIZED_STRING_(@"page_score_percent");
+    UIFont *font = [UIFont systemFontOfSize:14];
+    CGSize textSize = [finishStr sizeWithFont:font];
+    
+    UILabel *finishLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, textSize.width, percent_h)];
+    finishLabel.backgroundColor = [UIColor clearColor];
+    finishLabel.font = font;
+    self.finishLabel = finishLabel;
+    [percentView addSubview:finishLabel];
+    [finishLabel release];
+    
+    CFinishChart *finishChart = [[CFinishChart alloc] initWithFrame:CGRectMake(10 + textSize.width, 5, 200, percent_h - 10)];
     finishChart.backgroundColor = [UIColor blueColor];
     self.finishChart = finishChart;
     [percentView addSubview:finishChart];
+    [finishChart release];
     
     //top chapter head
     float chapter_x = 0;
@@ -118,6 +140,7 @@
     float chapter_h = 30;
     CGRect chapterFrame = CGRectMake(chapter_x, chapter_y, chapter_w, chapter_h);
     MR_ChapterHeadView *chapterHeadView = [[MR_ChapterHeadView alloc] initWithFrame:chapterFrame];
+    chapterHeadView.backgroundColor = [Common colorWithR:214 withG:230 withB:255];
     chapterHeadView.delegate = self;
     [self.view addSubview:chapterHeadView];
     self.chapterHeadView = chapterHeadView;
@@ -198,6 +221,7 @@
     float clause_h = mainFrame.size.height - head_h - top_h;
     CGRect clauseFrame = CGRectMake(clause_x, clause_y, clause_w, clause_h);
     MR_TableClauseView *clauseView = [[MR_TableClauseView alloc] initWithFrame:clauseFrame];
+    clauseView.scoredDelegate = self;
     self.clauseView = clauseView;
     [mainPageView addSubview:clauseView];
     [clauseView release];
@@ -235,7 +259,7 @@
     self.scoreData = [self getInitScoreData];
 }
 
-- (float)computeFinishPercent
+- (void)computeFinishPercent
 {
     int totalCount = 0;
     int finishCount = 0;
@@ -254,10 +278,8 @@
         }
     }
     
-    if (totalCount != 0)
-        return finishCount * 1.0 / totalCount;
-    else
-        return 0;
+    _totalCount = totalCount;
+    _finishCount = finishCount;
 }
 
 //选择左边节点时，clauseviewtable初始化
@@ -401,10 +423,13 @@
     if (scoredData && scoredData.count > 0){
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:_scoreData];
         [dic addEntriesFromDictionary:scoredData];
+        self.scoreData = dic;
         
-        float finishPercent = [self computeFinishPercent];
-        _finishChart.strActualValue = finishPercent * 100;
-        _finishChart.strDesiredValue = 100;
+        [self computeFinishPercent];
+        NSString *finishStr = [NSString stringWithFormat:_GET_LOCALIZED_STRING_(@"page_score_percent"), _totalCount, _finishCount];
+        _finishLabel.text = finishStr;
+        _finishChart.strActualValue = _finishCount;
+        _finishChart.strDesiredValue = _totalCount;
         [_finishChart setNeedsDisplay];
     }
 }
