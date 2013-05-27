@@ -73,7 +73,7 @@
     float top_h = rootFrame.size.height*0.1;
     CGRect topFrame = CGRectMake(top_x, top_y, top_w, top_h);
     MR_TopPageView *topPageView = [[MR_TopPageView alloc] initWithFrame:topFrame];
-    topPageView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"top_bg.gif"]];
+//    topPageView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"top_bg.gif"]];
     [self.view addSubview:topPageView];
     [topPageView release];
     
@@ -168,19 +168,25 @@
 }
 
 - (void)updateAvailabilityWithReach:(AHReach *)reach {
-//	if([reach isReachableViaWWAN]) {
+    BOOL isOnLine = NO;
+    
+	if([reach isReachableViaWiFi])
+    {
 //        _ALERT_CONFIRM_(@"WAN", self, 0);
-//    }
-//	else if([reach isReachableViaWiFi])
-//    {
+        isOnLine = YES;
+    }
+	else if([reach isReachableViaWWAN])
+    {
 //        _ALERT_CONFIRM_(@"WiFi", self, 0);
-//    }
-//	else {
+        isOnLine = YES;
+    }
+	else {
 //        _ALERT_CONFIRM_(@"SHIT", self, 0);
-//    }
+        isOnLine = NO;
+    }
     
     BOOL isScoreUpdateCache = [FileHelper ifHaveScoreUpdateCache];
-    if (isScoreUpdateCache) {
+    if (isOnLine && isScoreUpdateCache) {
         [self doUploadLocalScoredData];
     }
 }
@@ -240,6 +246,10 @@
         //同步成功后，清除本地更新缓存
         [FileHelper removeScoreUpdateCacheFile];
     }
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
 }
 
 @end

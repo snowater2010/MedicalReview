@@ -9,7 +9,8 @@
 #import "MR_RootController.h"
 #import "MR_ChapterHeadView.h"
 #import "MR_ChapterSearchView.h"
+#import "MR_TableClauseView.h"
 
-@interface MR_ChapterScoreCtro : MR_RootController <ChapterHeadDelegate, ChapterSearchDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface MR_ChapterScoreCtro : MR_RootController <ChapterHeadDelegate, TableClauseViewDelegate, ChapterSearchDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @end

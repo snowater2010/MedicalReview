@@ -11,6 +11,7 @@
 #import "MR_MainPageView.h"
 #import "MR_ClauseTable.h"
 #import "MR_TableClauseView.h"
+#import "CFinishChart.h"
 
 @interface MR_ChapterScoreCtro ()
 
@@ -22,6 +23,7 @@
 @property(nonatomic, retain) MR_TableClauseView *clauseView;
 @property(nonatomic, retain) MR_ChapterHeadView *chapterHeadView;
 @property(nonatomic, retain) UITableView *chapterTable;
+@property(nonatomic, retain) CFinishChart *finishChart;
 
 @end
 
@@ -47,6 +49,11 @@
     [super viewDidLoad];
 	
     [self initData];
+    
+    float finishPercent = [self computeFinishPercent];
+    _finishChart.strActualValue = finishPercent * 100;
+    _finishChart.strDesiredValue = 100;
+    [_finishChart setNeedsDisplay];
     
     _chapterHeadView.chapterData = _chapterData;
     [_chapterTable reloadData];
@@ -74,6 +81,7 @@
     
     self.clauseView = nil;
     self.chapterHeadView = nil;
+    self.finishChart = nil;
     [super dealloc];
 }
 
@@ -84,9 +92,28 @@
 {
     CGRect rootFrame = self.view.frame;
     
+    //compute finish coiunt
+    
+    //percent
+    float percent_x = 0;
+    float percent_y = 0;
+    float percent_w = rootFrame.size.width;
+    float percent_h = 30;
+    CGRect percentFrame = CGRectMake(percent_x, percent_y, percent_w, percent_h);
+    UIView *percentView = [[UIView alloc] initWithFrame:percentFrame];
+    //    topView.delegate = self;
+    //    topView.layer.borderWidth = 1;
+    [self.view addSubview:percentView];
+    [percentView release];
+    
+    CFinishChart *finishChart = [[CFinishChart alloc] initWithFrame:CGRectMake(0, 0, 200, percent_h)];
+    finishChart.backgroundColor = [UIColor blueColor];
+    self.finishChart = finishChart;
+    [percentView addSubview:finishChart];
+    
     //top chapter head
     float chapter_x = 0;
-    float chapter_y = 0;
+    float chapter_y = percent_y + percent_h;
     float chapter_w = rootFrame.size.width;
     float chapter_h = 30;
     CGRect chapterFrame = CGRectMake(chapter_x, chapter_y, chapter_w, chapter_h);
@@ -206,6 +233,31 @@
     }
     
     self.scoreData = [self getInitScoreData];
+}
+
+- (float)computeFinishPercent
+{
+    int totalCount = 0;
+    int finishCount = 0;
+    for (NSDictionary *chapterDic in _chapterData) {
+        NSArray *sectionList = [chapterDic objectForKey:KEY_sectionList];
+        for (NSDictionary *sectionDic in sectionList) {
+            NSArray *clauseList = [sectionDic objectForKey:KEY_clauseList];
+            for (NSDictionary *clauseDic in clauseList) {
+                NSString *clauseId = [clauseDic objectForKey:KEY_clauseId];
+                NSDictionary *scoreDic = [_scoreData objectForKey:clauseId];
+                NSString *scoreValue = [scoreDic objectForKey:KEY_scoreValue];
+                if ([Common isNotEmptyString:scoreValue])
+                    finishCount++;
+                totalCount++;
+            }
+        }
+    }
+    
+    if (totalCount != 0)
+        return finishCount * 1.0 / totalCount;
+    else
+        return 0;
 }
 
 //选择左边节点时，clauseviewtable初始化
@@ -340,6 +392,21 @@
     _clauseView.clauseData = clauseData;
     _clauseView.scoreData = [self getScoreFrom:_scoreData byNode:nodeData];
     [_clauseView reloadData];
+}
+
+#pragma mark -
+#pragma mark TableClauseViewDelegate
+- (void)clauseScored:(NSDictionary *)scoredData
+{
+    if (scoredData && scoredData.count > 0){
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:_scoreData];
+        [dic addEntriesFromDictionary:scoredData];
+        
+        float finishPercent = [self computeFinishPercent];
+        _finishChart.strActualValue = finishPercent * 100;
+        _finishChart.strDesiredValue = 100;
+        [_finishChart setNeedsDisplay];
+    }
 }
 
 @end

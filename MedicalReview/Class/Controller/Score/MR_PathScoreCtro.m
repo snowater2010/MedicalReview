@@ -289,7 +289,7 @@
 }
 
 #pragma mark -
-#pragma mark ClauseScoredDelegate
+#pragma mark TableClauseViewDelegate
 - (void)clauseScored:(NSDictionary *)scoredData
 {
     if (scoredData && scoredData.count > 0)

@@ -18,4 +18,8 @@
 
 + (UIColor *)colorWithR:(int)r withG:(int)g withB:(int)b;
 
++(UIColor*)colorWithHexString:(NSString*) hexstring;
+
++(NSArray*) HexString2RGB:(NSString*)hexstring;
+
 @end
