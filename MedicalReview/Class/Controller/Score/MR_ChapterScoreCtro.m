@@ -149,7 +149,7 @@
     //left
     float left_x = 0;
     float left_y = chapter_y + chapter_h;
-    float left_w = rootFrame.size.width*0.18;
+    float left_w = rootFrame.size.width*0.15;
     float left_h = rootFrame.size.height - left_y;
     CGRect leftFrame = CGRectMake(left_x, left_y, left_w, left_h);
     MR_LeftPageView *leftPageView = [[MR_LeftPageView alloc] initWithFrame:leftFrame];

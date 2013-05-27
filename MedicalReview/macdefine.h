@@ -180,6 +180,8 @@ enum SORT_TYPE
 #define KEY_nodeName            @"nodeName"
 #define KEY_totalCount          @"totalCount"
 #define KEY_finishCount         @"finishCount"
+#define KEY_interviewPeople     @"interviewPeople"
+#define KEY_functionContent     @"functionContent"
 
 //chapter data
 #define KEY_chapterName         @"chapterName"

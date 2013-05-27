@@ -57,7 +57,7 @@
 	
 	//画已完成部分
 	CGRect finishRect = CGRectMake(fLeft, fTop, fMiddle-fLeft, iHeight);
-	[gradientRect setHighColorHex:@"#00FF00"];
+	[gradientRect setHighColorHex:@"#FF9200"];
 	[gradientRect drawRect:finishRect inContext:context];
 	
 	if(fMiddle != fRight){

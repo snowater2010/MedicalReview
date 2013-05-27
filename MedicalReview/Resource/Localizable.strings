@@ -36,4 +36,6 @@
 "title_explain_page"                = "打分说明";
 
 //page
+"page_path_interviewPeople"         = "访谈人员：";
+"page_path_functionContent"         = "方法及内容：";
 "page_score_percent"                = "共有%d个评审条款,　已录入%d, 完成比率";

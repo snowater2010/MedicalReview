@@ -79,6 +79,12 @@
 
 #pragma mark -
 #pragma mark Utilities
+
+- (void)reSizeTable:(CGRect)frame
+{
+    _tableview.frame = frame;
+}
+
 - (void)reloadData
 {
     [_sectionArray removeAllObjects];

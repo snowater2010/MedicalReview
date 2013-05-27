@@ -12,7 +12,7 @@
 @protocol PathNodeDelegate <NSObject>
 
 @optional
-- (void)nodeSelected:(NSArray *)nodeData;
+- (void)nodeSelected:(NSDictionary *)nodeDic;
 @end
 
 @interface MR_PathNodeView : MR_RootView <NIDropDownDelegate, UITableViewDataSource, UITableViewDelegate>

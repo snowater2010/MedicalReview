@@ -65,11 +65,15 @@
     //第一次取第一条数据
     NSDictionary *pathDic = [_pathData objectAtIndex:0];
     NSArray *nodeList = [pathDic objectForKey:KEY_nodeList];
-    NSArray *nodeData = [[nodeList objectAtIndex:0] objectForKey:KEY_clauseList];
+    NSDictionary *nodeDic = [nodeList objectAtIndex:0];
+    NSArray *nodeData = [nodeDic objectForKey:KEY_clauseList];
     
     _clauseTableView.nodeData = nodeData;
     _clauseTableView.clauseData = [self getClauseFrom:_clauseData byNode:nodeData];
     _clauseTableView.scoreData = [self getScoreFrom:_scoreData byNode:nodeData];
+    
+    _topPageView.interviewPeople = [nodeDic objectForKey:KEY_interviewPeople];
+    _topPageView.functionContent = [nodeDic objectForKey:KEY_functionContent];
 }
 
 - (void)didReceiveMemoryWarning
@@ -240,6 +244,7 @@
     }
     _mainPageView.frame = mainFrame;
     _clauseTableView.frame = clauseFrame;
+    [_clauseTableView reSizeTable:_clauseTableView.bounds];
     
     _ANIMATIONS_INIT_END_;
 }
@@ -275,9 +280,11 @@
 
 #pragma mark -
 #pragma mark PathNodeDelegate
-- (void)nodeSelected:(NSArray *)nodeData;
+- (void)nodeSelected:(NSDictionary *)nodeDic;
 {
-    if (nodeData) {
+    if (nodeDic) {
+        NSArray *nodeData = [nodeDic objectForKey:KEY_clauseList];
+        
         //重新读取数据（可以优化，不必每次以重新读取来更新数据）
         self.scoreData = [self getInitScoreData];
         
@@ -285,6 +292,9 @@
         _clauseTableView.clauseData = [self getClauseFrom:_clauseData byNode:nodeData];
         _clauseTableView.scoreData = [self getScoreFrom:_scoreData byNode:nodeData];
         [_clauseTableView reloadData];
+        
+        _topPageView.interviewPeople = [nodeDic objectForKey:KEY_interviewPeople];
+        _topPageView.functionContent = [nodeDic objectForKey:KEY_functionContent];
     }
 }
 

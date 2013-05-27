@@ -8,6 +8,11 @@
 
 #import "MR_RootView.h"
 
+#define ClauseTopView_TextSize 17
+
 @interface MR_ClauseTopView : MR_RootView
+
+@property(nonatomic, retain) NSString *interviewPeople;
+@property(nonatomic, retain) NSString *functionContent;
 
 @end

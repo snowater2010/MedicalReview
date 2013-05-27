@@ -108,8 +108,7 @@
     [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
     
     NSDictionary *dic = [_nodeData objectAtIndex:0];
-    NSArray *clauseList = [dic objectForKey:KEY_clauseList];
-    [Common callDelegate:_delegate method:@selector(nodeSelected:) withObject:clauseList];
+    [Common callDelegate:_delegate method:@selector(nodeSelected:) withObject:dic];
 }
 
 - (void)setNodeDataAtIndex:(int)index
@@ -245,10 +244,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSDictionary *dic = [_nodeData objectAtIndex:indexPath.row];
-    NSArray *clauseList = [dic objectForKey:KEY_clauseList];
     
     if ([_delegate respondsToSelector:@selector(nodeSelected:)]) {
-        [_delegate performSelector:@selector(nodeSelected:) withObject:clauseList];
+        [_delegate performSelector:@selector(nodeSelected:) withObject:dic];
     }
     
 }

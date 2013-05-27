@@ -34,7 +34,7 @@
         CGColorRef borderColor = [[Common colorWithR:221 withG:221 withB:221] CGColor];
         
         UIView *bgView = [[UIView alloc] initWithFrame:rect];
-        bgView.backgroundColor = [UIColor lightGrayColor];
+        bgView.backgroundColor = [Common colorWithR:193 withG:202 withB:202];
         self.bgView = bgView;
         [self addSubview:bgView];
         
@@ -216,7 +216,7 @@
     NSString *scoreValue = [self getScoreValue];
     
     if ([Common isEmptyString:scoreValue]) {
-        _bgView.backgroundColor = [UIColor lightGrayColor];
+        _bgView.backgroundColor = [Common colorWithR:193 withG:202 withB:202];
     }
     else {
         _bgView.backgroundColor = [Common colorWithR:153 withG:255 withB:255];

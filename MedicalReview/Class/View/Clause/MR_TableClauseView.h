@@ -29,5 +29,6 @@
 @property(nonatomic, assign) id<TableClauseViewDelegate> scoredDelegate;
 
 - (void)reloadData;
+- (void)reSizeTable:(CGRect)frame;
 
 @end

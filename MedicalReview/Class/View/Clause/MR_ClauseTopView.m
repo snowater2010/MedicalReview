@@ -30,6 +30,8 @@
     topLeftView.backgroundColor = [Common colorWithR:239 withG:255 withB:255];
     topLeftView.layer.borderWidth = 0.5;
     topLeftView.layer.borderColor = [[Common colorWithR:153 withG:187 withB:232] CGColor];
+    topLeftView.text = _GET_LOCALIZED_STRING_(@"page_path_interviewPeople");
+    topLeftView.textAlignment = NSTextAlignmentCenter;
     [self addSubview:topLeftView];
     [topLeftView release];
     
@@ -39,6 +41,8 @@
     float topLeft_h2 = rect.size.height;
     CGRect topLeftFrame2 = CGRectMake(topLeft_x2, topLeft_y2, topLeft_w2, topLeft_h2);
     UITextView *topLeftView2 = [[UITextView alloc] initWithFrame:topLeftFrame2];
+    topLeftView2.text = _interviewPeople;
+    topLeftView2.font = [UIFont systemFontOfSize:ClauseTopView_TextSize];
     topLeftView2.layer.borderWidth = 0.5;
     topLeftView2.layer.borderColor = [[Common colorWithR:153 withG:187 withB:232] CGColor];
     topLeftView2.editable = NO;
@@ -54,6 +58,8 @@
     topRighView.backgroundColor = [Common colorWithR:239 withG:255 withB:255];
     topRighView.layer.borderWidth = 0.5;
     topRighView.layer.borderColor = [[Common colorWithR:153 withG:187 withB:232] CGColor];
+    topRighView.text = _GET_LOCALIZED_STRING_(@"page_path_functionContent");
+    topRighView.textAlignment = NSTextAlignmentCenter;
     [self addSubview:topRighView];
     [topRighView release];
 
@@ -63,11 +69,20 @@
     float topRight_h2 = rect.size.height;
     CGRect topRighFrame2 = CGRectMake(topRight_x2, topRight_y2, topRight_w2, topRight_h2);
     UITextView *topRighView2 = [[UITextView alloc] initWithFrame:topRighFrame2];
+    topRighView2.text = _functionContent;
+    topRighView2.font = [UIFont systemFontOfSize:ClauseTopView_TextSize];
     topRighView2.layer.borderWidth = 0.5;
     topRighView2.layer.borderColor = [[Common colorWithR:153 withG:187 withB:232] CGColor];
     topRighView2.editable = NO;
     [self addSubview:topRighView2];
     [topRighView2 release];
+}
+
+- (void)dealloc
+{
+    self.interviewPeople = nil;
+    self.functionContent = nil;
+    [super dealloc];
 }
 
 @end

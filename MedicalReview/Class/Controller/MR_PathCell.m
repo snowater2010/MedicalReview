@@ -54,7 +54,7 @@
         self.contentView.backgroundColor = [Common colorWithR:200 withG:211 withB:251];
     }
     else {
-        self.contentView.backgroundColor = [UIColor lightGrayColor];
+        self.contentView.backgroundColor = [Common colorWithR:193 withG:202 withB:202];
     }
 }
 
