@@ -156,11 +156,6 @@
     [self.request setPostValue:_loginName forKey:@"uid"];
     [self.request setPostValue:_loginPassWord forKey:@"pwd"];
     
-    NSDictionary *scoreUpdateCache = [FileHelper readScoreUpdateDataFromCache];
-    NSString *strscoreUpdateCache = [scoreUpdateCache JSONString];
-    if (strscoreUpdateCache)
-        [self.request setPostValue:strscoreUpdateCache forKey:@"postData"];
-    
     self.request.delegate = self;
     [self.request startAsynchronous];
     
@@ -188,8 +183,8 @@
     if (isScoreUpdateCache) {
         NSDictionary *scoreUpdateCache = [FileHelper readScoreUpdateDataFromCache];
         NSString *strscoreUpdateCache = [scoreUpdateCache JSONString];
-        
-        [self.request appendPostData:[strscoreUpdateCache dataUsingEncoding:NSNonLossyASCIIStringEncoding]];
+        if (strscoreUpdateCache)
+            [self.request setPostValue:strscoreUpdateCache forKey:@"postData"];
     }
     
     self.request.timeOutSeconds = 3000;

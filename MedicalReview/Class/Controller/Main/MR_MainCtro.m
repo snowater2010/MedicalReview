@@ -10,6 +10,7 @@
 #import "MR_TopPageView.h"
 #import "MR_PathScoreCtro.h"
 #import "MR_ChapterScoreCtro.h"
+#import "AHReach.h"
 
 @interface MR_MainCtro ()
 @end
@@ -36,6 +37,14 @@
     [super viewDidLoad];
     
     [self visitFunction:0];
+    
+    //net reacher
+    _GET_APP_DELEGATE_(appDelegate);
+    NSString *serverUrl = appDelegate.globalinfo.serverInfo.strWebServiceUrl;
+    AHReach *hostReach = [AHReach reachForHost:serverUrl];
+	[hostReach startUpdatingWithBlock:^(AHReach *reach) {
+		[self updateAvailabilityWithReach:reach];
+	}];
 }
 
 - (void)didReceiveMemoryWarning
@@ -156,6 +165,81 @@
 {
     UIButton *button = (UIButton *)sender;
     [self visitFunction:button.tag];
+}
+
+- (void)updateAvailabilityWithReach:(AHReach *)reach {
+//	if([reach isReachableViaWWAN]) {
+//        _ALERT_CONFIRM_(@"WAN", self, 0);
+//    }
+//	else if([reach isReachableViaWiFi])
+//    {
+//        _ALERT_CONFIRM_(@"WiFi", self, 0);
+//    }
+//	else {
+//        _ALERT_CONFIRM_(@"SHIT", self, 0);
+//    }
+    
+    BOOL isScoreUpdateCache = [FileHelper ifHaveScoreUpdateCache];
+    if (isScoreUpdateCache) {
+        [self doUploadLocalScoredData];
+    }
+}
+
+//上传本地缓存打分数据
+- (void)doUploadLocalScoredData
+{    
+    //异步请求服务器更新数据
+    _GET_APP_DELEGATE_(appDelegate);
+    NSString *serverUrl = appDelegate.globalinfo.serverInfo.strWebServiceUrl;
+    
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:serverUrl]];
+    
+    [request setPostValue:@"upLoadData" forKey:@"module"];
+    [request setPostValue:@"upLoadData" forKey:@"module2"];
+    [request setDefaultPostValue];
+    
+    NSDictionary *scoreUpdateCache = [FileHelper readScoreUpdateDataFromCache];
+    NSString *strscoreUpdateCache = [scoreUpdateCache JSONString];
+    if (strscoreUpdateCache)
+        [request setPostValue:strscoreUpdateCache forKey:@"postData"];
+    
+    request.delegate = self;
+    [request startAsynchronous];
+}
+
+-(void)requestFinished:(ASIHTTPRequest *)request
+{
+    request.responseEncoding = NSUTF8StringEncoding;
+    NSString *responseData = [request responseString];
+    
+    BOOL ok = NO;
+    NSString *message = nil;
+    NSDictionary* retDic;
+    if ([Common isNotEmptyString:responseData]) {
+        retDic = [responseData objectFromJSONString];
+        if (retDic) {
+            NSString *errCode = [retDic objectForKey:KEY_errCode];
+            if ([errCode isEqualToString:@"0"]) {
+                ok = YES;
+            } else {
+                message = [retDic objectForKey:KEY_errMsg];
+            }
+        }
+    }
+    
+    if (ok) {
+        //将同步的缓存数据更新到score上
+        NSDictionary *score = [FileHelper readScoreDataFromCache];
+        NSDictionary *updateScore = [FileHelper readScoreUpdateDataFromCache];
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:score];
+        [dic addEntriesFromDictionary:updateScore];
+        
+        [FileHelper asyWriteScoreDataToCache:dic];
+        
+        //同步成功后，清除本地更新缓存
+        [FileHelper removeScoreUpdateCacheFile];
+    }
 }
 
 @end
