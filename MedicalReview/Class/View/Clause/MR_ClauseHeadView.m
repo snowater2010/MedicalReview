@@ -12,6 +12,9 @@
 #import "MR_TableClauseView.h"
 
 @interface MR_ClauseHeadView ()
+{
+    CGRect readOnlyRect;
+}
 
 @property(nonatomic, retain) UIView *bgView;
 @property(nonatomic, retain) UILabel *nameLabel;
@@ -81,7 +84,7 @@
         coverControl.backgroundColor = [UIColor clearColor];
         [coverControl addTarget:self action:@selector(clickClauseHead) forControlEvents:UIControlEventTouchUpInside];
         
-        //----------------------
+        //----------------------------------------------------------
         //self score
         float self_x = name_x + name_w;
         float self_y = 0;
@@ -143,6 +146,8 @@
         [coverControl release];
         [selfView release];
         [operateView release];
+        
+        readOnlyRect = CGRectMake(self_x, 0, rect.size.width - self_x, rect.size.height);
     }
     return self;
 }
@@ -173,6 +178,12 @@
         [_explainView setExplain:scoreExplain];
     
     [self changeBackgroundColor];
+    
+    if (_readOnly) {
+        UIView *coverView = [[UIView alloc] initWithFrame:readOnlyRect];
+        [self addSubview:coverView];
+        [coverView release];
+    }
 }
 
 - (void)dealloc

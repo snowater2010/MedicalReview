@@ -23,6 +23,7 @@
 
 @interface MR_TableClauseView : MR_RootView <ClauseHeadDelegate, ClauseNodeDelegate, UITableViewDelegate, UITableViewDataSource>
 
+@property(nonatomic, assign) BOOL readOnly;
 @property(nonatomic, retain) NSArray *clauseData;
 @property(nonatomic, retain) NSDictionary *scoreData;
 @property(nonatomic, retain) NSArray *nodeData;

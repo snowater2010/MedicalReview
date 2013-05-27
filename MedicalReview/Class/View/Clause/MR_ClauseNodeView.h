@@ -21,6 +21,7 @@
 
 @interface MR_ClauseNodeView : MR_RootView <OperateDelegate, ExplainViewDelegate>
 
+@property(nonatomic, assign) BOOL readOnly;
 @property(nonatomic, assign) int section;
 @property(nonatomic, retain) NSString *attrId;
 @property(nonatomic, retain) NSString *clauseId;

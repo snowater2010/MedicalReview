@@ -221,6 +221,7 @@
     float clause_h = mainFrame.size.height - head_h - top_h;
     CGRect clauseFrame = CGRectMake(clause_x, clause_y, clause_w, clause_h);
     MR_TableClauseView *clauseView = [[MR_TableClauseView alloc] initWithFrame:clauseFrame];
+    clauseView.readOnly = _readOnly;
     clauseView.scoredDelegate = self;
     self.clauseView = clauseView;
     [mainPageView addSubview:clauseView];

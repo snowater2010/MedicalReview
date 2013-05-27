@@ -27,6 +27,7 @@
 
 @interface MR_ClauseHeadView : MR_RootView <MR_PopSelectListDelegate, ExplainViewDelegate, OperateDelegate>
 
+@property(nonatomic, assign) BOOL readOnly;
 @property(nonatomic, assign) BOOL isOpen;
 @property(nonatomic, assign) int section;
 @property(nonatomic, retain) NSString *clauseId;

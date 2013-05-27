@@ -481,7 +481,7 @@
     
     float head_x = 0;
     float head_y = 0;
-    float head_w =  _selfSize.width;
+    float head_w = _selfSize.width;
     float head_h = DEFAULT_CELL_HEIGHT;
     CGRect headFrame = CGRectMake(head_x, head_y, head_w, head_h);
     MR_ClauseHeadView *headView = [[[MR_ClauseHeadView alloc] initWithFrame:headFrame] autorelease];
@@ -492,6 +492,7 @@
     headView.scoreData = scoreDic;
     headView.scoreArray = _headScoreArray;
     headView.isOpen = [_sectionArray containsObject:[NSNumber numberWithInt:section]];
+    headView.readOnly = _readOnly;
     
     //save in a array
     if (_tableHadeViews.count > section && [_tableHadeViews objectAtIndex:section])
@@ -544,6 +545,7 @@
         nodeView.layer.borderWidth = 0.5;
         nodeView.delegate = self;
         nodeView.tag = TAG_CELL_NODE_VIEW;
+        nodeView.readOnly = _readOnly;
         [cell.contentView addSubview:nodeView];
         [nodeView release];
     }

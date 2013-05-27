@@ -13,4 +13,6 @@
 
 @interface MR_ChapterScoreCtro : MR_RootController <ChapterHeadDelegate, TableClauseViewDelegate, ChapterSearchDelegate, UITableViewDelegate, UITableViewDataSource>
 
+@property(nonatomic, assign) BOOL readOnly;
+
 @end

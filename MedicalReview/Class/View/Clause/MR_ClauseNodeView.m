@@ -12,6 +12,9 @@
 #import "MR_TableClauseView.h"
 
 @interface MR_ClauseNodeView ()
+{
+    CGRect readOnlyRect;
+}
 @property(nonatomic, retain) UILabel *nameLabel;
 @property(nonatomic, retain) UISegmentedControl *scoreView;
 @property(nonatomic, retain) MR_ExplainView *explainView;
@@ -122,6 +125,8 @@
     [nameLabel release];
     [selfView release];
     [operateView release];
+    
+    readOnlyRect = CGRectMake(self_x, 0, rect.size.width - self_x, rect.size.height);
 }
 
 - (void)drawRect:(CGRect)rect
@@ -154,6 +159,13 @@
         [_explainView setExplain:@""];
     else
         [_explainView setExplain:scoreExplain];
+    
+    
+    if (_readOnly) {
+        UIView *coverView = [[UIView alloc] initWithFrame:readOnlyRect];
+        [self addSubview:coverView];
+        [coverView release];
+    }
 }
 
 - (void)refreshDatas
