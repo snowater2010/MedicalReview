@@ -292,8 +292,11 @@
         _clauseTableView.scoreData = [self getScoreFrom:_scoreData byNode:nodeData];
         [_clauseTableView reloadData];
         
+        NSString *a = [nodeDic objectForKey:KEY_interviewPeople];
+        NSString *b = [nodeDic objectForKey:KEY_functionContent];
         _topPageView.interviewPeople = [nodeDic objectForKey:KEY_interviewPeople];
         _topPageView.functionContent = [nodeDic objectForKey:KEY_functionContent];
+        [_topPageView setNeedsDisplay];
     }
 }
 
