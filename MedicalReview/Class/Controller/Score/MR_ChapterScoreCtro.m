@@ -238,19 +238,18 @@
     //clause
     if ([FileHelper ifHaveClauseCache])
         self.clauseData = [FileHelper readClauseDataFromCache];
-    else {
-        NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
-        self.clauseData = [allData objectForKey:KEY_allClause];
-    }
+//    else {
+//        NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
+//        self.clauseData = [allData objectForKey:KEY_allClause];
+//    }
     
     //chapter
-    if ([FileHelper ifHaveCacheFile:CACHE_CHAPTER]) {
+    if ([FileHelper ifHaveCacheFile:CACHE_CHAPTER])
         self.chapterData = [FileHelper readDataFromCache:CACHE_CHAPTER];
-    }
-    else {
-        NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
-        self.chapterData = [allData objectForKey:KEY_chaptersFormat];
-    }
+//    else {
+//        NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
+//        self.chapterData = [allData objectForKey:KEY_chaptersFormat];
+//    }
     
     //section
     if (_chapterData && _chapterData.count > 0) {

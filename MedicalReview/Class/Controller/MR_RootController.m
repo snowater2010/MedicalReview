@@ -227,8 +227,6 @@
 
 - (NSDictionary *)getInitScoreData
 {
-//    return [FileHelper readDataFileWithName:@"json_score.txt"];
-    
     //score
     NSDictionary *scoreCache = [FileHelper readScoreDataFromCache];
     NSDictionary *updateScoreCache = [FileHelper readScoreUpdateDataFromCache];
