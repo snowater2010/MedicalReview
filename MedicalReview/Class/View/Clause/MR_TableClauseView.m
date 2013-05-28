@@ -446,6 +446,8 @@
 
 - (void)doRequestUpdateSucess:(NSDictionary *)newScoreData
 {
+    _LOG_(@"UpdateSucess");
+    
     //更新打分缓存
     [FileHelper asyWriteScoreDataToCache:newScoreData];
     
@@ -455,6 +457,8 @@
 
 - (void)doRequestUpdateFailed:(NSDictionary *)newScoreData
 {
+    _LOG_(@"UpdateFailed");
+    
     //更新“打分更新”缓存
     [FileHelper asyWriteScoreUpdateDataToCache:newScoreData];
     

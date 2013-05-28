@@ -192,6 +192,7 @@ enum SORT_TYPE
 #define KEY_clauseList          @"clauseList"
 #define KEY_clauseId            @"clauseId"
 #define KEY_clauseName          @"clauseName"
+#define KEY_selfLevel           @"selfLevel"
 #define KEY_formulaType         @"formulaType"
 #define KEY_attrId              @"attrId"
 #define KEY_attrName            @"attrName"

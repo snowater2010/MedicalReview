@@ -14,6 +14,7 @@
 @interface MR_ClauseNodeView ()
 {
     CGRect readOnlyRect;
+    int lastSelectIndex;
 }
 @property(nonatomic, retain) UILabel *nameLabel;
 @property(nonatomic, retain) UISegmentedControl *scoreView;
@@ -32,6 +33,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        lastSelectIndex = NO_SELECT_VALUE;
         [self buildViewInRect:frame];
     }
     return self;
@@ -139,18 +141,18 @@
     
     if ([Common isEmptyString:scoreValue])
     {
-        _scoreView.selectedSegmentIndex = NO_SELECT_VALUE;
+        [self changeScoreWithIndex:NO_SELECT_VALUE];
     }
     else {
         switch (scoreValue.intValue) {
             case 0:
-                _scoreView.selectedSegmentIndex = 1;
+                [self changeScoreWithIndex:1];
                 break;
             case 1:
-                _scoreView.selectedSegmentIndex = 0;
+                [self changeScoreWithIndex:0];
                 break;
             default:
-                _scoreView.selectedSegmentIndex = NO_SELECT_VALUE;
+                [self changeScoreWithIndex:NO_SELECT_VALUE];
                 break;
         }
     }
@@ -178,18 +180,18 @@
     
     if ([Common isEmptyString:scoreValue])
     {
-        _scoreView.selectedSegmentIndex = NO_SELECT_VALUE;
+        [self changeScoreWithIndex:NO_SELECT_VALUE];
     }
     else {
         switch (scoreValue.intValue) {
             case 0:
-                _scoreView.selectedSegmentIndex = 1;
+                [self changeScoreWithIndex:1];
                 break;
             case 1:
-                _scoreView.selectedSegmentIndex = 0;
+                [self changeScoreWithIndex:0];
                 break;
             default:
-                _scoreView.selectedSegmentIndex = NO_SELECT_VALUE;
+                [self changeScoreWithIndex:NO_SELECT_VALUE];
                 break;
         }
     }
@@ -259,6 +261,7 @@
 
 - (void)changeScoreWithIndex:(int)index
 {
+    lastSelectIndex = index;
     _scoreView.selectedSegmentIndex = index;
 }
 
@@ -284,14 +287,10 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0) {
-        if (alertView.tag == 0) {
-            _scoreView.selectedSegmentIndex = 1;
-        }
-        else if (alertView.tag == 1) {
-            _scoreView.selectedSegmentIndex = 0;
-        }
+        _scoreView.selectedSegmentIndex = lastSelectIndex;
     }
     if (buttonIndex == 1) {
+        lastSelectIndex = _scoreView.selectedSegmentIndex;
         [Common callDelegate:_delegate method:@selector(clauseNodeScored:) withObject:self];
     }
 }
@@ -308,7 +307,7 @@
 
 - (void)doDelete
 {
-    _scoreView.selectedSegmentIndex = NO_SELECT_VALUE;
+    [self changeScoreWithIndex:NO_SELECT_VALUE];
     [Common callDelegate:_delegate method:@selector(clauseNodeScored:) withObject:self];
 }
 - (void)doLink
