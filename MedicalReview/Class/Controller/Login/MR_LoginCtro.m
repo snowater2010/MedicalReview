@@ -213,11 +213,18 @@
             NSArray *pathFormat = [dataDic objectForKey:KEY_pathFormat];
             NSArray *chaptersFormat = [dataDic objectForKey:KEY_chaptersFormat];
             NSArray *clauseScore = [dataDic objectForKey:KEY_clauseScore];
+            NSArray *statementData = [dataDic objectForKey:KEY_statementData];
             //条款
             if (allClause) {
                 BOOL result = [FileHelper writeClauseDataToCache:allClause];
                 if (!result)
                     _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_clause_cache_update_error"));
+            }
+            //快捷评论
+            if (statementData) {
+                BOOL result = [FileHelper writeShareData:statementData toCacheFile:CACHE_STATEMENT];
+                if (!result)
+                    _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_statement_cache_update_error"));
             }
             //路径
             if (pathFormat) {

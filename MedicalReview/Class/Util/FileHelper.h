@@ -41,6 +41,11 @@
 //将条款数据写入缓存
 + (BOOL)writeClauseDataToCache:(id)dataDic;
 
+//将数据写入共享缓存
++ (BOOL)writeShareData:(id)data toCacheFile:(NSString *)fileName;
+//读取共享缓存
++ (id)readShareDataFromCacheFile:(NSString *)fileName;
+
 //删除用户的打分缓存路径(本地更新
 + (void)removeScoreUpdateCacheFile;
 

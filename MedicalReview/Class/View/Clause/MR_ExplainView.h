@@ -32,8 +32,13 @@
 @end
 
 //explain editor
-
+@protocol EditExplainDelegate <NSObject>
+@optional
+- (void)getEditExplain:(NSString *)explain;
+@end
 @interface MR_ExplainCtro : MR_RootController
+
+@property(nonatomic, assign) id<EditExplainDelegate> delegate;
 
 - (NSString *)getExplain;
 - (void)setExplain:(NSString *)explain;
@@ -41,9 +46,12 @@
 @end
 
 //fast explain
-
+@protocol FastExplainDelegate <NSObject>
+@optional
+- (void)getFastExplain:(NSString *)explain;
+@end
 @interface MR_FastExplainCtro : MR_RootController
 
-- (NSString *)getExplain;
+@property(nonatomic, assign) id<FastExplainDelegate> delegate;
 
 @end

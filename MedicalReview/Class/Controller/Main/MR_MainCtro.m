@@ -36,6 +36,8 @@
 {
     [super viewDidLoad];
     
+    [self loadShareData];
+    
     //net reacher
     _GET_APP_DELEGATE_(appDelegate);
     NSString *serverUrl = appDelegate.globalinfo.serverInfo.strWebServiceUrl;
@@ -61,6 +63,12 @@
 
 #pragma mark -
 #pragma mark -- init view
+
+- (void)loadShareData
+{
+    _GET_APP_DELEGATE_(appDelegate);
+    appDelegate.globalinfo.shareData.statementData = [FileHelper readShareDataFromCacheFile:CACHE_STATEMENT];
+}
 
 - (void)initView
 {

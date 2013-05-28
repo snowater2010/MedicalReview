@@ -87,6 +87,34 @@
 }
 
 #pragma mark -
+#pragma mark shared data
+
++ (BOOL)writeShareData:(id)data toCacheFile:(NSString *)fileName
+{
+    if (!data)
+        return NO;
+    
+    NSString *dataPath = [[FileHelper getDocumentPath] stringByAppendingPathComponent:fileName];
+    
+    //移出先
+    BOOL removed = [self removeFileAtPath:dataPath];
+    
+    if (removed) {
+        return [data writeToFile:dataPath atomically:YES];
+    }
+    else {
+        return NO;
+    }
+}
+
++ (id)readShareDataFromCacheFile:(NSString *)fileName
+{
+    NSString *dataPath = [[FileHelper getDocumentPath] stringByAppendingPathComponent:fileName];
+    NSArray *result = [[[NSArray alloc] initWithContentsOfFile:dataPath] autorelease];
+    return result;
+}
+
+#pragma mark -
 #pragma mark --- score
 //根据用户名，得到用户的打分缓存路径
 + (NSString*)getScoreCacheFilePath

@@ -8,7 +8,7 @@
 
 #import "MR_ExplainView.h"
 
-@interface MR_ExplainView () <UIPopoverControllerDelegate>
+@interface MR_ExplainView () <UIPopoverControllerDelegate, FastExplainDelegate, EditExplainDelegate>
 {
     CGRect fastButtonFrame;
     CGSize explainPopSize;
@@ -35,13 +35,15 @@
         _textSize = 17;
         
         explainPopSize = CGSizeMake(500, 500);
-        fastExplainPopSize = CGSizeMake(300, 300);
+        fastExplainPopSize = CGSizeMake(200, 500);
         
         MR_ExplainCtro *explainCtro = [[MR_ExplainCtro alloc] initWithFrame:CGRectMake(0, 0, explainPopSize.width, explainPopSize.height)];
+        explainCtro.delegate = self;
         self.explainCtro = explainCtro;
         [explainCtro release];
         
         MR_FastExplainCtro *fastExplainCtro = [[MR_FastExplainCtro alloc] initWithFrame:CGRectMake(0, 0, fastExplainPopSize.width, fastExplainPopSize.height)];
+        fastExplainCtro.delegate = self;
         self.fastExplainCtro = fastExplainCtro;
         [fastExplainCtro release];
         
@@ -113,6 +115,7 @@
     [_viewPop initWithContentViewController:_fastExplainCtro];
     _viewPop.popoverContentSize = fastExplainPopSize;
     
+    self.tempExplainText = _explainTextView.text;
     [_viewPop presentPopoverFromRect:fastButtonFrame inView:self permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
 }
 
@@ -131,10 +134,33 @@
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
-    NSString *text = [_explainCtro getExplain];
+    //do nothing
+//    NSString *text = [_explainCtro getExplain];
+//    if (![_tempExplainText isEqualToString:text]) {
+//        _explainTextView.text = text;
+//        [Common callDelegate:_delegate method:@selector(explainChanged)];
+//    }
+}
+
+#pragma mark-
+#pragma FastExplainDelegate EditExplainDelegate
+
+- (void)getFastExplain:(NSString *)explain
+{
+    [_viewPop dismissPopoverAnimated:YES];
     
-    if (![_tempExplainText isEqualToString:text]) {
-        _explainTextView.text = [_explainCtro getExplain];
+    if (![_tempExplainText isEqualToString:explain]) {
+        _explainTextView.text = explain;
+        [Common callDelegate:_delegate method:@selector(explainChanged)];
+    }
+}
+
+- (void)getEditExplain:(NSString *)explain
+{
+    [_viewPop dismissPopoverAnimated:YES];
+    
+    if (![_tempExplainText isEqualToString:explain]) {
+        _explainTextView.text = explain;
         [Common callDelegate:_delegate method:@selector(explainChanged)];
     }
 }
@@ -156,16 +182,25 @@
     
     CGRect frame = self.view.frame;
     
-    float titleHeight = 50;
+    float titleHeight = 60;
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, titleHeight)];
     titleLabel.text = _GET_LOCALIZED_STRING_(@"title_explain_page");
-    titleLabel.font = [UIFont systemFontOfSize:18];
+    titleLabel.font = [UIFont systemFontOfSize:20];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.backgroundColor = [UIColor purpleColor];
+    titleLabel.textColor = [UIColor blackColor];
+    titleLabel.backgroundColor = [Common colorWithR:214 withG:230 withB:255];
     [self.view addSubview:titleLabel];
     [titleLabel release];
+    
+    float buttonWidth = 60;
+    float buttonHeight = 40;
+    UIButton *closeBt = [[UIButton alloc] initWithFrame:CGRectMake(frame.size.width - buttonWidth - 10, (titleHeight-buttonHeight)/2, buttonWidth, buttonHeight)];
+    [closeBt setBackgroundImage:[UIImage imageNamed:@"btn_img.png"] forState:UIControlStateNormal];
+    [closeBt setTitle:@"确定" forState:UIControlStateNormal];
+    [closeBt setTitleColor:[UIColor blackColor] forState:UIScrollViewDecelerationRateNormal];
+    [closeBt addTarget:self action:@selector(doEditExplain:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:closeBt];
     
     UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, titleHeight, frame.size.width, frame.size.height - titleHeight)];
     textView.font = [UIFont systemFontOfSize:20];
@@ -193,6 +228,11 @@
     [super dealloc];
 }
 
+- (void)doEditExplain:(id)sender
+{
+    [Common callDelegate:_delegate method:@selector(getEditExplain:) withObject:_textView.text];
+}
+
 - (NSString *)getExplain
 {
     return _textView.text;
@@ -206,7 +246,10 @@
 @end
 
 //fast explain
-@interface MR_FastExplainCtro ()
+@interface MR_FastExplainCtro () <UITableViewDataSource, UITableViewDelegate>
+
+@property(nonatomic, retain) NSArray *statementData;
+@property(nonatomic, retain) UITableView *fastExplain;
 
 @end
 
@@ -225,14 +268,20 @@
 {
     [super loadRootView];
     
-    self.view.backgroundColor = [UIColor purpleColor];
+    UITableView *fastExplain = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    fastExplain.dataSource = self;
+    fastExplain.delegate = self;
+    self.fastExplain = fastExplain;
+    [self.view addSubview:fastExplain];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-	// Do any additional setup after loading the view.
+    _GET_APP_DELEGATE_(appDelegate);
+	self.statementData = appDelegate.globalinfo.shareData.statementData;
+    [_fastExplain reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -243,12 +292,36 @@
 
 - (void)dealloc
 {
+    self.statementData = nil;
+    self.fastExplain = nil;
     [super dealloc];
 }
 
-- (NSString *)getExplain
+#pragma mark
+#pragma tableview delegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return @"";
+    return _statementData.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *FastExplainCellWithIdentifier = @"FastExplainCellWithIdentifier";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FastExplainCellWithIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:FastExplainCellWithIdentifier];
+    }
+    
+    NSString *fastExplain = [_statementData objectAtIndex:indexPath.row];
+    cell.textLabel.text = fastExplain;
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *fastExplain = [_statementData objectAtIndex:indexPath.row];
+    [Common callDelegate:_delegate method:@selector(getFastExplain:) withObject:fastExplain];
 }
 
 @end

@@ -26,9 +26,18 @@
 
 @end
 
+//shared data
+@interface ShareData : NSObject
+
+@property(nonatomic, retain) NSDictionary *clauseData;
+@property(nonatomic, retain) NSArray *statementData;
+
+@end
+
 @interface GlobalInfo : NSObject
 
 @property(nonatomic, retain) UserInfo *userInfo;
 @property(nonatomic, retain) ServerInfo *serverInfo;
+@property(nonatomic, retain) ShareData *shareData;
 
 @end
