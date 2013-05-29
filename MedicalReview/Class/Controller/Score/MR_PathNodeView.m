@@ -235,6 +235,9 @@
     MR_PathCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[MR_PathCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        
+        cell.selectedBackgroundView = [[[UIView alloc] initWithFrame:cell.frame] autorelease]; 
+        cell.selectedBackgroundView.backgroundColor = [Common colorWithR:251 withG:225 withB:214];
     }
     
     cell.cellModel = [self.nodeData objectAtIndex:indexPath.row];
