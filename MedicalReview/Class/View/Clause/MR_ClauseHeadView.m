@@ -235,8 +235,9 @@
 - (void)changeBackgroundColor
 {
     NSString *scoreValue = [self getScoreValue];
+    NSString *selfLevel = [_nodeDic objectForKey:KEY_selfLevel];
     
-    if ([Common isEmptyString:scoreValue]) {
+    if ([Common isEmptyString:scoreValue] || [scoreValue isEqualToString:selfLevel]) {
         _bgView.backgroundColor = [Common colorWithR:193 withG:202 withB:202];
     }
     else {
