@@ -58,14 +58,12 @@
         explainView.font = [UIFont systemFontOfSize:_textSize];
         explainView.font = [UIFont systemFontOfSize:DEFAULT_TEXT_SIZE];
         explainView.editable = NO;
+        UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doEditExplain:)];//添加点击事件
+        [explainView addGestureRecognizer:tapGesture];
+        [tapGesture release];
         self.explainTextView = explainView;
         [self addSubview:explainView];
         [explainView release];
-        
-        UIButton *textButon = [[UIButton alloc] initWithFrame:textFrame];
-        [textButon addTarget:self action:@selector(doEditExplain:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:textButon];
-        [textButon release];
         
         fastButtonFrame = CGRectMake(rect.size.width*0.75, 0, rect.size.width*0.25, rect.size.height);
         UIButton *button = [[UIButton alloc] initWithFrame:fastButtonFrame];
@@ -98,7 +96,7 @@
 }
 
 #pragma mark-
-#pragma Utilities
+#pragma mark Utilities
 
 - (void)doEditExplain:(id)sender
 {
@@ -130,7 +128,7 @@
 }
 
 #pragma mark-
-#pragma UIPopoverControllerDelegate
+#pragma mark UIPopoverControllerDelegate
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
@@ -143,7 +141,7 @@
 }
 
 #pragma mark-
-#pragma FastExplainDelegate EditExplainDelegate
+#pragma mark FastExplainDelegate EditExplainDelegate
 
 - (void)getFastExplain:(NSString *)explain
 {

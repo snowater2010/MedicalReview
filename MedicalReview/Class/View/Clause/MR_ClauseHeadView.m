@@ -93,6 +93,8 @@
         float self_h = rect.size.height;
         CGRect selfFrame = CGRectMake(self_x, self_y, self_w, self_h);
         UILabel *selfView = [[UILabel alloc] initWithFrame:selfFrame];
+//        selfView.font = [UIFont systemFontOfSize:NAME_TEXT_SIZE];
+        selfView.textAlignment = NSTextAlignmentCenter;
         selfView.backgroundColor = [UIColor clearColor];
         selfView.layer.borderWidth = 0.5;
         selfView.layer.borderColor = borderColor;
