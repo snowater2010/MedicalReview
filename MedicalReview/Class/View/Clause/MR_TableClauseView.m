@@ -190,10 +190,12 @@
     
     int scoreIndex = [sender getScoreSelectIndex];
     NSString *scoreValue = [sender getScoreValue];
+    NSString *scoreExplain = [sender getScoreExplain];
     NSString *clauseId = sender.clauseId;
     
     NSDictionary *scoreDic = [self getScoreDataDic:clauseId inSection:section];
     [scoreDic setValue:scoreValue forKey:KEY_scoreValue];
+    [scoreDic setValue:scoreExplain forKey:KEY_scoreExplain];
     
     NSMutableDictionary *scorePoints = [scoreDic objectForKey:KEY_pointList];
     NSArray *scoreKeys = [scorePoints allKeys];
@@ -250,6 +252,7 @@
 {
     int section = sender.section;
     NSString *value = [sender getScoreValue];
+    NSString *scoreExplain = [sender getScoreExplain];
     NSString *attrId = sender.attrId;
     NSString *clauseId = sender.clauseId;
     
@@ -263,6 +266,7 @@
     NSDictionary *scoreDic = [self getScoreDataDic:clauseId inSection:section];
     NSDictionary *pointsDic = [scoreDic objectForKey:KEY_pointList];
     [[pointsDic objectForKey:attrId] setValue:value forKey:KEY_scoreValue];
+    [[pointsDic objectForKey:attrId] setValue:scoreExplain forKey:KEY_scoreExplain];
     
     //可以抽取单独方法，防止分组数改变
     BOOL passA = YES;

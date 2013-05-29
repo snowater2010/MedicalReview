@@ -315,6 +315,7 @@
 - (void)doDelete
 {
     [self changeScoreWithIndex:NO_SELECT_VALUE];
+    [_explainView setExplain:@""];
     [Common callDelegate:_delegate method:@selector(clauseNodeScored:) withObject:self];
 }
 - (void)doLink

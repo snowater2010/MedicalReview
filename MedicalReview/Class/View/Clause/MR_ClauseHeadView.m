@@ -313,6 +313,7 @@
 - (void)doDelete
 {
     [self changeScore:NO_SELECT_INDEX];
+    [_explainView setExplain:@""];
     [Common callDelegate:_delegate method:@selector(clauseHeadScored:) withObject:self];
     
 }
