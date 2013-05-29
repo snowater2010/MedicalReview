@@ -21,6 +21,7 @@
 @property(nonatomic, retain) MR_ArrowView *arrowView;
 @property(nonatomic, retain) MR_ExplainView *explainView;
 @property(nonatomic, retain) MR_PopSelectListView *scoreView;
+@property(nonatomic, retain) UILabel *selfView;
 
 @end
 
@@ -95,6 +96,7 @@
         selfView.backgroundColor = [UIColor clearColor];
         selfView.layer.borderWidth = 0.5;
         selfView.layer.borderColor = borderColor;
+        self.selfView = selfView;
         
         //score
         float score_x = self_x + self_w;
@@ -155,11 +157,15 @@
 - (void)drawRect:(CGRect)rect
 {
     NSString *name = [_clauseData objectForKey:KEY_clauseName];
+    NSString *selfLevel = [_clauseData objectForKey:KEY_selfLevel];
     NSString *scoreValue  = [_scoreData objectForKey:KEY_scoreValue];
     NSString *scoreExplain = [_scoreData objectForKey:KEY_scoreExplain];
     
     //name data
     _nameLabel.text = name;
+    
+    //selfLevel
+    _selfView.text = selfLevel;
     
     //init data
     _scoreView.scoreArray = _scoreArray;
@@ -196,6 +202,7 @@
     self.arrowView = nil;
     self.scoreView = nil;
     self.nameLabel = nil;
+    self.selfView = nil;
     [super dealloc];
 }
 

@@ -19,6 +19,7 @@
 @property(nonatomic, retain) UILabel *nameLabel;
 @property(nonatomic, retain) UISegmentedControl *scoreView;
 @property(nonatomic, retain) MR_ExplainView *explainView;
+@property(nonatomic, retain) UILabel *selfView;
 @end
 
 @implementation MR_ClauseNodeView
@@ -72,6 +73,7 @@
     selfView.backgroundColor = [UIColor clearColor];
     selfView.layer.borderWidth = 0.5;
     selfView.layer.borderColor = borderColor;
+    self.selfView = selfView;
     
     //score
     float score_margin = 3;
@@ -134,10 +136,13 @@
 - (void)drawRect:(CGRect)rect
 {
     NSString *name = [_clauseData objectForKey:KEY_attrName];
+    NSString *selfLevel = [_clauseData objectForKey:KEY_selfLevel];
     NSString *scoreValue = [_scoreData objectForKey:KEY_scoreValue];
     NSString *scoreExplain = [_scoreData objectForKey:KEY_scoreExplain];
     
     _nameLabel.text = name;
+    
+    _selfView.text = selfLevel;
     
     if ([Common isEmptyString:scoreValue])
     {
@@ -212,6 +217,7 @@
     self.nameLabel = nil;
     self.scoreArray = nil;
     self.explainView = nil;
+    self.selfView = nil;
     [super dealloc];
 }
 
