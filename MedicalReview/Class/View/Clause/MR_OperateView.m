@@ -14,6 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor clearColor];
         self.isHasLink = NO;
     }
     return self;
@@ -22,9 +23,9 @@
 - (void)drawRect:(CGRect)rect
 {
     float delete_x = 0.0f;
-    float delete_y = 0.0f;
+    float delete_y = 5.0f;
     float delete_w = _isHasLink ? rect.size.width * 0.4 : rect.size.width;
-    float delete_h = rect.size.height;
+    float delete_h = rect.size.height - 10;
     CGRect deleteRect = CGRectMake(delete_x, delete_y, delete_w, delete_h);
     UIButton *deleteBt = [[UIButton alloc] initWithFrame:deleteRect];
     [deleteBt setTitle:_GET_LOCALIZED_STRING_(@"button_delete") forState:UIControlStateNormal];
@@ -36,10 +37,10 @@
     [deleteBt release];
     
     if (_isHasLink) {
-        float link_x = delete_x + delete_w;
-        float link_y = 0.0f;
-        float link_w = rect.size.width * 0.6;
-        float link_h = rect.size.height;
+        float link_x = delete_x + delete_w + 5;
+        float link_y = 5.0f;
+        float link_w = rect.size.width * 0.6 - 10;
+        float link_h = rect.size.height - 10;
         CGRect linkRect = CGRectMake(link_x, link_y, link_w, link_h);
         UIButton *linkBt = [[UIButton alloc] initWithFrame:linkRect];
         [linkBt setTitle:_GET_LOCALIZED_STRING_(@"button_link") forState:UIControlStateNormal];

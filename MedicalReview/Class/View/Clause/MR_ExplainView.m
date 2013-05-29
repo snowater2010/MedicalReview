@@ -65,7 +65,7 @@
         [self addSubview:explainView];
         [explainView release];
         
-        fastButtonFrame = CGRectMake(rect.size.width*0.75, 0, rect.size.width*0.25, rect.size.height);
+        fastButtonFrame = CGRectMake(rect.size.width*0.75, 5, rect.size.width*0.25 - 5, rect.size.height - 10);
         UIButton *button = [[UIButton alloc] initWithFrame:fastButtonFrame];
         [button addTarget:self action:@selector(doFastExplain:) forControlEvents:UIControlEventTouchUpInside];
         [button setTitle:_GET_LOCALIZED_STRING_(@"button_shortcut") forState:UIControlStateNormal];
