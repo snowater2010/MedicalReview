@@ -492,6 +492,7 @@
     headView.section = section;
     headView.delegate = self;
     headView.clauseId = clauseId;
+    headView.nodeDic = nodeDic;
     headView.clauseData = clauseDic;
     headView.scoreData = scoreDic;
     headView.scoreArray = _headScoreArray;
@@ -561,6 +562,7 @@
     nodeView.section = section;
     nodeView.attrId = attrId;
     nodeView.clauseId = clauseId;
+    nodeView.nodeDic = nodeDic;
     nodeView.clauseData = [clauseDic objectForKey:attrId];
     nodeView.scoreData = [scoreDic objectForKey:attrId];
     

@@ -25,6 +25,7 @@
 @property(nonatomic, assign) int section;
 @property(nonatomic, retain) NSString *attrId;
 @property(nonatomic, retain) NSString *clauseId;
+@property(nonatomic, retain) NSDictionary *nodeDic;
 @property(nonatomic, retain) NSDictionary *clauseData;
 @property(nonatomic, retain) NSDictionary *scoreData;
 @property(nonatomic, retain) NSArray *scoreArray;

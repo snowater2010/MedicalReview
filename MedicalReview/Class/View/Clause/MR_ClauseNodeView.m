@@ -136,12 +136,11 @@
 - (void)drawRect:(CGRect)rect
 {
     NSString *name = [_clauseData objectForKey:KEY_attrName];
-    NSString *selfLevel = [_clauseData objectForKey:KEY_selfLevel];
+    NSString *selfLevel = [_nodeDic objectForKey:KEY_selfLevel];
     NSString *scoreValue = [_scoreData objectForKey:KEY_scoreValue];
     NSString *scoreExplain = [_scoreData objectForKey:KEY_scoreExplain];
     
     _nameLabel.text = name;
-    
     _selfView.text = selfLevel;
     
     if ([Common isEmptyString:scoreValue])
@@ -178,10 +177,12 @@
 - (void)refreshDatas
 {
     NSString *name = [_clauseData objectForKey:KEY_attrName];
+    NSString *selfLevel = [_nodeDic objectForKey:KEY_selfLevel];
     NSString *scoreValue = [_scoreData objectForKey:KEY_scoreValue];
     NSString *scoreExplain = [_scoreData objectForKey:KEY_scoreExplain];
     
     _nameLabel.text = name;
+    _selfView.text = selfLevel;
     
     if ([Common isEmptyString:scoreValue])
     {
@@ -211,6 +212,7 @@
 {
     self.attrId = nil;
     self.clauseId = nil;
+    self.nodeDic = nil;
     self.clauseData = nil;
     self.scoreData = nil;
     self.scoreView = nil;

@@ -157,7 +157,7 @@
 - (void)drawRect:(CGRect)rect
 {
     NSString *name = [_clauseData objectForKey:KEY_clauseName];
-    NSString *selfLevel = [_clauseData objectForKey:KEY_selfLevel];
+    NSString *selfLevel = [_nodeDic objectForKey:KEY_selfLevel];
     NSString *scoreValue  = [_scoreData objectForKey:KEY_scoreValue];
     NSString *scoreExplain = [_scoreData objectForKey:KEY_scoreExplain];
     
@@ -196,6 +196,7 @@
 {
     self.bgView = nil;
     self.clauseId = nil;
+    self.nodeDic = nil;
     self.clauseData = nil;
     self.scoreData = nil;
     self.scoreArray = nil;
