@@ -75,6 +75,11 @@
     _clauseView.nodeData = nodeData;
     _clauseView.clauseData = [self getClauseFrom:_clauseData byNode:nodeData];
     _clauseView.scoreData = _scoreData;
+    
+    //默认选中第一个节点
+    if ([_sectionData count] > 0) {
+        [_chapterTable selectRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] animated:NO scrollPosition:UITableViewRowAnimationTop];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -161,8 +166,8 @@
     chapterTable.delegate = self;
     chapterTable.dataSource = self;
     [leftPageView addSubview:chapterTable];
-    [chapterTable release];
     self.chapterTable = chapterTable;
+    [chapterTable release];
     
     //main
     float main_x = left_x + left_w;

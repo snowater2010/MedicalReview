@@ -67,6 +67,7 @@
     UITableView *tableView = [[UITableView alloc] initWithFrame:treeFrame];
     tableView.dataSource = self;
     tableView.delegate = self;
+    [tableView selectRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] animated:NO scrollPosition:UITableViewRowAnimationTop];
     self.tableView = tableView;
     
     [self addSubview:btnSelect];
@@ -104,11 +105,13 @@
     [_tableView reloadData];
     [self rel];
     
-    //选区第一个
-    [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
-    
-    NSDictionary *dic = [_nodeData objectAtIndex:0];
-    [Common callDelegate:_delegate method:@selector(nodeSelected:) withObject:dic];
+    //选取第一个
+    if ([_nodeData count] > 0) {
+        [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+        
+        NSDictionary *dic = [_nodeData objectAtIndex:0];
+        [Common callDelegate:_delegate method:@selector(nodeSelected:) withObject:dic];
+    }
 }
 
 - (void)setNodeDataAtIndex:(int)index
@@ -208,7 +211,10 @@
             }
         }
     }
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     [self.tableView reloadData];
+    [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     
     //更新数据
     NSMutableDictionary *newScoreData = [NSMutableDictionary dictionaryWithDictionary:_scoreData];
