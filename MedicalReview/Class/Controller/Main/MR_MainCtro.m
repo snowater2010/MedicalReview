@@ -10,6 +10,7 @@
 #import "MR_TopPageView.h"
 #import "MR_PathScoreCtro.h"
 #import "MR_ChapterScoreCtro.h"
+#import "MR_ProgressCheckCtro.h"
 #import "AHReach.h"
 
 @interface MR_MainCtro ()
@@ -99,10 +100,23 @@
     [topPageView addSubview:button1];
     [button1 release];
     
+    //进度查看
+    float button5_h = buttonSize;
+    float button5_w = buttonSize;
+    float button5_x = top_w - (buttonSize + MENU_BUTTON_MARGIN)*2;
+    float button5_y = top_h - buttonSize;
+    CGRect button5Frame = CGRectMake(button5_x, button5_y, button5_w, button5_h);
+    UIButton *button5 = [[UIButton alloc] initWithFrame:button5Frame];
+    button5.tag = 3;
+    [button5 setBackgroundImage:[UIImage imageNamed:@"tiaokuanck_s.png"] forState:UIControlStateNormal];
+    [button5 addTarget:self action:@selector(menuButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [topPageView addSubview:button5];
+    [button5 release];
+    
     //评审查看
     float button4_h = buttonSize;
     float button4_w = buttonSize;
-    float button4_x = top_w - (buttonSize + MENU_BUTTON_MARGIN)*2;
+    float button4_x = top_w - (buttonSize + MENU_BUTTON_MARGIN)*3;
     float button4_y = top_h - buttonSize;
     CGRect button4Frame = CGRectMake(button4_x, button4_y, button4_w, button4_h);
     UIButton *button4 = [[UIButton alloc] initWithFrame:button4Frame];
@@ -115,7 +129,7 @@
     //章节评审
     float button2_h = buttonSize;
     float button2_w = buttonSize;
-    float button2_x = top_w - (buttonSize + MENU_BUTTON_MARGIN)*3;
+    float button2_x = top_w - (buttonSize + MENU_BUTTON_MARGIN)*4;
     float button2_y = top_h - buttonSize;
     CGRect button2Frame = CGRectMake(button2_x, button2_y, button2_w, button2_h);
     UIButton *button2 = [[UIButton alloc] initWithFrame:button2Frame];
@@ -128,7 +142,7 @@
     //路径评审
     float button3_h = buttonSize;
     float button3_w = buttonSize;
-    float button3_x = top_w - (buttonSize + MENU_BUTTON_MARGIN)*4;
+    float button3_x = top_w - (buttonSize + MENU_BUTTON_MARGIN)*5;
     float button3_y = top_h - buttonSize;
     CGRect button3Frame = CGRectMake(button3_x, button3_y, button3_w, button3_h);
     UIButton *button3 = [[UIButton alloc] initWithFrame:button3Frame];
@@ -173,6 +187,13 @@
         {
             MR_ChapterScoreCtro *controller = [[MR_ChapterScoreCtro alloc] initWithFrame:mainFrame];
             controller.readOnly = YES;
+            self.mainController = controller;
+            [controller release];
+            break;
+        }
+        case 3:
+        {
+            MR_ProgressCheckCtro *controller = [[MR_ProgressCheckCtro alloc] initWithFrame:mainFrame];
             self.mainController = controller;
             [controller release];
             break;

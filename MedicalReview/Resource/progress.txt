@@ -1,0 +1,103 @@
+{
+  "errCode": "0",
+  "tableHead": [
+    {
+      "tableCode": "groupName",
+      "tableName": "专家组",
+      "tableType": "0",
+      "tableWidth": "0.1",
+      "alignment": "0"
+    },
+    {
+      "tableCode": "experId",
+      "tableName": "专家",
+      "tableType": "0",
+      "tableWidth": "0.1",
+      "alignment": "0"
+    },
+    {
+      "tableCode": "percentage",
+      "tableName": "完成进度",
+      "tableType": "2",
+      "tableWidth": "0.2",
+      "alignment": "0"
+    },
+    {
+      "tableCode": "allPoint",
+      "tableName": "全部数目",
+      "tableType": "0",
+      "tableWidth": "0.1",
+      "alignment": "0"
+    },
+    {
+      "tableCode": "inputPoint",
+      "tableName": "已评数目",
+      "tableType": "1",
+      "tableWidth": "0.1",
+      "alignment": "0"
+    },
+    {
+      "tableCode": "aAccounted",
+      "tableName": "A占比",
+      "tableType": "0",
+      "tableWidth": "0.1",
+      "alignment": "0"
+    },
+    {
+      "tableCode": "bAccounted",
+      "tableName": "B占比",
+      "tableType": "0",
+      "tableWidth": "0.1",
+      "alignment": "0"
+    },
+    {
+      "tableCode": "cAccounted",
+      "tableName": "C占比",
+      "tableType": "0",
+      "tableWidth": "0.1",
+      "alignment": "0"
+    },
+    {
+      "tableCode": "dAccounted",
+      "tableName": "D占比",
+      "tableType": "0",
+      "tableWidth": "0.1",
+      "alignment": "0"
+    }
+  ],
+  "tableData": [
+    {
+      "groupName": "护理管理组",
+      "experId": "zj0331",
+      "percentage": "96.15",
+      "allPoint": "26",
+      "inputPoint": "25",
+      "aAccounted": "28.00%",
+      "bAccounted": "16.00%",
+      "cAccounted": "28.00%",
+      "dAccounted": "20.00%"
+    },
+    {
+      "groupName": "护理管理组",
+      "experId": "zj0332",
+      "percentage": "40.00",
+      "allPoint": "35",
+      "inputPoint": "14",
+      "aAccounted": "42.86%",
+      "bAccounted": "28.57%",
+      "cAccounted": "14.29%",
+      "dAccounted": "14.29%"
+    },
+    {
+      "groupName": "合计",
+      "experId": "",
+      "percentage": "63.93",
+      "allPoint": "61",
+      "inputPoint": "39",
+      "aAccounted": "33.33%",
+      "bAccounted": "20.51%",
+      "cAccounted": "23.08%",
+      "dAccounted": "17.95%"
+    }
+  ]
+}

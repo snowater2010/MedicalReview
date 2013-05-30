@@ -230,3 +230,7 @@ enum SORT_TYPE
 #define KEY_tableName           @"tableName"
 #define KEY_tableWidth          @"tableWidth"
 
+//progress check
+#define KEY_tableHead           @"tableHead"
+#define KEY_tableData           @"tableData"
+

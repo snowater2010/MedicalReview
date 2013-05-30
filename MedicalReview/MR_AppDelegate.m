@@ -27,8 +27,8 @@
     
     [self initApp];
     
-    MR_LoginCtro *rootCtro = [[MR_LoginCtro alloc] initWithNibName:@"MR_LoginCtro" bundle:nil];
-//    MR_MainCtro *rootCtro = [[MR_MainCtro alloc] init];
+//    MR_LoginCtro *rootCtro = [[MR_LoginCtro alloc] initWithNibName:@"MR_LoginCtro" bundle:nil];
+    MR_MainCtro *rootCtro = [[MR_MainCtro alloc] init];
     self.window.rootViewController = rootCtro;
     [self.window makeKeyAndVisible];
     [rootCtro release];
