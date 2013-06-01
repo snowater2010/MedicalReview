@@ -40,4 +40,11 @@
     }
 }
 
+- (void)setBorderWidth:(float)width color:(CGColorRef)color corner:(float)cornor
+{
+    self.layer.borderWidth = width;
+    self.layer.borderColor = color;
+    self.layer.cornerRadius = cornor;
+}
+
 @end

@@ -15,5 +15,6 @@
 - (void)showLoadingWithText:(NSString *)text;
 - (void)showLoading;
 - (void)hideLoading;
+- (void)setBorderWidth:(float)width color:(CGColorRef)color corner:(float)cornor;
 
 @end

@@ -104,10 +104,6 @@
     request.responseEncoding = NSUTF8StringEncoding;
     NSString *responseData = [request responseString];
     
-    //demo
-//    responseData = @"{\"errCode\":\"0\",\"expertName\":\"zjgxy\",\"expertNo\":\"201207000000355\",\"hospitalId\":\"1047000\",\"hospitalName\":\"山东医院\"}";
-//    responseData = @"{\"errCode\":\"2\",\"errMsg\":\"密码错误\"}";
-    
     BOOL ok = NO;
     NSString *message = nil;
     NSDictionary* retDic;

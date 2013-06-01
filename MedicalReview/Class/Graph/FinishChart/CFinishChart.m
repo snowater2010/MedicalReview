@@ -25,6 +25,8 @@
 		
 		iWidth = frame.size.width;
 		iHeight = frame.size.height;
+        
+        self.textColor = [UIColor blackColor];
     }
     return self;
 }
@@ -75,7 +77,7 @@
     UIFont *font = [UIFont systemFontOfSize:12];
     CGSize textSize = [strFinishText sizeWithFont:font];
     
-    CGContextSetFillColorWithColor(context, [[UIColor blueColor] CGColor]);
+    CGContextSetFillColorWithColor(context, [_textColor CGColor]);
 	[strFinishText drawAtPoint:CGPointMake((iWidth-textSize.width)/2, (iHeight-textSize.height)/2) withFont:font];
 }
 

@@ -17,27 +17,26 @@
 {
     switch (type) {
         case 0:
-        {
+        {//普通字符串
             self.text = data;
-            self.textAlignment = UITextAlignmentCenter;
             self.textColor = [UIColor blackColor];
             break;
         }
         case 1:
-        {
+        {//高亮显示
             self.text = data;
-            self.textAlignment = UITextAlignmentCenter;
             self.textColor = [UIColor blueColor];
             break;
         }
         case 2:
-        {
+        {//进度条
             float labelWidth = self.frame.size.width;
             float labelHehght = self.frame.size.height;
+            float barHeight = 20;
             CGRect chartRect = CGRectMake(labelWidth * (1-0.8) * 0.5,
-                                          labelHehght * (1-0.8) * 0.5,
+                                          (labelHehght-barHeight) * 0.5,
                                           labelWidth*0.8,
-                                          labelHehght*0.8);
+                                          barHeight);
             CFinishChart* chart = [[CFinishChart alloc] initWithFrame:chartRect];
             chart.strActualValue = data.floatValue;
             chart.strDesiredValue = 100;

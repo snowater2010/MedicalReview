@@ -33,7 +33,27 @@
 {
     [super loadRootView];
     
-    ScrollTableController *tableView = [[ScrollTableController alloc] initWithFrame:self.view.bounds];
+    _GET_APP_DELEGATE_(appDelegate);
+    NSString *hospitalName = appDelegate.globalinfo.userInfo.user.hospitalName;
+    
+    CGRect frame = self.view.frame;
+    
+    //大标题
+    float title_x = 0;
+    float title_y = 0;
+    float title_w = frame.size.width;
+    float title_h = 30;
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(title_x, title_y, title_w, title_h)];
+    titleLabel.text = hospitalName;
+    titleLabel.textAlignment = _ALIGN_CENTER;
+    titleLabel.font = [UIFont systemFontOfSize:20];
+    [self.view addSubview:titleLabel];
+    
+    float table_x = 0;
+    float table_y = title_y + title_h;
+    float table_w = frame.size.width;
+    float table_h = frame.size.height - title_h;
+    ScrollTableController *tableView = [[ScrollTableController alloc] initWithFrame:CGRectMake(table_x, table_y, table_w, table_h)];
     self.mTableView = tableView;
     tableView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:tableView];
@@ -50,7 +70,6 @@
 	
     _mTableView.drTableHead = _tableHead;
 	_mTableView.drTableData = _tableData;
-    //[_mTableView refreshView];
 }
 
 - (void)didReceiveMemoryWarning

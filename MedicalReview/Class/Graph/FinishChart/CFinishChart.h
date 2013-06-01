@@ -33,4 +33,6 @@ enum GradientDirection {
 @property(nonatomic,assign) float strActualValue;
 @property(nonatomic,assign) float strDesiredValue;
 
+@property(nonatomic,assign) UIColor *textColor;
+
 @end

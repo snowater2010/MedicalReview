@@ -6,14 +6,14 @@
       "tableName": "专家组",
       "tableType": "0",
       "tableWidth": "0.1",
-      "alignment": "0"
+      "alignment": "1"
     },
     {
       "tableCode": "experId",
       "tableName": "专家",
       "tableType": "0",
       "tableWidth": "0.1",
-      "alignment": "0"
+      "alignment": "2"
     },
     {
       "tableCode": "percentage",

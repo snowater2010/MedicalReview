@@ -14,8 +14,9 @@
 #define ENABLE_CACHE 0   //是否启用缓存,1为启用
 
 //#define SERVICE_URL         @"http://222.173.30.135:8088/ylpj/webif"
-#define SERVICE_URL         @"http://124.133.27.146:8080/ylgl/webif"
-//#define SERVICE_URL         @"http://192.168.1.107:8080/ylpj/webif"
+//#define SERVICE_URL         @"http://124.133.27.146:8080/ylgl/webif"
+#define SERVICE_URL         @"http://222.173.30.135:8088/ylgl/webif"
+
 
 #define CACHE_CLAUSE        @"cache_clause"         //条款缓存文件名
 #define CACHE_STATEMENT     @"cache_statement"      //快捷评论
@@ -44,13 +45,13 @@ enum SORT_TYPE
 
 //对齐方式
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0 
-    #define ALIGN_LEFT      UITextAlignmentLeft
-    #define ALIGN_CENTER    UITextAlignmentCenter
-    #define ALIGN_RIGHT     UITextAlignmentRight
+    #define _ALIGN_LEFT      UITextAlignmentLeft
+    #define _ALIGN_CENTER    UITextAlignmentCenter
+    #define _ALIGN_RIGHT     UITextAlignmentRight
 #else
-    #define ALIGN_LEFT      NSTextAlignmentLeft 
-    #define ALIGN_CENTER    NSTextAlignmentCenter 
-    #define ALIGN_RIGHT     NSTextAlignmentRight 
+    #define _ALIGN_LEFT      NSTextAlignmentLeft
+    #define _ALIGN_CENTER    NSTextAlignmentCenter
+    #define _ALIGN_RIGHT     NSTextAlignmentRight 
 #endif
 
 //获取国际化字符串
@@ -227,10 +228,11 @@ enum SORT_TYPE
 #define KEY_userHospitalName    @"hospitalName"
 
 //table
-#define KEY_tableName           @"tableName"
-#define KEY_tableWidth          @"tableWidth"
-
-//progress check
 #define KEY_tableHead           @"tableHead"
 #define KEY_tableData           @"tableData"
+#define KEY_tableCode           @"tableCode"
+#define KEY_tableName           @"tableName"
+#define KEY_tableWidth          @"tableWidth"
+#define KEY_tableType           @"tableType"
+#define KEY_alignment           @"alignment"
 

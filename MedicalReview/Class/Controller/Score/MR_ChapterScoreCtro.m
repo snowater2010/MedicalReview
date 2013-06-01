@@ -133,7 +133,7 @@
     [finishLabel release];
     
     CFinishChart *finishChart = [[CFinishChart alloc] initWithFrame:CGRectMake(10 + textSize.width, 5, 200, percent_h - 10)];
-    finishChart.backgroundColor = [UIColor blueColor];
+    finishChart.textColor = [UIColor blueColor];
     self.finishChart = finishChart;
     [percentView addSubview:finishChart];
     [finishChart release];
