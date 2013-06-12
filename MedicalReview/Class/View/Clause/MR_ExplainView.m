@@ -47,8 +47,10 @@
         self.fastExplainCtro = fastExplainCtro;
         [fastExplainCtro release];
         
-        self.viewPop = [UIPopoverController alloc];
+        UIPopoverController *viewPop = [UIPopoverController alloc];
+        self.viewPop = viewPop;
         _viewPop.delegate = self;
+        [viewPop release];
         
         //view
         CGRect rect = frame;

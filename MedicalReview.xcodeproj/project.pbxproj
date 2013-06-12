@@ -19,6 +19,10 @@
 		F606A0BA1724CBD000490D04 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F606A0B71724CBD000490D04 /* Default-568h@2x.png */; };
 		F606A0BB1724CBD000490D04 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F606A0B81724CBD000490D04 /* Default.png */; };
 		F606A0BC1724CBD000490D04 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F606A0B91724CBD000490D04 /* Default@2x.png */; };
+		F609B7F51767095700EEDF59 /* MR_ClauseDetailCtro.m in Sources */ = {isa = PBXBuildFile; fileRef = F609B7F41767095700EEDF59 /* MR_ClauseDetailCtro.m */; };
+		F609B7FC1767139700EEDF59 /* MR_ClauseDetailCtro.xib in Resources */ = {isa = PBXBuildFile; fileRef = F609B7FB1767139700EEDF59 /* MR_ClauseDetailCtro.xib */; };
+		F609B8001767298800EEDF59 /* MR_ClauseLinkWebCtro.m in Sources */ = {isa = PBXBuildFile; fileRef = F609B7FE1767298700EEDF59 /* MR_ClauseLinkWebCtro.m */; };
+		F609B80317672B4D00EEDF59 /* MR_ClauseLinkWebCtro.xib in Resources */ = {isa = PBXBuildFile; fileRef = F609B80217672B4D00EEDF59 /* MR_ClauseLinkWebCtro.xib */; };
 		F6200B091741CEFD00BBC87E /* UIView+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = F6200B081741CEFD00BBC87E /* UIView+Helper.m */; };
 		F623AC401728FBB40060DD4E /* MR_PathNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F623AC3F1728FBB40060DD4E /* MR_PathNodeView.m */; };
 		F623AC51172906740060DD4E /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = F623AC50172906740060DD4E /* NIDropDown.m */; };
@@ -92,6 +96,8 @@
 		F6B1B2F3172539F200A51DDD /* FileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2E7172539F200A51DDD /* FileHelper.m */; };
 		F6B1B2F4172539F200A51DDD /* NSDate+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2EA172539F200A51DDD /* NSDate+Common.m */; };
 		F6B1B2F6172539F200A51DDD /* UITextView+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2EE172539F200A51DDD /* UITextView+Helper.m */; };
+		F6C0C12A175B8CAE00D3AC11 /* 对口支援.html in Resources */ = {isa = PBXBuildFile; fileRef = F6C0C129175B8CAE00D3AC11 /* 对口支援.html */; };
+		F6C0C130175B8D6800D3AC11 /* webViewContent.html in Resources */ = {isa = PBXBuildFile; fileRef = F6C0C12F175B8D6800D3AC11 /* webViewContent.html */; };
 		F6C2972D17267580002FB4B8 /* MR_User.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C2972C17267580002FB4B8 /* MR_User.m */; };
 		F6C2973117267C2E002FB4B8 /* MR_MainPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C2973017267C2E002FB4B8 /* MR_MainPageView.m */; };
 		F6C2973417267C43002FB4B8 /* MR_LeftPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C2973317267C43002FB4B8 /* MR_LeftPageView.m */; };
@@ -106,6 +112,8 @@
 		F6FD5D621757A87800218A59 /* ScrollTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6FD5D611757A87800218A59 /* ScrollTableController.m */; };
 		F6FD5D651757A96A00218A59 /* UILabel+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = F6FD5D641757A96A00218A59 /* UILabel+Helper.m */; };
 		F6FD5D6B1757B5DD00218A59 /* progress.txt in Resources */ = {isa = PBXBuildFile; fileRef = F6FD5D6A1757B5DD00218A59 /* progress.txt */; };
+		F6FEE1AC1768C46C005C9ADA /* jindu_s.png in Resources */ = {isa = PBXBuildFile; fileRef = F6FEE1AB1768C46B005C9ADA /* jindu_s.png */; };
+		F6FEE1B31768C90D005C9ADA /* close_x.png in Resources */ = {isa = PBXBuildFile; fileRef = F6FEE1B21768C90D005C9ADA /* close_x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +136,12 @@
 		F606A0B71724CBD000490D04 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F606A0B81724CBD000490D04 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		F606A0B91724CBD000490D04 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		F609B7F31767095700EEDF59 /* MR_ClauseDetailCtro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ClauseDetailCtro.h; sourceTree = "<group>"; };
+		F609B7F41767095700EEDF59 /* MR_ClauseDetailCtro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ClauseDetailCtro.m; sourceTree = "<group>"; };
+		F609B7FB1767139700EEDF59 /* MR_ClauseDetailCtro.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MR_ClauseDetailCtro.xib; sourceTree = "<group>"; };
+		F609B7FD1767298700EEDF59 /* MR_ClauseLinkWebCtro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ClauseLinkWebCtro.h; sourceTree = "<group>"; };
+		F609B7FE1767298700EEDF59 /* MR_ClauseLinkWebCtro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ClauseLinkWebCtro.m; sourceTree = "<group>"; };
+		F609B80217672B4D00EEDF59 /* MR_ClauseLinkWebCtro.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MR_ClauseLinkWebCtro.xib; sourceTree = "<group>"; };
 		F6200B071741CEFD00BBC87E /* UIView+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Helper.h"; sourceTree = "<group>"; };
 		F6200B081741CEFD00BBC87E /* UIView+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Helper.m"; sourceTree = "<group>"; };
 		F623AC3E1728FBB40060DD4E /* MR_PathNodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_PathNodeView.h; sourceTree = "<group>"; };
@@ -252,6 +266,8 @@
 		F6B1B2EA172539F200A51DDD /* NSDate+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Common.m"; sourceTree = "<group>"; };
 		F6B1B2ED172539F200A51DDD /* UITextView+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Helper.h"; sourceTree = "<group>"; };
 		F6B1B2EE172539F200A51DDD /* UITextView+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Helper.m"; sourceTree = "<group>"; };
+		F6C0C129175B8CAE00D3AC11 /* 对口支援.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "对口支援.html"; sourceTree = "<group>"; };
+		F6C0C12F175B8D6800D3AC11 /* webViewContent.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = webViewContent.html; sourceTree = "<group>"; };
 		F6C2972B17267580002FB4B8 /* MR_User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_User.h; sourceTree = "<group>"; };
 		F6C2972C17267580002FB4B8 /* MR_User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_User.m; sourceTree = "<group>"; };
 		F6C2972F17267C2E002FB4B8 /* MR_MainPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_MainPageView.h; sourceTree = "<group>"; };
@@ -275,6 +291,8 @@
 		F6FD5D631757A96A00218A59 /* UILabel+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Helper.h"; sourceTree = "<group>"; };
 		F6FD5D641757A96A00218A59 /* UILabel+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Helper.m"; sourceTree = "<group>"; };
 		F6FD5D6A1757B5DD00218A59 /* progress.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = progress.txt; sourceTree = "<group>"; };
+		F6FEE1AB1768C46B005C9ADA /* jindu_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jindu_s.png; sourceTree = "<group>"; };
+		F6FEE1B21768C90D005C9ADA /* close_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close_x.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,6 +412,8 @@
 		F606A0B61724C8D000490D04 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				F6FEE1B21768C90D005C9ADA /* close_x.png */,
+				F6FEE1AB1768C46B005C9ADA /* jindu_s.png */,
 				F6FD5D4B17579F7900218A59 /* beijing.jpg */,
 				F6FD5D4C17579F7B00218A59 /* beijing1.jpg */,
 				F6FD5D4D17579F7E00218A59 /* beijing2.jpg */,
@@ -602,6 +622,12 @@
 				F62862B7173F84300090C00D /* MR_ChapterHeadView.m */,
 				F62862B9173F845F0090C00D /* MR_ChapterSearchView.h */,
 				F62862BA173F84600090C00D /* MR_ChapterSearchView.m */,
+				F609B7F31767095700EEDF59 /* MR_ClauseDetailCtro.h */,
+				F609B7F41767095700EEDF59 /* MR_ClauseDetailCtro.m */,
+				F609B7FB1767139700EEDF59 /* MR_ClauseDetailCtro.xib */,
+				F609B7FD1767298700EEDF59 /* MR_ClauseLinkWebCtro.h */,
+				F609B7FE1767298700EEDF59 /* MR_ClauseLinkWebCtro.m */,
+				F609B80217672B4D00EEDF59 /* MR_ClauseLinkWebCtro.xib */,
 			);
 			path = Score;
 			sourceTree = "<group>";
@@ -713,6 +739,8 @@
 		F6E078BB1724F4C900C00E6B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				F6C0C12F175B8D6800D3AC11 /* webViewContent.html */,
+				F6C0C129175B8CAE00D3AC11 /* 对口支援.html */,
 				F67BA168173C07E2001F7228 /* json_loaddata.txt */,
 				F6EF2AFF17390D2400BC3355 /* json_score.txt */,
 				F6FD5D6A1757B5DD00218A59 /* progress.txt */,
@@ -826,6 +854,12 @@
 				F6FD5D4F17579F8300218A59 /* beijing1.jpg in Resources */,
 				F6FD5D5017579F8300218A59 /* beijing2.jpg in Resources */,
 				F6FD5D6B1757B5DD00218A59 /* progress.txt in Resources */,
+				F6C0C12A175B8CAE00D3AC11 /* 对口支援.html in Resources */,
+				F6C0C130175B8D6800D3AC11 /* webViewContent.html in Resources */,
+				F609B7FC1767139700EEDF59 /* MR_ClauseDetailCtro.xib in Resources */,
+				F609B80317672B4D00EEDF59 /* MR_ClauseLinkWebCtro.xib in Resources */,
+				F6FEE1AC1768C46C005C9ADA /* jindu_s.png in Resources */,
+				F6FEE1B31768C90D005C9ADA /* close_x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -894,6 +928,8 @@
 				F6FD5D571757A15900218A59 /* MR_ProgressCheckCtro.m in Sources */,
 				F6FD5D621757A87800218A59 /* ScrollTableController.m in Sources */,
 				F6FD5D651757A96A00218A59 /* UILabel+Helper.m in Sources */,
+				F609B7F51767095700EEDF59 /* MR_ClauseDetailCtro.m in Sources */,
+				F609B8001767298800EEDF59 /* MR_ClauseLinkWebCtro.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

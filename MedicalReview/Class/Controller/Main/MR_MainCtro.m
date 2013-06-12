@@ -108,7 +108,7 @@
     CGRect button5Frame = CGRectMake(button5_x, button5_y, button5_w, button5_h);
     UIButton *button5 = [[UIButton alloc] initWithFrame:button5Frame];
     button5.tag = 3;
-    [button5 setBackgroundImage:[UIImage imageNamed:@"tiaokuanck_s.png"] forState:UIControlStateNormal];
+    [button5 setBackgroundImage:[UIImage imageNamed:@"jindu_s.png"] forState:UIControlStateNormal];
     [button5 addTarget:self action:@selector(menuButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [topPageView addSubview:button5];
     [button5 release];

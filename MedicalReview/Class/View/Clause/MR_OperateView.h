@@ -21,5 +21,6 @@
 
 @property(nonatomic, assign) BOOL isHasLink;
 @property(nonatomic, assign) id<OperateDelegate> delegate;
+@property(nonatomic, retain) NSDictionary *clauseData;
 
 @end

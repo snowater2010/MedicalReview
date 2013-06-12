@@ -21,6 +21,7 @@
 @property(nonatomic, retain) MR_ArrowView *arrowView;
 @property(nonatomic, retain) MR_ExplainView *explainView;
 @property(nonatomic, retain) MR_PopSelectListView *scoreView;
+@property(nonatomic, retain) MR_OperateView *operateView;
 @property(nonatomic, retain) UILabel *selfView;
 
 @end
@@ -138,6 +139,7 @@
         operateView.isHasLink = YES;
         operateView.layer.borderWidth = 0.5;
         operateView.layer.borderColor = borderColor;
+        self.operateView = operateView;
         
         [self addSubview:nameView];
         [self addSubview:coverControl];
@@ -192,6 +194,10 @@
         [self addSubview:coverView];
         [coverView release];
     }
+    
+    NSString *hasYs = [_clauseData objectForKey:KEY_hasYs];
+    _operateView.isHasLink = hasYs.boolValue;
+    _operateView.clauseData = _clauseData;
 }
 
 - (void)dealloc
@@ -206,6 +212,7 @@
     self.scoreView = nil;
     self.nameLabel = nil;
     self.selfView = nil;
+    self.operateView = nil;
     [super dealloc];
 }
 

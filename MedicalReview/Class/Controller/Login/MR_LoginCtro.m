@@ -202,8 +202,8 @@
         [self initUserInfo:dataDic];
         
         //request data
-        [self doRequestData];
-//        [self visitMainPage];
+//        [self doRequestData];
+        [self visitMainPage];
     }
     else if (tag == TAG_REQUEST_DATA) {
         //获取数据

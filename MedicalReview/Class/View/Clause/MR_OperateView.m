@@ -7,6 +7,14 @@
 //
 
 #import "MR_OperateView.h"
+#import "MR_ClauseDetailCtro.h"
+
+@interface MR_OperateView () <UIPopoverControllerDelegate>
+
+@property(nonatomic, retain) UIPopoverController *viewPop;
+@property(nonatomic, retain) MR_ClauseDetailCtro *detailCtro;
+
+@end
 
 @implementation MR_OperateView
 
@@ -16,6 +24,15 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         self.isHasLink = NO;
+        
+        UIPopoverController *viewPop = [UIPopoverController alloc];
+        MR_ClauseDetailCtro *detailCtro = [[MR_ClauseDetailCtro alloc] initWithNibName:@"MR_ClauseDetailCtro" bundle:nil];
+        self.viewPop = viewPop;
+        self.detailCtro = detailCtro;
+        [_viewPop initWithContentViewController:detailCtro];
+        _viewPop.popoverContentSize = CGSizeMake(800, 560);
+        [detailCtro release];
+        [viewPop release];
     }
     return self;
 }
@@ -45,7 +62,7 @@
         UIButton *linkBt = [[UIButton alloc] initWithFrame:linkRect];
         [linkBt setTitle:_GET_LOCALIZED_STRING_(@"button_link") forState:UIControlStateNormal];
         linkBt.titleLabel.font = [UIFont systemFontOfSize:OPERATE_TEXT_SIZE];
-        [linkBt addTarget:_delegate action:@selector(doLink) forControlEvents:UIControlEventTouchUpInside];
+        [linkBt addTarget:self action:@selector(doLink:) forControlEvents:UIControlEventTouchUpInside];
         [linkBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [linkBt setBackgroundImage:[UIImage imageNamed:@"btn_img.png"] forState:UIControlStateNormal];
         [self addSubview:linkBt];
@@ -53,9 +70,25 @@
     }
 }
 
+- (void)dealloc
+{
+    self.viewPop = nil;
+    self.clauseData = nil;
+    self.detailCtro = nil;
+    [super dealloc];
+}
+
 - (void)doDelete
 {
     _ALERT_SELECT_(_GET_LOCALIZED_STRING_(@"alert_delete_score"), self, 0);
+}
+
+- (void)doLink:(id)sender
+{
+    _detailCtro.clauseData = _clauseData;
+    
+    UIButton *linkButton = (UIButton *)sender;
+    [_viewPop presentPopoverFromRect:linkButton.frame inView:self permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

@@ -20,6 +20,7 @@
 @property(nonatomic, retain) UISegmentedControl *scoreView;
 @property(nonatomic, retain) MR_ExplainView *explainView;
 @property(nonatomic, retain) UILabel *selfView;
+@property(nonatomic, retain) MR_OperateView *operateView;
 @end
 
 @implementation MR_ClauseNodeView
@@ -119,6 +120,7 @@
     operateView.isHasLink = YES;
     operateView.layer.borderWidth = 0.5;
     operateView.layer.borderColor = borderColor;
+    self.operateView = operateView;
     
     [self addSubview:nameLabel];
     [self addSubview:selfView];
@@ -171,6 +173,10 @@
         [self addSubview:coverView];
         [coverView release];
     }
+    
+    NSString *hasYs = [_clauseData objectForKey:KEY_hasYs];
+    _operateView.isHasLink = hasYs.boolValue;
+    _operateView.clauseData = _clauseData;
 }
 
 - (void)refreshDatas
@@ -205,6 +211,10 @@
         [_explainView setExplain:@""];
     else
         [_explainView setExplain:scoreExplain];
+    
+    NSString *hasYs = [_clauseData objectForKey:KEY_hasYs];
+    _operateView.isHasLink = hasYs.boolValue;
+    _operateView.clauseData = _clauseData;
 }
 
 - (void)dealloc
@@ -219,6 +229,7 @@
     self.scoreArray = nil;
     self.explainView = nil;
     self.selfView = nil;
+    self.operateView = nil;
     [super dealloc];
 }
 
