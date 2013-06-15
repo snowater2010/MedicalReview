@@ -23,4 +23,6 @@
 @property(nonatomic, assign) id<OperateDelegate> delegate;
 @property(nonatomic, retain) NSDictionary *clauseData;
 
+- (void)refreshPage;
+
 @end

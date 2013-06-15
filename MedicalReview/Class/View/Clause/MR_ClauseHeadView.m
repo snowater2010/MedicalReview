@@ -64,7 +64,6 @@
         self.arrowView = arrowView;
         [arrowView release];
         [nameView addSubview:_arrowView];
-        [self changeHeadState];
         
         //name label
         float name_x = arrow_x + arrow_w + ARROW_MARGIN;
@@ -165,6 +164,9 @@
     NSString *scoreValue  = [_scoreData objectForKey:KEY_scoreValue];
     NSString *scoreExplain = [_scoreData objectForKey:KEY_scoreExplain];
     
+    //arrow
+    [self changeArrowState];
+    
     //name data
     _nameLabel.text = name;
     
@@ -198,6 +200,7 @@
     NSString *hasYs = [_clauseData objectForKey:KEY_hasYs];
     _operateView.isHasLink = hasYs.boolValue;
     _operateView.clauseData = _clauseData;
+    [_operateView refreshPage];
 }
 
 - (void)dealloc
@@ -219,13 +222,13 @@
 - (void)clickClauseHead
 {
     _isOpen = !_isOpen;
-    [self changeHeadState];
+    [self changeArrowState];
     
     if(_delegate && [_delegate respondsToSelector:@selector(clickClauseHead:)])
         [_delegate performSelector:@selector(clickClauseHead:) withObject:self];
 }
 
-- (void)changeHeadState
+- (void)changeArrowState
 {
     if (_isOpen) {
         CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI/2);

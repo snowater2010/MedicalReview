@@ -39,6 +39,17 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    [self refreshPage];
+}
+
+- (void)refreshPage
+{
+    [self.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+        [obj removeFromSuperview];
+    }];
+    
+    CGRect rect = self.bounds;
+    
     float delete_x = 0.0f;
     float delete_y = 5.0f;
     float delete_w = _isHasLink ? rect.size.width * 0.4 : rect.size.width;

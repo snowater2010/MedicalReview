@@ -136,47 +136,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    NSString *name = [_clauseData objectForKey:KEY_attrName];
-    NSString *selfLevel = [_nodeDic objectForKey:KEY_selfLevel];
-    NSString *scoreValue = [_scoreData objectForKey:KEY_scoreValue];
-    NSString *scoreExplain = [_scoreData objectForKey:KEY_scoreExplain];
-    
-    _nameLabel.text = name;
-    _selfView.text = selfLevel;
-    
-    if ([Common isEmptyString:scoreValue])
-    {
-        [self changeScoreWithIndex:NO_SELECT_VALUE];
-    }
-    else {
-        switch (scoreValue.intValue) {
-            case 0:
-                [self changeScoreWithIndex:1];
-                break;
-            case 1:
-                [self changeScoreWithIndex:0];
-                break;
-            default:
-                [self changeScoreWithIndex:NO_SELECT_VALUE];
-                break;
-        }
-    }
-    
-    if ([Common isEmptyString:scoreExplain])
-        [_explainView setExplain:@""];
-    else
-        [_explainView setExplain:scoreExplain];
-    
-    
-    if (_readOnly) {
-        UIView *coverView = [[UIView alloc] initWithFrame:readOnlyRect];
-        [self addSubview:coverView];
-        [coverView release];
-    }
-    
-    NSString *hasYs = [_clauseData objectForKey:KEY_hasYs];
-    _operateView.isHasLink = hasYs.boolValue;
-    _operateView.clauseData = _clauseData;
+    [self refreshDatas];
 }
 
 - (void)refreshDatas
@@ -215,6 +175,7 @@
     NSString *hasYs = [_clauseData objectForKey:KEY_hasYs];
     _operateView.isHasLink = hasYs.boolValue;
     _operateView.clauseData = _clauseData;
+    [_operateView refreshPage];
 }
 
 - (void)dealloc

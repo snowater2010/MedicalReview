@@ -38,7 +38,7 @@
 
 @property(nonatomic, assign) id<ClauseHeadDelegate> delegate;
 
-- (void)changeHeadState;
+- (void)changeArrowState;
 - (NSDictionary *)getScoreData;
 - (void)changeScore:(int)index;
 - (void)changeScoreWithValue:(NSString *)value;
