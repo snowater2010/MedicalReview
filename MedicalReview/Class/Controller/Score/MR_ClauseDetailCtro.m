@@ -127,7 +127,6 @@
 {
     if (indexPath.row == 5) {
         MR_ClauseLinkWebCtro *linkCtro = [[MR_ClauseLinkWebCtro alloc] initWithNibName:@"MR_ClauseLinkWebCtro" bundle:nil];
-        linkCtro.view.backgroundColor = [UIColor redColor];
         [self presentModalViewController:linkCtro animated:YES];
         [linkCtro release];
     }

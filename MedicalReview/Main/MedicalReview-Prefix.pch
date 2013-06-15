@@ -23,4 +23,5 @@
     #import "UIView+Helper.h"
     #import "FileHelper.h"
     #import "NSArray+Helper.h"
+    #import "UIColor+MLPFlatColors.h"
 #endif

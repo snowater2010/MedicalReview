@@ -7,6 +7,7 @@
 //
 
 #import "MR_ChapterHeadView.h"
+#import "HMSegmentedControl.h"
 
 @implementation MR_ChapterHeadView
 
@@ -21,69 +22,42 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    float padding = 10;
-    
-    float chapter_x = padding;
-    float chapter_y = 0;
-    float chapter_w = 0;
-    float chapter_h = rect.size.height;
-    
     UIFont *textFont = [UIFont systemFontOfSize:17];
     
-    int i = 0;
+    NSMutableArray *titleArray = [[NSMutableArray alloc] initWithCapacity:_chapterData.count];
+    
+    float maxWidth = 0.0;
     for (NSDictionary *chapterDic in _chapterData) {
         NSString *chapterName = [chapterDic objectForKey:KEY_chapterName];
         CGSize textSize = [chapterName sizeWithFont:textFont];
         
-        chapter_w = textSize.width;
-        
-        CGRect chapterFrame = CGRectMake(chapter_x, chapter_y, chapter_w, chapter_h);
-        UIButton *chapterButton = [[UIButton alloc] initWithFrame:chapterFrame];
-        chapterButton.tag = i;
-        [chapterButton addTarget:self action:@selector(chapterSelected:) forControlEvents:UIControlEventTouchUpInside];
-        [chapterButton setTitle:chapterName forState:UIControlStateNormal];
-        if (i == 0) {
-            chapterButton.backgroundColor = [UIColor whiteColor];
-            [chapterButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        }
-        else {
-            chapterButton.backgroundColor = [UIColor clearColor];
-            [chapterButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        }
-        
-        chapterButton.titleLabel.font = textFont;
-        [self addSubview:chapterButton];
-        
-        chapter_x += chapter_w + padding;
-        i++;
+        maxWidth = maxWidth < textSize.width ? textSize.width : maxWidth;
+        [titleArray addObject:chapterName];
     }
+    
+    //最小值
+    maxWidth = maxWidth < MIN_TAB_WIDTH ? MIN_TAB_WIDTH : maxWidth;
+    CGRect tabRect = CGRectMake(0, 0, maxWidth*titleArray.count, rect.size.height);
+    
+    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:tabRect];
+    [segmentedControl setSectionTitles:titleArray];
+    [segmentedControl setFont:textFont];
+    [segmentedControl setSelectionIndicatorLoc:HMSelectionIndicatorLocBottom];
+    [segmentedControl setSelectionIndicatorMode:HMSelectionIndicatorFillsSegment];
+    [segmentedControl setBackgroundColor:[Common colorWithR:214 withG:230 withB:255]];
+    [segmentedControl setSelectionIndicatorColor:[UIColor flatDarkRedColor]];
+    [segmentedControl setSelectionIndicatorHeight:3];
+    [segmentedControl setTag:3];
+    [segmentedControl setIndexChangeBlock:^(NSUInteger index) {
+        [Common callDelegate:_delegate method:@selector(ChapterSelected:) withObject:[NSNumber numberWithInt:index]];
+    }];
+    [self addSubview:segmentedControl];
 }
 
 - (void)dealloc
 {
     self.chapterData = nil;
     [super dealloc];
-}
-
-- (void)chapterSelected:(id)sender
-{
-    UIButton *chapterButton = (UIButton *)sender;
-    int tag = chapterButton.tag;
-    
-    for (UIView *subview in self.subviews) {
-        if (subview.class == [UIButton class]) {
-            if (subview == sender) {
-                subview.backgroundColor = [UIColor whiteColor];
-                [(UIButton *)subview setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-            }
-            else {
-                subview.backgroundColor = [UIColor clearColor];
-                [(UIButton *)subview setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            }
-        }
-    }
-    
-    [Common callDelegate:_delegate method:@selector(ChapterSelected:) withObject:[NSNumber numberWithInt:tag]];
 }
 
 @end

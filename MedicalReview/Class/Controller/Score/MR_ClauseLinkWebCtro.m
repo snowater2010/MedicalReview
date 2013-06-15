@@ -26,9 +26,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    NSString *urlString = @"http://222.173.30.135:8088/ylpj/ylgl/indexPointFile/名词解释/对口支援.htm";
     NSString *urlString = @"http://www.baidu.com/";
     NSURL *url =[NSURL URLWithString:urlString];
+    
     NSURLRequest *request =[NSURLRequest requestWithURL:url];
     [_webView loadRequest:request];
     

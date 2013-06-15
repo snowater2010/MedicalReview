@@ -23,6 +23,7 @@
 		F609B7FC1767139700EEDF59 /* MR_ClauseDetailCtro.xib in Resources */ = {isa = PBXBuildFile; fileRef = F609B7FB1767139700EEDF59 /* MR_ClauseDetailCtro.xib */; };
 		F609B8001767298800EEDF59 /* MR_ClauseLinkWebCtro.m in Sources */ = {isa = PBXBuildFile; fileRef = F609B7FE1767298700EEDF59 /* MR_ClauseLinkWebCtro.m */; };
 		F609B80317672B4D00EEDF59 /* MR_ClauseLinkWebCtro.xib in Resources */ = {isa = PBXBuildFile; fileRef = F609B80217672B4D00EEDF59 /* MR_ClauseLinkWebCtro.xib */; };
+		F61435B1176C3885000484AC /* URBSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F61435B0176C3885000484AC /* URBSegmentedControl.m */; };
 		F6200B091741CEFD00BBC87E /* UIView+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = F6200B081741CEFD00BBC87E /* UIView+Helper.m */; };
 		F623AC401728FBB40060DD4E /* MR_PathNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F623AC3F1728FBB40060DD4E /* MR_PathNodeView.m */; };
 		F623AC51172906740060DD4E /* NIDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = F623AC50172906740060DD4E /* NIDropDown.m */; };
@@ -96,6 +97,9 @@
 		F6B1B2F3172539F200A51DDD /* FileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2E7172539F200A51DDD /* FileHelper.m */; };
 		F6B1B2F4172539F200A51DDD /* NSDate+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2EA172539F200A51DDD /* NSDate+Common.m */; };
 		F6B1B2F6172539F200A51DDD /* UITextView+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2EE172539F200A51DDD /* UITextView+Helper.m */; };
+		F6B8A83F176C556000B76C10 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B8A83E176C556000B76C10 /* HMSegmentedControl.m */; };
+		F6B8A87A176C577C00B76C10 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B8A879176C577C00B76C10 /* QuartzCore.framework */; };
+		F6B8A886176C64AA00B76C10 /* UIColor+MLPFlatColors.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B8A885176C64AA00B76C10 /* UIColor+MLPFlatColors.m */; };
 		F6C0C12A175B8CAE00D3AC11 /* 对口支援.html in Resources */ = {isa = PBXBuildFile; fileRef = F6C0C129175B8CAE00D3AC11 /* 对口支援.html */; };
 		F6C0C130175B8D6800D3AC11 /* webViewContent.html in Resources */ = {isa = PBXBuildFile; fileRef = F6C0C12F175B8D6800D3AC11 /* webViewContent.html */; };
 		F6C2972D17267580002FB4B8 /* MR_User.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C2972C17267580002FB4B8 /* MR_User.m */; };
@@ -142,6 +146,8 @@
 		F609B7FD1767298700EEDF59 /* MR_ClauseLinkWebCtro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_ClauseLinkWebCtro.h; sourceTree = "<group>"; };
 		F609B7FE1767298700EEDF59 /* MR_ClauseLinkWebCtro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MR_ClauseLinkWebCtro.m; sourceTree = "<group>"; };
 		F609B80217672B4D00EEDF59 /* MR_ClauseLinkWebCtro.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MR_ClauseLinkWebCtro.xib; sourceTree = "<group>"; };
+		F61435AF176C3885000484AC /* URBSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URBSegmentedControl.h; sourceTree = "<group>"; };
+		F61435B0176C3885000484AC /* URBSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URBSegmentedControl.m; sourceTree = "<group>"; };
 		F6200B071741CEFD00BBC87E /* UIView+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Helper.h"; sourceTree = "<group>"; };
 		F6200B081741CEFD00BBC87E /* UIView+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Helper.m"; sourceTree = "<group>"; };
 		F623AC3E1728FBB40060DD4E /* MR_PathNodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_PathNodeView.h; sourceTree = "<group>"; };
@@ -266,6 +272,11 @@
 		F6B1B2EA172539F200A51DDD /* NSDate+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Common.m"; sourceTree = "<group>"; };
 		F6B1B2ED172539F200A51DDD /* UITextView+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Helper.h"; sourceTree = "<group>"; };
 		F6B1B2EE172539F200A51DDD /* UITextView+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Helper.m"; sourceTree = "<group>"; };
+		F6B8A83D176C556000B76C10 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
+		F6B8A83E176C556000B76C10 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
+		F6B8A879176C577C00B76C10 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F6B8A884176C64AA00B76C10 /* UIColor+MLPFlatColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MLPFlatColors.h"; sourceTree = "<group>"; };
+		F6B8A885176C64AA00B76C10 /* UIColor+MLPFlatColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MLPFlatColors.m"; sourceTree = "<group>"; };
 		F6C0C129175B8CAE00D3AC11 /* 对口支援.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "对口支援.html"; sourceTree = "<group>"; };
 		F6C0C12F175B8D6800D3AC11 /* webViewContent.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = webViewContent.html; sourceTree = "<group>"; };
 		F6C2972B17267580002FB4B8 /* MR_User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MR_User.h; sourceTree = "<group>"; };
@@ -300,6 +311,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6B8A87A176C577C00B76C10 /* QuartzCore.framework in Frameworks */,
 				F606A0831724BF3100490D04 /* CoreGraphics.framework in Frameworks */,
 				F641710F1725718500648A5E /* MobileCoreServices.framework in Frameworks */,
 				F641710D1725716000648A5E /* SystemConfiguration.framework in Frameworks */,
@@ -334,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				F641710A1725702300648A5E /* libz.1.2.5.dylib */,
+				F6B8A879176C577C00B76C10 /* QuartzCore.framework */,
 				F641710E1725718500648A5E /* MobileCoreServices.framework */,
 				F641710C1725716000648A5E /* SystemConfiguration.framework */,
 				F641710817256FC100648A5E /* CFNetwork.framework */,
@@ -444,6 +457,15 @@
 				F606A0B71724CBD000490D04 /* Default-568h@2x.png */,
 			);
 			path = Image;
+			sourceTree = "<group>";
+		};
+		F61435AD176C3877000484AC /* URBSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				F61435AF176C3885000484AC /* URBSegmentedControl.h */,
+				F61435B0176C3885000484AC /* URBSegmentedControl.m */,
+			);
+			path = URBSegmentedControl;
 			sourceTree = "<group>";
 		};
 		F623AC4E172906740060DD4E /* NIDropDown */ = {
@@ -685,6 +707,24 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		F6B8A838176C534300B76C10 /* HMSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				F6B8A83D176C556000B76C10 /* HMSegmentedControl.h */,
+				F6B8A83E176C556000B76C10 /* HMSegmentedControl.m */,
+			);
+			path = HMSegmentedControl;
+			sourceTree = "<group>";
+		};
+		F6B8A883176C64AA00B76C10 /* UIColor+MLPFlatColors */ = {
+			isa = PBXGroup;
+			children = (
+				F6B8A884176C64AA00B76C10 /* UIColor+MLPFlatColors.h */,
+				F6B8A885176C64AA00B76C10 /* UIColor+MLPFlatColors.m */,
+			);
+			path = "UIColor+MLPFlatColors";
+			sourceTree = "<group>";
+		};
 		F6C297271726736A002FB4B8 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -722,6 +762,9 @@
 		F6E078B61724F43C00C00E6B /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				F6B8A883176C64AA00B76C10 /* UIColor+MLPFlatColors */,
+				F6B8A838176C534300B76C10 /* HMSegmentedControl */,
+				F61435AD176C3877000484AC /* URBSegmentedControl */,
 				F6FD5D5C1757A6A300218A59 /* MyScrollTable */,
 				F64F3275173E472E00AF7A15 /* MyPopSelectList */,
 				F67728571752F250005BB1B4 /* AHReach */,
@@ -930,6 +973,9 @@
 				F6FD5D651757A96A00218A59 /* UILabel+Helper.m in Sources */,
 				F609B7F51767095700EEDF59 /* MR_ClauseDetailCtro.m in Sources */,
 				F609B8001767298800EEDF59 /* MR_ClauseLinkWebCtro.m in Sources */,
+				F61435B1176C3885000484AC /* URBSegmentedControl.m in Sources */,
+				F6B8A83F176C556000B76C10 /* HMSegmentedControl.m in Sources */,
+				F6B8A886176C64AA00B76C10 /* UIColor+MLPFlatColors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

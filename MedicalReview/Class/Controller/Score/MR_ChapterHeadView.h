@@ -8,6 +8,8 @@
 
 #import "MR_RootView.h"
 
+#define MIN_TAB_WIDTH 80
+
 @protocol ChapterHeadDelegate <NSObject>
 
 - (void)ChapterSelected:(NSNumber *)chapterIndex;
