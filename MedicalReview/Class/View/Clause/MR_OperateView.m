@@ -61,7 +61,7 @@
 //    deleteBt.titleLabel.font = [UIFont systemFontOfSize:OPERATE_TEXT_SIZE+2];
 //    [deleteBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [deleteBt addTarget:self action:@selector(doDelete) forControlEvents:UIControlEventTouchUpInside];
-    [deleteBt setImage:[UIImage imageNamed:@"new5.png"] forState:UIControlStateNormal];
+    [deleteBt setBackgroundImage:[UIImage imageNamed:@"export.png"] forState:UIControlStateNormal];
     [self addSubview:deleteBt];
     [deleteBt release];
     
@@ -77,7 +77,7 @@
 //        linkBt.titleLabel.font = [UIFont systemFontOfSize:OPERATE_TEXT_SIZE];
 //        [linkBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [linkBt addTarget:self action:@selector(doLink:) forControlEvents:UIControlEventTouchUpInside];
-        [linkBt setImage:[UIImage imageNamed:@"detail.png"] forState:UIControlStateNormal];
+        [linkBt setBackgroundImage:[UIImage imageNamed:@"detail.png"] forState:UIControlStateNormal];
         [self addSubview:linkBt];
         [linkBt release];
     }

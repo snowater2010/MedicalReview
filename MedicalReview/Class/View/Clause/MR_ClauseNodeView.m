@@ -76,7 +76,7 @@
     self.selfView = selfView;
     
     //score
-    float score_margin = 3;
+    float score_margin = 10;
     float score_x = self_x + self_w + score_margin;
     float score_y = score_margin;
     float score_w = rect.size.width * 0.18 - score_margin * 2;

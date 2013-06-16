@@ -186,7 +186,8 @@
     [mainPageView addSubview:_clauseTableView];
     
     //menu control
-    CGRect menuBtFrame = CGRectMake(head_x, head_y, head_h, head_h);
+    float padding = 5;
+    CGRect menuBtFrame = CGRectMake(head_x+padding, head_y+padding, head_h-padding*2, head_h-padding*2);
     UIButton *menuBt = [[UIButton alloc] initWithFrame:menuBtFrame];
     [menuBt setBackgroundImage:[UIImage imageNamed:@"shen.gif"] forState:UIControlStateNormal];
     [menuBt addTarget:self action:@selector(leftHider) forControlEvents:UIControlEventTouchUpInside];
