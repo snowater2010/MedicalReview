@@ -59,7 +59,7 @@
     
     //tree node List
     float tree_x = 5;
-    float tree_y = select_y + select_h;
+    float tree_y = select_y + select_h + 10;
     float tree_w = rect.size.width - 10;
     float tree_h = rect.size.height - (select_y + select_h) -10;
     CGRect treeFrame = CGRectMake(tree_x, tree_y, tree_w, tree_h);
@@ -237,7 +237,7 @@
         cell = [[MR_PathCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
         cell.selectedBackgroundView = [[[UIView alloc] initWithFrame:cell.frame] autorelease]; 
-        cell.selectedBackgroundView.backgroundColor = [Common colorWithR:251 withG:225 withB:214];
+        cell.selectedBackgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"beijing2.jpg"]];
     }
     
     cell.cellModel = [self.nodeData objectAtIndex:indexPath.row];

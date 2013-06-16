@@ -53,7 +53,7 @@
     [nameField release];
     
     float scored_w = 200;
-    float scored_h = 44;
+    float scored_h = 30;
     float scored_x = name2_x + name2_w + margin;
     float scored_y = (rect.size.height - scored_h) / 2; 
     UISegmentedControl *scoredSeg = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"全部", @"已录", @"未录", nil]];
@@ -75,7 +75,7 @@
     [coreLabel release];
     
     float core2_w = 100;
-    float core2_h = 27;
+    float core2_h = 30;
     float core2_x = core_x + core_w;
     float core2_y = (rect.size.height - core2_h) / 2;
     UISwitch *coreSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(core2_x, core2_y, core2_w, core2_h)];
@@ -85,7 +85,7 @@
     [coreSwitch release];
     
     float search_w = 60;
-    float search_h = 44;
+    float search_h = 40;
     float search_x = rect.size.width - search_w - 10;
     float search_y = (rect.size.height - search_h) / 2;
     UIButton *searchButton = [[UIButton alloc] initWithFrame:CGRectMake(search_x, search_y, search_w, search_h)];

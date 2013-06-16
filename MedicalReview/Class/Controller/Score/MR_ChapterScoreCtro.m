@@ -323,14 +323,17 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
+        cell.selectedBackgroundView = [[[UIView alloc] initWithFrame:cell.frame] autorelease];
+        cell.selectedBackgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"beijing2.jpg"]];
+        
         cell.textLabel.backgroundColor = [UIColor clearColor];
         cell.textLabel.font = [UIFont systemFontOfSize:15];
+        cell.textLabel.highlightedTextColor = [UIColor blackColor];
         cell.textLabel.numberOfLines = 0;
     }
     
     NSDictionary *sectionDic = [_sectionData objectAtIndex:row];
     NSString *sectionName = [sectionDic objectForKey:KEY_sectionName];
-    
     cell.textLabel.text = sectionName;
     
     return cell;

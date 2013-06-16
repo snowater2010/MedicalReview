@@ -51,10 +51,10 @@
     _descLabel.text = desc;
     
     if (total.intValue == finish.intValue) {
-        self.contentView.backgroundColor = [Common colorWithR:200 withG:211 withB:251];
+        self.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"beijing.jpg"]];
     }
     else {
-        self.contentView.backgroundColor = [Common colorWithR:193 withG:202 withB:202];
+        self.contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"beijing1.jpg"]];
     }
 }
 
