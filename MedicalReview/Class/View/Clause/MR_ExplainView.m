@@ -67,14 +67,17 @@
         [self addSubview:explainView];
         [explainView release];
         
-        fastButtonFrame = CGRectMake(rect.size.width*0.75, 5, rect.size.width*0.25 - 5, rect.size.height - 10);
+        float button_x = rect.size.width - BUTTON_SIZE;
+        float button_y = (rect.size.height - BUTTON_SIZE)*0.5;
+        fastButtonFrame = CGRectMake(button_x, button_y, BUTTON_SIZE, BUTTON_SIZE);
         UIButton *button = [[UIButton alloc] initWithFrame:fastButtonFrame];
         [button addTarget:self action:@selector(doFastExplain:) forControlEvents:UIControlEventTouchUpInside];
-        [button setTitle:_GET_LOCALIZED_STRING_(@"button_shortcut") forState:UIControlStateNormal];
-        button.titleLabel.font = [UIFont systemFontOfSize:BUTTON_TEXT_SIZE];
+//        [button setTitle:_GET_LOCALIZED_STRING_(@"button_shortcut") forState:UIControlStateNormal];
+//        [button setBackgroundImage:[UIImage imageNamed:@"btn_img.png"] forState:UIControlStateNormal];
+//        button.titleLabel.font = [UIFont systemFontOfSize:BUTTON_TEXT_SIZE];
+//        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         button.enabled = !_readOnly;
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [button setBackgroundImage:[UIImage imageNamed:@"btn_img.png"] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"fast.png"] forState:UIControlStateNormal];
         [self addSubview:button];
         [button release];
     }

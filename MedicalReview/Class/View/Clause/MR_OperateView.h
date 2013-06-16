@@ -9,6 +9,7 @@
 #import "MR_RootView.h"
 
 #define OPERATE_TEXT_SIZE 14
+#define BUTTON_SIZE 45
 
 @protocol OperateDelegate <NSObject>
 

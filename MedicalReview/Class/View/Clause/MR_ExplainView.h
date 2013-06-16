@@ -11,6 +11,7 @@
 
 #define DEFAULT_TEXT_SIZE   14
 #define BUTTON_TEXT_SIZE    16
+#define BUTTON_SIZE 45
 
 @protocol ExplainViewDelegate <NSObject>
 

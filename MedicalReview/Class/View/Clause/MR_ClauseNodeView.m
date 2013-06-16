@@ -117,7 +117,6 @@
     CGRect operateFrame = CGRectMake(operate_x, operate_y, operate_w, operate_h);
     MR_OperateView *operateView = [[MR_OperateView alloc] initWithFrame:operateFrame];
     operateView.delegate = self;
-    operateView.isHasLink = YES;
     operateView.layer.borderWidth = 0.5;
     operateView.layer.borderColor = borderColor;
     self.operateView = operateView;
@@ -176,6 +175,12 @@
     _operateView.isHasLink = hasYs.boolValue;
     _operateView.clauseData = _clauseData;
     [_operateView refreshPage];
+    
+    if (_readOnly) {
+        UIView *coverView = [[UIView alloc] initWithFrame:readOnlyRect];
+        [self addSubview:coverView];
+        [coverView release];
+    }
 }
 
 - (void)dealloc
