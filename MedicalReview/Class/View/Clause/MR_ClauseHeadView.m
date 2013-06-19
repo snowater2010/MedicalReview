@@ -331,5 +331,9 @@
 - (void)doLink{
     
 }
+- (void)doWait
+{
+    _bgView.backgroundColor = [Common colorWithR:175 withG:139 withB:185];
+}
 
 @end

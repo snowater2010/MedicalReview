@@ -135,11 +135,6 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    [self refreshDatas];
-}
-
-- (void)refreshDatas
-{
     NSString *name = [_clauseData objectForKey:KEY_attrName];
     NSString *selfLevel = [_nodeDic objectForKey:KEY_selfLevel];
     NSString *scoreValue = [_scoreData objectForKey:KEY_scoreValue];

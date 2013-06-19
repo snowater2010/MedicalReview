@@ -32,7 +32,6 @@
 @property(nonatomic, assign) id<ClauseNodeDelegate> delegate;
 
 - (id)initWithFrame:(CGRect)frame withScoreArray:(NSArray *)scoreArray;
-- (void)refreshDatas;
 - (NSDictionary *)getScoreData;
 - (void)changeScoreWithIndex:(int)index;
 - (void)changeScoreWithValue:(NSString *)value;

@@ -26,8 +26,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSString *urlString = @"http://www.baidu.com/";
-    NSURL *url =[NSURL URLWithString:urlString];
+//    NSString *urlString = @"http://222.173.30.135:8088/ylpj/ylgl/indexPointFile/名词解释/对口支援.htm";
+    self.urlString = [_urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *url =[NSURL URLWithString:_urlString];
     
     NSURLRequest *request =[NSURLRequest requestWithURL:url];
     [_webView loadRequest:request];
@@ -46,6 +47,13 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    self.urlString = nil;
+    self.webView = nil;
+    [super dealloc];
 }
 
 - (IBAction)doClose:(id)sender

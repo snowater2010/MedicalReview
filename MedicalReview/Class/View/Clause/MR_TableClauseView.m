@@ -569,8 +569,7 @@
     nodeView.nodeDic = nodeDic;
     nodeView.clauseData = [clauseDic objectForKey:attrId];
     nodeView.scoreData = [scoreDic objectForKey:attrId];
-    
-    [nodeView refreshDatas];
+    [nodeView setNeedsDisplay];
     
     return cell;
 }

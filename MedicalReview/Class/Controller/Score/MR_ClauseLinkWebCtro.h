@@ -10,6 +10,7 @@
 
 @interface MR_ClauseLinkWebCtro : MR_RootController
 
+@property(nonatomic, retain) NSString *urlString;
 @property(nonatomic, retain) IBOutlet UIWebView *webView;
 
 - (IBAction)doClose:(id)sender;

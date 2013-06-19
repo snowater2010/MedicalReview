@@ -39,19 +39,23 @@
     maxWidth = maxWidth < MIN_TAB_WIDTH ? MIN_TAB_WIDTH : maxWidth;
     CGRect tabRect = CGRectMake(0, 0, maxWidth*titleArray.count, rect.size.height);
     
-    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:tabRect];
-    [segmentedControl setSectionTitles:titleArray];
-    [segmentedControl setFont:textFont];
-    [segmentedControl setSelectionIndicatorLoc:HMSelectionIndicatorLocBottom];
-    [segmentedControl setSelectionIndicatorMode:HMSelectionIndicatorFillsSegment];
-    [segmentedControl setBackgroundColor:[Common colorWithR:214 withG:230 withB:255]];
-    [segmentedControl setSelectionIndicatorColor:[UIColor flatDarkRedColor]];
-    [segmentedControl setSelectionIndicatorHeight:3];
-    [segmentedControl setTag:3];
-    [segmentedControl setIndexChangeBlock:^(NSUInteger index) {
-        [Common callDelegate:_delegate method:@selector(ChapterSelected:) withObject:[NSNumber numberWithInt:index]];
-    }];
-    [self addSubview:segmentedControl];
+    if (titleArray && titleArray.count > 0) {
+        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:tabRect];
+        [segmentedControl setSectionTitles:titleArray];
+        [segmentedControl setFont:textFont];
+        [segmentedControl setSelectionIndicatorLoc:HMSelectionIndicatorLocBottom];
+        [segmentedControl setSelectionIndicatorMode:HMSelectionIndicatorFillsSegment];
+        [segmentedControl setBackgroundColor:[Common colorWithR:214 withG:230 withB:255]];
+        [segmentedControl setSelectionIndicatorColor:[UIColor flatDarkRedColor]];
+        [segmentedControl setSelectionIndicatorHeight:3];
+        [segmentedControl setTag:3];
+        [segmentedControl setIndexChangeBlock:^(NSUInteger index) {
+            [Common callDelegate:_delegate method:@selector(ChapterSelected:) withObject:[NSNumber numberWithInt:index]];
+        }];
+        [self addSubview:segmentedControl];
+        [segmentedControl release];
+    }
+    [titleArray release];
 }
 
 - (void)dealloc
