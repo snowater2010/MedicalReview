@@ -40,7 +40,7 @@
 {
     //set server url
     self.globalinfo = [[GlobalInfo alloc] init];
-    _globalinfo.serverInfo.strWebServiceUrl = SERVICE_URL;
+    _globalinfo.serverInfo.strWebServiceUrl = [NSString stringWithFormat:@"%@/%@", SERVICE_URL, SERVICE_URL_SUB1];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

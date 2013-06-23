@@ -158,20 +158,18 @@
 
 - (void)doLink:(id)sender
 {
-    _GET_APP_DELEGATE_(appDelegate);
-    NSMutableString *serverUrl = [[NSMutableString alloc] initWithString:appDelegate.globalinfo.serverInfo.strWebServiceUrl];
-    
-//    @"http://222.173.30.135:8088/ylpj/ylgl/indexPointFile/名词解释/对口支援.htm"
+    NSMutableString *serverUrl = [[NSMutableString alloc] initWithString:SERVICE_URL];
     
     UIButton *button = (UIButton *)sender;
     NSString *title = button.titleLabel.text;
     
-    [serverUrl appendFormat:@"/indexPointFile/%@.htm", title];
+    [serverUrl appendFormat:@"/%@/indexPointFile/%@.htm", SERVICE_URL_SUB2, title];
     
     MR_ClauseLinkWebCtro *linkCtro = [[MR_ClauseLinkWebCtro alloc] initWithNibName:@"MR_ClauseLinkWebCtro" bundle:nil];
     linkCtro.urlString = serverUrl;
     [self presentModalViewController:linkCtro animated:YES];
     [linkCtro release];
+    [serverUrl release];
 }
 
 @end

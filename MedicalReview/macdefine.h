@@ -15,7 +15,9 @@
 
 //#define SERVICE_URL         @"http://222.173.30.135:8088/ylpj/webif"
 //#define SERVICE_URL         @"http://124.133.27.146:8080/ylgl/webif"
-#define SERVICE_URL         @"http://222.173.30.135:8088/ylgl/webif"
+#define SERVICE_URL         @"http://222.173.30.135:8088/ylgl"
+#define SERVICE_URL_SUB1    @"webif"
+#define SERVICE_URL_SUB2    @"ylgl"
 //土豆本机
 //#define SERVICE_URL         @"http://192.168.1.107:8080/ylpj/webif"
 

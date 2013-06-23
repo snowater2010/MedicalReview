@@ -1051,15 +1051,15 @@
 		F606A0A51724BF3100490D04 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bin Shan (C228THHY56)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bin Shan (C228THHY56)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: GAO XIYU (9VVE288CPU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: GAO XIYU (9VVE288CPU)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MedicalReview/Main/MedicalReview-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/MedicalReview/Main/MedicalReview-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "764379DD-289A-4E1F-9C70-23353E819C2C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "764379DD-289A-4E1F-9C70-23353E819C2C";
+				PROVISIONING_PROFILE = "01F957E9-53AE-495A-88C4-17D83D607D2D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "01F957E9-53AE-495A-88C4-17D83D607D2D";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1068,15 +1068,15 @@
 		F606A0A61724BF3100490D04 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bin Shan (C228THHY56)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bin Shan (C228THHY56)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: GAO XIYU (9VVE288CPU)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: GAO XIYU (9VVE288CPU)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MedicalReview/Main/MedicalReview-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/MedicalReview/Main/MedicalReview-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "764379DD-289A-4E1F-9C70-23353E819C2C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "764379DD-289A-4E1F-9C70-23353E819C2C";
+				PROVISIONING_PROFILE = "01F957E9-53AE-495A-88C4-17D83D607D2D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "01F957E9-53AE-495A-88C4-17D83D607D2D";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
