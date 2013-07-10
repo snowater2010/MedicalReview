@@ -216,7 +216,8 @@
             NSArray *statementData = [dataDic objectForKey:KEY_statementData];
             //条款
             if (allClause) {
-                BOOL result = [FileHelper writeClauseDataToCache:allClause];
+                BOOL result = [FileHelper writeData:allClause toCacheFile:CACHE_CLAUSE];
+//                BOOL result = [FileHelper writeClauseDataToCache:allClause];
                 if (!result)
                     _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"alert_clause_cache_update_error"));
             }

@@ -161,13 +161,6 @@ enum SORT_TYPE
             [bgTable release];\
         }\
 
-
-//上锁，解锁
-#define _lock       NSLock *lock = [[NSLock alloc] init];\
-                    [lock lock];
-#define _unlock     [lock unlock];\
-                    [lock release];
-
 //login
 #define KEY_errCode             @"errCode"
 #define KEY_errMsg              @"errMsg"

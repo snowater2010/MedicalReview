@@ -54,17 +54,42 @@
 //是否有缓存条款
 + (BOOL)ifHaveClauseCache
 {
-    NSString *clausePath = [self getClauseCacheFilePath];
-    return [[NSFileManager defaultManager] fileExistsAtPath:clausePath];
+    _GET_APP_DELEGATE_(appDelegate);
+    NSString *userName = appDelegate.globalinfo.userInfo.user.loginName;
+    
+    NSFileManager *fileManger = [NSFileManager defaultManager];
+    
+    NSString *userPath = [[FileHelper getDocumentPath] stringByAppendingPathComponent:userName];
+    if (![fileManger fileExistsAtPath:userPath]) {
+        return NO;
+    }
+    else {
+        NSString *scorePath = [userPath stringByAppendingPathComponent:CACHE_CLAUSE];
+        if (![fileManger fileExistsAtPath:scorePath])
+            return NO;
+        else
+            return YES;
+    }
+    
+    
+    
+//    NSString *clausePath = [self getClauseCacheFilePath];
+//    return [[NSFileManager defaultManager] fileExistsAtPath:clausePath];
 }
 
 + (id)readClauseDataFromCache
 {
     NSDictionary *result = nil;
-    if ([self ifHaveClauseCache]) {
-        NSString *cachePath = [FileHelper getClauseCacheFilePath];
+    if ([self ifHaveCacheFile:CACHE_CLAUSE]) {
+        NSString *cachePath = [FileHelper getCacheFilePath:CACHE_CLAUSE];
         result = [[[NSDictionary alloc] initWithContentsOfFile:cachePath] autorelease];
     }
+    
+//    NSDictionary *result = nil;
+//    if ([self ifHaveClauseCache]) {
+//        NSString *cachePath = [FileHelper getClauseCacheFilePath];
+//        result = [[[NSDictionary alloc] initWithContentsOfFile:cachePath] autorelease];
+//    }
     return result;
 }
 
@@ -240,9 +265,7 @@
     
     NSString *cachePath = [FileHelper getScoreCacheFilePath];
     //不知道writeToFile方法是否是线程安全的，所以上锁
-    _lock;
     BOOL result = [resultDic writeToFile:cachePath atomically:YES];
-    _unlock;
     [resultDic release];
     
     return result;
@@ -282,9 +305,7 @@
     [resultDic addEntriesFromDictionary:dataDic];
     
     NSString *cachePath = [FileHelper getScoreUpdateCacheFilePath];
-    _lock;
     BOOL result = [resultDic writeToFile:cachePath atomically:YES];
-    _unlock;
     [resultDic release];
     
     return result;
@@ -335,9 +356,7 @@
     
     NSString *cachePath = [FileHelper getCacheFilePath:fileName];
     //不知道writeToFile方法是否是线程安全的，所以上锁
-    _lock;
     BOOL result = [dataDic writeToFile:cachePath atomically:YES];
-    _unlock;
     
     return result;
 }

@@ -190,8 +190,6 @@
     if (![Common isEmptyString:scoreExplain])
         [_explainView setExplain:scoreExplain];
     
-    [self changeBackgroundColor];
-    
     if (_readOnly) {
         UIView *coverView = [[UIView alloc] initWithFrame:readOnlyRect];
         [self addSubview:coverView];
@@ -206,8 +204,8 @@
     _operateView.clauseData = _clauseData;
     [_operateView refreshPage];
     
-    //根据是否待议改变背景颜色
-    [self changeBgColorByWait:_operateView.isWait];
+    //改变背景颜色
+    [self changeBackgroundColor];
 }
 
 - (void)dealloc
@@ -254,7 +252,10 @@
     NSString *scoreValue = [self getScoreValue];
     NSString *selfLevel = [_nodeDic objectForKey:KEY_selfLevel];
     
-    if ([Common isEmptyString:scoreValue] || [scoreValue isEqualToString:selfLevel]) {
+    if (_operateView.isWait) {
+        _bgView.backgroundColor = [Common colorWithR:175 withG:139 withB:185];
+    }
+    else if ([Common isEmptyString:scoreValue] || [scoreValue isEqualToString:selfLevel]) {
         _bgView.backgroundColor = [Common colorWithR:193 withG:202 withB:202];
     }
     else {
@@ -345,18 +346,8 @@
 }
 - (void)doWait:(BOOL)isWait
 {
-    [self changeBgColorByWait:isWait];
+    [self changeBackgroundColor];
     [Common callDelegate:_delegate method:@selector(clauseHeadWait:) withObject:self];
-}
-
-- (void)changeBgColorByWait:(BOOL)isWait
-{
-    if (isWait) {
-        _bgView.backgroundColor = [Common colorWithR:175 withG:139 withB:185];
-    }
-    else {
-        _bgView.backgroundColor = [Common colorWithR:193 withG:202 withB:202];
-    }
 }
 
 @end

@@ -35,9 +35,9 @@
         [titleArray addObject:chapterName];
     }
     
-    //最小值
+    //最大值
     maxWidth = maxWidth < MIN_TAB_WIDTH ? MIN_TAB_WIDTH : maxWidth;
-    CGRect tabRect = CGRectMake(0, 0, maxWidth*titleArray.count, rect.size.height);
+    CGRect tabRect = CGRectMake(0, 0, (maxWidth+20)*titleArray.count, rect.size.height);
     
     if (titleArray && titleArray.count > 0) {
         HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithFrame:tabRect];
