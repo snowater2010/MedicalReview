@@ -205,19 +205,19 @@
 - (void)initData
 {
     //clause
-    if ([FileHelper ifHaveClauseCache])
-        self.clauseData = [FileHelper readClauseDataFromCache];
+//    if ([FileHelper ifHaveClauseCache])
+//        self.clauseData = [FileHelper readClauseDataFromCache];
 //    else {
-//        NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
-//        self.clauseData = [allData objectForKey:KEY_allClause];
+        NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
+        self.clauseData = [allData objectForKey:KEY_allClause];
 //    }
     
     //path
-    if ([FileHelper ifHaveCacheFile:CACHE_PATH]) 
-        self.pathData = [FileHelper readDataFromCache:CACHE_PATH];
+//    if ([FileHelper ifHaveCacheFile:CACHE_PATH]) 
+//        self.pathData = [FileHelper readDataFromCache:CACHE_PATH];
 //    else {
 //        NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
-//        self.pathData = [allData objectForKey:KEY_pathFormat];
+        self.pathData = [allData objectForKey:KEY_pathFormat];
 //    }
     
     self.scoreData = [self getInitScoreData];

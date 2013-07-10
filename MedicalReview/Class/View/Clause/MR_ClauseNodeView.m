@@ -166,8 +166,10 @@
     else
         [_explainView setExplain:scoreExplain];
     
+    //要点有评审要素，没有待议
     NSString *hasYs = [_clauseData objectForKey:KEY_hasYs];
     _operateView.isHasLink = hasYs.boolValue;
+    _operateView.isHasWait = NO;
     _operateView.clauseData = _clauseData;
     [_operateView refreshPage];
     

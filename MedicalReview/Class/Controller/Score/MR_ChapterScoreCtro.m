@@ -78,7 +78,7 @@
     
     //默认选中第一个节点
     if ([_sectionData count] > 0) {
-        [_chapterTable selectRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] animated:NO scrollPosition:UITableViewRowAnimationTop];
+        [_chapterTable selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewRowAnimationTop];
     }
 }
 
@@ -241,19 +241,19 @@
 - (void)initData
 {
     //clause
-    if ([FileHelper ifHaveClauseCache])
-        self.clauseData = [FileHelper readClauseDataFromCache];
+//    if ([FileHelper ifHaveClauseCache])
+//        self.clauseData = [FileHelper readClauseDataFromCache];
 //    else {
-//        NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
-//        self.clauseData = [allData objectForKey:KEY_allClause];
+        NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
+        self.clauseData = [allData objectForKey:KEY_allClause];
 //    }
     
     //chapter
-    if ([FileHelper ifHaveCacheFile:CACHE_CHAPTER])
-        self.chapterData = [FileHelper readDataFromCache:CACHE_CHAPTER];
+//    if ([FileHelper ifHaveCacheFile:CACHE_CHAPTER])
+//        self.chapterData = [FileHelper readDataFromCache:CACHE_CHAPTER];
 //    else {
 //        NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
-//        self.chapterData = [allData objectForKey:KEY_chaptersFormat];
+        self.chapterData = [allData objectForKey:KEY_chaptersFormat];
 //    }
     
     //section

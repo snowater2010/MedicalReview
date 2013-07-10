@@ -13,6 +13,7 @@
 
 @property(nonatomic, retain) UIPopoverController *viewPop;
 @property(nonatomic, retain) MR_ClauseDetailCtro *detailCtro;
+@property(nonatomic, retain) UIButton *linkBt;
 
 @end
 
@@ -23,7 +24,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        self.isHasLink = NO;
         
         UIPopoverController *viewPop = [UIPopoverController alloc];
         MR_ClauseDetailCtro *detailCtro = [[MR_ClauseDetailCtro alloc] initWithNibName:@"MR_ClauseDetailCtro" bundle:nil];
@@ -49,57 +49,59 @@
     }];
     
     CGRect rect = self.bounds;
-//    _isHasLink = YES;
     
-    float delete_x = _isHasLink ? (rect.size.width-UNIT_BUTTON_SIZE*3)*0.3 : (rect.size.width-UNIT_BUTTON_SIZE)*0.5;
-    float delete_y = (rect.size.height-UNIT_BUTTON_SIZE)*0.5;
-    float delete_w = UNIT_BUTTON_SIZE;
-    float delete_h = UNIT_BUTTON_SIZE;
+    UIFont *font = [UIFont systemFontOfSize:OPERATE_TEXT_SIZE];
+    NSString *delTitle = _GET_LOCALIZED_STRING_(@"button_delete");
+    
+    float delWidth = [delTitle sizeWithFont:font].width;
+    
+    float padding = _isHasLink || _isHasWait ? (rect.size.width-delWidth*3)*0.33 : (rect.size.width-delWidth)*0.5;
+    float delete_x = padding;
+    float delete_y = 0;
+    float delete_w = delWidth;
+    float delete_h = rect.size.height;
     CGRect deleteRect = CGRectMake(delete_x, delete_y, delete_w, delete_h);
     UIButton *deleteBt = [[UIButton alloc] initWithFrame:deleteRect];
     [deleteBt setTitle:_GET_LOCALIZED_STRING_(@"button_delete") forState:UIControlStateNormal];
-    deleteBt.titleLabel.font = [UIFont systemFontOfSize:OPERATE_TEXT_SIZE];
+    deleteBt.titleLabel.font = font;
     [deleteBt setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [deleteBt setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     [deleteBt addTarget:self action:@selector(doDelete) forControlEvents:UIControlEventTouchUpInside];
-//    [deleteBt setBackgroundImage:[UIImage imageNamed:@"export.png"] forState:UIControlStateNormal];
     [self addSubview:deleteBt];
     [deleteBt release];
     
     if (_isHasLink) {
-        float link_x = CGRectGetMaxX(deleteRect) + (rect.size.width-UNIT_BUTTON_SIZE*3)*0.3;
-        float link_y = (rect.size.height-UNIT_BUTTON_SIZE)*0.5;
-        float link_w = UNIT_BUTTON_SIZE*2;
-        float link_h = UNIT_BUTTON_SIZE;
+        float link_x = CGRectGetMaxX(deleteRect) + padding;
+        float link_y = 0;
+        float link_w = delWidth*2;
+        float link_h = rect.size.height;
         CGRect linkRect = CGRectMake(link_x, link_y, link_w, link_h);
         UIButton *linkBt = [[UIButton alloc] initWithFrame:linkRect];
         [linkBt setTitle:_GET_LOCALIZED_STRING_(@"button_link") forState:UIControlStateNormal];
-        linkBt.titleLabel.font = [UIFont systemFontOfSize:OPERATE_TEXT_SIZE];
+        linkBt.titleLabel.font = font;
         [linkBt setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [linkBt setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
         [linkBt addTarget:self action:@selector(doLink:) forControlEvents:UIControlEventTouchUpInside];
-//        [linkBt setBackgroundImage:[UIImage imageNamed:@"detail.png"] forState:UIControlStateNormal];
         [self addSubview:linkBt];
         [linkBt release];
     }
     
-//    if (_isHasLink) {
-//        float link_x = CGRectGetMaxX(deleteRect) + (rect.size.width-UNIT_BUTTON_SIZE*3)*0.3;
-//        float link_y = (rect.size.height-UNIT_BUTTON_SIZE)*0.5;
-//        float link_w = UNIT_BUTTON_SIZE*2;
-//        float link_h = UNIT_BUTTON_SIZE;
-//        CGRect linkRect = CGRectMake(link_x, link_y, link_w, link_h);
-//        UIButton *linkBt = [[UIButton alloc] initWithFrame:linkRect];
-//        [linkBt setTitle:_GET_LOCALIZED_STRING_(@"button_link") forState:UIControlStateNormal];
-//        linkBt.titleLabel.font = [UIFont systemFontOfSize:OPERATE_TEXT_SIZE];
-//        [linkBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//        [linkBt addTarget:self action:@selector(doWait:) forControlEvents:UIControlEventTouchUpInside];
-//        //        [linkBt setBackgroundImage:[UIImage imageNamed:@"detail.png"] forState:UIControlStateNormal];
-//        [self addSubview:linkBt];
-//        [linkBt release];
-//        
-////        [Common colorWithR:175 withG:139 withB:185];
-//    }
+    if (_isHasWait) {
+        float link_x = CGRectGetMaxX(deleteRect) + padding;
+        float link_y = 0;
+        float link_w = delWidth*2;
+        float link_h = rect.size.height;
+        CGRect linkRect = CGRectMake(link_x, link_y, link_w, link_h);
+        UIButton *linkBt = [[UIButton alloc] initWithFrame:linkRect];
+        linkBt.titleLabel.font = font;
+        [linkBt setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [linkBt setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+        [linkBt addTarget:self action:@selector(doWait:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:linkBt];
+        self.linkBt = linkBt;
+        [self changeTitleByWait:_isWait];
+        [linkBt release];
+    }
 }
 
 - (void)dealloc
@@ -125,22 +127,21 @@
 
 - (void)doWait:(id)sender
 {
-    UIButton *button = (UIButton *)sender;
+    self.isWait = !_isWait;
     
-    [Common callDelegate:_delegate method:@selector(doWait)];
+    [self changeTitleByWait:_isWait];
     
-//    _isHasWait = YES;
-//    if (_isHasWait) {
-//        button.backgroundColor = [Common colorWithR:175 withG:139 withB:185];
-//    }
-//    else {
-//        button.backgroundColor = [Common colorWithR:175 withG:139 withB:185];
-//    }
-    
-//    _detailCtro.clauseData = _clauseData;
-//    
-//    UIButton *linkButton = (UIButton *)sender;
-//    [_viewPop presentPopoverFromRect:linkButton.frame inView:self permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+    [Common callDelegate:_delegate method:@selector(doWait:) withObject:(id)_isWait];
+}
+
+- (void)changeTitleByWait:(BOOL)isWait
+{
+    if (_isWait) {
+        [_linkBt setTitle:_GET_LOCALIZED_STRING_(@"button_nowait") forState:UIControlStateNormal];
+    }
+    else {
+        [_linkBt setTitle:_GET_LOCALIZED_STRING_(@"button_wait") forState:UIControlStateNormal];
+    }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

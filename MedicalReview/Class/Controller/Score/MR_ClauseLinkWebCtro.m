@@ -26,21 +26,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    NSString *urlString = @"http://222.173.30.135:8088/ylpj/ylgl/indexPointFile/名词解释/对口支援.htm";
     self.urlString = [_urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *url =[NSURL URLWithString:_urlString];
     
     NSURLRequest *request =[NSURLRequest requestWithURL:url];
     [_webView loadRequest:request];
-    
-    
-//    NSString *path = [[NSBundle mainBundle] pathForResource:@"webViewContent" ofType:@"html"];
-//	NSFileHandle *readHandle = [NSFileHandle fileHandleForReadingAtPath:path];
-//    
-//	NSString *htmlString = [[NSString alloc] initWithData:
-//                            [readHandle readDataToEndOfFile] encoding:NSUTF8StringEncoding];
-//	[_webView loadHTMLString:htmlString baseURL:nil];
-//	[htmlString release];
 }
 
 - (void)didReceiveMemoryWarning

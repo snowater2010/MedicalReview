@@ -248,6 +248,24 @@
         [self doReaquestUpdateScoreData:newScoreData];
 }
 
+//update head wait flag
+- (void)clauseHeadWait:(MR_ClauseHeadView *)sender
+{
+    int section = sender.section;
+    
+    NSString *scoreWait = [sender getScoreWait];
+    NSString *clauseId = sender.clauseId;
+    
+    NSDictionary *scoreDic = [self getScoreDataDic:clauseId inSection:section];
+    [scoreDic setValue:scoreWait forKey:KEY_completeFlag];
+    
+    //update score
+    NSDictionary *newScoreData = [NSDictionary dictionaryWithObjectsAndKeys:scoreDic, clauseId, nil];
+    self.updateScoreData = newScoreData;
+    if (newScoreData)
+        [self doReaquestUpdateScoreData:newScoreData];
+}
+
 - (void)clauseNodeScored:(MR_ClauseNodeView *)sender
 {
     int section = sender.section;

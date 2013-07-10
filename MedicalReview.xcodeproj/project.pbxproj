@@ -96,7 +96,6 @@
 		F6B1B2F2172539F200A51DDD /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2E5172539F200A51DDD /* Common.m */; };
 		F6B1B2F3172539F200A51DDD /* FileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2E7172539F200A51DDD /* FileHelper.m */; };
 		F6B1B2F4172539F200A51DDD /* NSDate+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2EA172539F200A51DDD /* NSDate+Common.m */; };
-		F6B1B2F6172539F200A51DDD /* UITextView+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B1B2EE172539F200A51DDD /* UITextView+Helper.m */; };
 		F6B8A83F176C556000B76C10 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B8A83E176C556000B76C10 /* HMSegmentedControl.m */; };
 		F6B8A87A176C577C00B76C10 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B8A879176C577C00B76C10 /* QuartzCore.framework */; };
 		F6B8A886176C64AA00B76C10 /* UIColor+MLPFlatColors.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B8A885176C64AA00B76C10 /* UIColor+MLPFlatColors.m */; };
@@ -274,8 +273,6 @@
 		F6B1B2E8172539F200A51DDD /* MyLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLog.h; sourceTree = "<group>"; };
 		F6B1B2E9172539F200A51DDD /* NSDate+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Common.h"; sourceTree = "<group>"; };
 		F6B1B2EA172539F200A51DDD /* NSDate+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Common.m"; sourceTree = "<group>"; };
-		F6B1B2ED172539F200A51DDD /* UITextView+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Helper.h"; sourceTree = "<group>"; };
-		F6B1B2EE172539F200A51DDD /* UITextView+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Helper.m"; sourceTree = "<group>"; };
 		F6B8A83D176C556000B76C10 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		F6B8A83E176C556000B76C10 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		F6B8A879176C577C00B76C10 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -702,8 +699,6 @@
 				F6B1B2E7172539F200A51DDD /* FileHelper.m */,
 				F6B1B2E9172539F200A51DDD /* NSDate+Common.h */,
 				F6B1B2EA172539F200A51DDD /* NSDate+Common.m */,
-				F6B1B2ED172539F200A51DDD /* UITextView+Helper.h */,
-				F6B1B2EE172539F200A51DDD /* UITextView+Helper.m */,
 				F64171711725957400648A5E /* NSString+Helper.h */,
 				F64171721725957400648A5E /* NSString+Helper.m */,
 				F602F4A1172651AD005FE31F /* ASIHTTPRequest+Helper.h */,
@@ -937,7 +932,6 @@
 				F6B1B2F2172539F200A51DDD /* Common.m in Sources */,
 				F6B1B2F3172539F200A51DDD /* FileHelper.m in Sources */,
 				F6B1B2F4172539F200A51DDD /* NSDate+Common.m in Sources */,
-				F6B1B2F6172539F200A51DDD /* UITextView+Helper.m in Sources */,
 				F641714F17258B7600648A5E /* ASIAuthenticationDialog.m in Sources */,
 				F641715017258B7600648A5E /* ASIDataCompressor.m in Sources */,
 				F641715117258B7600648A5E /* ASIDataDecompressor.m in Sources */,
@@ -1051,15 +1045,15 @@
 		F606A0A51724BF3100490D04 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: GAO XIYU (9VVE288CPU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: GAO XIYU (9VVE288CPU)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: GAO XIYU (PEKPRBC842)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: GAO XIYU (PEKPRBC842)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MedicalReview/Main/MedicalReview-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/MedicalReview/Main/MedicalReview-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "01F957E9-53AE-495A-88C4-17D83D607D2D";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "01F957E9-53AE-495A-88C4-17D83D607D2D";
+				PROVISIONING_PROFILE = "0BF30966-C8EB-45EC-A60B-4A2EF33E7605";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0BF30966-C8EB-45EC-A60B-4A2EF33E7605";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1068,15 +1062,15 @@
 		F606A0A61724BF3100490D04 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: GAO XIYU (9VVE288CPU)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: GAO XIYU (9VVE288CPU)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: GAO XIYU (PEKPRBC842)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: GAO XIYU (PEKPRBC842)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MedicalReview/Main/MedicalReview-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/MedicalReview/Main/MedicalReview-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "01F957E9-53AE-495A-88C4-17D83D607D2D";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "01F957E9-53AE-495A-88C4-17D83D607D2D";
+				PROVISIONING_PROFILE = "0BF30966-C8EB-45EC-A60B-4A2EF33E7605";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0BF30966-C8EB-45EC-A60B-4A2EF33E7605";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};

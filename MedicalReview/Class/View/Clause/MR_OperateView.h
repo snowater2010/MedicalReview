@@ -9,14 +9,13 @@
 #import "MR_RootView.h"
 
 #define OPERATE_TEXT_SIZE 16
-#define UNIT_BUTTON_SIZE 40
 
 @protocol OperateDelegate <NSObject>
 
 @optional
 - (void)doDelete;
 - (void)doLink;
-- (void)doWait;
+- (void)doWait:(BOOL)isWait;
 
 @end
 
@@ -24,6 +23,7 @@
 
 @property(nonatomic, assign) BOOL isHasLink;
 @property(nonatomic, assign) BOOL isHasWait;
+@property(nonatomic, assign) BOOL isWait;
 @property(nonatomic, assign) id<OperateDelegate> delegate;
 @property(nonatomic, retain) NSDictionary *clauseData;
 

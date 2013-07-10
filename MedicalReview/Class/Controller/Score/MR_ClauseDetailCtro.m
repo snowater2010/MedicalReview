@@ -147,15 +147,6 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == 5) {
-        MR_ClauseLinkWebCtro *linkCtro = [[MR_ClauseLinkWebCtro alloc] initWithNibName:@"MR_ClauseLinkWebCtro" bundle:nil];
-        [self presentModalViewController:linkCtro animated:YES];
-        [linkCtro release];
-    }
-}
-
 - (void)doLink:(id)sender
 {
     NSMutableString *serverUrl = [[NSMutableString alloc] initWithString:SERVICE_URL];

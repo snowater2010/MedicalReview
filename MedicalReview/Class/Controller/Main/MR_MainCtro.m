@@ -87,23 +87,11 @@
     [topPageView release];
     
     float buttonSize = MENU_BUTTON_SIZE;
-    //退出
-    float button1_h = buttonSize;
-    float button1_w = buttonSize;
-    float button1_x = top_w - buttonSize - MENU_BUTTON_MARGIN;
-    float button1_y = top_h - buttonSize;
-    CGRect button1Frame = CGRectMake(button1_x, button1_y, button1_w, button1_h);
-    UIButton *button1 = [[UIButton alloc] initWithFrame:button1Frame];
-    button1.tag = -1;
-    [button1 setBackgroundImage:[UIImage imageNamed:@"logout.png"] forState:UIControlStateNormal];
-    [button1 addTarget:self action:@selector(menuButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [topPageView addSubview:button1];
-    [button1 release];
     
     //进度查看
     float button5_h = buttonSize;
     float button5_w = buttonSize;
-    float button5_x = top_w - (buttonSize + MENU_BUTTON_MARGIN)*2;
+    float button5_x = top_w - buttonSize - MENU_BUTTON_MARGIN;
     float button5_y = top_h - buttonSize;
     CGRect button5Frame = CGRectMake(button5_x, button5_y, button5_w, button5_h);
     UIButton *button5 = [[UIButton alloc] initWithFrame:button5Frame];
@@ -116,7 +104,7 @@
     //评审查看
     float button4_h = buttonSize;
     float button4_w = buttonSize;
-    float button4_x = top_w - (buttonSize + MENU_BUTTON_MARGIN)*3;
+    float button4_x = top_w - (buttonSize + MENU_BUTTON_MARGIN)*2;
     float button4_y = top_h - buttonSize;
     CGRect button4Frame = CGRectMake(button4_x, button4_y, button4_w, button4_h);
     UIButton *button4 = [[UIButton alloc] initWithFrame:button4Frame];
@@ -129,7 +117,7 @@
     //章节评审
     float button2_h = buttonSize;
     float button2_w = buttonSize;
-    float button2_x = top_w - (buttonSize + MENU_BUTTON_MARGIN)*4;
+    float button2_x = top_w - (buttonSize + MENU_BUTTON_MARGIN)*3;
     float button2_y = top_h - buttonSize;
     CGRect button2Frame = CGRectMake(button2_x, button2_y, button2_w, button2_h);
     UIButton *button2 = [[UIButton alloc] initWithFrame:button2Frame];
@@ -142,7 +130,7 @@
     //路径评审
     float button3_h = buttonSize;
     float button3_w = buttonSize;
-    float button3_x = top_w - (buttonSize + MENU_BUTTON_MARGIN)*5;
+    float button3_x = top_w - (buttonSize + MENU_BUTTON_MARGIN)*4;
     float button3_y = top_h - buttonSize;
     CGRect button3Frame = CGRectMake(button3_x, button3_y, button3_w, button3_h);
     UIButton *button3 = [[UIButton alloc] initWithFrame:button3Frame];
@@ -197,10 +185,6 @@
             self.mainController = controller;
             [controller release];
             break;
-        }
-        case -1:
-        {
-            exit(0);
         }
         default:
             break;

@@ -45,5 +45,6 @@
 - (int)getScoreSelectIndex;
 - (NSString *)getScoreValue;
 - (NSString *)getScoreExplain;
+- (NSString *)getScoreWait;
 
 @end

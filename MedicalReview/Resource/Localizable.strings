@@ -31,6 +31,8 @@
 //button
 "button_shortcut"                   = "快捷";
 "button_delete"                     = "删除";
+"button_wait"                       = "待议";
+"button_nowait"                     = "取消待议";
 "button_link"                       = "评审要素";
 
 //title

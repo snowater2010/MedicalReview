@@ -67,7 +67,7 @@
     UITableView *tableView = [[UITableView alloc] initWithFrame:treeFrame];
     tableView.dataSource = self;
     tableView.delegate = self;
-    [tableView selectRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] animated:NO scrollPosition:UITableViewRowAnimationTop];
+    [tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewRowAnimationTop];
     self.tableView = tableView;
     
     [self addSubview:btnSelect];

@@ -163,6 +163,7 @@
     NSString *selfLevel = [_nodeDic objectForKey:KEY_selfLevel];
     NSString *scoreValue  = [_scoreData objectForKey:KEY_scoreValue];
     NSString *scoreExplain = [_scoreData objectForKey:KEY_scoreExplain];
+    NSString *completeFlag = [_scoreData objectForKey:KEY_completeFlag];
     
     //arrow
     [self changeArrowState];
@@ -197,10 +198,16 @@
         [coverView release];
     }
     
-    NSString *hasYs = [_clauseData objectForKey:KEY_hasYs];
-    _operateView.isHasLink = hasYs.boolValue;
+    //条款没有评审要素，有待议
+//    NSString *hasYs = [_clauseData objectForKey:KEY_hasYs];
+    _operateView.isHasLink = NO;
+    _operateView.isHasWait = YES;
+    _operateView.isWait = completeFlag.boolValue;
     _operateView.clauseData = _clauseData;
     [_operateView refreshPage];
+    
+    //根据是否待议改变背景颜色
+    [self changeBgColorByWait:_operateView.isWait];
 }
 
 - (void)dealloc
@@ -285,6 +292,11 @@
     return [_explainView getExplain];
 }
 
+- (NSString *)getScoreWait
+{
+    return [NSString stringWithFormat:@"%d", [[NSNumber numberWithBool:_operateView.isWait] intValue]];
+}
+
 - (void)changeScore:(int)index
 {
     [_scoreView selectAtIndex:index];
@@ -331,9 +343,20 @@
 - (void)doLink{
     
 }
-- (void)doWait
+- (void)doWait:(BOOL)isWait
 {
-    _bgView.backgroundColor = [Common colorWithR:175 withG:139 withB:185];
+    [self changeBgColorByWait:isWait];
+    [Common callDelegate:_delegate method:@selector(clauseHeadWait:) withObject:self];
+}
+
+- (void)changeBgColorByWait:(BOOL)isWait
+{
+    if (isWait) {
+        _bgView.backgroundColor = [Common colorWithR:175 withG:139 withB:185];
+    }
+    else {
+        _bgView.backgroundColor = [Common colorWithR:193 withG:202 withB:202];
+    }
 }
 
 @end
