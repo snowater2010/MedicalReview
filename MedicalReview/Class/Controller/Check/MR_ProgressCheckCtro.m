@@ -64,12 +64,44 @@
 {
     [super viewDidLoad];
     
-    NSDictionary *data = [FileHelper readDataFileWithName:@"progress.txt"];
+    //demo data
+//    NSDictionary *data2 = [FileHelper readDataFileWithName:@"progress.txt"];
+//    self.tableHead = [data2 objectForKey:KEY_tableHead];
+//    self.tableData = [data2 objectForKey:KEY_tableData];
+//    _mTableView.drTableHead = _tableHead;
+//    _mTableView.drTableData = _tableData;
+//    [_mTableView refreshView];
+    
+    [self.view showLoadingWithText:_GET_LOCALIZED_STRING_(@"request_msg_wait_login")];
+    
+    _GET_APP_DELEGATE_(appDelegate);
+    NSString *serverUrl = appDelegate.globalinfo.serverInfo.strWebServiceUrl;
+    
+    self.request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:serverUrl]];
+    self.request.tag = TAG_REQUEST_LOGIN;
+    
+    [self.request setPostValue:@"loadProgress" forKey:@"module"];
+    [self.request setDefaultPostValue];
+    
+    self.request.delegate = self;
+    [self.request startAsynchronous];
+}
+
+- (void)responseSuccess:(NSDictionary *)data tag:(int)tag
+{
     self.tableHead = [data objectForKey:KEY_tableHead];
     self.tableData = [data objectForKey:KEY_tableData];
-	
     _mTableView.drTableHead = _tableHead;
 	_mTableView.drTableData = _tableData;
+    
+    [_mTableView refreshView];
+    [self.view hideLoading];
+}
+
+//处理失败请求的结果
+- (void)responseFailed:(int)tag
+{
+    [self.view hideLoading];
 }
 
 - (void)didReceiveMemoryWarning

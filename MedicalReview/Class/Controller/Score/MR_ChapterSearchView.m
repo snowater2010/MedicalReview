@@ -13,6 +13,7 @@
 @property(nonatomic, retain) UITextField *nameField;
 @property(nonatomic, retain) UISegmentedControl *scoredSeg;
 @property(nonatomic, retain) UISwitch *coreSwitch;
+@property(nonatomic, retain) UISwitch *waitSwitch;
 
 @end
 
@@ -29,15 +30,19 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    float margin = 20;
+    float margin = 15;
+    float swidthWidth = 80;
+    UIFont *font = [UIFont systemFontOfSize:17];
     
-    float name_x = 0.;
+    NSString *name = @"条款名称：";
+    CGSize nameSize = [name sizeWithFont:font];
+    float name_x = margin;
     float name_y = 0.;
-    float name_w = 100;
+    float name_w = nameSize.width;
     float name_h = rect.size.height;
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(name_x, name_y, name_w, name_h)];
-    nameLabel.text = @"条款名称：";
-    nameLabel.backgroundColor = [UIColor clearColor];
+    nameLabel.text = name;
+    nameLabel.font = font;
     nameLabel.textAlignment = NSTextAlignmentRight;
     [self addSubview:nameLabel];
     [nameLabel release];
@@ -52,7 +57,7 @@
     self.nameField = nameField;
     [nameField release];
     
-    float scored_w = 200;
+    float scored_w =180;
     float scored_h = 30;
     float scored_x = name2_x + name2_w + margin;
     float scored_y = (rect.size.height - scored_h) / 2; 
@@ -63,26 +68,52 @@
     self.scoredSeg = scoredSeg;
     [scoredSeg release];
     
+    NSString *coreName = @"核心条款：";
+    CGSize coreSize = [coreName sizeWithFont:font];
     float core_x = scored_x + scored_w + margin;
     float core_y = 0.;
-    float core_w = 100;
+    float core_w = coreSize.width;
     float core_h = rect.size.height;
     UILabel *coreLabel = [[UILabel alloc] initWithFrame:CGRectMake(core_x, core_y, core_w, core_h)];
-    coreLabel.text = @"核心条款：";
+    coreLabel.text = coreName;
+    coreLabel.font = font;
     coreLabel.textAlignment = NSTextAlignmentRight;
-    coreLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:coreLabel];
     [coreLabel release];
     
-    float core2_w = 100;
+    float core2_w = swidthWidth;
     float core2_h = 30;
     float core2_x = core_x + core_w;
     float core2_y = (rect.size.height - core2_h) / 2;
-    UISwitch *coreSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(core2_x, core2_y, core2_w, core2_h)];
+    CGRect core2Frame = CGRectMake(core2_x, core2_y, core2_w, core2_h);
+    UISwitch *coreSwitch = [[UISwitch alloc] initWithFrame:core2Frame];
     [coreSwitch setOn:NO];
     [self addSubview:coreSwitch];
     self.coreSwitch = coreSwitch;
     [coreSwitch release];
+    
+    NSString *waitName = @"待议：";
+    CGSize waitNameSize = [waitName sizeWithFont:font];
+    float wait_x = CGRectGetMaxX(core2Frame) + margin;
+    float wait_y = 0.;
+    float wait_w = waitNameSize.width;
+    float wait_h = rect.size.height;
+    UILabel *waitLabel = [[UILabel alloc] initWithFrame:CGRectMake(wait_x, wait_y, wait_w, wait_h)];
+    waitLabel.text = waitName;
+    waitLabel.font = font;
+    waitLabel.textAlignment = NSTextAlignmentRight;
+    [self addSubview:waitLabel];
+    [waitLabel release];
+    
+    float wait2_w = swidthWidth;
+    float wait2_h = 30;
+    float wait2_x = wait_x + wait_w;
+    float wait2_y = (rect.size.height - wait2_h) / 2;
+    UISwitch *waitSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(wait2_x, wait2_y, wait2_w, wait2_h)];
+    [waitSwitch setOn:NO];
+    [self addSubview:waitSwitch];
+    self.waitSwitch = waitSwitch;
+    [waitSwitch release];
     
     float search_w = 60;
     float search_h = 40;
@@ -103,6 +134,8 @@
     self.nameField = nil;
     self.scoredSeg = nil;
     self.coreSwitch = nil;
+    self.waitSwitch = nil;
+    
     [super dealloc];
 }
 
@@ -115,11 +148,13 @@
         name = @"";
     int scoredIndex = _scoredSeg.selectedSegmentIndex;
     BOOL isCore = _coreSwitch.isOn;
+    BOOL isWait = _waitSwitch.isOn;
     
     NSDictionary *searchDic = [[[NSDictionary alloc] initWithObjectsAndKeys:
                               name, KEY_searchName,
                               [NSNumber numberWithInt:scoredIndex], KEY_searchScored,
                               [NSNumber numberWithBool:isCore], KEY_searchCore,
+                              [NSNumber numberWithBool:isWait], KEY_searchWait,
                               nil] autorelease];
     
     [Common callDelegate:_delegate method:@selector(doSearch:) withObject:searchDic];

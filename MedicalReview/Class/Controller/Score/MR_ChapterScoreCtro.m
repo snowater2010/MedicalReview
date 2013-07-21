@@ -374,6 +374,7 @@
     NSString *name = [searchDic objectForKey:KEY_searchName];
     int scoredIndex = [[searchDic objectForKey:KEY_searchScored] intValue];
     BOOL isCore = [[searchDic objectForKey:KEY_searchCore] boolValue];
+    BOOL isWait = [[searchDic objectForKey:KEY_searchWait] boolValue];
     
     NSMutableArray *nodeData = [[NSMutableArray alloc] initWithCapacity:0];
     NSMutableArray *clauseData = [[NSMutableArray alloc] initWithCapacity:0];
@@ -408,6 +409,14 @@
             if (isCore) {
                 NSString *formulaType = [clauseDic objectForKey:KEY_formulaType];
                 if (formulaType.intValue != 2) {
+                    continue;
+                }
+            }
+            
+            if (isWait) {
+                NSDictionary *scoreDic = [_scoreData objectForKey:clauseId];
+                NSString *completeFlag = [scoreDic objectForKey:KEY_completeFlag];
+                if (completeFlag.intValue != 1) {
                     continue;
                 }
             }

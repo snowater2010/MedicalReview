@@ -105,7 +105,7 @@
 		CGRect cellFrame = CGRectMake(0, 0, self.frame.size.width, cellHeight);
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellTableIdentifier];
         
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		
 		CGRect rect = cell.frame;
 		float tableWidth = rect.origin.x;
