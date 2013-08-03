@@ -39,8 +39,12 @@
 - (void)initApp
 {
     //set server url
+    NSUserDefaults* userDefault = [NSUserDefaults standardUserDefaults];
+    NSString *serverUrl = [userDefault stringForKey:@"server_preference"];
+    
     self.globalinfo = [[GlobalInfo alloc] init];
-    _globalinfo.serverInfo.strWebServiceUrl = [NSString stringWithFormat:@"%@/%@", SERVICE_URL, SERVICE_URL_SUB1];
+    _globalinfo.serverInfo.serviceUrl = serverUrl;
+    _globalinfo.serverInfo.strWebServiceUrl = [NSString stringWithFormat:@"%@/%@", serverUrl, SERVICE_URL_SUB1];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

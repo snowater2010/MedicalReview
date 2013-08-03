@@ -25,8 +25,8 @@
 //request
 "request_msg_wait_login"            = "登陆中...";
 "request_msg_wait_loaddata"         = "数据同步中，请稍候...";
-"request_error"                     = "数据请求错误";
-"request_data_error"                = "数据格式错误";
+"request_error"                     = "网络链接错误，请检查服务地址是否填写正确";
+"request_data_error"                = "数据解析错误，请联系技术支持人员";
 
 //button
 "button_shortcut"                   = "快捷";

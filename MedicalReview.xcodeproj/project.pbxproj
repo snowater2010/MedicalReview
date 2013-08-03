@@ -68,6 +68,7 @@
 		F66C2A2A175258D000FFB968 /* btn_img.png in Resources */ = {isa = PBXBuildFile; fileRef = F66C2A29175258D000FFB968 /* btn_img.png */; };
 		F66C2A2D17525A7800FFB968 /* shen.gif in Resources */ = {isa = PBXBuildFile; fileRef = F66C2A2B17525A7700FFB968 /* shen.gif */; };
 		F66C2A2E17525A7800FFB968 /* suo.gif in Resources */ = {isa = PBXBuildFile; fileRef = F66C2A2C17525A7700FFB968 /* suo.gif */; };
+		F673B66417ACA053002CE425 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F673B66317ACA053002CE425 /* Settings.bundle */; };
 		F677285B1752F25C005BB1B4 /* AHReach.m in Sources */ = {isa = PBXBuildFile; fileRef = F677285A1752F25C005BB1B4 /* AHReach.m */; };
 		F677286817533240005BB1B4 /* CFinishChart.m in Sources */ = {isa = PBXBuildFile; fileRef = F677286717533240005BB1B4 /* CFinishChart.m */; };
 		F677286C17533484005BB1B4 /* CGradientRect.m in Sources */ = {isa = PBXBuildFile; fileRef = F677286B17533484005BB1B4 /* CGradientRect.m */; };
@@ -224,6 +225,7 @@
 		F66C2A29175258D000FFB968 /* btn_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_img.png; sourceTree = "<group>"; };
 		F66C2A2B17525A7700FFB968 /* shen.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = shen.gif; sourceTree = "<group>"; };
 		F66C2A2C17525A7700FFB968 /* suo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = suo.gif; sourceTree = "<group>"; };
+		F673B66317ACA053002CE425 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		F67728591752F25C005BB1B4 /* AHReach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHReach.h; sourceTree = "<group>"; };
 		F677285A1752F25C005BB1B4 /* AHReach.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHReach.m; sourceTree = "<group>"; };
 		F677286617533240005BB1B4 /* CFinishChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFinishChart.h; sourceTree = "<group>"; };
@@ -795,6 +797,7 @@
 				F6EF2AFF17390D2400BC3355 /* json_score.txt */,
 				F6FD5D6A1757B5DD00218A59 /* progress.txt */,
 				F678A9A01727DA68000DAB46 /* Localizable.strings */,
+				F673B66317ACA053002CE425 /* Settings.bundle */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -914,6 +917,7 @@
 				F6CFD5C5176D6B4E0047AE15 /* export.png in Resources */,
 				F6CFD5C8176D6DCC0047AE15 /* delete.png in Resources */,
 				F6CFD5C9176D6DCC0047AE15 /* fast.png in Resources */,
+				F673B66417ACA053002CE425 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

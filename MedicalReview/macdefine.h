@@ -14,7 +14,7 @@
 #define ENABLE_CACHE 0   //是否启用缓存,1为启用
 
 //#define SERVICE_URL         @"http://124.133.27.146:8080/ylgl"
-#define SERVICE_URL         @"http://222.173.30.135:8088/ylgl"
+//#define SERVICE_URL         @"http://222.173.30.135:8088/ylgl"
 //土豆本机
 //#define SERVICE_URL         @"http://192.168.1.107:8080/ylpj"
 #define SERVICE_URL_SUB1    @"webif"

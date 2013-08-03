@@ -11,6 +11,7 @@
 //服务器信息
 @interface ServerInfo : NSObject
 
+@property(nonatomic, retain) NSString *serviceUrl;
 @property(nonatomic, retain) NSString *strWebServiceUrl;
 @property(nonatomic, retain) NSString *strAppUpdateUrl;
 

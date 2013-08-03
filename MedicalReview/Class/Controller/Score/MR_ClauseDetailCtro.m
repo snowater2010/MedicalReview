@@ -149,7 +149,8 @@
 
 - (void)doLink:(id)sender
 {
-    NSMutableString *serverUrl = [[NSMutableString alloc] initWithString:SERVICE_URL];
+    _GET_APP_DELEGATE_(appDelegate);
+    NSMutableString *serverUrl = [[NSMutableString alloc] initWithString:appDelegate.globalinfo.serverInfo.serviceUrl];
     
     UIButton *button = (UIButton *)sender;
     NSString *title = button.titleLabel.text;
