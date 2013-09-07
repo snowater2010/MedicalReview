@@ -14,6 +14,7 @@
 {
     if (self = [super init]) {
         self.loginIsRememberPw = NO;
+        self.userType = USER_TYPE_TEST;
     }
     return self;
 }
@@ -27,6 +28,14 @@
             NSNumber *isRemember = [userDic objectForKey:KEY_loginIsRememberPw];
             if (isRemember) {
                 self.loginIsRememberPw = [isRemember boolValue];
+            }
+            
+            //用户类型
+            if ([self.loginName isEqualToString:TEST_USER_NAME]) {
+                self.userType = USER_TYPE_TEST;
+            }
+            else {
+                self.userType = USER_TYPE_NORMAL;
             }
         }
     }

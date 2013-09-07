@@ -240,21 +240,25 @@
 
 - (void)initData
 {
-    //clause
-    if ([FileHelper ifHaveClauseCache])
-        self.clauseData = [FileHelper readClauseDataFromCache];
-//    else {
-//        NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
-//        self.clauseData = [allData objectForKey:KEY_allClause];
-//    }
-    
-    //chapter
-    if ([FileHelper ifHaveCacheFile:CACHE_CHAPTER])
-        self.chapterData = [FileHelper readDataFromCache:CACHE_CHAPTER];
-//    else {
-//        NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
-//        self.chapterData = [allData objectForKey:KEY_chaptersFormat];
-//    }
+    _GET_APP_DELEGATE_(appDelegate);
+    MR_User *user = appDelegate.globalinfo.userInfo.user;
+    if (user.userType == USER_TYPE_TEST) {
+        //clause
+        NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
+        self.clauseData = [allData objectForKey:KEY_allClause];
+        
+        //chapter
+        self.chapterData = [allData objectForKey:KEY_chaptersFormat];
+    }
+    else if (user.userType == USER_TYPE_NORMAL) {
+        //clause
+        if ([FileHelper ifHaveClauseCache])
+            self.clauseData = [FileHelper readClauseDataFromCache];
+        
+        //chapter
+        if ([FileHelper ifHaveCacheFile:CACHE_CHAPTER])
+            self.chapterData = [FileHelper readDataFromCache:CACHE_CHAPTER];
+    }
     
     //section
     if (_chapterData && _chapterData.count > 0) {

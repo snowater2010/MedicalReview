@@ -3,6 +3,7 @@ Build/
 
 #ignore UserInterfaceState.xcuserstate
 MedicalReview.xcodeproj/project.xcworkspace/xcuserdata/
+MedicalReview.xcodeproj/xcuserdata/
 
 # ignore DS_Store
 .DS_Store

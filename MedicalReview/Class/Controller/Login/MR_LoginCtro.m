@@ -108,9 +108,12 @@
     [_ibName resignFirstResponder];
     [_ibPassWord resignFirstResponder];
     
-    [self doRequestLogin];
-    
-//    [self visitMainPage];
+    if ([self.loginName isEqualToString:TEST_USER_NAME]) {
+        [self visitMainPage];
+    }
+    else {
+        [self doRequestLogin];
+    }
 }
 
 - (void)nameChanged

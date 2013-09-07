@@ -204,21 +204,25 @@
 
 - (void)initData
 {
-    //clause
-    if ([FileHelper ifHaveClauseCache])
-        self.clauseData = [FileHelper readClauseDataFromCache];
-//    else {
-//        NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
-//        self.clauseData = [allData objectForKey:KEY_allClause];
-//    }
-    
-    //path
-    if ([FileHelper ifHaveCacheFile:CACHE_PATH]) 
-        self.pathData = [FileHelper readDataFromCache:CACHE_PATH];
-//    else {
-//        NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
-//        self.pathData = [allData objectForKey:KEY_pathFormat];
-//    }
+    _GET_APP_DELEGATE_(appDelegate);
+    MR_User *user = appDelegate.globalinfo.userInfo.user;
+    if (user.userType == USER_TYPE_TEST) {
+        //clause
+        NSDictionary *allData = [FileHelper readDataFileWithName:@"json_loaddata.txt"];
+        self.clauseData = [allData objectForKey:KEY_allClause];
+        
+        //path
+        self.pathData = [allData objectForKey:KEY_pathFormat];
+    }
+    else if (user.userType == USER_TYPE_NORMAL) {
+        //clause
+        if ([FileHelper ifHaveClauseCache])
+            self.clauseData = [FileHelper readClauseDataFromCache];
+        
+        //path
+        if ([FileHelper ifHaveCacheFile:CACHE_PATH])
+            self.pathData = [FileHelper readDataFromCache:CACHE_PATH];
+    }
     
     self.scoreData = [self getInitScoreData];
 }
