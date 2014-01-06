@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "m1111": {
         "scoreValue": "1",
         "scoreExplain": "head测评说明",
@@ -31,4 +32,20 @@
             "scoreExplain": "Z2424测评说明"
         }
     }
+=======
+  "m3111": {
+    "scoreValue": "A",
+    "scoreExplain": "head测评说明",
+    "pointList": {
+      "Z2876": {
+        "scoreValue": "0",
+        "scoreExplain": "Z2418测评说明1"
+      },
+      "Z2877": {
+        "scoreValue": "1",
+        "scoreExplain": "Z2419测评说明2"
+      }
+    }
+  }
+>>>>>>> branch
 }

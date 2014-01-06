@@ -8,6 +8,7 @@
 
 #import "MR_RootView.h"
 
+<<<<<<< HEAD
 #define OPERATE_TEXT_SIZE 14
 
 @protocol OperateDelegate <NSObject>
@@ -21,5 +22,27 @@
 
 @property(nonatomic, assign) BOOL isHasLink;
 @property(nonatomic, assign) id<OperateDelegate> delegate;
+=======
+#define OPERATE_TEXT_SIZE 16
+
+@protocol OperateDelegate <NSObject>
+
+@optional
+- (void)doDelete;
+- (void)doLink;
+- (void)doWait:(BOOL)isWait;
+
+@end
+
+@interface MR_OperateView : MR_RootView <UIAlertViewDelegate>
+
+@property(nonatomic, assign) BOOL isHasLink;
+@property(nonatomic, assign) BOOL isHasWait;
+@property(nonatomic, assign) BOOL isWait;
+@property(nonatomic, assign) id<OperateDelegate> delegate;
+@property(nonatomic, retain) NSDictionary *clauseData;
+
+- (void)refreshPage;
+>>>>>>> branch
 
 @end

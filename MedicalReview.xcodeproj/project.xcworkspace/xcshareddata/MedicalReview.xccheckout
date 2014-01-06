@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6F8F66E5-2FF1-4EF5-B949-5ACE80A0FF4D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MedicalReview</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>7F57258B-E7B4-4046-A08E-CFF20FC41E47</key>
+		<string>https://github.com/snowater2010/MedicalReview.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MedicalReview.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>7F57258B-E7B4-4046-A08E-CFF20FC41E47</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/snowater2010/MedicalReview.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>7F57258B-E7B4-4046-A08E-CFF20FC41E47</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7F57258B-E7B4-4046-A08E-CFF20FC41E47</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MedicalReview</string>
+		</dict>
+	</array>
+</dict>
+</plist>

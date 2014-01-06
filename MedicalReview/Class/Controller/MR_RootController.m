@@ -104,6 +104,7 @@
     request.responseEncoding = NSUTF8StringEncoding;
     NSString *responseData = [request responseString];
     
+<<<<<<< HEAD
     //demo
 //    responseData = @"{\"errCode\":\"0\",\"expertName\":\"zjgxy\",\"expertNo\":\"201207000000355\",\"hospitalId\":\"1047000\",\"hospitalName\":\"山东医院\"}";
 //    responseData = @"{\"errCode\":\"2\",\"errMsg\":\"密码错误\"}";
@@ -133,6 +134,28 @@
         [self requestResult:retDic tag:request.tag];
     }
     else {
+=======
+    BOOL ok = NO;
+    NSString *message = nil;
+    NSDictionary* retDic;
+    if ([Common isNotEmptyString:responseData]) {
+        retDic = [responseData objectFromJSONString];
+        if (retDic) {
+            NSString *errCode = [retDic objectForKey:KEY_errCode];
+            if ([errCode isEqualToString:@"0"]) {
+                ok = YES;
+            } else {
+                message = [retDic objectForKey:KEY_errMsg];
+            }
+        }
+    }
+    
+    if (ok) {
+        [self responseSuccess:retDic tag:request.tag];
+    }
+    else {
+        [self responseFailed:request.tag];
+>>>>>>> branch
         if (message) {
             _ALERT_SIMPLE_(message);
         }
@@ -142,17 +165,31 @@
     }
 }
 
+<<<<<<< HEAD
 - (void)requestResult:(NSDictionary *)dataDic tag:(int)tag
 {
 }
 
+=======
+>>>>>>> branch
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
-    NSError *error = [request error];
-    _LOG_(error);
+//    NSError *error = [request error];
+    [self responseFailed:request.tag];
     _ALERT_SIMPLE_(_GET_LOCALIZED_STRING_(@"request_error"));
 }
 
+<<<<<<< HEAD
+=======
+- (void)responseSuccess:(NSDictionary *)dataDic tag:(int)tag
+{
+}
+
+- (void)responseFailed:(int)tag
+{
+}
+
+>>>>>>> branch
 ////键盘事件
 //- (void)keyboardWillShow:(NSNotification *)notification
 //{
@@ -185,4 +222,67 @@
 //    self.nowEditView = textField;
 //}
 
+<<<<<<< HEAD
+=======
+- (NSArray *)getClauseFrom:(NSDictionary *)allClause byNode:(NSArray *)nodeData
+{
+    if (!allClause)
+        return nil;
+    
+    NSArray *keyArr = [allClause allKeys];
+    NSMutableArray *clauseArr = [[[NSMutableArray alloc] initWithCapacity:0] autorelease];
+    for (NSDictionary *nodeDic in nodeData) {
+        NSString *nodeId = [nodeDic objectForKey:KEY_clauseId];
+        if ([keyArr containsObject:nodeId]) {
+            NSDictionary *clauseDic = [allClause objectForKey:nodeId];
+            if (clauseDic)
+                [clauseArr addObject:clauseDic];
+        }
+    }
+    return clauseArr;
+}
+
+- (NSDictionary *)getScoreFrom:(NSDictionary *)allScore byNode:(NSArray *)nodeData
+{
+    if (!allScore)
+        return nil;
+    
+    //score
+    NSArray *scoreKeys = [allScore allKeys];
+    NSMutableDictionary *scoreNodeDic = [[[NSMutableDictionary alloc] initWithCapacity:0] autorelease];
+    
+    for (NSDictionary *nodeDic in nodeData)
+    {
+        NSString *nodeId = [nodeDic objectForKey:KEY_clauseId];
+        
+        if ([scoreKeys containsObject:nodeId])
+        {
+            NSDictionary *scoreDic = [allScore objectForKey:nodeId];
+            if (scoreDic)
+                [scoreNodeDic setValue:scoreDic forKey:nodeId];
+        }
+    }
+    return scoreNodeDic;
+}
+
+- (NSDictionary *)getInitScoreData
+{
+    //score
+    NSDictionary *scoreCache = [FileHelper readScoreDataFromCache];
+    NSDictionary *updateScoreCache = [FileHelper readScoreUpdateDataFromCache];
+    if (scoreCache || updateScoreCache) {
+        NSMutableDictionary *allScore = [[[NSMutableDictionary alloc] initWithCapacity:0] autorelease];
+        if (scoreCache)
+            [allScore addEntriesFromDictionary:scoreCache];
+        if (updateScoreCache)
+            [allScore addEntriesFromDictionary:updateScoreCache];
+        
+        return allScore;
+    }
+    else {
+        return nil;
+    }
+}
+
+>>>>>>> branch
 @end

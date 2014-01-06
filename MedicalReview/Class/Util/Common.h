@@ -9,5 +9,20 @@
 @interface Common : NSObject
 
 + (BOOL)isEmptyString:(NSString *)str;
+<<<<<<< HEAD
+=======
+
++ (BOOL)isNotEmptyString:(NSString *)str;
+
++ (void)callDelegate:(id)delegate method:(SEL)seletor;
+
++ (void)callDelegate:(id)delegate method:(SEL)seletor withObject:(id)object;
+
++ (UIColor *)colorWithR:(int)r withG:(int)g withB:(int)b;
+
++(UIColor*)colorWithHexString:(NSString*) hexstring;
+
++(NSArray*) HexString2RGB:(NSString*)hexstring;
+>>>>>>> branch
 
 @end

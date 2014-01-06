@@ -64,6 +64,29 @@
 @end
 
 #pragma mark -
+#pragma mark -- SharedData
+@implementation ShareData
+
+-(id)init
+{
+    if(self = [super init])
+    {
+        _clauseData = nil;
+        _statementData = nil;
+    }
+    return self;
+}
+
+-(void)dealloc
+{
+    self.clauseData = nil;
+    self.statementData = nil;
+    [super dealloc];
+}
+
+@end
+
+#pragma mark -
 #pragma mark -- GlobalInfo
 @implementation GlobalInfo
 
@@ -73,6 +96,8 @@
     {
         _userInfo = [[UserInfo alloc] init];
         _serverInfo = [[ServerInfo alloc] init];
+        _shareData = [[ShareData alloc] init];
+        
     }
     return self;
 }
@@ -80,6 +105,7 @@
 {
     self.userInfo = nil;
     self.serverInfo = nil;
+    self.shareData = nil;
     [super dealloc];
 }
 

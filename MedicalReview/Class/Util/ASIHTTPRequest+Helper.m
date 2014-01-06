@@ -58,3 +58,21 @@
 }
 
 @end
+
+@implementation ASIFormDataRequest (Helper)
+
+- (void)setDefaultPostValue
+{
+    _GET_APP_DELEGATE_(appDelegate);
+    NSString *uid = appDelegate.globalinfo.userInfo.user.loginName;
+    NSString *reviewId = appDelegate.globalinfo.userInfo.user.reviewId;
+    NSString *expertNo = appDelegate.globalinfo.userInfo.user.expertNo;
+    NSString *groupId = appDelegate.globalinfo.userInfo.user.groupId;
+    
+    [self setPostValue:uid forKey:@"uid"];
+    [self setPostValue:reviewId forKey:@"reviewId"];
+    [self setPostValue:expertNo forKey:@"expertNo"];
+    [self setPostValue:groupId forKey:@"groupId"];
+}
+
+@end

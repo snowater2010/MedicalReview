@@ -13,6 +13,7 @@
 
 #define ENABLE_CACHE 0   //是否启用缓存,1为启用
 
+<<<<<<< HEAD
 #define SERVICE_URL         @"http://222.173.30.135:8088/ylpj/webif"
 //#define SERVICE_URL         @"http://124.133.27.146:8080/ylpj/webif"
 
@@ -21,6 +22,22 @@
 #define CACHE_CLAUSE        @"cache_clause"         //条款缓存文件名
 #define CACHE_SCORE         @"cache_score"          //打分缓存文件名
 #define CACHE_SCORE_UPDATE  @"cache_score_update"   //打分缓存文件名，本地更新，待上传
+=======
+//#define SERVICE_URL         @"http://124.133.27.146:8080/ylgl"
+//#define SERVICE_URL         @"http://222.173.30.135:8088/ylgl"
+//土豆本机
+//#define SERVICE_URL         @"http://192.168.1.107:8080/ylpj"
+#define SERVICE_URL_SUB1    @"webif"
+#define SERVICE_URL_SUB2    @"ylgl"
+
+
+#define CACHE_CLAUSE        @"cache_clause"         //条款缓存文件名
+#define CACHE_STATEMENT     @"cache_statement"      //快捷评论
+#define CACHE_SCORE         @"cache_score"          //打分缓存文件名
+#define CACHE_SCORE_UPDATE  @"cache_score_update"   //打分缓存文件名，本地更新，待上传
+#define CACHE_PATH          @"cache_path"           //路径数据缓存文件名
+#define CACHE_CHAPTER       @"cache_chapter"        //章节数据缓存文件名
+>>>>>>> branch
 
 #define USER_DEFAULT_KEY    @"MR_User_Default"      //存储登陆信息
 
@@ -42,13 +59,13 @@ enum SORT_TYPE
 
 //对齐方式
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0 
-    #define ALIGN_LEFT      UITextAlignmentLeft
-    #define ALIGN_CENTER    UITextAlignmentCenter
-    #define ALIGN_RIGHT     UITextAlignmentRight
+    #define _ALIGN_LEFT      UITextAlignmentLeft
+    #define _ALIGN_CENTER    UITextAlignmentCenter
+    #define _ALIGN_RIGHT     UITextAlignmentRight
 #else
-    #define ALIGN_LEFT      NSTextAlignmentLeft 
-    #define ALIGN_CENTER    NSTextAlignmentCenter 
-    #define ALIGN_RIGHT     NSTextAlignmentRight 
+    #define _ALIGN_LEFT      NSTextAlignmentLeft
+    #define _ALIGN_CENTER    NSTextAlignmentCenter
+    #define _ALIGN_RIGHT     NSTextAlignmentRight 
 #endif
 
 //获取国际化字符串
@@ -155,7 +172,18 @@ enum SORT_TYPE
             [bgTable release];\
         }\
 
+//login
+#define KEY_errCode             @"errCode"
+#define KEY_errMsg              @"errMsg"
 
+//all
+#define KEY_allClause           @"allClause"
+#define KEY_pathFormat          @"pathFormat"
+#define KEY_chaptersFormat      @"chaptersFormat"
+#define KEY_clauseScore         @"clauseScore"
+#define KEY_statementData       @"statementData"
+
+<<<<<<< HEAD
 //上锁，解锁
 #define _lock       NSLock *lock = [[NSLock alloc] init];\
                     [lock lock];
@@ -173,8 +201,39 @@ enum SORT_TYPE
 #define KEY_clauseList          @"clauseList"
 #define KEY_attrId              @"attrId"
 #define KEY_indexName           @"indexName"
+=======
+//path data
+#define KEY_pathName            @"pathName"
+#define KEY_nodeList            @"nodeList"
+#define KEY_nodeId              @"nodeId"
+#define KEY_nodeName            @"nodeName"
+#define KEY_totalCount          @"totalCount"
+#define KEY_finishCount         @"finishCount"
+#define KEY_interviewPeople     @"interviewPeople"
+#define KEY_functionContent     @"functionContent"
+
+//chapter data
+#define KEY_chapterName         @"chapterName"
+#define KEY_sectionList         @"sectionList"
+#define KEY_sectionName         @"sectionName"
+
+//clause data keys
+#define KEY_clauseList          @"clauseList"
+#define KEY_clauseId            @"clauseId"
+#define KEY_clauseName          @"clauseName"
+#define KEY_selfLevel           @"selfLevel"
+#define KEY_formulaType         @"formulaType"
+#define KEY_attrId              @"attrId"
+#define KEY_attrName            @"attrName"
+>>>>>>> branch
 #define KEY_pointList           @"pointList"
+#define KEY_attrLevel           @"attrLevel"
+#define KEY_hasYs               @"hasYs"
 #define KEY_datainSpection      @"datainSpection"
+#define KEY_surveyEnterview     @"surveyEnterview"
+#define KEY_factView            @"factView"
+#define KEY_caseTrack           @"caseTrack"
+#define KEY_checkAccess         @"checkAccess"
 #define KEY_proofLink           @"proofLink"
 #define KEY_wordExplan          @"wordExplan"
 #define KEY_templateDisplay     @"templateDisplay"
@@ -182,6 +241,7 @@ enum SORT_TYPE
 //score data keys
 #define KEY_scoreValue          @"scoreValue"
 #define KEY_scoreExplain        @"scoreExplain"
+<<<<<<< HEAD
 
 //user
 #define KEY_userId              @"expertNo"
@@ -194,4 +254,34 @@ enum SORT_TYPE
 //table
 #define KEY_tableName           @"tableName"
 #define KEY_tableWidth          @"tableWidth"
+=======
+#define KEY_completeFlag        @"completeFlag"
+
+//search key
+#define KEY_searchName          @"searchName"
+#define KEY_searchScored        @"searchScored"
+#define KEY_searchCore          @"searchCore"
+#define KEY_searchWait          @"searchWait"
+
+//user
+#define KEY_loginName           @"loginName"
+#define KEY_loginPassWord       @"loginPassWord"
+#define KEY_loginIsRememberPw   @"loginIsRememberPw"
+
+#define KEY_userExpertNod       @"expertNo"
+#define KEY_userExpertName      @"expertName"
+#define KEY_userReviewId        @"reviewId"
+#define KEY_userGroupId         @"groupId"
+#define KEY_userHospitalId      @"hospitalId"
+#define KEY_userHospitalName    @"hospitalName"
+
+//table
+#define KEY_tableHead           @"tableHead"
+#define KEY_tableData           @"tableData"
+#define KEY_tableCode           @"tableCode"
+#define KEY_tableName           @"tableName"
+#define KEY_tableWidth          @"tableWidth"
+#define KEY_tableType           @"tableType"
+#define KEY_alignment           @"alignment"
+>>>>>>> branch
 

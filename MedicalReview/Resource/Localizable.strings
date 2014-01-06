@@ -5,6 +5,7 @@
   Created by lipeng11 on 13-4-24.
   Copyright (c) 2013年 medical.review. All rights reserved.
 */
+<<<<<<< HEAD
 "alert_note"                    = "提示";
 "alert_sure"                    = "确定";
 "alert_cancel"                  = "取消";
@@ -20,3 +21,42 @@
 "button_shortcut"               = "快捷";
 "button_delete"                 = "删除";
 "button_link"                   = "评审要素";
+=======
+
+//alert
+"alert_note"                        = "提示";
+"alert_sure"                        = "确定";
+"alert_cancel"                      = "取消";
+"alert_login_name_empty"            = "用户名不能为空";
+"alert_login_password_empty"        = "密码不能为空";
+"alert_login_error"                 = "用户名或密码错误";
+"alert_clause_cache_update_error"   = "条款更新失败";
+"alert_statement_cache_update_error"= "快捷评论更新失败";
+"alert_path_cache_update_error"     = "路径数据更新失败";
+"alert_chapter_cache_update_error"  = "章节数据更新失败";
+"alert_score_cache_update_error"    = "打分数据更新失败";
+"alert_change_clause_score"         = "您确定要改变测评结果吗？";
+"alert_change_point_score"          = "您确定要改变要点值？";
+"alert_delete_score"                = "您确定要删除评价结果？";
+
+//request
+"request_msg_wait_login"            = "登陆中...";
+"request_msg_wait_loaddata"         = "数据同步中，请稍候...";
+"request_error"                     = "网络链接错误，请检查服务地址是否填写正确";
+"request_data_error"                = "数据解析错误，请联系技术支持人员";
+
+//button
+"button_shortcut"                   = "快捷";
+"button_delete"                     = "删除";
+"button_wait"                       = "待议";
+"button_nowait"                     = "取消待议";
+"button_link"                       = "评审要素";
+
+//title
+"title_explain_page"                = "打分说明";
+
+//page
+"page_path_interviewPeople"         = "访谈人员：";
+"page_path_functionContent"         = "方法及内容：";
+"page_score_percent"                = "共有%d个评审条款,　已录入%d, 完成比率";
+>>>>>>> branch

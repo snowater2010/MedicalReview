@@ -10,8 +10,20 @@
 
 #define TABLE_TEXT_SIZE 17
 
+<<<<<<< HEAD
 @interface MR_ClauseTable : MR_RootView
 
 @property(nonatomic, retain) NSArray *jsonData;
+=======
+@protocol MR_ClauseTableDelegate <NSObject>
+@optional
+- (void)tableClicked;
+@end
+
+@interface MR_ClauseTable : MR_RootView
+
+@property(nonatomic, retain) NSArray *jsonData;
+@property(nonatomic, assign) id<MR_ClauseTableDelegate> delegate;
+>>>>>>> branch
 
 @end

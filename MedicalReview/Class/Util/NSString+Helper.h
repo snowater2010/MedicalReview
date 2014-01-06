@@ -11,6 +11,7 @@
 @interface NSString (Helper)
 
 - (BOOL)isNumberString;
+- (BOOL)isContainsString:(NSString *)str;
 - (NSString *)toThousand;
 
 - (NSArray *)HexString2RGB;

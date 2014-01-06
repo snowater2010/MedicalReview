@@ -34,7 +34,6 @@
 		[fileManager removeItemAtPath:path error:&removeError];
 		if (removeError)
         {
-            NSLog(@"file remove failed :%@", [removeError domain]);
 			return NO;
 		}
 	}
@@ -55,6 +54,7 @@
 //是否有缓存条款
 + (BOOL)ifHaveClauseCache
 {
+<<<<<<< HEAD
     NSString *clausePath = [self getClauseCacheFilePath];
     return [[NSFileManager defaultManager] fileExistsAtPath:clausePath];
 }
@@ -75,6 +75,48 @@
 }
 
 + (BOOL)writeClauseDataToCache:(NSDictionary *)dataDic
+=======
+    _GET_APP_DELEGATE_(appDelegate);
+    NSString *userName = appDelegate.globalinfo.userInfo.user.loginName;
+    
+    NSFileManager *fileManger = [NSFileManager defaultManager];
+    
+    NSString *userPath = [[FileHelper getDocumentPath] stringByAppendingPathComponent:userName];
+    if (![fileManger fileExistsAtPath:userPath]) {
+        return NO;
+    }
+    else {
+        NSString *scorePath = [userPath stringByAppendingPathComponent:CACHE_CLAUSE];
+        if (![fileManger fileExistsAtPath:scorePath])
+            return NO;
+        else
+            return YES;
+    }
+    
+    
+    
+//    NSString *clausePath = [self getClauseCacheFilePath];
+//    return [[NSFileManager defaultManager] fileExistsAtPath:clausePath];
+}
+
++ (id)readClauseDataFromCache
+{
+    NSDictionary *result = nil;
+    if ([self ifHaveCacheFile:CACHE_CLAUSE]) {
+        NSString *cachePath = [FileHelper getCacheFilePath:CACHE_CLAUSE];
+        result = [[[NSDictionary alloc] initWithContentsOfFile:cachePath] autorelease];
+    }
+    
+//    NSDictionary *result = nil;
+//    if ([self ifHaveClauseCache]) {
+//        NSString *cachePath = [FileHelper getClauseCacheFilePath];
+//        result = [[[NSDictionary alloc] initWithContentsOfFile:cachePath] autorelease];
+//    }
+    return result;
+}
+
++ (BOOL)writeClauseDataToCache:(id)dataDic
+>>>>>>> branch
 {
     if (!dataDic)
         return NO;
@@ -93,12 +135,47 @@
 }
 
 #pragma mark -
+<<<<<<< HEAD
+=======
+#pragma mark shared data
+
++ (BOOL)writeShareData:(id)data toCacheFile:(NSString *)fileName
+{
+    if (!data)
+        return NO;
+    
+    NSString *dataPath = [[FileHelper getDocumentPath] stringByAppendingPathComponent:fileName];
+    
+    //移出先
+    BOOL removed = [self removeFileAtPath:dataPath];
+    
+    if (removed) {
+        return [data writeToFile:dataPath atomically:YES];
+    }
+    else {
+        return NO;
+    }
+}
+
++ (id)readShareDataFromCacheFile:(NSString *)fileName
+{
+    NSString *dataPath = [[FileHelper getDocumentPath] stringByAppendingPathComponent:fileName];
+    NSArray *result = [[[NSArray alloc] initWithContentsOfFile:dataPath] autorelease];
+    return result;
+}
+
+#pragma mark -
+>>>>>>> branch
 #pragma mark --- score
 //根据用户名，得到用户的打分缓存路径
 + (NSString*)getScoreCacheFilePath
 {
     _GET_APP_DELEGATE_(appDelegate);
+<<<<<<< HEAD
     NSString *userName = appDelegate.globalinfo.userInfo.user.uName;
+=======
+    NSString *userName = appDelegate.globalinfo.userInfo.user.loginName;
+>>>>>>> branch
     
     NSString *userPath = [[FileHelper getDocumentPath] stringByAppendingPathComponent:userName];
     
@@ -117,7 +194,11 @@
 + (NSString*)getScoreUpdateCacheFilePath
 {
     _GET_APP_DELEGATE_(appDelegate);
+<<<<<<< HEAD
     NSString *userName = appDelegate.globalinfo.userInfo.user.uName;
+=======
+    NSString *userName = appDelegate.globalinfo.userInfo.user.loginName;
+>>>>>>> branch
     
     NSString *userPath = [[FileHelper getDocumentPath] stringByAppendingPathComponent:userName];
     
@@ -132,10 +213,26 @@
     return result;
 }
 
+<<<<<<< HEAD
 + (BOOL)ifHaveScoreCache
 {
     _GET_APP_DELEGATE_(appDelegate);
     NSString *userName = appDelegate.globalinfo.userInfo.user.uName;
+=======
+//删除用户的打分缓存路径(本地更新)
++ (void)removeScoreUpdateCacheFile
+{
+    if ([FileHelper ifHaveScoreUpdateCache]) {
+        NSString *path = [FileHelper getScoreUpdateCacheFilePath];
+        [FileHelper removeFileAtPath:path];
+    }
+}
+
++ (BOOL)ifHaveScoreCache
+{
+    _GET_APP_DELEGATE_(appDelegate);
+    NSString *userName = appDelegate.globalinfo.userInfo.user.loginName;
+>>>>>>> branch
     
     NSFileManager *fileManger = [NSFileManager defaultManager];
     
@@ -155,7 +252,11 @@
 + (BOOL)ifHaveScoreUpdateCache
 {
     _GET_APP_DELEGATE_(appDelegate);
+<<<<<<< HEAD
     NSString *userName = appDelegate.globalinfo.userInfo.user.uName;
+=======
+    NSString *userName = appDelegate.globalinfo.userInfo.user.loginName;
+>>>>>>> branch
     
     NSFileManager *fileManger = [NSFileManager defaultManager];
     
@@ -181,7 +282,10 @@
         NSDictionary *jsonDic = [NSDictionary dictionaryWithContentsOfFile:cachePath];
         
         result = [[[NSDictionary alloc] initWithDictionary:jsonDic] autorelease];
+<<<<<<< HEAD
         _LOG_(@"读取条款缓存成功！");
+=======
+>>>>>>> branch
     }
     
     return result;
@@ -210,9 +314,13 @@
     
     NSString *cachePath = [FileHelper getScoreCacheFilePath];
     //不知道writeToFile方法是否是线程安全的，所以上锁
+<<<<<<< HEAD
     _lock;
     BOOL result = [resultDic writeToFile:cachePath atomically:YES];
     _unlock;
+=======
+    BOOL result = [resultDic writeToFile:cachePath atomically:YES];
+>>>>>>> branch
     [resultDic release];
     
     return result;
@@ -227,7 +335,10 @@
         NSDictionary *jsonDic = [NSDictionary dictionaryWithContentsOfFile:cachePath];
         
         result = [[[NSDictionary alloc] initWithDictionary:jsonDic] autorelease];
+<<<<<<< HEAD
         _LOG_(@"读取条款缓存成功！");
+=======
+>>>>>>> branch
     }
     
     return result;
@@ -253,23 +364,102 @@
     [resultDic addEntriesFromDictionary:dataDic];
     
     NSString *cachePath = [FileHelper getScoreUpdateCacheFilePath];
+<<<<<<< HEAD
     _lock;
     BOOL result = [resultDic writeToFile:cachePath atomically:YES];
     _unlock;
+=======
+    BOOL result = [resultDic writeToFile:cachePath atomically:YES];
+>>>>>>> branch
     [resultDic release];
     
     return result;
 }
 
+<<<<<<< HEAD
 #pragma mark -
 #pragma mark --- demo file
+=======
++ (BOOL)ifHaveCacheFile:(NSString *)fileName
+{
+    _GET_APP_DELEGATE_(appDelegate);
+    NSString *userName = appDelegate.globalinfo.userInfo.user.loginName;
+    
+    NSFileManager *fileManger = [NSFileManager defaultManager];
+    
+    NSString *userPath = [[FileHelper getDocumentPath] stringByAppendingPathComponent:userName];
+    if (![fileManger fileExistsAtPath:userPath]) {
+        return NO;
+    }
+    else {
+        NSString *filePath = [userPath stringByAppendingPathComponent:fileName];
+        if (![fileManger fileExistsAtPath:filePath])
+            return NO;
+        else
+            return YES;
+    }
+}
+
++ (NSString*)getCacheFilePath:(NSString *)fileName
+{
+    _GET_APP_DELEGATE_(appDelegate);
+    NSString *userName = appDelegate.globalinfo.userInfo.user.loginName;
+    
+    NSString *userPath = [[FileHelper getDocumentPath] stringByAppendingPathComponent:userName];
+    
+    //if the user folder not exist, create it
+    NSFileManager *fileManger = [NSFileManager defaultManager];
+    if (![fileManger fileExistsAtPath:userPath]) {
+        [fileManger createDirectoryAtPath:userPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    
+    NSString *scorePath = [userPath stringByAppendingPathComponent:fileName];
+    NSString *result = [[[NSString alloc] initWithString:scorePath] autorelease];
+    return result;
+}
+
++ (BOOL)writeData:(id)dataDic toCacheFile:(NSString *)fileName
+{
+    if (!dataDic)
+        return NO;
+    
+    NSString *cachePath = [FileHelper getCacheFilePath:fileName];
+    //不知道writeToFile方法是否是线程安全的，所以上锁
+    BOOL result = [dataDic writeToFile:cachePath atomically:YES];
+    
+    return result;
+}
+
++ (id)readDataFromCache:(NSString *)fileName
+{
+    NSArray *result = nil;
+    if ([self ifHaveCacheFile:fileName]) {
+        NSString *cachePath = [FileHelper getCacheFilePath:fileName];
+        result = [[[NSArray alloc] initWithContentsOfFile:cachePath] autorelease];
+    }
+    return result;
+}
+
+#pragma mark -
+#pragma mark --- demo file
++ (id)readDataFileWithName:(NSString *)fileName
+{
+    NSString *filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
+    NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
+    return [jsonData objectFromJSONData];
+}
+>>>>>>> branch
 + (NSDictionary *)readClauseDataFromFile
 {
     NSString *fileName = @"json_clause.txt";
     NSString *filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
     NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
+<<<<<<< HEAD
     NSDictionary *jsonDic = [[NSDictionary dictionaryWithDictionary:[jsonData objectFromJSONData]] autorelease];
     return jsonDic;
+=======
+    return [jsonData objectFromJSONData];
+>>>>>>> branch
 }
 
 + (NSDictionary *)readScoreDataFromFile
@@ -277,8 +467,12 @@
     NSString *fileName = @"json_score.txt";
     NSString *filePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
     NSData *jsonData = [NSData dataWithContentsOfFile:filePath];
+<<<<<<< HEAD
     NSDictionary *jsonDic = [[NSDictionary dictionaryWithDictionary:[jsonData objectFromJSONData]] autorelease];
     return jsonDic;
+=======
+    return [jsonData objectFromJSONData];
+>>>>>>> branch
 }
 
 @end

@@ -36,10 +36,25 @@
 + (BOOL)removeFileAtPath:(NSString*)path;
 
 //从缓存中读取条款数据
+<<<<<<< HEAD
 + (NSDictionary *)readClauseDataFromCache;
 
 //将条款数据写入缓存
 + (BOOL)writeClauseDataToCache:(NSDictionary *)dataDic;
+=======
++ (id)readClauseDataFromCache;
+
+//将条款数据写入缓存
++ (BOOL)writeClauseDataToCache:(id)dataDic;
+
+//将数据写入共享缓存
++ (BOOL)writeShareData:(id)data toCacheFile:(NSString *)fileName;
+//读取共享缓存
++ (id)readShareDataFromCacheFile:(NSString *)fileName;
+
+//删除用户的打分缓存路径(本地更新
++ (void)removeScoreUpdateCacheFile;
+>>>>>>> branch
 
 + (NSDictionary *)readScoreDataFromCache;
 
@@ -61,4 +76,19 @@
 //从文件中读取打分数据，demo
 + (NSDictionary *)readScoreDataFromFile;
 
+<<<<<<< HEAD
+=======
+
+//------------
+
++ (BOOL)ifHaveCacheFile:(NSString *)fileName;
++ (NSString*)getCacheFilePath:(NSString *)fileName;
++ (BOOL)writeData:(id)dataDic toCacheFile:(NSString *)fileName;
++ (id)readDataFromCache:(NSString *)fileName;
+
+//从文件中读取条款数据
++ (id)readDataFileWithName:(NSString *)fileName;
+
+
+>>>>>>> branch
 @end

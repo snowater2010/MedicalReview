@@ -19,4 +19,8 @@
 - (id)initWithFrame:(CGRect)frame;
 - (void)loadRootView;
 
+- (NSArray *)getClauseFrom:(NSDictionary *)allClause byNode:(NSArray *)nodeData;
+- (NSDictionary *)getScoreFrom:(NSDictionary *)allScore byNode:(NSArray *)nodeData;
+- (NSDictionary *)getInitScoreData;
+
 @end

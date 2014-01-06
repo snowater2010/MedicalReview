@@ -8,6 +8,9 @@
 
 #import "MR_RootController.h"
 
+#define MENU_BUTTON_MARGIN 20
+#define MENU_BUTTON_SIZE 50
+
 @interface MR_MainCtro : MR_RootController
 
 @property(nonatomic, retain) UIViewController *mainController;

@@ -3,6 +3,10 @@ Build/
 
 #ignore UserInterfaceState.xcuserstate
 MedicalReview.xcodeproj/project.xcworkspace/xcuserdata/
+<<<<<<< HEAD
+=======
+MedicalReview.xcodeproj/xcuserdata/
+>>>>>>> branch
 
 # ignore DS_Store
 .DS_Store
